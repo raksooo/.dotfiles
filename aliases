@@ -1,0 +1,21 @@
+#!/bin/sh
+
+alias ls='ls --color=auto'
+alias grep='grep --color=auto'
+
+alias vim='/usr/local/bin/vim'
+
+#tmux
+alias tmux='tmux -2' # run with 256 colors
+alias trx='tmux resize -x'
+alias try='tmux resize -y'
+
+#git
+alias gs='git status'
+alias ga='git add'
+alias gc='git commit -m'
+alias gl='git log'
+
+#other
+alias ql='qlmanage -p "$1" >& /dev/null'
+alias sniff="sudo ngrep -d 'en1' -t '^(GET|POST) ' 'tcp and port 80'"
