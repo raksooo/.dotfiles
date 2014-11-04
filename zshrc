@@ -6,6 +6,8 @@ zstyle :compinstall filename '$HOME/.zshrc'
 autoload -Uz compinit
 compinit
 
+fpath=(/usr/local/share/zsh-completions $fpath)
+
 ## Set options
 setopt append_history
 setopt auto_cd
@@ -32,6 +34,13 @@ export VISUAL=less
 
 export LANG='en_GB.UTF-8'
 export LANGUAGE=$LANG
+
+export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
+
+# Make vim colors work in tmux
+export TERM=xterm-256color
+[ -n "$TMUX" ] && export TERM=screen-256color
 
 ## Aliases
 source $HOME/.dotfiles/aliases
