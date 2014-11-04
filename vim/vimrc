@@ -1,0 +1,42 @@
+syntax on
+
+" Vundle
+set nocompatible
+filetype off
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+Bundle 'gmarik/vundle'
+
+" Bundle 'Valloric/YouCompleteMe'
+Bundle 'Raimondi/delimitMate'
+Bundle 'scrooloose/nerdcommenter'
+Bundle 'godlygeek/tabular'
+
+Bundle 'altercation/vim-colors-solarized'
+
+call vundle#end()
+filetype plugin indent on
+
+" Theme
+set background=dark
+let g:solarized_termtrans=0
+let g:solarized_termcolors=256
+let g:solarized_termtrans=1
+colorscheme solarized
+
+" Settings
+set autoindent
+set backspace=2
+set expandtab
+set hlsearch
+set ignorecase
+set number
+set ruler
+set scrolloff=5
+set shortmess=atI
+set shiftwidth=4
+set smartcase
+set smartindent
+set tabstop=4
+set title
