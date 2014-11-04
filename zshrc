@@ -30,7 +30,7 @@ eval $( dircolors -b $HOME/.dotfiles/LS_COLOURS/LS_COLORS )
 export CLICOLOR=1
 
 export EDITOR=vim
-export VISUAL=less
+export VISUAL=vim
 
 export LANG='en_GB.UTF-8'
 export LANGUAGE=$LANG
