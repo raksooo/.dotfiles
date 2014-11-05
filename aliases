@@ -1,9 +1,15 @@
 #!/bin/sh
 
+#color
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 
+#duplicate
 alias vim='/usr/local/bin/vim'
+
+#ls
+alias la='ls -a'
+alias ll='ls -l'
 
 #tmux
 alias tmux='tmux -2' # run with 256 colors
