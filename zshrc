@@ -26,7 +26,7 @@ SAVEHIST=1000
 HISTFILE=~/.zhistory
 
 ## Export variables for shell
-eval $( dircolors -b $HOME/.dotfiles/LS_COLOURS/LS_COLORS )
+eval $( dircolors -b $HOME/.dotfiles/LS_COLORS/LS_COLORS )
 export CLICOLOR=1
 
 export EDITOR=vim
