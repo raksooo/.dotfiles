@@ -8,6 +8,9 @@
 #source ~/code/liquidprompt/nojhan.theme
 #LP_PS1_FILE="~/code/liquidprompt/nojhan.ps1"
 
+#source $DOTFILES/config/liquidprompt.theme
+#LP_PS1_FILE="$DOTFILES/config/raksooo.p1"
+
 #############
 # BEHAVIOUR #
 #############
