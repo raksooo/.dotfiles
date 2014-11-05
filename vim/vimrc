@@ -8,7 +8,7 @@ call vundle#begin()
 
 Bundle 'gmarik/vundle'
 
-" Bundle 'Valloric/YouCompleteMe'
+Bundle 'Shougo/neocomplete'
 Bundle 'Raimondi/delimitMate'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'godlygeek/tabular'
@@ -40,3 +40,8 @@ set smartcase
 set smartindent
 set tabstop=4
 set title
+
+" Mappings
+map \yy :.w !pbcopy<CR><CR>
+map \p :r !pbpaste<CR>
+map <F2> :!open -a iTerm2<CR><CR>
