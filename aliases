@@ -24,6 +24,14 @@ alias gc='git commit -m'
 alias gca='git commit -am'
 alias gl='git log'
 
+#ssh
+alias irc='mosh irc'
+alias pi='mosh pi'
+alias spi='ssh pi'
+alias nollkit='ssh nollkit'
+alias styrit='ssh styrit'
+alias backup='ssh pi \"backup\"'
+
 #other
 alias ql='qlmanage -p "$1" >& /dev/null'
 alias sniff="sudo ngrep -d 'en1' -t '^(GET|POST) ' 'tcp and port 80'"

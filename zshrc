@@ -35,7 +35,7 @@ export VISUAL=vim
 export LANG='en_GB.UTF-8'
 export LANGUAGE=$LANG
 
-# Make vim colors work in tmux
+## Make vim colors work in tmux
 export TERM=xterm-256color
 [ -n "$TMUX" ] && export TERM=screen-256color
 
