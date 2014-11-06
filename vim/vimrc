@@ -44,4 +44,3 @@ set title
 " Mappings
 map \yy :.w !pbcopy<CR><CR>
 map \p :r !pbpaste<CR>
-map <F2> :!open -a iTerm2<CR><CR>
