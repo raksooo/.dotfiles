@@ -24,10 +24,13 @@ let g:solarized_termtrans=0
 let g:solarized_termcolors=256
 let g:solarized_termtrans=1
 colorscheme solarized
+hi LineNr ctermfg=grey
+hi CursorLine ctermbg=236
 
 " Settings
 set autoindent
 set backspace=2
+set cursorline
 set expandtab
 set hlsearch
 set ignorecase
@@ -44,3 +47,9 @@ set title
 " Mappings
 map \yy :.w !pbcopy<CR><CR>
 map \p :r !pbpaste<CR>
+
+" Autocommands
+augroup reload_vimrc " {
+    autocmd!
+    autocmd BufWritePost $MYVIMRC source $MYVIMRC
+augroup END " }"
