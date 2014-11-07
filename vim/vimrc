@@ -8,10 +8,11 @@ call vundle#begin()
 
 Bundle 'gmarik/vundle'
 
-Bundle 'Valloric/YouCompleteMe'
+Plugin 'Valloric/YouCompleteMe'
 Bundle 'Raimondi/delimitMate'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'godlygeek/tabular'
+Plugin 'airblade/vim-gitgutter'
 
 Bundle 'altercation/vim-colors-solarized'
 
@@ -25,7 +26,15 @@ let g:solarized_termcolors=256
 let g:solarized_termtrans=1
 colorscheme solarized
 hi LineNr ctermfg=grey ctermbg=none
-hi CursorLine ctermbg=236
+hi CursorLine ctermbg=237
+hi CursorLineNr ctermbg=237
+
+" gitgutter
+hi SignColumn ctermbg=none
+hi GitGutterAdd ctermbg=none ctermfg=lightgreen
+hi GitGutterChange ctermbg=none ctermfg=yellow
+hi GitGutterDelete ctermbg=none ctermfg=red
+hi GitGutterChangeDelete ctermbg=none ctermfg=lightred
 
 " Settings
 set autoindent
@@ -50,7 +59,7 @@ map \p :r !pbpaste<CR>
 
 " Commands
 if !exists(":DiffOrig")
-    command Diff vert new | set bt=nofile | r # | 0d_ | diffthis
+    command! Diff vert new | set bt=nofile | r # | 0d_ | diffthis
               \ | wincmd p | diffthis
 endif
 
