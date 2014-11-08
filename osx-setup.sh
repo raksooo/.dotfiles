@@ -88,6 +88,13 @@ defaults write com.apple.terminal "Default Window Settings" -string "raksooo"
 defaults write com.apple.terminal "Startup Window Settings" -string "raksooo"
 
 #############################
+# Other applications
+#############################
+
+# Makes quicktime autoplay videos when opened
+defaults write com.apple.QuickTimePlayerX MGPlayMovieOnOpen -bool true
+
+#############################
 # Kill affected applications
 #############################
 
