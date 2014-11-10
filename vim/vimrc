@@ -25,9 +25,11 @@ let g:solarized_termtrans=0
 let g:solarized_termcolors=256
 let g:solarized_termtrans=1
 colorscheme solarized
+
 hi LineNr ctermfg=grey ctermbg=none
 hi CursorLine ctermbg=237
 hi CursorLineNr ctermbg=237
+hi Folded cterm=bold ctermbg=234
 
 " gitgutter
 hi SignColumn ctermbg=none
@@ -52,10 +54,13 @@ set smartcase
 set smartindent
 set tabstop=4
 set title
+set foldmethod=indent
+set foldnestmax=2
 
 " Mappings
 map \yy :.w !pbcopy<CR><CR>
 map \p :r !pbpaste<CR>
+nnoremap <space> zA
 
 " Commands
 if !exists(":DiffOrig")
