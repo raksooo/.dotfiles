@@ -61,6 +61,7 @@ set foldnestmax=2
 map \yy :.w !pbcopy<CR><CR>
 map \p :r !pbpaste<CR>
 nnoremap <space> zA
+map <F2> :noh<CR>
 
 " Commands
 if !exists(":DiffOrig")
