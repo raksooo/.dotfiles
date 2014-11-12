@@ -36,6 +36,7 @@ alias backup='ssh pi \"backup\"'
 #selfcreated apps
 alias chp='php ~/java -jar ~/Programmering/Java/chp/chp.jar'
 alias snapchat='php ~/Programmering/php/Snapchat/snapchat.php'
+alias lsn='snapchat -s v'
 
 #other
 alias ql='qlmanage -p "$1" >& /dev/null'
