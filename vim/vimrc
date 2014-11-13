@@ -13,6 +13,7 @@ Bundle 'Raimondi/delimitMate'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'godlygeek/tabular'
 Plugin 'airblade/vim-gitgutter'
+Bundle 'bling/vim-airline'
 
 Bundle 'altercation/vim-colors-solarized'
 
@@ -41,6 +42,12 @@ hi GitGutterChange ctermbg=none ctermfg=yellow
 hi GitGutterDelete ctermbg=none ctermfg=red
 hi GitGutterChangeDelete ctermbg=none ctermfg=lightred
 
+" airline
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#fnamemod = ':t'
+let g:airline#extensions#tabline#left_sep = ''
+let g:airline#extensions#tabline#right_sep = ''
+
 " Settings
 set autoindent
 set backspace=2
@@ -48,13 +55,13 @@ set cursorline
 set expandtab
 set foldmethod=indent
 set foldnestmax=2
+set hidden
 set hlsearch
 set ignorecase
 set number
 set ruler
 set scrolloff=200
 set shortmess=atI
-set showcmd
 set shiftwidth=4
 set smartcase
 set smartindent
@@ -64,10 +71,20 @@ set title
 
 " Mappings
 map <space> <leader>
+
 map <leader>yy :.w !pbcopy<CR><CR>
 map <leader>p :r !pbpaste<CR>
 map <leader>c zA
 map <leader>f :noh<CR>
+map <leader>w :w<CR>
+map <leader>ww :w<CR><CR>
+
+"" Tabs
+nmap <leader>t :enew<cr>" New
+nmap <leader>l :bnext<CR>" Next
+nmap <leader>h :bprevious<CR>" Previous
+nmap <leader>bq :bp <BAR> bd #<CR>" Close
+nmap <leader>bl :ls <CR>" List
 
 " Commands
 command! W w
