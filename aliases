@@ -1,4 +1,4 @@
-[?1;2c#!/bin/sh
+#!/bin/sh
 
 #color
 alias ls='ls --color=auto'
