@@ -27,9 +27,6 @@ defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
 # Turn off keyboard illumination when computer is not used for 5 minutes
 defaults write com.apple.BezelServices kDimTime -int 300
 
-# Install Keyboard layout without dead keys
-sudo cp Swedish_NoDead.keylayout /Library/Keyboard\ Layouts
-
 #############################
 # Finder
 #############################
