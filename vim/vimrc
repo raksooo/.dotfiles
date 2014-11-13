@@ -31,6 +31,9 @@ hi CursorLine ctermbg=237
 hi CursorLineNr ctermbg=237
 hi Folded cterm=bold ctermbg=234
 
+highlight ExtraWhitespace ctermbg=red
+match ExtraWhitespace /\s\+$/
+
 " gitgutter
 hi SignColumn ctermbg=none
 hi GitGutterAdd ctermbg=none ctermfg=lightgreen
@@ -43,19 +46,19 @@ set autoindent
 set backspace=2
 set cursorline
 set expandtab
+set foldmethod=indent
+set foldnestmax=2
 set hlsearch
 set ignorecase
 set number
 set ruler
-set scrolloff=5
+set scrolloff=200
 set shortmess=atI
 set shiftwidth=4
 set smartcase
 set smartindent
 set tabstop=4
 set title
-set foldmethod=indent
-set foldnestmax=2
 
 " Mappings
 map \yy :.w !pbcopy<CR><CR>
@@ -74,3 +77,8 @@ augroup reload_vimrc
     autocmd!
     autocmd BufWritePost $MYVIMRC source $MYVIMRC
 augroup END
+
+autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+autocmd BufWinLeave * call clearmatches()
