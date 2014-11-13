@@ -45,8 +45,10 @@ hi GitGutterChangeDelete ctermbg=none ctermfg=lightred
 " airline
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
-let g:airline#extensions#tabline#left_sep = ''
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = ' '
 let g:airline#extensions#tabline#right_sep = ''
+let g:airline#extensions#tabline#show_buffers = 1
 
 " Settings
 set autoindent
@@ -60,7 +62,7 @@ set hlsearch
 set ignorecase
 set number
 set ruler
-set scrolloff=200
+set scrolloff=1000
 set shortmess=atI
 set shiftwidth=4
 set smartcase
