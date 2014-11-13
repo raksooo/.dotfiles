@@ -1,4 +1,4 @@
-#!/bin/sh
+[?1;2c#!/bin/sh
 
 #color
 alias ls='ls --color=auto'
@@ -24,6 +24,7 @@ alias gaa='git add -A'
 alias gc='git commit -m'
 alias gca='git commit -am'
 alias gl='git log'
+alias gp='git push'
 
 #ssh
 alias irc='mosh irc'
