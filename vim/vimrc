@@ -54,19 +54,23 @@ set number
 set ruler
 set scrolloff=200
 set shortmess=atI
+set showcmd
 set shiftwidth=4
 set smartcase
 set smartindent
 set tabstop=4
+set timeoutlen=400
 set title
 
 " Mappings
-map \yy :.w !pbcopy<CR><CR>
-map \p :r !pbpaste<CR>
-nnoremap <space> zA
-map <F2> :noh<CR>
+map <space> <leader>
+map <leader>yy :.w !pbcopy<CR><CR>
+map <leader>p :r !pbpaste<CR>
+map <leader>c zA
+map <leader>f :noh<CR>
 
 " Commands
+command! W w
 if !exists(":DiffOrig")
     command! Diff vert new | set bt=nofile | r # | 0d_ | diffthis
               \ | wincmd p | diffthis
