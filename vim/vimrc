@@ -68,7 +68,6 @@ map <leader>yy :.w !pbcopy<CR><CR>
 map <leader>p :r !pbpaste<CR>
 map <leader>c zA
 map <leader>f :noh<CR>
-map <Esc> i
 
 " Commands
 command! W w
