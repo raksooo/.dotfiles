@@ -82,10 +82,10 @@ map <leader>w :w<CR><CR>
 
 "" Buffers
 nmap <leader>t :enew<cr>" New
-nmap <leader>l :bnext<CR>" Next
-nmap <leader>h :bprevious<CR>" Previous
+nmap <leader>h :bnext<CR>" Next
+nmap <leader>l :bprevious<CR>" Previous
 nmap <leader>q :bp <BAR> bd #<CR>" Close
-nmap <leader>l :ls <CR>" List
+nmap <leader>s :ls <CR>" List
 nnoremap <Leader>g :e#<CR>
 nnoremap <Leader>1 :1b<CR>
 nnoremap <Leader>2 :2b<CR>
