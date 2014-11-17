@@ -1,3 +1,9 @@
+## Paths
+export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
+export PATH="$HOME/.cabal/bin:$PATH"
+export DOTFILES=$HOME/.dotfiles
+
 ## Completion
 zstyle ':completion:*' menu select
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
