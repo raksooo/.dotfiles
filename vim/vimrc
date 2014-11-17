@@ -86,6 +86,7 @@ nmap <leader>h :bnext<CR>" Next
 nmap <leader>l :bprevious<CR>" Previous
 nmap <leader>q :bp <BAR> bd #<CR>" Close
 nmap <leader>s :ls <CR>" List
+nmap <leader>n :badd %:h/<CR>:bnext<CR>
 nnoremap <Leader>g :e#<CR>
 nnoremap <Leader>1 :1b<CR>
 nnoremap <Leader>2 :2b<CR>
