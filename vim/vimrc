@@ -31,6 +31,7 @@ hi LineNr ctermfg=grey ctermbg=none
 hi CursorLine ctermbg=237
 hi CursorLineNr ctermbg=237
 hi Folded cterm=bold ctermbg=234
+hi Colorcolumn ctermbg=1
 
 highlight ExtraWhitespace ctermbg=red
 match ExtraWhitespace /\s\+$/
@@ -53,6 +54,7 @@ let g:airline#extensions#tabline#show_buffers = 1
 " Settings
 set autoindent
 set backspace=2
+set colorcolumn=80
 set cursorline
 set expandtab
 set foldmethod=indent

@@ -3,6 +3,7 @@ export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
 export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
 export PATH="$HOME/.cabal/bin:$PATH"
 export DOTFILES=$HOME/.dotfiles
+export JAVA_HOME=$(/usr/libexec/java_home)
 
 ## Completion
 zstyle ':completion:*' menu select
