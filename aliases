@@ -23,7 +23,8 @@ alias gaa='git add -A'
 alias gc='git commit -m'
 alias gca='git commit -am'
 alias gl='git log'
-alias gp='git push'
+alias gll='git pull'
+alias gsh='git push'
 
 #ssh
 alias irc='mosh irc'
