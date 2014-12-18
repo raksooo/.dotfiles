@@ -84,8 +84,8 @@ map <leader>w :w<CR><CR>
 
 "" Buffers
 nmap <leader>t :enew<cr>" New
-nmap <leader>h :bnext<CR>" Next
-nmap <leader>l :bprevious<CR>" Previous
+nmap <leader>l :bnext<CR>" Next
+nmap <leader>h :bprevious<CR>" Previous
 nmap <leader>q :bp <BAR> bd #<CR>" Close
 nmap <leader>s :ls <CR>" List
 nmap <leader>n :badd %:h/<CR>:bnext<CR>
