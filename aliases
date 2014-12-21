@@ -45,5 +45,6 @@ alias sniff="sudo ngrep -d 'en1' -t '^(GET|POST) ' 'tcp and port 80'"
 alias spotify='sh ~/Applications/spotify'
 alias gitinspector='python ~/Applications/gitinspector/gitinspector/gitinspector.py -wTl'
 alias qute='qutebrowser;exit;'
+alias applist='sh ~/Google\ Drive/bup/Applications/applistscript.sh'
 
 alias wwwim='vim scp://pi/www/'
