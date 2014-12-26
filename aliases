@@ -40,6 +40,7 @@ alias snapchat='php ~/Programmering/php/Snapchat/snapchat.php'
 alias lsn='snapchat -s v'
 
 #other
+alias brewpdate='brew update && brew upgrade'
 alias ql='qlmanage -p "$1" >& /dev/null'
 alias sniff="sudo ngrep -d 'en1' -t '^(GET|POST) ' 'tcp and port 80'"
 alias spotify='sh ~/Applications/spotify'
