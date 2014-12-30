@@ -14,6 +14,7 @@ Bundle 'scrooloose/nerdcommenter'
 Bundle 'godlygeek/tabular'
 Plugin 'airblade/vim-gitgutter'
 Bundle 'bling/vim-airline'
+Bundle 'scrooloose/nerdtree'
 
 Bundle 'altercation/vim-colors-solarized'
 
@@ -50,6 +51,10 @@ let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = ' '
 let g:airline#extensions#tabline#right_sep = ''
 let g:airline#extensions#tabline#show_buffers = 1
+
+" NerdTree
+let NERDTreeShowHidden=1
+map <Leader>n :NERDTreeToggle<CR>
 
 " Settings
 set autoindent
