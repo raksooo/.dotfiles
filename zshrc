@@ -4,6 +4,7 @@ export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
 export PATH="$HOME/.cabal/bin:$PATH"
 export DOTFILES=$HOME/.dotfiles
 export JAVA_HOME=$(/usr/libexec/java_home)
+export ANDROID_HOME=/usr/local/opt/android-sdk
 
 ## Completion
 zstyle ':completion:*' menu select
