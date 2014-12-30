@@ -5,6 +5,7 @@ export PATH="$HOME/.cabal/bin:$PATH"
 export DOTFILES=$HOME/.dotfiles
 export JAVA_HOME=$(/usr/libexec/java_home)
 export ANDROID_HOME=/usr/local/opt/android-sdk
+export STUDIO_JDK=/Library/Java/JavaVirtualMachines/jdk1.8.0_25.jdk
 
 ## Completion
 zstyle ':completion:*' menu select
