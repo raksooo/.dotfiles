@@ -87,19 +87,19 @@
     },
     "focus-ccw": {
         "mod": "mod1",
-        "key": "j"
+        "key": "k"
     },
     "focus-cw": {
         "mod": "mod1",
-        "key": "k"
+        "key": "j"
     },
     "swap-ccw": {
         "mod": "mod2",
-        "key": "j"
+        "key": "k"
     },
     "swap-cw": {
         "mod": "mod2",
-        "key": "k"
+        "key": "j"
     },
     "swap-main": {
         "mod": "mod2",
