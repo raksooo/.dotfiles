@@ -107,6 +107,7 @@ nnoremap <Leader>9 :9b<CR>
 nnoremap <Leader>0 :10b<CR>
 
 " Commands
+command! J w | !javac %
 command! W w
 if !exists(":DiffOrig")
     command! Diff vert new | set bt=nofile | r # | 0d_ | diffthis
