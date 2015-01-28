@@ -6,7 +6,8 @@ export PATH="$(brew --prefix homebrew/php/php56)/bin:$PATH"
 export DOTFILES=$HOME/.dotfiles
 export JAVA_HOME=$(/usr/libexec/java_home)
 export ANDROID_HOME=/usr/local/opt/android-sdk
-export STUDIO_JDK=/Library/Java/JavaVirtualMachines/jdk1.8.0_25.jdk
+VER=$(/usr/libexec/java_home | cut -d '/' -f 5)
+export STUDIO_JDK="/Library/Java/JavaVirtualMachines/$VER"
 
 ## Completion
 zstyle ':completion:*' menu select
