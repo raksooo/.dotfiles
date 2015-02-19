@@ -26,6 +26,7 @@ alias gsh='git push'
 #ssh
 alias irc='mosh irc'
 alias pi='mosh pi'
+alias lpi='mosh lpi'
 alias spi='ssh pi'
 alias nollkit='ssh nollkit'
 alias styrit='ssh styrit'
