@@ -51,7 +51,7 @@ export TERM=xterm-256color
 [ -n "$TMUX" ] && export TERM=screen-256color
 
 ## Aliases
-source $HOME/.dotfiles/aliases
+source $DOTFILES/aliases
 
 ## LiquidPrompt
 source ~/.dotfiles/liquidprompt/liquidprompt

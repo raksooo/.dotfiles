@@ -8,7 +8,7 @@ call vundle#begin()
 
 Bundle 'gmarik/vundle'
 
-Plugin 'Valloric/YouCompleteMe'
+"Plugin 'Valloric/YouCompleteMe'
 Bundle 'Raimondi/delimitMate'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'godlygeek/tabular'
