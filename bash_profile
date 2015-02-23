@@ -24,4 +24,6 @@ source $DOTFILES/aliases_rpi
 ## LiquidPrompt
 source ~/.dotfiles/liquidprompt/liquidprompt
 
-tmux
+if [ -z "$TMUX" ]; then
+    exec tmux
+fi
