@@ -25,5 +25,5 @@ source $DOTFILES/aliases_rpi
 source ~/.dotfiles/liquidprompt/liquidprompt
 
 if [ -z "$TMUX" ]; then
-    exec tmux
+    exec tmux new-session -A -s main
 fi
