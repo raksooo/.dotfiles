@@ -28,7 +28,7 @@ defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
 defaults write com.apple.BezelServices kDimTime -int 300
 
 # Install keyboard with no dead keys
-sudo cp $DOTFILES/helpfiles/Swedish_NoDead.keylayout /Library/Keyboard\ Layouts/
+sudo cp $DOTFILES/Swedish_NoDead.keylayout /Library/Keyboard\ Layouts/
 
 #############################
 # Finder
