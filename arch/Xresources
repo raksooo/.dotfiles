@@ -1,0 +1,6 @@
+XTerm*Background: rgb:35/35/36
+XTerm*Foreground: rgb:BB/BB/BB
+
+XTerm*renderFont: true
+XTerm*faceName: Monaco
+XTerm*faceSize: 7.8

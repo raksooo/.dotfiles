@@ -8,7 +8,7 @@ call vundle#begin()
 
 Bundle 'gmarik/vundle'
 
-"Plugin 'Valloric/YouCompleteMe'
+Plugin 'Valloric/YouCompleteMe'
 Bundle 'Raimondi/delimitMate'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'godlygeek/tabular'
@@ -81,8 +81,8 @@ set title
 " Mappings
 map <space> <leader>
 
-map <leader>yy :.w !pbcopy<CR><CR>
-map <leader>p :r !pbpaste<CR>
+map <leader>yy :.w !xclip -i<CR><CR>
+map <leader>p :r !xclip -o<CR>
 map <leader>c zA
 map <leader>f :noh<CR>
 map <leader>w :w<CR><CR>
