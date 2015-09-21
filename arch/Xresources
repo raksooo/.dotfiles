@@ -3,4 +3,4 @@ XTerm*Foreground: rgb:BB/BB/BB
 
 XTerm*renderFont: true
 XTerm*faceName: Monaco
-XTerm*faceSize: 7.8
+XTerm*faceSize: 7.5

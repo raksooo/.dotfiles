@@ -58,7 +58,8 @@ function rascal.batterywidget()
             lowbattery = true
             naughty.notify({ preset = {
                 title = "Low battery",
-                text = "Only " .. percentage .. "% left"
+                text = "Only " .. percentage .. "% left",
+                timeout = 120
             } })
         elseif percentage > 10 then
             lowbattery = false
@@ -208,13 +209,13 @@ end
 
 function mediakeys(globalkeys)
     globalkeys = awful.util.table.join(globalkeys, awful.key({ }, "XF86AudioPlay", function()
-        os.execute("playerctl play-pause")
+        os.execute("playerctl play-pause &")
     end))
     globalkeys = awful.util.table.join(globalkeys, awful.key({ }, "XF86AudioPrev", function()
-        os.execute("playerctl previous")
+        os.execute("playerctl previous &")
     end))
     globalkeys = awful.util.table.join(globalkeys, awful.key({ }, "XF86AudioNext", function()
-        os.execute("playerctl next")
+        os.execute("playerctl next &")
     end))
     return globalkeys
 end
