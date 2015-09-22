@@ -39,6 +39,7 @@ function rascal.batterywidget()
         percentage = data[2][#data[2]]
         percentage = percentage:gsub("%W", "")
         percentage = tonumber(percentage)
+        percentage = round((percentage / 95) * 100)
         local text = ""
         if state == "fully-charged" then
             text = "<span color=\"lightgreen\">" .. percentage .. "%</span>"
@@ -306,7 +307,7 @@ end
 
 function round(num, idp)
     local mult = 10^(idp or 0)
-    return math.floor(num * mult + 0.5) / mult
+    return math.floor(math.floor(num * mult + 0.5) / mult)
 end
 
 function split(inputstr, sep)

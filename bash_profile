@@ -1,4 +1,4 @@
-## Paths
+## Path
 export DOTFILES=$HOME/.dotfiles
 
 ## Export variables for shell
@@ -17,8 +17,10 @@ export TERM=xterm-256color
 
 ## Aliases
 source $DOTFILES/aliases
+source $DOTFILES/arch/aliases
 
 ## LiquidPrompt
 source ~/.dotfiles/liquidprompt/liquidprompt
 
+[[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && exec startx
 
