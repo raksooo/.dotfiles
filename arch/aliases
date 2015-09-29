@@ -4,3 +4,5 @@ alias battery='upower -i $(upower -e | grep 'BAT') | grep -E "state|to\ full|per
 alias batteryonly='echo $(battery | grep percentage | sed "s/.*[ \t][ \t]*\([0-9][0-9]*\)%.*/\1/")%'
 alias externalmonitor='xrandr --output DisplayPort-1 --auto --right-of LVDS'
 alias externalmonitoroff='xrandr --output DisplayPort-1 --off'
+
+alias feh='feh -.'
