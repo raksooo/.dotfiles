@@ -1,6 +1,6 @@
-[[ -f ~/.bashrc ]] && . ~/.bashrc
+#!/bin/sh
 
-## Paths
+## Path
 export DOTFILES=$HOME/.dotfiles
 
 ## Export variables for shell
@@ -10,7 +10,7 @@ export CLICOLOR=1
 export EDITOR=vim
 export VISUAL=vim
 
-export LANG='en_GB.UTF-8'
+export LANG='en_US.UTF-8'
 export LANGUAGE=$LANG
 
 ## Make vim colors work in tmux
@@ -19,11 +19,10 @@ export TERM=xterm-256color
 
 ## Aliases
 source $DOTFILES/aliases
-source $DOTFILES/aliases_rpi
+source $DOTFILES/arch/aliases
 
 ## LiquidPrompt
-source ~/.dotfiles/liquidprompt/liquidprompt
+source $DOTFILES/liquidprompt/liquidprompt
 
-if [ -z "$TMUX" ]; then
-    exec tmux
-fi
+[[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && exec startx
+
