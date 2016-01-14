@@ -16,7 +16,8 @@
     ],
 
     "mod1": [
-        "control"
+        "command",
+        "shift"
     ],
     "mod2": [
         "control",

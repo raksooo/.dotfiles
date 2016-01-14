@@ -37,6 +37,7 @@ alias chp='php ~/java -jar ~/Programmering/Java/chp/chp.jar'
 alias snapchat='php ~/Programmering/php/Snapchat/snapchat.php'
 alias lsn='snapchat -s v'
 alias magnet='sh ~/rtorrent_watch/download_magnet.sh $(pbpaste)'
+alias playmagnet='peerflix $(pbpaste) --vlc'
 
 #other
 alias brewpdate='brew update && brew upgrade --all'
