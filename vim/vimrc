@@ -15,6 +15,7 @@ Bundle 'godlygeek/tabular'
 Plugin 'airblade/vim-gitgutter'
 Bundle 'bling/vim-airline'
 Bundle 'scrooloose/nerdtree'
+Bundle 'unblevable/quick-scope'
 
 Bundle 'altercation/vim-colors-solarized'
 
@@ -69,7 +70,7 @@ set hlsearch
 set ignorecase
 set number
 set ruler
-set scrolloff=1000
+set scrolloff=10
 set shortmess=atI
 set shiftwidth=4
 set smartcase
