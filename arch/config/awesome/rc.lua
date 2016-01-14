@@ -46,11 +46,10 @@ end
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
-beautiful.init("/usr/share/awesome/themes/default/theme.lua")
-beautiful.wallpaper = "/home/rascal/.config/awesome/wallpaper.jpg"
+-- beautiful.init("/home/rascal/.config/awesome/theme.lua")
+beautiful.init("/home/rascal/.config/awesome/theme.lua")
+-- require("rascal.theme")
 
-beautiful.useless_gap_width = 10
-beautiful.bg_normal = "#222733"
 naughty.config.defaults.height = 60
 naughty.config.defaults.width = 250
 naughty.config.defaults.margin = 7
@@ -92,11 +91,6 @@ local layouts =
     -- awful.layout.suit.max.fullscreen,
     -- awful.layout.suit.magnifier
 }
-
-beautiful.layout_tile = "/usr/share/awesome/themes/zenburn/layouts/tile.png"
-beautiful.layout_tilebottom = "/usr/share/awesome/themes/zenburn/layouts/tilebottom.png"
-beautiful.layout_floating = "/usr/share/awesome/themes/zenburn/layouts/floating.png"
-beautiful.layout_max = "/usr/share/awesome/themes/zenburn/layouts/max.png"
 -- }}}
 
 -- {{{ Wallpaper
@@ -226,23 +220,24 @@ for s = 1, screen.count() do
 
     -- Widgets that are aligned to the right
     local right_layout = wibox.layout.fixed.horizontal()
-    if s == 1 then right_layout:add(wibox.widget.systray()) end
-    right_layout:add(rascal.bigspacing)
+        right_layout:add(rascal.bigspacing)
     right_layout:add(rascal.volumewidget())
 
-    right_layout:add(rascal.bigspacing)
+        right_layout:add(rascal.bigspacing)
     right_layout:add(rascal.batterywidget())
 
-    right_layout:add(rascal.newSeperator("  | "))
+        right_layout:add(rascal.mediumspacing)
     right_layout:add(mytextclock)
 
-    right_layout:add(rascal.spacing)
+        right_layout:add(rascal.spacing)
+    if s == 1 then right_layout:add(wibox.widget.systray()) end
+        right_layout:add(rascal.mediumspacing)
     right_layout:add(mylayoutbox[s])
 
     -- Now bring it all together (with the tasklist in the middle)
     local layout = wibox.layout.align.horizontal()
     layout:set_left(left_layout)
-    layout:set_middle(mytasklist[s])
+    -- layout:set_middle(mytasklist[s])
     layout:set_right(right_layout)
 
     mywibox[s]:set_widget(layout)
@@ -260,16 +255,36 @@ root.buttons(awful.util.table.join(
 
 -- {{{ Key bindings
 globalkeys = awful.util.table.join(
-    awful.key({ "Control",           }, "k",   awful.tag.viewprev       ),
-    awful.key({ "Control",           }, "j",  awful.tag.viewnext       ),
+    awful.key({ modkey,           }, "k",  awful.tag.viewprev ),
+    awful.key({ modkey,           }, "j",  awful.tag.viewnext ),
+	awful.key({ "Mod1", 		  }, "j",
+		function (c)
+			local curidx = awful.tag.getidx()
+			if curidx == 9 then
+				awful.client.movetotag(tags[client.focus.screen][1])
+			else
+				awful.client.movetotag(tags[client.focus.screen][curidx + 1])
+			end
+			awful.tag.viewnext()
+		end),
+    awful.key({ "Mod1",           }, "k",
+		function (c)
+			local curidx = awful.tag.getidx()
+			if curidx == 1 then
+				awful.client.movetotag(tags[client.focus.screen][9])
+			else
+				awful.client.movetotag(tags[client.focus.screen][curidx - 1])
+			end
+			awful.tag.viewprev()
+		end),
     awful.key({ modkey,           }, "Escape", awful.tag.history.restore),
 
-    awful.key({ modkey,        }, "j",
+    awful.key({ modkey, "Shift" }, "j",
         function ()
             awful.client.focus.byidx( 1)
             if client.focus then client.focus:raise() end
         end),
-    awful.key({ modkey,        }, "k",
+    awful.key({ modkey, "Shift" }, "k",
         function ()
             awful.client.focus.byidx(-1)
             if client.focus then client.focus:raise() end
@@ -277,10 +292,11 @@ globalkeys = awful.util.table.join(
     -- awful.key({ modkey,           }, "w", function () mymainmenu:show() end),
 
     -- Layout manipulation
-    awful.key({ modkey, "Shift"   }, "j", function () awful.client.swap.byidx(  1)    end),
-    awful.key({ modkey, "Shift"   }, "k", function () awful.client.swap.byidx( -1)    end),
-    awful.key({ modkey, "Control" }, "j", function () awful.screen.focus_relative( 1) end),
-    awful.key({ modkey, "Control" }, "k", function () awful.screen.focus_relative(-1) end),
+    awful.key({ "Control", }, "j", function () awful.client.swap.byidx(  1)    end),
+    awful.key({ "Control", }, "k", function () awful.client.swap.byidx( -1)    end),
+    -- Multiple screens?
+    --awful.key({ modkey, "Control" }, "j", function () awful.screen.focus_relative( 1) end),
+    --awful.key({ modkey, "Control" }, "k", function () awful.screen.focus_relative(-1) end),
     awful.key({ modkey,           }, "u", awful.client.urgent.jumpto),
     awful.key({ modkey,           }, "Tab",
         function ()
@@ -405,7 +421,7 @@ root.keys(globalkeys)
 awful.rules.rules = {
     -- All clients will match this rule.
     { rule = { },
-      properties = { border_width = theme.border_width,
+      properties = { border_width = beautiful.border_width,
                      border_color = "#303030", -- beautiful.border_color,
                      focus = awful.client.focus.filter,
                      raise = true,
@@ -497,7 +513,7 @@ client.connect_signal("focus", function(c)
     else
         c.opacity = 1
     end
-    c.border_color = theme.border_focus
+    c.border_color = beautiful.border_focus
 end)
 client.connect_signal("unfocus", function(c)
     c.opacity = 0.7

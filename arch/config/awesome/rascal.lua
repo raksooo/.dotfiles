@@ -16,9 +16,10 @@ function rascal.newSeperator(text)
     seperator:set_markup("<span color=\"#444444\">" .. text .. "</span>")
     return seperator
 end
-rascal.spacing = rascal.newSeperator(" ")
-rascal.bigspacing = rascal.newSeperator("   ")
-rascal.seperator = rascal.newSeperator("  |  ")
+rascal.spacing = rascal.newSeperator("  ")
+rascal.mediumspacing = rascal.newSeperator("   ")
+rascal.bigspacing = rascal.newSeperator("    ")
+rascal.seperator = rascal.newSeperator("    |    ")
 
 function rascal.init(_terminal)
     terminal = _terminal
@@ -266,7 +267,7 @@ function adjustBrightness(delta)
     current = math.floor(current + delta)
     current = math.min(current, max)
     current = math.max(current, 0)
-    os.execute("tee /sys/class/backlight/gmux_backlight/brightness <<< " .. current)
+    os.execute("sudo tee /sys/class/backlight/gmux_backlight/brightness <<< " .. current)
 end
 
 function rascal.wifiwidget()
