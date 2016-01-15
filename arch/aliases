@@ -6,3 +6,5 @@ alias externalmonitor='xrandr --output DisplayPort-1 --auto --right-of LVDS'
 alias externalmonitoroff='xrandr --output DisplayPort-1 --off'
 
 alias feh='feh -.'
+
+alias startphone='sudo fastboot reboot'

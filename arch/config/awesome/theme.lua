@@ -7,7 +7,7 @@ theme = {}
 theme.font = "sans 7.5"
 -- theme.font          = "sans 8"
 
-theme.bg_normal = "#F44336"
+theme.bg_normal = "#222222"
 theme.bg_focus      = "#535d6c"
 theme.bg_urgent     = "#ff0000"
 theme.bg_minimize   = "#444444"
@@ -20,7 +20,7 @@ theme.fg_minimize   = "#ffffff"
 
 theme.border_width  = 1
 theme.border_normal = "#000000"
-theme.border_focus  = "#535d6c"
+theme.border_focus  = "#28496b"
 theme.border_marked = "#91231c"
 
 theme.tasklist_bg_normal = "#222733"
@@ -36,9 +36,9 @@ theme.tasklist_bg_focus = "#394049"
 -- mouse_finder_[color|timeout|animate_timeout|radius|factor]
 -- Example:
 --
-theme.taglist_bg_focus = "#EF9A9A"
-theme.taglist_bg_occupied = "#E57373"
-theme.taglist_fg_focus = "#666666"
+theme.taglist_bg_focus = "#C057A9"
+theme.taglist_bg_occupied = "#714469"
+theme.taglist_fg_focus = "#ffffff"
 theme.taglist_fg_occupied = "#ffffff"
 theme.taglist_fg_empty = theme.taglist_fg_occupied
 
