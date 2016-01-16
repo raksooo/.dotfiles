@@ -7,7 +7,8 @@ require("awful.autofocus")
 -- Widget and layout library
 local wibox = require("wibox")
 rascal = require("rascal")
-keys = require("keys")
+require("keys")
+require("layouts")
 
 -- Theme handling library
 local beautiful = require("beautiful")
@@ -68,23 +69,6 @@ vain.widgets.terminal = terminal
 -- Import personal conf
 rascal.init(terminal);
 
--- Table of layouts to cover with awful.layout.inc, order matters.
-local layouts =
-{
-    vain.layout.uselesstile,
-    awful.layout.suit.tile,
-    -- awful.layout.suit.tile.left,
-    awful.layout.suit.tile.bottom,
-    -- awful.layout.suit.tile.top,
-    -- awful.layout.suit.fair,
-    -- awful.layout.suit.fair.horizontal,
-    awful.layout.suit.floating,
-    -- awful.layout.suit.spiral,
-    -- awful.layout.suit.spiral.dwindle,
-    awful.layout.suit.max,
-    -- awful.layout.suit.max.fullscreen,
-    -- awful.layout.suit.magnifier
-}
 -- }}}
 
 -- {{{ Wallpaper
