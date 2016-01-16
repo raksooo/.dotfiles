@@ -71,7 +71,7 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end),
     awful.key({ modkey, "Shift"   }, "Return", function () awful.util.spawn(webbrowser) end),
     awful.key({ modkey,           }, "space", function () awful.util.spawn(launcher) end),
-    awful.key({ "Mod1",           }, "l", function () awful.util.spawn("slock") end),
+    awful.key({ "Mod1",           }, "space", function () awful.util.spawn("slock") end),
     awful.key({ modkey,           }, "r", function () mypromptbox[mouse.screen]:run() end),
     awful.key({ modkey, "Control" }, "r", awesome.restart),
     awful.key({ modkey, "Shift"   }, "q", awesome.quit),
