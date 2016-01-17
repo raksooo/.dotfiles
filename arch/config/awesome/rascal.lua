@@ -21,56 +21,19 @@ rascal.mediumspacing = rascal.newSeperator("   ")
 rascal.bigspacing = rascal.newSeperator("    ")
 rascal.seperator = rascal.newSeperator("    |    ")
 
-function rascal.init(_terminal)
-    terminal = _terminal
+function debug.notify(text)
+    local preset = {
+        height = 60,
+        width = 140,
+        font = alsawidget.notifications.font,
+        title = "Debug",
+        text = text
+    }
+    alsawidget._notify = naughty.notify ({ preset = preset })
 end
 
-lowbattery = false
-
-function rascal.batterywidget()
-    batterywidget = wibox.widget.textbox()
-    batterywidgettimer = timer({ timeout = 10 })
-    batterywidgettimer:connect_signal("timeout",
-      function()
-        fh = io.popen("upower -i $(upower -e | grep 'BAT') | grep -E 'state|percentage'")
-        data = split(fh:read("*a"), "\n")
-        data[1] = split(data[1], " ")
-        data[2] = split(data[2], " ")
-        state = data[1][#data[1]]
-        percentage = data[2][#data[2]]
-        percentage = percentage:gsub("%W", "")
-        percentage = tonumber(percentage)
-        percentage = round((percentage / 95) * 100)
-        local text = ""
-        if state == "fully-charged" then
-            text = "<span color=\"lightgreen\">" .. percentage .. "%</span>"
-        elseif state == "charging" then
-            text = "<span color=\"lightblue\">⚡" .. percentage .. "%</span>"
-        elseif percentage <= 10 then
-            text = "<span color=\"#FFBBBB\">Battery low: " .. percentage .. "%</span>"
-        elseif percentage <= 25 then
-            text = "<span color=\"#FFFF77\">" .. percentage .. "%</span>"
-        else
-            text = percentage .. "%"
-        end
-        batterywidget:set_markup(text)
-        fh:close()
-
-        if percentage <= 10 and not(lowbattery) then
-            lowbattery = true
-            naughty.notify({ preset = {
-                title = "Low battery",
-                text = "Only " .. percentage .. "% left",
-                timeout = 120
-            } })
-        elseif percentage > 10 then
-            lowbattery = false
-        end
-      end
-    )
-    batterywidgettimer:emit_signal("timeout")
-    batterywidgettimer:start()
-    return batterywidget
+function rascal.init(_terminal)
+    terminal = _terminal
 end
 
 function rascal.volumewidget()
@@ -93,7 +56,7 @@ function rascal.volumewidget()
             },
             font = "Monospace 10", -- must be a monospace font for the bar to be sized consistently
             icon_size = 48,
-            bar_size = 17 -- adjust to fit your font if the bar doesn't fit
+            bar_size = 11 -- adjust to fit your font if the bar doesn't fit
         }
     }
     -- widget
@@ -130,9 +93,9 @@ function rascal.volumewidget()
     function alsawidget:notify ()
         local preset = {
             height = 60,
-            width = 190,
+            width = 140,
             font = alsawidget.notifications.font,
-            bar_character = "="
+            bar_character = "═"
         }
         local i = 1;
         while alsawidget.notifications.icons[i + 1] ~= nil
@@ -158,16 +121,16 @@ function rascal.volumewidget()
             preset.title = alsawidget.channel .. " - Muted"
         elseif alsawidget._current_level == 0
         then
-            preset.title = alsawidget.channel .. " - 0% (muted)"
+            preset.title = alsawidget.channel .. " - 0%"
             preset.text = "[" .. string.rep (" ", alsawidget.notifications.bar_size) .. "]"
         elseif alsawidget._current_level == 100
         then
-            preset.title = alsawidget.channel .. " - 100% (max)"
+            preset.title = alsawidget.channel .. " - 100%"
             preset.text = "[" .. string.rep (preset.bar_character, alsawidget.notifications.bar_size) .. "]"
         else
             local int = round (alsawidget._current_level / 100 * alsawidget.notifications.bar_size)
             preset.title = alsawidget.channel .. " - " .. alsawidget._current_level .. "%"
-            preset.text = "[" .. string.rep (preset.bar_character, int) .. ">" .. string.rep (" ", alsawidget.notifications.bar_size - int - 1) .. "]"
+            preset.text = "[" .. string.rep (preset.bar_character, int) .. string.rep (" ", alsawidget.notifications.bar_size - int) .. "]"
         end
         preset.title = " " .. preset.title
         if preset.text ~= nil then

@@ -1,7 +1,19 @@
 setxkbmap -option caps:escape
-unclutter &
-
 [[ -f ~/.Xresources ]] && xrdb -merge -I$HOME ~/.Xresources
 
+unclutter -idle 1 &
+slock &
+nm-applet &
+redshift 57.705829:11.990570 &
+
+# Startup sound
+sleep 1.5 && mpg123 ~/.dotfiles/arch/boot.mp3 &
+
+# Autostart
+xterm -hold -e "sleep 0.1; mosh nyoskar@hubben.chalmers.it" &
+sleep 0.1 && xterm -hold -e htop &
+sleep 0.2 && xterm &
+
+# Start awesome
 exec awesome
 

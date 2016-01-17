@@ -18,7 +18,9 @@ local menubar = require("menubar")
 
 require("vain")
 
-rascal.run_once("nm-applet")
+-- Widgets
+require("batteryWidget")
+
 rascal.run_once("xcompmgr")
 
 -- {{{ Error handling
@@ -202,7 +204,7 @@ for s = 1, screen.count() do
     right_layout:add(rascal.volumewidget())
 
         right_layout:add(rascal.bigspacing)
-    right_layout:add(rascal.batterywidget())
+    right_layout:add(batterywidget())
 
         right_layout:add(rascal.mediumspacing)
     right_layout:add(mytextclock)
@@ -264,6 +266,16 @@ awful.rules.rules = {
     --   properties = { tag = tags[1][2] } },
 }
 -- }}}
+
+client.connect_signal("manage", function(c, startup)
+    local tag = awful.tag.getidx()
+    if c.class == "mpv" and tag == 4 then
+        if client.focus then
+            awful.client.toggletag(tags[1][1])
+            moveFocus(1)
+        end
+    end
+end)
 
 -- {{{ Signals
 -- Signal function to execute when a new client appears.
@@ -343,7 +355,9 @@ client.connect_signal("focus", function(c)
     c.border_color = beautiful.border_focus
 end)
 client.connect_signal("unfocus", function(c)
-    c.opacity = 0.7
+    if c.class ~= "mpv" then
+        c.opacity = 0.75
+    end
     c.border_color = "#303030" -- theme.border_normal
 end)
 -- }}}
