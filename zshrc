@@ -8,7 +8,6 @@ export JAVA_HOME=$(/usr/libexec/java_home)
 export ANDROID_HOME=/usr/local/opt/android-sdk
 VER=$(/usr/libexec/java_home | cut -d '/' -f 5)
 export STUDIO_JDK="/Library/Java/JavaVirtualMachines/$VER"
-export HOMEBREW_GITHUB_API_TOKEN="d6880336b5176fb5868f6516eccad929bc589b96"
 
 ## Completion
 zstyle ':completion:*' menu select
@@ -53,6 +52,7 @@ export TERM=xterm-256color
 
 ## Aliases
 source $DOTFILES/aliases
+source $DOTFILES/github_oauth
 
 ## LiquidPrompt
 source ~/.dotfiles/liquidprompt/liquidprompt
