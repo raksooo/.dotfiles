@@ -261,9 +261,8 @@ awful.rules.rules = {
       properties = { opacity = 0.95 } },
     { rule = { class = "Spotify" },
       properties = { tag = tags[1][9] } },
-    -- Set Firefox to always map on tags number 2 of screen 1.
-    -- { rule = { class = "Firefox" },
-    --   properties = { tag = tags[1][2] } },
+    { rule = { class = "qutebrowser" },
+      properties = { tag = tags[1][4] } },
 }
 -- }}}
 
@@ -272,7 +271,6 @@ client.connect_signal("manage", function(c, startup)
     if c.class == "mpv" and tag == 4 then
         if client.focus then
             awful.client.toggletag(tags[1][1])
-            moveFocus(1)
         end
     end
 end)

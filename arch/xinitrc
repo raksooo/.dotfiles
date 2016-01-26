@@ -1,4 +1,9 @@
+xmodmap -e "keycode 16 = 7 slash 7 slash braceleft backslash"
+xmodmap -e "keycode 17 = 8 parenleft 8 8 bracketleft braceleft"
+xmodmap -e "keycode 18 = 9 parenright 8 8 bracketright braceright"
+
 setxkbmap -option caps:escape
+
 [[ -f ~/.Xresources ]] && xrdb -merge -I$HOME ~/.Xresources
 
 unclutter -idle 1 &
@@ -10,9 +15,10 @@ redshift 57.705829:11.990570 &
 sleep 1.5 && mpg123 ~/.dotfiles/arch/boot.mp3 &
 
 # Autostart
-xterm -hold -e "sleep 0.1; mosh nyoskar@hubben.chalmers.it" &
-sleep 0.1 && xterm -hold -e htop &
-sleep 0.2 && xterm &
+qutebrowser &
+xterm -hold -e htop &
+xterm &
+xterm &
 
 # Start awesome
 exec awesome
