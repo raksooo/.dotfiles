@@ -1,8 +1,9 @@
+setxkbmap -option caps:escape
+
 xmodmap -e "keycode 16 = 7 slash 7 slash braceleft backslash"
 xmodmap -e "keycode 17 = 8 parenleft 8 8 bracketleft braceleft"
 xmodmap -e "keycode 18 = 9 parenright 8 8 bracketright braceright"
 
-setxkbmap -option caps:escape
 
 [[ -f ~/.Xresources ]] && xrdb -merge -I$HOME ~/.Xresources
 
