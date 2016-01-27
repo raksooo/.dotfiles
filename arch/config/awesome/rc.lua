@@ -204,7 +204,7 @@ for s = 1, screen.count() do
         right_layout:add(rascal.bigspacing)
     right_layout:add(rascal.volumewidget())
 
-        right_layout:add(rascal.bigspacing)
+        right_layout:add(rascal.seperator)
     right_layout:add(batteryWidget())
 
         right_layout:add(rascal.seperator)

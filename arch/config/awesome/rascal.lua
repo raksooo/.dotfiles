@@ -61,8 +61,7 @@ function rascal.volumewidget()
     }
     -- widget
     alsawidget.bar = awful.widget.progressbar ()
-    alsawidget.bar:set_width (8)
-    alsawidget.bar:set_vertical (true)
+    alsawidget.bar:set_width (40)
     alsawidget.bar:set_background_color ("#494B4F")
     alsawidget.bar:set_color (alsawidget.colors.unmute)
     alsawidget.bar:buttons (awful.util.table.join (
@@ -162,7 +161,13 @@ function rascal.volumewidget()
         return args[1]
     end, 5, alsawidget.channel) -- relatively high update time, use of keys/mouse will force update
 
-    return alsawidget.bar
+    finalWidget = wibox.layout.fixed.horizontal()
+    volumeText = wibox.widget.textbox()
+    volumeText:set_text("Vol: ")
+    finalWidget:add(volumeText)
+    margin = wibox.layout.margin(alsawidget.bar, 0, 0, 4, 3)
+    finalWidget:add(margin)
+    return finalWidget
 end
 
 function rascal.keys(globalkeys)
