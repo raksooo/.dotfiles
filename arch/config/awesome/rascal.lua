@@ -13,13 +13,13 @@ local alsawidget
 
 function rascal.newSeperator(text)
     seperator = wibox.widget.textbox()
-    seperator:set_markup("<span color=\"#444444\">" .. text .. "</span>")
+    seperator:set_markup("<span color=\"#333333\">" .. text .. "</span>")
     return seperator
 end
 rascal.spacing = rascal.newSeperator("  ")
 rascal.mediumspacing = rascal.newSeperator("   ")
 rascal.bigspacing = rascal.newSeperator("    ")
-rascal.seperator = rascal.newSeperator("    |    ")
+rascal.seperator = rascal.newSeperator("   |   ")
 
 function debug.notify(text)
     local preset = {

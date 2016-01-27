@@ -3,10 +3,10 @@ local naughty = require("naughty")
 
 lowbattery = false
 
-function batterywidget()
-    batterywidget = wibox.widget.textbox()
-    batterywidgettimer = timer({ timeout = 20 })
-    batterywidgettimer:connect_signal("timeout",
+function batteryWidget()
+    batteryWidget = wibox.widget.textbox()
+    batteryWidgettimer = timer({ timeout = 20 })
+    batteryWidgettimer:connect_signal("timeout",
       function()
         fh = io.popen("upower -i $(upower -e | grep 'BAT') | grep -E 'state|percentage'")
         data = split(fh:read("*a"), "\n")
@@ -29,7 +29,7 @@ function batterywidget()
         else
             text = percentage .. "%"
         end
-        batterywidget:set_markup(text)
+        batteryWidget:set_markup(text)
         fh:close()
 
         if percentage <= 10 and not(lowbattery) then
@@ -44,8 +44,8 @@ function batterywidget()
         end
       end
     )
-    batterywidgettimer:emit_signal("timeout")
-    batterywidgettimer:start()
-    return batterywidget
+    batteryWidgettimer:emit_signal("timeout")
+    batteryWidgettimer:start()
+    return batteryWidget
 end
 

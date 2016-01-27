@@ -20,6 +20,7 @@ require("vain")
 
 -- Widgets
 require("batteryWidget")
+require("pacmanWidget")
 
 rascal.run_once("xcompmgr")
 
@@ -204,12 +205,15 @@ for s = 1, screen.count() do
     right_layout:add(rascal.volumewidget())
 
         right_layout:add(rascal.bigspacing)
-    right_layout:add(batterywidget())
+    right_layout:add(batteryWidget())
 
-        right_layout:add(rascal.mediumspacing)
+        right_layout:add(rascal.seperator)
+    right_layout:add(pacmanWidget())
+
+        right_layout:add(rascal.seperator)
     right_layout:add(mytextclock)
 
-        right_layout:add(rascal.spacing)
+        right_layout:add(rascal.seperator)
     if s == 1 then right_layout:add(wibox.widget.systray()) end
         right_layout:add(rascal.mediumspacing)
     right_layout:add(mylayoutbox[s])
