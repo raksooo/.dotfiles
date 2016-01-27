@@ -61,8 +61,10 @@ function rascal.volumewidget()
     }
     -- widget
     alsawidget.bar = awful.widget.progressbar ()
-    alsawidget.bar:set_width (40)
-    alsawidget.bar:set_background_color ("#494B4F")
+    alsawidget.bar:set_width (30)
+    alsawidget.bar:set_ticks (true)
+    alsawidget.bar:set_ticks_gap (1)
+    alsawidget.bar:set_background_color ("#222222")
     alsawidget.bar:set_color (alsawidget.colors.unmute)
     alsawidget.bar:buttons (awful.util.table.join (
         awful.button ({}, 1, function()
