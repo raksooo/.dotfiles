@@ -16,6 +16,7 @@ function volumewidget(terminal)
     }
     -- widget
     alsawidget.bar = awful.widget.progressbar ()
+    finalWidget = wibox.layout.fixed.horizontal()
     alsawidget.bar:set_width (30)
     alsawidget.bar:set_ticks (true)
     alsawidget.bar:set_ticks_gap (1)
@@ -27,7 +28,7 @@ function volumewidget(terminal)
         end)
     ))
     -- tooltip
-    alsawidget.tooltip = awful.tooltip ({ objects = { alsawidget.bar } })
+    alsawidget.tooltip = awful.tooltip ({ objects = { finalWidget } })
 
     alsawidget._current_level = 0
     alsawidget._muted = false
@@ -47,7 +48,6 @@ function volumewidget(terminal)
         return args[1]
     end, 5, alsawidget.channel) -- relatively high update time, use of keys/mouse will force update
 
-    finalWidget = wibox.layout.fixed.horizontal()
     volumeText = wibox.widget.textbox()
     volumeText:set_markup("Vol: <span color=\"#333333\">[</span>")
     finalWidget:add(volumeText)
