@@ -49,7 +49,7 @@ function volumewidget(terminal)
     end, 5, alsawidget.channel) -- relatively high update time, use of keys/mouse will force update
 
     volumeText = wibox.widget.textbox()
-    volumeText:set_markup("Vol: <span color=\"#333333\">[</span>")
+    volumeText:set_markup("A: <span color=\"#333333\">[</span>")
     finalWidget:add(volumeText)
     margin = wibox.layout.margin(alsawidget.bar, 0, 0, 4, 3)
     finalWidget:add(margin)
