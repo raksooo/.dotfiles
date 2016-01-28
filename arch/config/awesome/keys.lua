@@ -1,5 +1,8 @@
 local awful = require("awful")
 local menubar = require("menubar")
+
+require("volumeWidget")
+
 require("layouts")
 
 modkey = "Mod4"
@@ -33,6 +36,19 @@ function moveFocus(n)
     if client.focus then
         client.focus:raise()
     end
+end
+
+function adjustBrightness(delta)
+    current_fh = io.popen("cat /sys/class/backlight/gmux_backlight/actual_brightness")
+    current = tonumber(current_fh:read("*a"))
+    current_fh:close()
+    max_fh = io.popen("cat /sys/class/backlight/gmux_backlight/max_brightness")
+    max = tonumber(max_fh:read("*a"))
+    max_fh:close()
+    current = math.floor(current + delta)
+    current = math.min(current, max)
+    current = math.max(current, 0)
+    os.execute("sudo tee /sys/class/backlight/gmux_backlight/brightness <<< " .. current)
 end
 
 globalkeys = awful.util.table.join(
@@ -77,7 +93,14 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Shift"   }, "q", awesome.quit),
 
     awful.key({ modkey, "Shift"   }, "space", function () awful.layout.inc(layouts, 1) end),
-    awful.key({ modkey, "Control" }, "n", awful.client.restore)
+    awful.key({ modkey, "Control" }, "n", awful.client.restore),
+
+    -- Volume/Playback/Brightness controls
+    awful.key({ }, "XF86AudioPlay", function() os.execute("playerctl play-pause &") end),
+    awful.key({ }, "XF86AudioPrev", function() os.execute("playerctl previous &") end),
+    awful.key({ }, "XF86AudioNext", function() os.execute("playerctl next &") end),
+    awful.key({ }, "XF86MonBrightnessDown", function() adjustBrightness(-5000) end),
+    awful.key({ }, "XF86MonBrightnessUp", function() adjustBrightness(5000) end)
 
     --[[
     awful.key({ modkey,           }, "w", function () mymainmenu:show() end),
@@ -97,6 +120,7 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey }, "p", function() menubar.show() end)
     --]]
 )
+globalkeys = volumekeys(globalkeys)
 
 clientkeys = awful.util.table.join(
     awful.key({ modkey,           }, "f",      function (c) c.fullscreen = not c.fullscreen  end),

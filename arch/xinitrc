@@ -11,6 +11,7 @@ unclutter -idle 1 &
 slock &
 nm-applet &
 redshift 57.705829:11.990570 &
+xcompmgr &
 
 # Startup sound
 sleep 1.5 && mpg123 ~/.dotfiles/arch/boot.mp3 &

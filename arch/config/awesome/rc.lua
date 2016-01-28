@@ -1,5 +1,4 @@
 -- Standard awesome library
-local vicious = require("vicious")
 local gears = require("gears")
 local awful = require("awful")
 awful.rules = require("awful.rules")
@@ -21,8 +20,7 @@ require("vain")
 -- Widgets
 require("batteryWidget")
 require("pacmanWidget")
-
-rascal.run_once("xcompmgr")
+require("volumeWidget")
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -68,9 +66,6 @@ webbrowser = "qutebrowser"
 launcher = "dmenu_run"
 
 vain.widgets.terminal = terminal
-
--- Import personal conf
-rascal.init(terminal);
 
 -- }}}
 
@@ -202,7 +197,7 @@ for s = 1, screen.count() do
     -- Widgets that are aligned to the right
     local right_layout = wibox.layout.fixed.horizontal()
         right_layout:add(rascal.bigspacing)
-    right_layout:add(rascal.volumewidget())
+    right_layout:add(volumewidget(terminal))
 
         right_layout:add(rascal.seperator)
     right_layout:add(batteryWidget())
@@ -238,8 +233,6 @@ root.buttons(awful.util.table.join(
 -- }}}
 
 -- {{{ Key bindings
-globalkeys = rascal.keys(globalkeys);
-
 clientbuttons = awful.util.table.join(
     awful.button({ }, 1, function (c) client.focus = c; c:raise() end),
     awful.button({ modkey }, 1, awful.mouse.client.move),

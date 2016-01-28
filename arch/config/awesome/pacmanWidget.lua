@@ -4,13 +4,17 @@ local awful = require("awful")
 function pacmanWidget()
     local data
     pacmanWidget = wibox.widget.textbox()
+    pacmanWidgetTooltip = awful.tooltip ({ objects = { pacmanWidget } })
     pacmanWidgetTimer = timer({ timeout = 900 })
     pacmanWidgetTimer:connect_signal("timeout",
       function()
         fh = io.popen("checkupdates")
-        data = split(fh:read("*a"), "\n")
-        text = #data
+        data = fh:read("*a"), "\n"
+        lines = split(data)
+        text = #lines
         pacmanWidget:set_markup("pacman:  " .. text)
+        tooltip = data:gsub("^%s*(.-)%s*$", "%1")
+        pacmanWidgetTooltip:set_text (tooltip)
         fh:close()
       end
     )
