@@ -18,9 +18,9 @@ local menubar = require("menubar")
 require("vain")
 
 -- Widgets
-require("batteryWidget")
-require("pacmanWidget")
-require("volumeWidget")
+require("statusbar/batteryWidget")
+require("statusbar/pacmanWidget")
+require("statusbar/volumeWidget")
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to

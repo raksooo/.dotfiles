@@ -1,7 +1,7 @@
 local awful = require("awful")
 local menubar = require("menubar")
 
-require("volumeWidget")
+require("statusbar/volumeWidget")
 
 require("layouts")
 
