@@ -1,0 +1,14 @@
+#!/bin/sh
+
+alias magnet='sh ~/rtorrent_watch/download_magnet.sh $(pbpaste)'
+alias playmagnet='peerflix $(pbpaste) --vlc'
+
+#other
+alias brewpdate='brew update && brew upgrade --all'
+alias ql='qlmanage -p "$1" >& /dev/null'
+alias sniff="sudo ngrep -d 'en1' -t '^(GET|POST) ' 'tcp and port 80'"
+alias spotify='sh ~/Applications/spotify'
+alias gitinspector='python ~/Applications/gitinspector/gitinspector/gitinspector.py -wTl'
+alias qute='qutebrowser;exit;'
+alias applist='sh ~/Google\ Drive/bup/Applications/applistscript.sh'
+alias et='eth -i -j -v 0 -x 15 --client-name Zeppelin/Rascal'
