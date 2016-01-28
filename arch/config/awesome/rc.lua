@@ -5,7 +5,7 @@ awful.rules = require("awful.rules")
 require("awful.autofocus")
 -- Widget and layout library
 local wibox = require("wibox")
-rascal = require("rascal")
+local tools = require("tools")
 require("keys")
 require("layouts")
 
@@ -49,9 +49,9 @@ end
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
--- beautiful.init("/home/rascal/.config/awesome/theme.lua")
+-- beautiful.init("/home/tools/.config/awesome/theme.lua")
 beautiful.init("/home/rascal/.config/awesome/theme.lua")
--- require("rascal.theme")
+-- require("tools.theme")
 
 naughty.config.defaults.height = 60
 naughty.config.defaults.width = 250
@@ -190,27 +190,27 @@ for s = 1, screen.count() do
     local left_layout = wibox.layout.fixed.horizontal()
     --left_layout:add(mylauncher)
     left_layout:add(mytaglist[s])
-    left_layout:add(rascal.spacing)
+    left_layout:add(tools.spacing)
     left_layout:add(mypromptbox[s])
-    left_layout:add(rascal.spacing)
+    left_layout:add(tools.spacing)
 
     -- Widgets that are aligned to the right
     local right_layout = wibox.layout.fixed.horizontal()
-        right_layout:add(rascal.bigspacing)
+        right_layout:add(tools.bigspacing)
     right_layout:add(volumewidget(terminal))
 
-        right_layout:add(rascal.seperator)
+        right_layout:add(tools.seperator)
     right_layout:add(batteryWidget())
 
-        right_layout:add(rascal.seperator)
+        right_layout:add(tools.seperator)
     right_layout:add(pacmanWidget())
 
-        right_layout:add(rascal.seperator)
+        right_layout:add(tools.seperator)
     right_layout:add(mytextclock)
 
-        right_layout:add(rascal.seperator)
+        right_layout:add(tools.seperator)
     if s == 1 then right_layout:add(wibox.widget.systray()) end
-        right_layout:add(rascal.mediumspacing)
+        right_layout:add(tools.mediumspacing)
     right_layout:add(mylayoutbox[s])
 
     -- Now bring it all together (with the tasklist in the middle)
