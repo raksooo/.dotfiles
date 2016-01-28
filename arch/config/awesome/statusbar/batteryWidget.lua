@@ -22,11 +22,12 @@ function batteryWidget()
         data[1] = split(data[1], " ")
         data[2] = split(data[2], " ")
         data[3] = split(data[3], " ")
+        timeleft = data[2][4] .. " " .. data[2][5]
         state = data[1][#data[1]]
         percentage = data[3][#data[3]]
         percentage = percentage:gsub("%W", "")
         percentage = tonumber(percentage)
-        percentage = round((percentage / 95) * 100)
+        percentage = round((percentage / 90) * 100)
         local text = ""
         local color
         local tooltip
@@ -35,19 +36,19 @@ function batteryWidget()
             color = "#AECF96"
             text = "<span color=\"lightgreen\">" .. percentage .. "%</span>"
         elseif state == "charging" then
-            tooltip = "Charging: " .. data[2][4] .. " " .. data[2][5] .. " until full"
+            tooltip = "Charging: " .. timeleft .. " until full"
             color = "#B0E0E6"
             text = "<span color=\"lightblue\">⚡" .. percentage .. "%</span>"
         elseif percentage <= 10 then
-            tooltip = data[2][4] .. " " .. data[2][5] .. " until empty"
+            tooltip = timeleft .. " until empty"
             color = "#FF5656"
             text = "<span color=\"#FFBBBB\">Battery low: " .. percentage .. "%</span>"
         elseif percentage <= 25 then
-            tooltip = data[2][4] .. " " .. data[2][5] .. " until empty"
+            tooltip = timeleft .. " until empty"
             color = "#FFFF77"
             text = "<span color=\"#FFFF77\">" .. percentage .. "%</span>"
         else
-            tooltip = data[2][4] .. " " .. data[2][5] .. " until empty"
+            tooltip = timeleft .. " until empty"
             color = "#AECF96"
             text = percentage .. "%"
         end
@@ -64,7 +65,7 @@ function batteryWidget()
             lowbattery = true
             naughty.notify({ preset = {
                 title = "Low battery",
-                text = "Only " .. percentage .. "% left",
+                text = "Only " .. percentage .. "% (" .. timeleft .. ") left",
                 timeout = 120
             } })
         elseif percentage > 10 then
