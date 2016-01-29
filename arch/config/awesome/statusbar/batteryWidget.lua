@@ -2,8 +2,6 @@ local wibox = require("wibox")
 local naughty = require("naughty")
 local awful = require("awful")
 
-require("../tools")
-
 lowbattery = false
 
 function batteryWidget()
@@ -36,7 +34,7 @@ function batteryWidget()
         percentage = data[3][#data[3]]
         percentage = percentage:gsub("%W", "")
         percentage = tonumber(percentage)
-        percentage = round((percentage / capacity) * 100)
+        percentage = math.min(round((percentage / capacity) * 100), 100)
 
         local text = ""
         local color
