@@ -2,6 +2,8 @@ local wibox = require("wibox")
 local naughty = require("naughty")
 local awful = require("awful")
 
+require("../tools")
+
 lowbattery = false
 
 function batteryWidget()
@@ -17,19 +19,24 @@ function batteryWidget()
     batteryWidgettimer = timer({ timeout = 20 })
     batteryWidgettimer:connect_signal("timeout",
       function()
-        fh = io.popen("upower -i $(upower -e | grep 'BAT') | grep -E 'state|percentage|time to'")
+        fh = io.popen("upower -i $(upower -e | grep 'BAT') | grep -E 'state|percentage|time to|capacity'")
         data = split(fh:read("*a"), "\n")
         fh:close()
 
         data[1] = split(data[1], " ")
         data[2] = split(data[2], " ")
         data[3] = split(data[3], " ")
+        data[4] = split(data[4], " ")
+
         timeleft = data[2][4] .. " " .. data[2][5]
         state = data[1][#data[1]]
+        capacity = data[4][#data[4]]
+        capacity = split(capacity, ".")[1]
+        capacity = tonumber(capacity)
         percentage = data[3][#data[3]]
         percentage = percentage:gsub("%W", "")
         percentage = tonumber(percentage)
-        percentage = round((percentage / 90) * 100)
+        percentage = round((percentage / capacity) * 100)
 
         local text = ""
         local color
