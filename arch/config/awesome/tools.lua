@@ -40,5 +40,10 @@ function split(inputstr, sep)
         return t
 end
 
+function trim(s)
+    local n = s:find"%S"
+    return n and s:match(".*%S", n) or ""
+end
+
 return tools
 
