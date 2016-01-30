@@ -21,12 +21,22 @@ function batteryWidget()
         data = split(fh:read("*a"), "\n")
         fh:close()
 
+        local timeleft
+        if data[4] == nil then
+            data[4] = data[3]
+            data[3] = data[2]
+            data[2] = ""
+        end
+
         data[1] = split(data[1], " ")
         data[2] = split(data[2], " ")
         data[3] = split(data[3], " ")
         data[4] = split(data[4], " ")
 
-        timeleft = data[2][4] .. " " .. data[2][5]
+        local timeleft
+        if #data[2] >= 5 then
+            timeleft = data[2][4] .. " " .. data[2][5]
+        end
         state = data[1][#data[1]]
         capacity = data[4][#data[4]]
         capacity = split(capacity, ".")[1]
@@ -57,7 +67,7 @@ function batteryWidget()
             tooltip = timeleft .. " until empty"
             color = "#AECF96"
         end
-        text = "<span color=\"" .. color .. "\">" .. percentage .. "%</span>"
+        text = text ..  "<span color=\"" .. color .. "\">" .. percentage .. "%</span>"
         batteryWidget:set_markup(text)
         batteryWidgetTooltip:set_text("  " .. tooltip .. "  ")
         battery:set_color(color)

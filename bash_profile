@@ -13,6 +13,8 @@ export VISUAL=vim
 export LANG='en_US.UTF-8'
 export LANGUAGE=$LANG
 
+export PATH="$(ruby -e 'puts Gem.user_dir')/bin:$PATH"
+
 ## Make vim colors work in tmux
 export TERM=xterm-256color
 [ -n "$TMUX" ] && export TERM=screen-256color
