@@ -17,7 +17,7 @@ xcompmgr &
 sleep 1.5 && mpg123 ~/.dotfiles/arch/boot.mp3 &
 
 # Autostart
-sleep 30 && watchdrive &
+sleep 60 && watchdrive &
 qutebrowser &
 xterm htop &
 xterm &
