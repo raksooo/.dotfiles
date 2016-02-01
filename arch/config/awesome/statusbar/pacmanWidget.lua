@@ -6,8 +6,8 @@ function pacmanWidget()
     image = wibox.widget.imagebox()
     image:set_image("/home/rascal/.config/awesome/statusbar/pacman.png")
     count = wibox.widget.textbox()
-    pacmanWidget:add(image)
     pacmanWidget:add(count)
+    pacmanWidget:add(image)
     pacmanWidgetTooltip = awful.tooltip({ objects = { pacmanWidget } })
 
     pacmanWidgetTimer = timer({ timeout = 900 })
@@ -18,7 +18,11 @@ function pacmanWidget()
         fh:close()
 
         lines = split(data, "\n")
-        count:set_markup(" " .. #lines)
+        dots = ""
+        for i = 1, #lines do
+            dots = dots .. "•"
+        end
+        count:set_markup(dots .. " ")
 
         tooltip = data:gsub("^%s*(.-)%s*$", "%1")
         pacmanWidgetTooltip:set_text(tooltip)

@@ -90,13 +90,13 @@ for s = 1, screen.count() do
 
     -- Widgets that are aligned to the right
     local right_layout = wibox.layout.fixed.horizontal()
+    right_layout:add(pacmanWidget())
+
+        right_layout:add(tools.seperator)
     right_layout:add(volumewidget(terminal))
 
         right_layout:add(tools.seperator)
     right_layout:add(batteryWidget())
-
-        right_layout:add(tools.seperator)
-    right_layout:add(pacmanWidget())
 
         right_layout:add(tools.seperator)
     right_layout:add(mytextclock)
