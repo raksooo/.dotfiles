@@ -20,7 +20,11 @@ function pacmanWidget()
         lines = split(data, "\n")
         dots = ""
         for i = 1, #lines do
-            dots = dots .. "•"
+            if i == 1 then
+                dots = dots .. "⚫"
+            else
+                dots = dots .. "•"
+            end
         end
         count:set_markup(dots .. " ")
 
