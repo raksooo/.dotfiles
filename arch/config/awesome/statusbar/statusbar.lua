@@ -5,6 +5,7 @@ local tools = require("../tools")
 require("statusbar/batteryWidget")
 require("statusbar/pacmanWidget")
 require("statusbar/volumeWidget")
+require("statusbar/gdriveWidget")
 
 -- Create a textclock widget
 mytextclock = awful.widget.textclock()
@@ -100,9 +101,12 @@ for s = 1, screen.count() do
         right_layout:add(tools.seperator)
     right_layout:add(mytextclock)
 
-        right_layout:add(tools.seperator)
+        right_layout:add(tools.newSeperator("   |"))
+    right_layout:add(gdriveWidget())
+
     if s == 1 then right_layout:add(wibox.widget.systray()) end
-        right_layout:add(tools.mediumspacing)
+        right_layout:add(tools.bigspacing)
+
     right_layout:add(mylayoutbox[s])
 
     -- Now bring it all together (with the tasklist in the middle)

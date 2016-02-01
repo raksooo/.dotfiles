@@ -33,13 +33,13 @@ function batteryWidget()
         data[3] = split(data[3], " ")
         data[4] = split(data[4], " ")
 
-        local timeleft
+        local timeleft = ""
         if #data[2] >= 5 then
             timeleft = data[2][4] .. " " .. data[2][5]
         end
         state = data[1][#data[1]]
         capacity = data[4][#data[4]]
-        capacity = split(capacity, ".")[1]
+        capacity = split(capacity, "%%")[1]
         capacity = tonumber(capacity)
         percentage = data[3][#data[3]]
         percentage = percentage:gsub("%W", "")
