@@ -3,5 +3,5 @@
 sleep 5
 cd ~/gdrive/
 
-pidof grive || (grive >> .grive_log && date >> .grive_syncs) &
+pidof grive || grive &
 
