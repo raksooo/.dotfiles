@@ -25,6 +25,7 @@ function pacmanWidget()
         count:set_markup(dots .. " ")
 
         tooltip = data:gsub("^%s*(.-)%s*$", "%1")
+        tooltip = "Updates: " .. #lines .. "\n\n" .. tooltip
         pacmanWidgetTooltip:set_text(tooltip)
       end
     )
