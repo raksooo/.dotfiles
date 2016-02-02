@@ -67,7 +67,7 @@ function batteryWidget()
             tooltip = timeleft .. " until empty"
             color = "#AECF96"
         end
-        text = text ..  "<span color=\"" .. color .. "\">" .. percentage .. "%</span>"
+        text = "<span color=\"" .. color .. "\">" .. text .. percentage .. "%</span>"
         batteryWidget:set_markup(text)
         batteryWidgetTooltip:set_text("  " .. tooltip .. "  ")
         battery:set_color(color)
