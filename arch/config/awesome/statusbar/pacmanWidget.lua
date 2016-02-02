@@ -19,7 +19,7 @@ function pacmanWidget()
 
         lines = split(data, "\n")
         dots = ""
-        for i = 1, #lines do
+        for i = 1, math.min(#lines, 120) do
             dots = dots .. (i == 1 and "⚫" or "•")
         end
         count:set_markup(dots .. " ")

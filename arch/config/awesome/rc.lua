@@ -46,6 +46,7 @@ end
 -- Themes define colours, icons, font and wallpapers.
 -- beautiful.init("/home/tools/.config/awesome/theme.lua")
 beautiful.init("/home/rascal/.config/awesome/theme.lua")
+
 -- require("tools.theme")
 
 naughty.config.defaults.height = 60

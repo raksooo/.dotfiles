@@ -1,0 +1,6 @@
+#!/bin/sh
+
+read -s -p "Password: " password
+curl 'https://login.nomad.chalmers.se/' -d 'action=Login&login=nyoskar%2Fnet&password=$password&org=Radius' &> /dev/null
+
+echo "Logged in!"
