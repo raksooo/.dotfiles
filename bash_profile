@@ -14,6 +14,7 @@ export LANG='en_US.UTF-8'
 export LANGUAGE=$LANG
 
 export PATH="$(ruby -e 'puts Gem.user_dir')/bin:$PATH"
+export PATH=$PATH:~/.cabal/bin
 
 ## Make vim colors work in tmux
 export TERM=xterm-256color

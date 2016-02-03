@@ -6,6 +6,7 @@ require("statusbar/batteryWidget")
 require("statusbar/pacmanWidget")
 require("statusbar/volumeWidget")
 require("statusbar/gdriveWidget")
+require("statusbar/weatherWidget")
 
 -- Create a textclock widget
 mytextclock = awful.widget.textclock()
@@ -91,6 +92,9 @@ for s = 1, screen.count() do
     -- Widgets that are aligned to the right
     local right_layout = wibox.layout.fixed.horizontal()
     right_layout:add(pacmanWidget())
+
+        right_layout:add(tools.seperator)
+    right_layout:add(weatherWidget())
 
         right_layout:add(tools.seperator)
     right_layout:add(volumewidget(terminal))
