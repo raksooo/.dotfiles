@@ -8,11 +8,14 @@ require("statusbar/volumeWidget")
 require("statusbar/gdriveWidget")
 require("statusbar/weatherWidget")
 
--- Create a textclock widget
-mytextclock = awful.widget.textclock()
+-- Define a tag table which hold all screen tags.
+tags = {}
+for s = 1, screen.count() do
+    -- Each screen has its own tag table.
+    tags[s] = awful.tag({ " 1 ", " 2 ", " 3 ", " 4 ", " 5 ", " 6 " }, s, layouts[1], vain.layout.uselesstile )
+end
 
--- Create a wibox for each screen and add it
-mywibox = {}
+statusbar = {}
 mypromptbox = {}
 mylayoutbox = {}
 mytaglist = {}
@@ -24,101 +27,60 @@ mytaglist.buttons = awful.util.table.join(
                     awful.button({ }, 4, function(t) awful.tag.viewnext(awful.tag.getscreen(t)) end),
                     awful.button({ }, 5, function(t) awful.tag.viewprev(awful.tag.getscreen(t)) end)
                     )
-mytasklist = {}
-mytasklist.buttons = awful.util.table.join(
-                     awful.button({ }, 1, function (c)
-                                              if c == client.focus then
-                                                  c.minimized = true
-                                              else
-                                                  -- Without this, the following
-                                                  -- :isvisible() makes no sense
-                                                  c.minimized = false
-                                                  if not c:isvisible() then
-                                                      awful.tag.viewonly(c:tags()[1])
-                                                  end
-                                                  -- This will also un-minimize
-                                                  -- the client, if needed
-                                                  client.focus = c
-                                                  c:raise()
-                                              end
-                                          end),
-                     awful.button({ }, 3, function ()
-                                              if instance then
-                                                  instance:hide()
-                                                  instance = nil
-                                              else
-                                                  instance = awful.menu.clients({
-                                                      theme = { width = 250 }
-                                                  })
-                                              end
-                                          end),
-                     awful.button({ }, 4, function ()
-                                              awful.client.focus.byidx(1)
-                                              if client.focus then client.focus:raise() end
-                                          end),
-                     awful.button({ }, 5, function ()
-                                              awful.client.focus.byidx(-1)
-                                              if client.focus then client.focus:raise() end
-                                          end))
+
+local pacmanwidget = margin(pacmanWidget(), 2)
+local weatherwidget = weatherWidget()
+local volumewidget = volumeWidget(terminal)
+local batterywidget = margin(batteryWidget())
+local clockwidget = awful.widget.textclock()
+local gdrivewidget = margin(gdriveWidget(), 2)
 
 for s = 1, screen.count() do
+    statusbar[s] = awful.wibox({ position = "bottom", screen = s, height = 20, opacity = 0.85 })
+
     -- Create a promptbox for each screen
     mypromptbox[s] = awful.widget.prompt()
-    -- Create an imagebox widget which will contains an icon indicating which layout we're using.
-    -- We need one layoutbox per screen.
-    mylayoutbox[s] = awful.widget.layoutbox(s)
-    mylayoutbox[s]:buttons(awful.util.table.join(
-                           awful.button({ }, 1, function () awful.layout.inc(layouts, 1) end),
-                           awful.button({ }, 3, function () awful.layout.inc(layouts, -1) end),
-                           awful.button({ }, 4, function () awful.layout.inc(layouts, 1) end),
-                           awful.button({ }, 5, function () awful.layout.inc(layouts, -1) end)))
     -- Create a taglist widget
     mytaglist[s] = awful.widget.taglist(s, awful.widget.taglist.filter.all, mytaglist.buttons)
-
-    -- Create a tasklist widget
-    mytasklist[s] = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, mytasklist.buttons)
-
-    -- Create the wibox
-    mywibox[s] = awful.wibox({ position = "top", screen = s, height = 14, opacity = 0.85 })
 
     -- Widgets that are aligned to the left
     local left_layout = wibox.layout.fixed.horizontal()
     --left_layout:add(mylauncher)
     left_layout:add(mytaglist[s])
-    left_layout:add(tools.spacing)
+    left_layout:add(tools.bigspacing)
     left_layout:add(mypromptbox[s])
     left_layout:add(tools.spacing)
 
     -- Widgets that are aligned to the right
     local right_layout = wibox.layout.fixed.horizontal()
-    right_layout:add(pacmanWidget())
+    right_layout:add(pacmanwidget)
 
         right_layout:add(tools.seperator)
-    right_layout:add(weatherWidget())
+    right_layout:add(weatherwidget)
 
         right_layout:add(tools.seperator)
-    right_layout:add(volumewidget(terminal))
+    right_layout:add(volumewidget)
 
         right_layout:add(tools.seperator)
-    right_layout:add(batteryWidget())
+    right_layout:add(batterywidget)
 
         right_layout:add(tools.seperator)
-    right_layout:add(mytextclock)
+    right_layout:add(clockwidget)
 
         right_layout:add(tools.newSeperator("   |"))
-    right_layout:add(gdriveWidget())
+    right_layout:add(gdrivewidget)
 
-    if s == 1 then right_layout:add(wibox.widget.systray()) end
+    if s == 1 then
+        right_layout:add(wibox.widget.systray())
         right_layout:add(tools.bigspacing)
+    end
 
-    right_layout:add(mylayoutbox[s])
-
-    -- Now bring it all together (with the tasklist in the middle)
+    -- Now bring it all together
     local layout = wibox.layout.align.horizontal()
     layout:set_left(left_layout)
-    -- layout:set_middle(mytasklist[s])
+    -- layout:set_middle(mytextclock)
     layout:set_right(right_layout)
 
-    mywibox[s]:set_widget(layout)
+    statusbar[s]:set_widget(layout)
 end
 

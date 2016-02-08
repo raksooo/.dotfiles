@@ -93,7 +93,10 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Shift"   }, "q", awesome.quit),
 
     awful.key({ modkey, "Shift"   }, "space", function () awful.layout.inc(layouts, 1) end),
-    awful.key({ modkey, "Control" }, "n", awful.client.restore),
+    awful.key({ modkey, "Shift"   }, "n", awful.client.restore),
+    awful.key({ modkey, "Control" }, "n", function()
+            statusbar[mouse.screen].visible = not statusbar[mouse.screen].visible
+        end),
 
     -- Volume/Playback/Brightness controls
     awful.key({ }, "XF86AudioPlay", function() os.execute("playerctl play-pause &") end),

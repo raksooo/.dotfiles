@@ -4,7 +4,7 @@ local vicious = require("vicious")
 
 local alsawidget
 
-function volumewidget(terminal)
+function volumeWidget(terminal)
     alsawidget = {
         channel = "Master",
         step = "5%",
@@ -16,7 +16,7 @@ function volumewidget(terminal)
     }
     -- widget
     alsawidget.bar = awful.widget.progressbar ()
-    finalWidget = wibox.layout.fixed.horizontal()
+    volumeWidget = wibox.layout.fixed.horizontal()
     alsawidget.bar:set_width (30)
     alsawidget.bar:set_ticks (true)
     alsawidget.bar:set_ticks_gap (1)
@@ -28,7 +28,7 @@ function volumewidget(terminal)
         end)
     ))
     -- tooltip
-    alsawidget.tooltip = awful.tooltip ({ objects = { finalWidget } })
+    alsawidget.tooltip = awful.tooltip ({ objects = { volumeWidget } })
 
     alsawidget._current_level = 0
     alsawidget._muted = false
@@ -50,13 +50,12 @@ function volumewidget(terminal)
 
     volumeText = wibox.widget.textbox()
     volumeText:set_markup("<span color=\"#666666\">A:</span><span color=\"#333333\">[</span>")
-    finalWidget:add(volumeText)
-    margin = wibox.layout.margin(alsawidget.bar, 0, 0, 4, 3)
-    finalWidget:add(margin)
+    volumeWidget:add(volumeText)
+    volumeWidget:add(margin(alsawidget.bar, 6))
     rightBracket = wibox.widget.textbox()
     rightBracket:set_markup(" <span color=\"#333333\">]</span>")
-    finalWidget:add(rightBracket)
-    return finalWidget
+    volumeWidget:add(rightBracket)
+    return volumeWidget
 end
 
 function volumekeys(globalkeys)

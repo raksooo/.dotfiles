@@ -44,10 +44,7 @@ end
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
--- beautiful.init("/home/tools/.config/awesome/theme.lua")
 beautiful.init("/home/rascal/.config/awesome/theme.lua")
-
--- require("tools.theme")
 
 naughty.config.defaults.height = 60
 naughty.config.defaults.width = 250
@@ -60,9 +57,9 @@ editor = os.getenv("EDITOR") or "nano"
 editor_cmd = terminal .. " -e " .. editor
 webbrowser = "qutebrowser"
 launcher = "dmenu_run"
+titlebars_enabled = false
 
 vain.widgets.terminal = terminal
-
 -- }}}
 
 -- {{{ Wallpaper
@@ -73,46 +70,12 @@ if beautiful.wallpaper then
 end
 -- }}}
 
--- {{{ Tags
--- Define a tag table which hold all screen tags.
-tags = {}
-for s = 1, screen.count() do
-    -- Each screen has its own tag table.
-    tags[s] = awful.tag({ 1, 2, 3, 4, 5, 6, 7, 8, 9 }, s, layouts[1], vain.layout.uselesstile )
-end
--- }}}
-
--- {{{ Menu
--- Create a laucher widget and a main menu
-myawesomemenu = {
-   { "manual", terminal .. " -e man awesome" },
-   { "edit config", editor_cmd .. " " .. awesome.conffile },
-   { "restart", awesome.restart },
-   { "quit", awesome.quit }
-}
-
-mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
-                                    { "open terminal", terminal }
-                                  }
-                        })
-
-mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
-                                     menu = mymainmenu })
-
 -- Menubar configuration
 menubar.utils.terminal = terminal -- Set the terminal for applications that require it
 -- }}}
 
 -- {{{ Statusbar
 require("statusbar/statusbar")
--- }}}
-
--- {{{ Mouse bindings
-root.buttons(awful.util.table.join(
-    awful.button({ }, 3, function () mymainmenu:toggle() end),
-    awful.button({ }, 4, awful.tag.viewnext),
-    awful.button({ }, 5, awful.tag.viewprev)
-))
 -- }}}
 
 -- {{{ Key bindings
@@ -178,7 +141,6 @@ client.connect_signal("manage", function (c, startup)
         end
     end
 
-    local titlebars_enabled = false
     if titlebars_enabled and (c.type == "normal" or c.type == "dialog") then
         -- buttons for the titlebar
         local buttons = awful.util.table.join(
@@ -196,15 +158,11 @@ client.connect_signal("manage", function (c, startup)
 
         -- Widgets that are aligned to the left
         local left_layout = wibox.layout.fixed.horizontal()
-        left_layout:add(awful.titlebar.widget.iconwidget(c))
+        left_layout:add(awful.titlebar.widget.maximizedbutton(c))
         left_layout:buttons(buttons)
 
         -- Widgets that are aligned to the right
         local right_layout = wibox.layout.fixed.horizontal()
-        right_layout:add(awful.titlebar.widget.floatingbutton(c))
-        right_layout:add(awful.titlebar.widget.maximizedbutton(c))
-        right_layout:add(awful.titlebar.widget.stickybutton(c))
-        right_layout:add(awful.titlebar.widget.ontopbutton(c))
         right_layout:add(awful.titlebar.widget.closebutton(c))
 
         -- The title goes in the middle
@@ -233,7 +191,7 @@ client.connect_signal("focus", function(c)
     c.border_color = beautiful.border_focus
 end)
 client.connect_signal("unfocus", function(c)
-    if c.class ~= "mpv" then
+    if c.class ~= "mpv" and c.class ~= "chromium" then
         c.opacity = 0.75
     end
     c.border_color = "#303030" -- theme.border_normal

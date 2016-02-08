@@ -5,17 +5,17 @@ local awful = require("awful")
 lowbattery = false
 
 function batteryWidget()
-    batteryWidget = wibox.widget.textbox()
-    finalWidget = wibox.layout.fixed.horizontal()
-    batteryWidgetTooltip = awful.tooltip ({ objects = { finalWidget } })
+    batteryText = wibox.widget.textbox()
+    batteryWidget = wibox.layout.fixed.horizontal()
+    batteryTextTooltip = awful.tooltip ({ objects = { batteryWidget } })
 
     battery = awful.widget.progressbar()
     battery:set_vertical(true)
     battery:set_width(7)
     battery:set_background_color("#494B4F")
 
-    batteryWidgettimer = timer({ timeout = 20 })
-    batteryWidgettimer:connect_signal("timeout",
+    batteryTexttimer = timer({ timeout = 20 })
+    batteryTexttimer:connect_signal("timeout",
       function()
         fh = io.popen("upower -i $(upower -e | grep 'BAT') | grep -E 'state|percentage|time to|capacity'")
         data = split(fh:read("*a"), "\n")
@@ -68,8 +68,8 @@ function batteryWidget()
             color = "#AECF96"
         end
         text = "<span color=\"" .. color .. "\">" .. text .. percentage .. "%</span>"
-        batteryWidget:set_markup(text)
-        batteryWidgetTooltip:set_text("  " .. tooltip .. "  ")
+        batteryText:set_markup(text)
+        batteryTextTooltip:set_text("  " .. tooltip .. "  ")
         battery:set_color(color)
         battery:set_value(percentage/100)
 
@@ -85,15 +85,14 @@ function batteryWidget()
         end
       end
     )
-    batteryWidgettimer:emit_signal("timeout")
-    batteryWidgettimer:start()
+    batteryTexttimer:emit_signal("timeout")
+    batteryTexttimer:start()
 
-    finalWidget:add(batteryWidget)
+    batteryWidget:add(batteryText)
     seperator = wibox.widget.textbox()
     seperator:set_text("  ")
-    finalWidget:add(seperator)
-    margin = wibox.layout.margin(battery, 0, 0, 2, 1)
-    finalWidget:add(margin)
-    return finalWidget
+    batteryWidget:add(seperator)
+    batteryWidget:add(battery)
+    return batteryWidget
 end
 

@@ -11,7 +11,7 @@ end
 tools.spacing = tools.newSeperator("  ")
 tools.mediumspacing = tools.newSeperator("   ")
 tools.bigspacing = tools.newSeperator("    ")
-tools.seperator = tools.newSeperator("   |   ")
+tools.seperator = tools.newSeperator("    |    ")
 
 function debug.notify(text)
     local preset = {
@@ -21,6 +21,14 @@ function debug.notify(text)
         text = text
     }
     naughty.notify ({ preset = preset })
+end
+
+function margin(widget, margin)
+    if margin == nil then
+        margin = 4
+    end
+    margin = wibox.layout.margin(widget, 0, 0, margin + 1, margin)
+    return margin
 end
 
 function round(num, idp)

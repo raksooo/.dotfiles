@@ -44,7 +44,7 @@ theme.taglist_fg_focus = "#ffffff"
 theme.taglist_fg_occupied = "#ffffff"
 theme.taglist_fg_empty = theme.taglist_fg_occupied
 
-theme.useless_gap_width = 10
+theme.useless_gap_width = 30
 
 -- Display the taglist squares
 theme.taglist_squares_sel   = ""
