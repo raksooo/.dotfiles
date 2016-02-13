@@ -14,10 +14,11 @@ redshift 57.705829:11.990570 &
 xcompmgr &
 
 # Startup sound
-sleep 1.5 && mpg123 ~/.dotfiles/arch/boot.mp3 &
+sleep 1.5 && mpg123 ~/.local/share/rascal/boot.mp3 &
 
 # Autostart
 sleep 60 && watchdrive &
+qutebrowser "http://messenger.com" &
 qutebrowser &
 xterm htop &
 xterm &

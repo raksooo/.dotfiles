@@ -51,6 +51,11 @@ function adjustBrightness(delta)
     os.execute("sudo tee /sys/class/backlight/gmux_backlight/brightness <<< " .. current)
 end
 
+function takeScreenshot()
+    io.popen(screenshot):close()
+    io.popen("mpg123 ~/.local/share/rascal/screenshot.mp3 &"):close()
+end
+
 globalkeys = awful.util.table.join(
     awful.key({ modkey,           }, "j", function() navigate("j") end),
     awful.key({ modkey,           }, "k", function() navigate("k") end),
@@ -88,6 +93,7 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Shift"   }, "Return", function () awful.util.spawn(webbrowser) end),
     awful.key({ modkey,           }, "space", function () awful.util.spawn(launcher) end),
     awful.key({ "Mod1",           }, "space", function () awful.util.spawn("slock") end),
+    awful.key({ modkey,           }, "+", takeScreenshot),
     awful.key({ modkey,           }, "r", function () mypromptbox[mouse.screen]:run() end),
     awful.key({ modkey, "Control" }, "r", awesome.restart),
     awful.key({ modkey, "Shift"   }, "q", awesome.quit),

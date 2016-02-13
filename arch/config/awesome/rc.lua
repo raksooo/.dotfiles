@@ -57,6 +57,7 @@ editor = os.getenv("EDITOR") or "nano"
 editor_cmd = terminal .. " -e " .. editor
 webbrowser = "qutebrowser"
 launcher = "dmenu_run"
+screenshot = "maim /home/rascal/documents/Bilder/screenshots/$(date +%F-%T).png"
 titlebars_enabled = false
 
 vain.widgets.terminal = terminal
@@ -121,14 +122,6 @@ end)
 -- {{{ Signals
 -- Signal function to execute when a new client appears.
 client.connect_signal("manage", function (c, startup)
-    -- Enable sloppy focus
-    -- c:connect_signal("mouse::enter", function(c)
-    --    if awful.layout.get(c.screen) ~= awful.layout.suit.magnifier
-    --        and awful.client.focus.filter(c) then
-    --        client.focus = c
-    --    end
-    -- end)
-
     if not startup then
         -- Set the windows at the slave,
         -- i.e. put it at the end of others instead of setting it master.
@@ -191,7 +184,7 @@ client.connect_signal("focus", function(c)
     c.border_color = beautiful.border_focus
 end)
 client.connect_signal("unfocus", function(c)
-    if c.class ~= "mpv" and c.class ~= "chromium" then
+    if c.class ~= "mpv" then
         c.opacity = 0.75
     end
     c.border_color = "#303030" -- theme.border_normal
