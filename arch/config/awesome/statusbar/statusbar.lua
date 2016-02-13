@@ -7,6 +7,7 @@ require("statusbar/pacmanWidget")
 require("statusbar/volumeWidget")
 require("statusbar/gdriveWidget")
 require("statusbar/weatherWidget")
+require("statusbar/etherWidget")
 
 -- Define a tag table which hold all screen tags.
 tags = {}
@@ -34,6 +35,7 @@ local volumewidget = volumeWidget(terminal)
 local batterywidget = margin(batteryWidget())
 local clockwidget = awful.widget.textclock()
 local gdrivewidget = margin(gdriveWidget(), 2)
+local etherwidget = etherWidget()
 
 for s = 1, screen.count() do
     statusbar[s] = awful.wibox({ position = "bottom", screen = s, height = 20, opacity = 0.85 })
@@ -54,6 +56,9 @@ for s = 1, screen.count() do
     -- Widgets that are aligned to the right
     local right_layout = wibox.layout.fixed.horizontal()
     right_layout:add(pacmanwidget)
+
+        right_layout:add(tools.seperator)
+    right_layout:add(etherwidget)
 
         right_layout:add(tools.seperator)
     right_layout:add(weatherwidget)
