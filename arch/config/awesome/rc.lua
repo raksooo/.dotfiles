@@ -109,6 +109,8 @@ awful.rules.rules = {
       properties = { tag = tags[1][4] } },
     { rule = { class = "http___messenger_com" },
       properties = { tag = tags[1][4] } },
+    { rule = { class = "chromium" },
+      properties = { tag = tags[1][2] } },
 }
 -- }}}
 
