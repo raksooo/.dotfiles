@@ -107,7 +107,14 @@ awful.rules.rules = {
       properties = { tag = tags[1][9] } },
     { rule = { class = "qutebrowser" },
       properties = { tag = tags[1][4] } },
+    { rule = { class = "http___messenger_com" },
+      properties = { tag = tags[1][4] } },
 }
+-- }}}
+
+-- {{{ Startup
+awful.layout.set(awful.layout.suit.tile.left, tags[1][4])
+awful.tag.setmwfact(0.25, tags[1][4])
 -- }}}
 
 client.connect_signal("manage", function(c, startup)
@@ -116,6 +123,10 @@ client.connect_signal("manage", function(c, startup)
         if client.focus then
             awful.client.toggletag(tags[1][1])
         end
+    end
+
+    if c.class == "qutebrowser" then
+        awful.client.setslave(c)
     end
 end)
 

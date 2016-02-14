@@ -23,6 +23,26 @@ function debug.notify(text)
     naughty.notify ({ preset = preset })
 end
 
+local startTimer
+function setInterval(f, interval, first)
+    t = timer({ timeout = interval })
+    t:connect_signal("timeout", f)
+    t:start()
+
+    if first then
+        local startTimer = timer({ timeout = first })
+        startTimer:connect_signal("timeout", function()
+                startTimer:stop()
+                f()
+            end)
+        startTimer:start()
+    else
+        t:emit_signal("timeout")
+    end
+
+    return t
+end
+
 function margin(widget, margin)
     if margin == nil then
         margin = 4

@@ -10,18 +10,9 @@ function pacmanWidget()
     pacmanWidget:add(image)
     pacmanWidgetTooltip = awful.tooltip({ objects = { pacmanWidget } })
 
-    pacmanWidgetTimer = timer({ timeout = 1800 })
-    pacmanWidgetTimer:connect_signal("timeout", function()
+    setInterval(function()
             updatePacmanWidget(count, pacmanWidgetTooltip)
-        end)
-    pacmanWidgetTimer:start()
-
-    pacmanWidgetStartTimer = timer({ timeout = 15 })
-    pacmanWidgetStartTimer:connect_signal("timeout", function()
-            updatePacmanWidget(count, pacmanWidgetTooltip)
-            pacmanWidgetStartTimer:stop()
-        end)
-    pacmanWidgetStartTimer:start()
+        end, 1800, 15)
 
     return pacmanWidget
 end

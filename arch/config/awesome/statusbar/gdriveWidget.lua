@@ -8,24 +8,22 @@ function gdriveWidget()
     gdriveWidget:add(image)
     gdriveWidget:add(padding)
 
-    gdriveWidgetTimer = timer({ timeout = 30 })
-    gdriveWidgetTimer:connect_signal("timeout",
-      function()
-        fh = io.popen("pidof grive")
-        data = fh:read("*a")
-        fh:close()
+    setInterval(function() updateGDriveWidget(image, padding) end, 30)
 
-        if data == "" then
-            image:set_image("/home/rascal/.config/awesome/statusbar/transparent.png")
-            padding:set_text("")
-        else
-            image:set_image("/home/rascal/.config/awesome/statusbar/gdrive.png")
-            padding:set_text("   ")
-        end
-      end
-    )
-    gdriveWidgetTimer:emit_signal("timeout")
-    gdriveWidgetTimer:start()
     return gdriveWidget
+end
+
+function updateGDriveWidget(image, padding)
+    fh = io.popen("pidof grive")
+    data = fh:read("*a")
+    fh:close()
+
+    if data == "" then
+        image:set_image("/home/rascal/.config/awesome/statusbar/transparent.png")
+        padding:set_text("")
+    else
+        image:set_image("/home/rascal/.config/awesome/statusbar/gdrive.png")
+        padding:set_text("   ")
+    end
 end
 

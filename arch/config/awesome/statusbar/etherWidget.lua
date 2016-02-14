@@ -7,17 +7,7 @@ function etherWidget()
     etherWidget:add(value)
     value:set_text("Ξ")
 
-    etherWidgetTimer = timer({ timeout = 1200 })
-    etherWidgetTimer:connect_signal("timeout", function() updateEtherWidget(value) end)
-    etherWidgetTimer:start()
-
-    etherWidgetStartTimer = timer({ timeout = 10 })
-    etherWidgetStartTimer:connect_signal("timeout",
-        function()
-            updateEtherWidget(value)
-            etherWidgetStartTimer:stop()
-        end)
-    etherWidgetStartTimer:start()
+    setInterval(function() updateEtherWidget(value) end, 1200, 10)
 
     return etherWidget
 end
