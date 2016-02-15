@@ -14,10 +14,11 @@ end
 
 function updateEtherWidget(textbox)
     ether = getEtherValue()
-    ether = round2(ether)
+    usd = round2(ether)
+    sek = round2(ether * usdToSek(1))
 
-    text = "Ξ: $" .. ether
-    textbox:set_text(text)
+    text = "Ξ: $" .. usd .. " (" .. sek .. "kr)"
+    textbox:set_markup(text)
 end
 
 function round2(n)
@@ -31,5 +32,19 @@ function getEtherValue()
     data = split(data, ":")
     data = split(data[2], "\"")
     return tonumber(data[2])
+end
+
+function usdToSek(usd)
+    fh = io.popen("curl -q -s http://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml | grep -i -E 'sek|usd'")
+    data = fh:read("*a")
+    fh:close()
+    data = split(data, "\n")
+    for i=1,2 do
+        data[i] = split(data[i], "'")
+        data[i] = data[i][4]
+        data[i] = tonumber(data[i])
+    end
+
+    return data[2]/data[1]
 end
 
