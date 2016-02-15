@@ -3,6 +3,10 @@
 history_file=~/.local/share/rascal/rofiHistory
 
 hst=$(printf "$(cat $history_file)\nrofiHistory --all")
+rofi="rofi -dmenu -p > -i -width 40"
+if [[ "$1" ]]; then
+    rofi="$rofi -mesg $1"
+fi
 
 if [[ $* == *--all* ]]; then
     a1=$(ls /usr/local/bin)
@@ -12,11 +16,17 @@ else
     alt=$(printf "$hst")
 fi
 
-result=$(printf "$alt" | rofi -dmenu)
-$($result) &
+result=$(printf "$alt" | $rofi)
 
-if [[ $result = *[!\ ]* ]] && [[ $result != *"rofiHistory"* ]]; then
-    newhst=$(printf "$(grep -v -x "$result" $history_file)")
-    printf "$result\n$newhst" > $history_file
+if [[ "$result" =~ ^=.* ]]; then
+    calc=$(python -c "print($(echo $result | sed "s/^=//"))")
+    rofiHistory "$result=$calc"
+else
+    $($result) &
+    if [[ $result = *[!\ ]* ]] && [[ $result != *"rofiHistory"* ]]; then
+        newhst=$(printf "$(grep -v -x "$result" $history_file)")
+        printf "$result\n$newhst" > $history_file
+    fi
 fi
+
 
