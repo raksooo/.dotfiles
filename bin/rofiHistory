@@ -1,0 +1,22 @@
+#!/bin/sh
+
+history_file=~/.local/share/rascal/rofiHistory
+
+hst=$(printf "$(cat $history_file)\nrofiHistory --all")
+a1=$(ls /usr/local/bin)
+a2=$(ls /usr/bin)
+
+if [[ $* == *--all* ]]; then
+    alt=$(printf "$a1\n$a2")
+else
+    alt=$(printf "$hst")
+fi
+
+result=$(printf "$alt" | rofi -dmenu)
+$($result) &
+
+if [[ $result = *[!\ ]* ]] && [[ $result != *"rofiHistory"* ]]; then
+    newhst=$(printf "$(grep -v -x "$result" $history_file)")
+    printf "$result\n$newhst" > $history_file
+fi
+
