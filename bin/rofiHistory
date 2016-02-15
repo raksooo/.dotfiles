@@ -3,10 +3,10 @@
 history_file=~/.local/share/rascal/rofiHistory
 
 hst=$(printf "$(cat $history_file)\nrofiHistory --all")
-a1=$(ls /usr/local/bin)
-a2=$(ls /usr/bin)
 
 if [[ $* == *--all* ]]; then
+    a1=$(ls /usr/local/bin)
+    a2=$(ls /usr/bin)
     alt=$(printf "$a1\n$a2")
 else
     alt=$(printf "$hst")
