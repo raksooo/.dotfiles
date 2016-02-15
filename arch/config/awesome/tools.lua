@@ -23,7 +23,6 @@ function debug.notify(text)
     naughty.notify ({ preset = preset })
 end
 
-local startTimer
 function setInterval(f, interval, first)
     t = timer({ timeout = interval })
     t:connect_signal("timeout", f)

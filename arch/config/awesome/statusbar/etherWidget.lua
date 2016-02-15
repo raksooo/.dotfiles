@@ -7,7 +7,7 @@ function etherWidget()
     etherWidget:add(value)
     value:set_text("Ξ")
 
-    setInterval(function() updateEtherWidget(value) end, 1200, 10)
+    setInterval(function() updateEtherWidget(value) end, 1200, 2)
 
     return etherWidget
 end
