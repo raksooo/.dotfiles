@@ -106,11 +106,15 @@ awful.rules.rules = {
     { rule = { class = "Spotify" },
       properties = { tag = tags[1][9] } },
     { rule = { class = "qutebrowser" },
-      properties = { tag = tags[1][4] } },
+      properties = { tag = tags[1][4] },
+      callback = awful.client.setslave },
     { rule = { class = "http___messenger_com" },
-      properties = { tag = tags[1][4] } },
+      properties = { tag = tags[1][4] },
+      callback = awful.client.setmaster },
     { rule = { class = "chromium" },
       properties = { tag = tags[1][2] } },
+    { rule = { class = "mpv" },
+      callback = mpvStart },
 }
 -- }}}
 
@@ -119,18 +123,12 @@ awful.layout.set(awful.layout.suit.tile.left, tags[1][4])
 awful.tag.setmwfact(0.25, tags[1][4])
 -- }}}
 
-client.connect_signal("manage", function(c, startup)
+function mpvStart(c)
     local tag = awful.tag.getidx()
-    if c.class == "mpv" and tag == 4 then
-        if client.focus then
-            awful.client.toggletag(tags[1][1])
-        end
+    if tag == 4 and client.focus then
+        awful.client.toggletag(tags[1][1])
     end
-
-    if c.class == "qutebrowser" then
-        awful.client.setslave(c)
-    end
-end)
+end
 
 -- {{{ Signals
 -- Signal function to execute when a new client appears.
