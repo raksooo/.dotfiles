@@ -56,7 +56,7 @@ terminal = "xterm"
 editor = os.getenv("EDITOR") or "nano"
 editor_cmd = terminal .. " -e " .. editor
 webbrowser = "qutebrowser"
-launcher = "dmenu_run"
+launcher = "rofiHistory"
 screenshot = "maim /home/rascal/documents/Bilder/screenshots/$(date +%F-%T).png"
 titlebars_enabled = false
 
