@@ -91,6 +91,14 @@ root.keys(globalkeys)
 
 -- {{{ Rules
 -- Rules to apply to new clients (through the "manage" signal).
+function mpvStart(c)
+    local tag = awful.tag.getidx()
+    if tag == 4 and client.focus then
+        awful.client.setslave(c)
+        c:tags({ tags[1][1], tags[1][4], tags[1][5] })
+    end
+end
+
 awful.rules.rules = {
     -- All clients will match this rule.
     { rule = { },
@@ -122,13 +130,6 @@ awful.rules.rules = {
 awful.layout.set(awful.layout.suit.tile.left, tags[1][4])
 awful.tag.setmwfact(0.25, tags[1][4])
 -- }}}
-
-function mpvStart(c)
-    local tag = awful.tag.getidx()
-    if tag == 4 and client.focus then
-        awful.client.toggletag(tags[1][1])
-    end
-end
 
 -- {{{ Signals
 -- Signal function to execute when a new client appears.
