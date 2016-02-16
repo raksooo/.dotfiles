@@ -4,26 +4,29 @@ history_file=~/.local/share/rascal/rofiHistory
 
 hst=$(printf "$(cat $history_file)\nrofiHistory --all")
 rofi="rofi -dmenu -p > -i -width 40"
-if [[ "$1" ]]; then
+if [[ "$1" ]] && [[ $1 != "--all" ]]; then
     rofi="$rofi -mesg $1"
+    alt="calc $(echo $1 | sed 's/\=.*$//')\n"
 fi
 
 if [[ $* == *--all* ]]; then
+    aliases=$(/usr/local/bin/listAliasNames ~/.dotfiles/arch/aliases)
     a1=$(ls /usr/local/bin)
     a2=$(ls /usr/bin)
-    alt=$(printf "$a1\n$a2")
+    alt=$(printf "$aliases\n$a1\n$a2")
 else
-    alt=$(printf "$hst")
+    alt=$(printf "$alt$hst")
 fi
 
 result=$(printf "$alt" | $rofi)
 
 if [[ "$result" =~ ^=.* ]]; then
-    calc=$(python -c "print($(echo $result | sed "s/^=//"))")
-    rofiHistory "$result=$calc"
+    math=$(echo $result | sed "s/^=//")
+    calc=$(python -c "print($math)")
+    rofiHistory "$math=$calc"
 else
     $($result) &
-    if [[ $result = *[!\ ]* ]] && [[ $result != *"rofiHistory"* ]]; then
+    if [[ $result = *[!\ ]* ]] && [[ $result != "rofiHistory"* ]] && [[ $result != "calc "* ]]; then
         newhst=$(printf "$(grep -v -x "$result" $history_file)")
         printf "$result\n$newhst" > $history_file
     fi
