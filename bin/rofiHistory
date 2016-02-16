@@ -2,19 +2,19 @@
 
 history_file=~/.local/share/rascal/rofiHistory
 
-hst=$(printf "$(cat $history_file)\nrofiHistory --all")
 rofi="rofi -dmenu -p > -i -width 40"
-if [[ "$1" ]] && [[ $1 != "--all" ]]; then
+if [[ $* != *"--all"* ]]; then
     rofi="$rofi -mesg $1"
     alt="calc $(echo $1 | sed 's/\=.*$//')\n"
 fi
 
 if [[ $* == *--all* ]]; then
     aliases=$(/usr/local/bin/listAliasNames ~/.dotfiles/arch/aliases)
-    a1=$(ls /usr/local/bin)
-    a2=$(ls /usr/bin)
-    alt=$(printf "$aliases\n$a1\n$a2")
+    b1=$(ls /usr/local/bin)
+    b2=$(ls /usr/bin)
+    alt=$(printf "$aliases\n$b1\n$b2")
 else
+    hst=$(printf "$(cat $history_file)\nrofiHistory --all")
     alt=$(printf "$alt$hst")
 fi
 
