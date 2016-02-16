@@ -3,7 +3,7 @@
 history_file=~/.local/share/rascal/rofiHistory
 
 rofi="rofi -dmenu -p > -i -width 40"
-if [[ $* != *"--all"* ]]; then
+if [[ $1 ]] && [[ $1 != *"--all"* ]]; then
     rofi="$rofi -mesg $1"
     alt="calc $(echo $1 | sed 's/\=.*$//')\n"
 fi
