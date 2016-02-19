@@ -19,10 +19,10 @@ function updateGDriveWidget(image, padding)
     fh:close()
 
     if data == "" then
-        image:set_image("/home/rascal/.config/awesome/statusbar/transparent.png")
+        image:set_image("/home/rascal/.config/awesome/resources/transparent.png")
         padding:set_text("")
     else
-        image:set_image("/home/rascal/.config/awesome/statusbar/gdrive.png")
+        image:set_image("/home/rascal/.config/awesome/resources/gdrive.png")
         padding:set_text("   ")
     end
 end

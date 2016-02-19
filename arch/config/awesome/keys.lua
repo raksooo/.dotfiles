@@ -1,9 +1,10 @@
 local awful = require("awful")
 local menubar = require("menubar")
+local beautiful = require("beautiful")
 
 require("statusbar/volumeWidget")
 
-require("layouts")
+beautiful.init("/home/rascal/.config/awesome/theme.lua")
 
 modkey = "Mod4"
 
@@ -56,6 +57,14 @@ function takeScreenshot()
     io.popen("mpg123 ~/.local/share/rascal/screenshot.mp3 &"):close()
 end
 
+function toggleGap()
+    if awful.tag.getgap() == beautiful.useless_gap then
+        awful.tag.setgap(beautiful.less_useless_gap)
+    else
+        awful.tag.setgap(beautiful.useless_gap)
+    end
+end
+
 globalkeys = awful.util.table.join(
     awful.key({ modkey,           }, "j", function() navigate("j") end),
     awful.key({ modkey,           }, "k", function() navigate("k") end),
@@ -100,6 +109,7 @@ globalkeys = awful.util.table.join(
 
     awful.key({ modkey, "Shift"   }, "space", function () awful.layout.inc(layouts, 1) end),
     awful.key({ modkey, "Shift"   }, "n", awful.client.restore),
+    awful.key({ modkey, "Shift"   }, "m", toggleGap),
     awful.key({ modkey, "Control" }, "n", function()
             statusbar[mouse.screen].visible = not statusbar[mouse.screen].visible
         end),

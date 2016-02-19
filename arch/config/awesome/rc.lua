@@ -6,8 +6,6 @@ require("awful.autofocus")
 -- Widget and layout library
 local wibox = require("wibox")
 local tools = require("tools")
-require("keys")
-require("layouts")
 
 -- Theme handling library
 local beautiful = require("beautiful")
@@ -15,7 +13,8 @@ local beautiful = require("beautiful")
 local naughty = require("naughty")
 local menubar = require("menubar")
 
-require("vain")
+require("layouts")
+require("keys")
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -59,8 +58,6 @@ webbrowser = "qutebrowser"
 launcher = "rofiHistory"
 screenshot = "maim /home/rascal/documents/Bilder/screenshots/$(date +%F-%T).png"
 titlebars_enabled = false
-
-vain.widgets.terminal = terminal
 -- }}}
 
 -- {{{ Wallpaper
@@ -129,6 +126,7 @@ awful.rules.rules = {
 -- {{{ Startup
 awful.layout.set(awful.layout.suit.tile.left, tags[1][4])
 awful.tag.setmwfact(0.25, tags[1][4])
+awful.tag.setgap(1, tags[1][4])
 -- }}}
 
 -- {{{ Signals

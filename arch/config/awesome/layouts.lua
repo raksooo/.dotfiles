@@ -1,9 +1,7 @@
 local awful = require("awful")
-require("vain")
 
 layouts =
 {
-    vain.layout.uselesstile,
     awful.layout.suit.tile,
     -- awful.layout.suit.tile.left,
     awful.layout.suit.tile.bottom,
