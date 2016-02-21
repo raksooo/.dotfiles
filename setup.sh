@@ -6,19 +6,19 @@ function link {
 
 sudo -v
 
-link bash_profile .bashprofile
+link bash_profile .bash_profile
 link vimrc .vimrc
 link xinitrc .xinitrc
 link Xresources .Xresources
 link Xresources_rofi .Xresources_rofi
 
-link awesome .config/awesome
-link liquidpromptrc .config/liquidpromptrc
-link qutebrowser .config/qutebrowser
-link user-dirs.dirs .config/user-dirs.dirs
+link awesome .config/
+link liquidpromptrc .config/
+link qutebrowser .config/
+link user-dirs.dirs .config/
 
 link ssh .ssh/config
 
-sudo ln -sf $DOTFILES/bin /usr/local/bin
-ln -sf $DOTFILES/share ~/.local/share/rascal
+sudo ln -sf $DOTFILES/bin /usr/local/
+ln -s $DOTFILES/share ~/.local/share/rascal
 
