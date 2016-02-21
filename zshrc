@@ -52,7 +52,6 @@ export TERM=xterm-256color
 
 ## Aliases
 source $DOTFILES/aliases
-source $DOTFILES/github_oauth
 
 ## LiquidPrompt
 source ~/.dotfiles/liquidprompt/liquidprompt

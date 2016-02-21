@@ -1,9 +1,0 @@
-#!/bin/sh
-
-tmpfile="/tmp/gpgedit_file"
-
-gpg --batch --yes --output $tmpfile -d $1
-$EDITOR $tmpfile
-gpg --batch --yes --output $1 -r "Oskar Nyberg" -e $tmpfile
-rm $tmpfile
-

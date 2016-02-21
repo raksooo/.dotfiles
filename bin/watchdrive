@@ -1,9 +1,0 @@
-#!/bin/sh
-
-syncdrive &
-
-while true; do
-    inotifywait ~/gdrive/ -r -e close_write -e delete -e move_self -e move --exclude "(.grive|.swp|.swo|.swx)"
-    pidof grive || syncdrive
-done
-

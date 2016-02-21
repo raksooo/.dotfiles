@@ -1,7 +1,0 @@
-#!/bin/sh
-
-sleep 5
-cd ~/gdrive/
-
-pidof grive || grive &
-
