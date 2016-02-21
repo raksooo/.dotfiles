@@ -20,5 +20,7 @@ link user-dirs.dirs .config/
 link ssh .ssh/config
 
 sudo ln -sf $DOTFILES/bin /usr/local/
-ln -s $DOTFILES/share ~/.local/share/rascal
+if [ ! -s ~/.local/share/rascal ]; then
+    ln -s $DOTFILES/share ~/.local/share/rascal
+fi
 
