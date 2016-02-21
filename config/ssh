@@ -1,7 +1,0 @@
-Host pi
-    HostName raksooo.se
-    User rascal
-
-Host irc
-    HostName hubben.chalmers.it
-    User nyoskar

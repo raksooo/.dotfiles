@@ -29,3 +29,12 @@ alias pi='mosh pi'
 alias opi='ssh opi'
 alias spi='ssh pi'
 
+#other
+alias externalmonitor='xrandr --output DisplayPort-1 --auto --right-of LVDS'
+alias externalmonitoroff='xrandr --output DisplayPort-1 --off'
+
+alias feh='feh -.'
+alias messenger='midori -e identify-as=MIDORI_IDENT_SAFARI -e show-navigationbar=false -e zoom-level=0.9 -a http://messenger.com'
+
+alias startphone='sudo fastboot reboot'
+
