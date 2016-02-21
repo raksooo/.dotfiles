@@ -1,0 +1,30 @@
+setxkbmap -option caps:escape
+
+xmodmap -e "keycode 16 = 7 slash 7 slash braceleft backslash"
+xmodmap -e "keycode 17 = 8 parenleft 8 8 bracketleft braceleft"
+xmodmap -e "keycode 18 = 9 parenright 8 8 bracketright braceright"
+
+
+[[ -f ~/.Xresources ]] && xrdb -merge -I$HOME ~/.Xresources
+[[ -f ~/.Xresources_rofi ]] && xrdb -merge -I$HOME ~/.Xresources_rofi
+
+unclutter -idle 1 &
+slock &
+nm-applet &
+redshift 57.705829:11.990570 &
+xcompmgr &
+
+# Startup sound
+sleep 1.5 && mpg123 ~/.local/share/rascal/boot.mp3 &
+
+# Autostart
+sleep 60 && watchdrive &
+qutebrowser &
+messenger &
+xterm htop &
+sleep 4 && xterm &
+sleep 4 && xterm &
+
+# Start awesome
+exec awesome
+
