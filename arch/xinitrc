@@ -20,7 +20,7 @@ sleep 1.5 && mpg123 ~/.local/share/rascal/boot.mp3 &
 # Autostart
 sleep 60 && watchdrive &
 qutebrowser &
-midori -e identify-as=MIDORI_IDENT_SAFARI -e show-navigationbar=false -e zoom-level=0.9 -a http://messenger.com &
+messenger &
 xterm htop &
 sleep 4 && xterm &
 sleep 4 && xterm &
