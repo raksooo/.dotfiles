@@ -4,7 +4,7 @@
 export DOTFILES=$HOME/.dotfiles
 
 ## Export variables for shell
-eval $( dircolors -b $DOTFILES/dircolors-solarized/dircolors.256dark )
+eval $( dircolors -b $DOTFILES/config/dircolors-solarized/dircolors.256dark )
 export CLICOLOR=1
 
 export EDITOR=vim
