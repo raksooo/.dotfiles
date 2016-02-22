@@ -13,7 +13,7 @@ function batteryWidget()
     battery:set_width(7)
     battery:set_background_color("#494B4F")
 
-    setInterval(function()
+    initInterval(function()
             updateBatteryWidget(battery, batteryText, batteryTooltip)
         end, 5)
 

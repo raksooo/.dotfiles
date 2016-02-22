@@ -1,5 +1,6 @@
 local wibox = require("wibox")
 local naughty = require("naughty")
+local asyncshell = require("../asyncshell")
 
 local tools = {}
 
@@ -23,22 +24,29 @@ function debug.notify(text)
     naughty.notify ({ preset = preset })
 end
 
-function setInterval(f, interval, first)
+function setInterval(f, interval)
     t = timer({ timeout = interval })
     t:connect_signal("timeout", f)
     t:start()
+    return t
+end
 
-    if first then
-        local startTimer = timer({ timeout = first })
+function setTimeout(f, timeout)
+    if timeout then
+        local startTimer = timer({ timeout = timeout })
         startTimer:connect_signal("timeout", function()
                 startTimer:stop()
                 f()
             end)
         startTimer:start()
     else
-        t:emit_signal("timeout")
+        f()
     end
+end
 
+function initInterval(f, interval, first)
+    local t = setInterval(f, interval)
+    setTimeout(f, first)
     return t
 end
 

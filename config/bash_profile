@@ -25,3 +25,6 @@ source liquidprompt
 
 [[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && exec startx
 
+## To prevent the errorcode from the tmux line to show
+true
+
