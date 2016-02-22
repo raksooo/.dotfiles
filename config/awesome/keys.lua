@@ -1,6 +1,7 @@
 local awful = require("awful")
 local menubar = require("menubar")
 local beautiful = require("beautiful")
+local drop  = require("scratchdrop")
 
 require("statusbar/volumeWidget")
 
@@ -104,6 +105,7 @@ globalkeys = awful.util.table.join(
     awful.key({ "Mod1",           }, "space", function () awful.util.spawn("slock") end),
     awful.key({ modkey,           }, "+", takeScreenshot),
     awful.key({ modkey,           }, "r", function () mypromptbox[mouse.screen]:run() end),
+    awful.key({ modkey,	          }, "z", function () drop(terminal) end),
     awful.key({ modkey, "Control" }, "r", awesome.restart),
     awful.key({ modkey, "Shift"   }, "q", awesome.quit),
 
