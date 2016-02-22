@@ -31,7 +31,7 @@ function asyncshell.request(command, callback)
    local tmpfname = asyncshell.file_template .. id
    asyncshell.request_table[id] = {callback = callback}
    local req =
-      string.format("bash -c '%s > %s; " ..
+      string.format("bash -c '(%s) > %s; " ..
                     'echo "asyncshell.deliver(%s)" | ' ..
                     "awesome-client' 2> /dev/null",
                     string.gsub(command, "'", "'\\''"), tmpfname, id, tmpfname)
@@ -46,7 +46,7 @@ end
 function asyncshell.deliver(id)
    if asyncshell.request_table[id] and
       asyncshell.request_table[id].callback then
-      local output = io.popen("cat " .. asyncshell.file_template .. id)
+      local output = io.open(asyncshell.file_template .. id, "r")
       local data = output:read("*a")
       output:close()
       asyncshell.request_table[id].callback(data)

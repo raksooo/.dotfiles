@@ -18,18 +18,20 @@ function pacmanWidget()
 end
 
 function updatePacmanWidget(count, pacmanWidgetTooltip)
-    asyncshell.request("checkupdates",
-        function(data)
-            lines = split(data, "\n")
-            dots = ""
-            for i = 1, math.min(#lines, 120) do
-                dots = dots .. (i == 1 and "⚫" or "•")
-            end
-            count:set_markup(dots .. " ")
+    ifConnected(function()
+        asyncshell.request("checkupdates",
+            function(data)
+                lines = split(data, "\n")
+                dots = ""
+                for i = 1, math.min(#lines, 120) do
+                    dots = dots .. (i == 1 and "⚫" or "•")
+                end
+                count:set_markup(dots .. " ")
 
-            tooltip = data:gsub("^%s*(.-)%s*$", "%1")
-            tooltip = "Updates: " .. #lines .. "\n\n" .. tooltip
-            pacmanWidgetTooltip:set_text(tooltip)
-        end)
+                tooltip = data:gsub("^%s*(.-)%s*$", "%1")
+                tooltip = "Updates: " .. #lines .. "\n\n" .. tooltip
+                pacmanWidgetTooltip:set_text(tooltip)
+            end)
+    end)
 end
 

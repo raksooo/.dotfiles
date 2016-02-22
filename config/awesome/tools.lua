@@ -14,6 +14,16 @@ tools.mediumspacing = tools.newSeperator("   ")
 tools.bigspacing = tools.newSeperator("    ")
 tools.seperator = tools.newSeperator("    |    ")
 
+function ifConnected(callback)
+    command = "ping -q -w 1 -c 1 `ip r | grep default | cut -d ' ' -f 3` &> /dev/null && echo true || echo false"
+    asyncshell.request(command, function(status)
+        status = trim(status)
+        if status == "true" then
+            callback()
+        end
+    end)
+end
+
 function debug.notify(text)
     local preset = {
         height = 60,

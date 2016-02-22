@@ -15,7 +15,7 @@ function batteryWidget()
 
     initInterval(function()
             updateBatteryWidget(battery, batteryText, batteryTooltip)
-        end, 5)
+        end, 15, 1)
 
     batteryWidget:add(batteryText)
     batteryWidget:add(tools.spacing)
@@ -24,45 +24,46 @@ function batteryWidget()
 end
 
 function updateBatteryWidget(battery, batteryText, batteryTooltip)
-    local data = getBatteryData()
+    getBatteryData(function(data)
+        timeleft = ""
+        if #data[2] >= 5 then
+            timeleft = data[2][4] .. " " .. data[2][5]
+        end
 
-    timeleft = ""
-    if #data[2] >= 5 then
-        timeleft = data[2][4] .. " " .. data[2][5]
-    end
+        state = data[1][#data[1]]
+        capacity = data[4][#data[4]]
+        capacity = split(capacity, "%%")[1]
+        capacity = tonumber(capacity)
+        percentage = data[3][#data[3]]
+        percentage = percentage:gsub("%W", "")
+        percentage = tonumber(percentage)
+        percentage = math.min(round((percentage / capacity) * 100), 100)
 
-    state = data[1][#data[1]]
-    capacity = data[4][#data[4]]
-    capacity = split(capacity, "%%")[1]
-    capacity = tonumber(capacity)
-    percentage = data[3][#data[3]]
-    percentage = percentage:gsub("%W", "")
-    percentage = tonumber(percentage)
-    percentage = math.min(round((percentage / capacity) * 100), 100)
+        formatBatteryContent(state, percentage, timeleft)
 
-    formatBatteryContent(state, percentage, timeleft)
-
-    batteryNotification(percentage, timeleft)
+        batteryNotification(percentage, timeleft)
+    end)
 end
 
-function getBatteryData()
-    fh = io.popen("upower -i $(upower -e | grep 'BAT') | grep -E 'state|percentage|time to|capacity'")
-    data = split(fh:read("*a"), "\n")
-    fh:close()
+function getBatteryData(callback)
+    asyncshell.request("upower -i $(upower -e | grep 'BAT') | grep -E 'state|percentage|time to|capacity'",
+        function(data)
+            data = split(data, "\n")
 
-    local timeleft
-    if data[4] == nil then
-        data[4] = data[3]
-        data[3] = data[2]
-        data[2] = ""
-    end
+            local timeleft
+            if data[4] == nil then
+                data[4] = data[3]
+                data[3] = data[2]
+                data[2] = ""
+            end
 
-    data[1] = split(data[1], " ")
-    data[2] = split(data[2], " ")
-    data[3] = split(data[3], " ")
-    data[4] = split(data[4], " ")
+            data[1] = split(data[1], " ")
+            data[2] = split(data[2], " ")
+            data[3] = split(data[3], " ")
+            data[4] = split(data[4], " ")
 
-    return data
+            callback(data)
+        end)
 end
 
 function formatBatteryContent(state, percentage, timeleft)

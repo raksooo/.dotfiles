@@ -13,12 +13,14 @@ function etherWidget()
 end
 
 function updateEtherWidget(textbox)
-    getEtherValue(function(ether)
-        usdToSek(function(sek)
-            usd = round2(ether)
-            sek = round2(ether * sek)
-            text = "Ξ: $" .. usd .. " (" .. sek .. "kr)"
-            textbox:set_markup(text)
+    ifConnected(function()
+        getEtherValue(function(ether)
+            usdToSek(function(sek)
+                usd = round2(ether)
+                sek = round2(ether * sek)
+                text = "Ξ: $" .. usd .. " (" .. sek .. "kr)"
+                textbox:set_markup(text)
+            end)
         end)
     end)
 end
