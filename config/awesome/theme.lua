@@ -7,7 +7,7 @@ theme = {}
 theme.font = "sans 7.5"
 theme.wallpaper = "/home/rascal/.local/share/rascal/wallpaper.jpg"
 
-theme.bg_normal = "#222222"
+theme.bg_normal     = "#222222"
 theme.bg_focus      = "#535d6c"
 theme.bg_urgent     = "#ff0000"
 theme.bg_minimize   = "#444444"
