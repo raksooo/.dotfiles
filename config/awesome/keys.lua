@@ -1,8 +1,3 @@
-local awful = require("awful")
-local menubar = require("menubar")
-local beautiful = require("beautiful")
-local drop  = require("scratchdrop")
-
 require("statusbar/volumeWidget")
 
 beautiful.init("/home/rascal/.config/awesome/theme.lua")

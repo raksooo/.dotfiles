@@ -25,7 +25,6 @@
 
 -- Grab environment
 local pairs        = pairs
-local awful        = require("awful")
 local setmetatable = setmetatable
 local capi         = {
     mouse  = mouse,

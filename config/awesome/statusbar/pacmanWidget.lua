@@ -1,6 +1,3 @@
-local wibox = require("wibox")
-local awful = require("awful")
-
 function pacmanWidget()
     pacmanWidget = wibox.layout.fixed.horizontal()
     image = wibox.widget.imagebox()
@@ -10,15 +7,15 @@ function pacmanWidget()
     pacmanWidget:add(image)
     pacmanWidgetTooltip = awful.tooltip({ objects = { pacmanWidget } })
 
-    initInterval(function()
+    tools.initInterval(function()
             updatePacmanWidget(count, pacmanWidgetTooltip)
-        end, 1800, 15)
+        end, 1800, true)
 
     return pacmanWidget
 end
 
 function updatePacmanWidget(count, pacmanWidgetTooltip)
-    ifConnected(function()
+    tools.connected(function()
         asyncshell.request("checkupdates",
             function(data)
                 lines = split(data, "\n")

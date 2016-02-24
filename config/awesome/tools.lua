@@ -1,7 +1,3 @@
-local wibox = require("wibox")
-local naughty = require("naughty")
-local asyncshell = require("../asyncshell")
-
 local tools = {}
 
 function tools.newSeperator(text)
@@ -14,35 +10,43 @@ tools.mediumspacing = tools.newSeperator("   ")
 tools.bigspacing = tools.newSeperator("    ")
 tools.seperator = tools.newSeperator("    |    ")
 
-function ifConnected(callback)
-    command = "ping -q -w 1 -c 1 www.google.com &> /dev/null && echo true || echo false"
-    asyncshell.request(command, function(status)
-        status = trim(status)
-        if status == "true" then
-            callback()
-        end
-    end)
+tools.lastConnected = 0
+function tools.connected(online, offline)
+    if tools.lastConnected > os.time() - 15 then
+        online()
+    else
+        command = "ping -q -w 1 -c 1 www.google.com &> /dev/null && echo true || echo false"
+        asyncshell.request(command, function(status)
+            status = trim(status) == "true"
+            if status then
+                online()
+            elseif offline then
+                offline()
+            end
+            tools.lastConnected = os.time()
+        end)
+    end
 end
 
-function debug.notify(text)
+function tools.notify(text)
     local preset = {
         height = 60,
         width = 140,
         title = "Debug",
         text = text
     }
-    naughty.notify ({ preset = preset })
+    naughty.notify({ preset = preset })
 end
 
-function setInterval(f, interval)
+function tools.setInterval(f, interval)
     t = timer({ timeout = interval })
     t:connect_signal("timeout", f)
     t:start()
     return t
 end
 
-function setTimeout(f, timeout)
-    if timeout then
+function tools.setTimeout(f, timeout)
+    if timeout and timeout > 0 then
         local startTimer = timer({ timeout = timeout })
         startTimer:connect_signal("timeout", function()
                 startTimer:stop()
@@ -54,13 +58,24 @@ function setTimeout(f, timeout)
     end
 end
 
-function initInterval(f, interval, first)
-    local t = setInterval(f, interval)
-    setTimeout(f, first)
-    return t
+function tools.initInterval(f, interval, first, needsInternet)
+    if first == true or first == false then
+        needsInternet = first
+        first = nil
+    end
+
+    tools.connected(function()
+        local t = tools.setInterval(f, interval)
+        tools.setTimeout(f, first)
+        return t
+    end, function()
+        tools.setTimeout(function()
+            tools.initInterval(f, interval, first, needsInternet)
+        end, 15)
+    end)
 end
 
-function margin(widget, margin)
+function tools.margin(widget, margin)
     if margin == nil then
         margin = 4
     end

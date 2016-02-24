@@ -1,7 +1,3 @@
-local wibox = require("wibox")
-local awful = require("awful")
-local vicious = require("vicious")
-
 function weatherWidget()
     weatherwidget = wibox.widget.textbox()
     weather_t = awful.tooltip({ objects = { weatherwidget },})

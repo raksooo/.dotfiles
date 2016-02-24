@@ -5,8 +5,6 @@
 -- ...synchronously
 -- wwidget.text = asyncshell.demand('wscript -Kiev', 5):read("*l") or "Error"
 
-local awful = require('awful')
-
 asyncshell = {}
 asyncshell.request_table = {}
 asyncshell.id_counter = 0

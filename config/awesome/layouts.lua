@@ -1,5 +1,3 @@
-local awful = require("awful")
-
 layouts =
 {
     awful.layout.suit.tile,

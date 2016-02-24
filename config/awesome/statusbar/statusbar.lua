@@ -1,11 +1,7 @@
-local awful = require("awful")
-local wibox = require("wibox")
-local tools = require("../tools")
-
 require("statusbar/batteryWidget")
 require("statusbar/pacmanWidget")
 require("statusbar/volumeWidget")
-require("statusbar/gdriveWidget")
+local gdrive = require("statusbar/gdriveWidget")
 require("statusbar/weatherWidget")
 require("statusbar/etherWidget")
 
@@ -29,12 +25,12 @@ mytaglist.buttons = awful.util.table.join(
                     awful.button({ }, 5, function(t) awful.tag.viewprev(awful.tag.getscreen(t)) end)
                     )
 
-local pacmanwidget = margin(pacmanWidget(), 2)
+local pacmanwidget = tools.margin(pacmanWidget(), 2)
 local weatherwidget = weatherWidget()
 local volumewidget = volumeWidget(terminal)
-local batterywidget = margin(batteryWidget())
+local batterywidget = tools.margin(batteryWidget())
 local clockwidget = awful.widget.textclock()
-local gdrivewidget = margin(gdriveWidget(), 2)
+local gdrivewidget = tools.margin(gdrive.widget(), 2)
 local etherwidget = etherWidget()
 
 for s = 1, screen.count() do

@@ -1,8 +1,3 @@
-local wibox = require("wibox")
-local naughty = require("naughty")
-local awful = require("awful")
-local tools = require("../tools")
-
 function batteryWidget()
     batteryWidget = wibox.layout.fixed.horizontal()
     batteryText = wibox.widget.textbox()
@@ -13,7 +8,7 @@ function batteryWidget()
     battery:set_width(7)
     battery:set_background_color("#494B4F")
 
-    initInterval(function()
+    tools.initInterval(function()
             updateBatteryWidget(battery, batteryText, batteryTooltip)
         end, 15, 1)
 

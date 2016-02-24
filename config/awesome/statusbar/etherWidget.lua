@@ -1,19 +1,16 @@
-local wibox = require("wibox")
-local awful = require("awful")
-
 function etherWidget()
     etherWidget = wibox.layout.fixed.horizontal()
     value = wibox.widget.textbox()
     etherWidget:add(value)
     value:set_text("Ξ")
 
-    initInterval(function() updateEtherWidget(value) end, 1200, 10)
+    tools.initInterval(function() updateEtherWidget(value) end, 1200, true)
 
     return etherWidget
 end
 
 function updateEtherWidget(textbox)
-    ifConnected(function()
+    tools.connected(function()
         getEtherValue(function(ether)
             usdToSek(function(sek)
                 usd = round2(ether)

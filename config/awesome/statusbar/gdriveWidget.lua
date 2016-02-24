@@ -1,29 +1,34 @@
-local wibox = require("wibox")
-
-function gdriveWidget()
+gdrive = {}
+gdrive.image = nil
+gdrive.padding = nil
+function gdrive.widget()
     gdriveWidget = wibox.layout.fixed.horizontal()
-    image = wibox.widget.imagebox()
-    padding = wibox.widget.textbox()
-    gdriveWidget:add(padding)
-    gdriveWidget:add(image)
-    gdriveWidget:add(padding)
+    gdrive.image = wibox.widget.imagebox()
+    gdrive.padding = wibox.widget.textbox()
+    gdriveWidget:add(gdrive.padding)
+    gdriveWidget:add(gdrive.image)
+    gdriveWidget:add(gdrive.padding)
 
-    setInterval(function() updateGDriveWidget(image, padding) end, 30)
+    --tools.initInterval(function() updateGDriveWidget(image, padding) end, 60)
 
     return gdriveWidget
 end
 
-function updateGDriveWidget(image, padding)
-    fh = io.popen("pidof grive")
-    data = fh:read("*a")
-    fh:close()
+function gdrive.update()
+    tools.setTimeout(function()
+        fh = io.popen("pidof grive")
+        data = fh:read("*a")
+        fh:close()
 
-    if data == "" then
-        image:set_image("/home/rascal/.config/awesome/resources/transparent.png")
-        padding:set_text("")
-    else
-        image:set_image("/home/rascal/.config/awesome/resources/gdrive.png")
-        padding:set_text("   ")
-    end
+        if data == "" then
+            gdrive.image:set_image("/home/rascal/.config/awesome/resources/transparent.png")
+            gdrive.padding:set_text("")
+        else
+            gdrive.image:set_image("/home/rascal/.config/awesome/resources/gdrive.png")
+            gdrive.padding:set_text("   ")
+        end
+    end, 3)
 end
+
+return gdrive
 

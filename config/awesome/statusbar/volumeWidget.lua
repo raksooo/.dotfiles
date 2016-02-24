@@ -1,7 +1,3 @@
-local wibox = require("wibox")
-local awful = require("awful")
-local vicious = require("vicious")
-
 local alsawidget
 
 function volumeWidget(terminal)
@@ -51,7 +47,7 @@ function volumeWidget(terminal)
     volumeText = wibox.widget.textbox()
     volumeText:set_markup("<span color=\"#666666\">A:</span><span color=\"#333333\">[</span>")
     volumeWidget:add(volumeText)
-    volumeWidget:add(margin(alsawidget.bar, 6))
+    volumeWidget:add(tools.margin(alsawidget.bar, 6))
     rightBracket = wibox.widget.textbox()
     rightBracket:set_markup(" <span color=\"#333333\">]</span>")
     volumeWidget:add(rightBracket)
