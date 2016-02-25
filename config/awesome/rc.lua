@@ -6,9 +6,6 @@ require("awful.autofocus")
 
 -- Widget and layout library
 wibox = require("wibox")
-tools = require("tools")
-asyncshell = require("asyncshell")
-drop  = require("scratchdrop")
 
 -- Theme handling library
 beautiful = require("beautiful")
@@ -16,6 +13,10 @@ beautiful = require("beautiful")
 naughty = require("naughty")
 menubar = require("menubar")
 vicious = require("vicious")
+
+tools = require("tools")
+asyncshell = require("asyncshell")
+drop  = require("scratchdrop")
 
 require("layouts")
 require("keys")

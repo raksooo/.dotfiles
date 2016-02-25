@@ -37,6 +37,24 @@ local scratchdrop = {} -- module scratch.drop
 
 local dropdown = {}
 
+tools.setTimeout(function()
+    clients = client.get()
+    floating = {}
+
+    for i, c in pairs(clients) do
+        if c.class == "XTerm" and awful.client.floating.get(c) then
+            floating[#floating + 1] = c
+        end
+    end
+
+    if #floating == 1 then
+        c = floating[1]
+        dropdown["xterm"] = {}
+        dropdown["xterm"][1] = c
+        c.hidden = true
+    end
+end, 0.1)
+
 -- Create a new window for the drop-down application when it doesn't
 -- exist, or toggle between hidden and visible states when it does
 function toggle(prog, vert, horiz, width, height, sticky, screen)
@@ -64,7 +82,7 @@ function toggle(prog, vert, horiz, width, height, sticky, screen)
         end)
     end
 
-    if not dropdown[prog][screen] then
+    if not dropdown[prog][screen] or not dropdown[prog][screen].valid then
         spawnw = function (c)
             dropdown[prog][screen] = c
 
