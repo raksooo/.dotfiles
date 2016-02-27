@@ -1,0 +1,7 @@
+[user]
+    email = oskar@oskarnyberg.com
+	name = Oskar Nyberg
+[push]
+	default = simple
+[color]
+	ui = true

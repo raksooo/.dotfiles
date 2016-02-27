@@ -11,6 +11,7 @@ link vimrc .vimrc
 link xinitrc .xinitrc
 link Xresources .Xresources
 link Xresources_rofi .Xresources_rofi
+link gitconfig .gitconfig
 
 link awesome .config/
 link liquidpromptrc .config/
