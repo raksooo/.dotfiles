@@ -101,6 +101,9 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey,           }, "+", takeScreenshot),
     awful.key({ modkey,           }, "r", function () mypromptbox[mouse.screen]:run() end),
     awful.key({ modkey,	          }, "z", function () drop(terminal) end),
+    awful.key({ modkey,	          }, "x", function ()
+            drop(messenger, "top", "right", 0.25, 1)
+        end),
     awful.key({ modkey, "Control" }, "r", awesome.restart),
     awful.key({ modkey, "Shift"   }, "q", awesome.quit),
 

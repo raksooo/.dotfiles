@@ -1,5 +1,5 @@
 require("statusbar/batteryWidget")
-require("statusbar/pacmanWidget")
+local pacman = require("statusbar/pacmanWidget")
 require("statusbar/volumeWidget")
 local gdrive = require("statusbar/gdriveWidget")
 require("statusbar/weatherWidget")
@@ -25,7 +25,7 @@ mytaglist.buttons = awful.util.table.join(
                     awful.button({ }, 5, function(t) awful.tag.viewprev(awful.tag.getscreen(t)) end)
                     )
 
-local pacmanwidget = tools.margin(pacmanWidget(), 2)
+local pacmanwidget = tools.margin(pacman.widget(), 2)
 local weatherwidget = weatherWidget()
 local volumewidget = volumeWidget(terminal)
 local batterywidget = tools.margin(batteryWidget())

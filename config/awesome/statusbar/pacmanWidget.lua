@@ -1,20 +1,24 @@
-function pacmanWidget()
+pacman = {}
+pacman.count = nil
+pacman.tootltip = nil
+
+function pacman.widget()
     pacmanWidget = wibox.layout.fixed.horizontal()
     image = wibox.widget.imagebox()
     image:set_image("/home/rascal/.config/awesome/resources/pacman.png")
-    count = wibox.widget.textbox()
-    pacmanWidget:add(count)
+    pacman.count = wibox.widget.textbox()
+    pacmanWidget:add(pacman.count)
     pacmanWidget:add(image)
-    pacmanWidgetTooltip = awful.tooltip({ objects = { pacmanWidget } })
+    pacman.tooltip = awful.tooltip({ objects = { pacmanWidget } })
 
     tools.initInterval(function()
-            updatePacmanWidget(count, pacmanWidgetTooltip)
+            pacman.update(count, pacman.tooltip)
         end, 1800, true)
 
     return pacmanWidget
 end
 
-function updatePacmanWidget(count, pacmanWidgetTooltip)
+function pacman.update()
     tools.connected(function()
         asyncshell.request("checkupdates",
             function(data)
@@ -23,12 +27,14 @@ function updatePacmanWidget(count, pacmanWidgetTooltip)
                 for i = 1, math.min(#lines, 120) do
                     dots = dots .. (i == 1 and "⚫" or "•")
                 end
-                count:set_markup(dots .. " ")
+                pacman.count:set_markup(dots .. " ")
 
                 tooltip = data:gsub("^%s*(.-)%s*$", "%1")
                 tooltip = "Updates: " .. #lines .. "\n\n" .. tooltip
-                pacmanWidgetTooltip:set_text(tooltip)
+                pacman.tooltip:set_text(tooltip)
             end)
     end)
 end
+
+return pacman
 

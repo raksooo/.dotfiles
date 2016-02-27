@@ -37,21 +37,28 @@ local scratchdrop = {} -- module scratch.drop
 
 local dropdown = {}
 
+local possibleProgs = {
+    xterm     = "XTerm",
+    messenger = "http___messenger_com"
+}
 tools.setTimeout(function()
     clients = client.get()
-    floating = {}
 
-    for i, c in pairs(clients) do
-        if c.class == "XTerm" and awful.client.floating.get(c) then
-            floating[#floating + 1] = c
+    for prog, class in pairs(possibleProgs) do
+        floating = {}
+
+        for i, c in pairs(clients) do
+            if c.class == class and awful.client.floating.get(c) then
+                floating[#floating + 1] = c
+            end
         end
-    end
 
-    if #floating == 1 then
-        c = floating[1]
-        dropdown["xterm"] = {}
-        dropdown["xterm"][1] = c
-        c.hidden = true
+        if #floating == 1 then
+            c = floating[1]
+            dropdown[prog] = {}
+            dropdown[prog][1] = c
+            c.hidden = true
+        end
     end
 end, 0.1)
 

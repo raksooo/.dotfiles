@@ -60,6 +60,7 @@ terminal = "xterm"
 editor = os.getenv("EDITOR") or "nano"
 editor_cmd = terminal .. " -e " .. editor
 webbrowser = "qutebrowser"
+messenger = "messenger"
 launcher = "rofiHistory"
 screenshot = "maim /home/rascal/documents/Bilder/screenshots/$(date +%F-%T).png"
 titlebars_enabled = false
@@ -96,8 +97,13 @@ root.keys(globalkeys)
 function mpvStart(c)
     local tag = awful.tag.getidx()
     if tag == 4 and client.focus then
-        awful.client.setslave(c)
-        c:tags({ tags[1][1], tags[1][4], tags[1][5] })
+        c:tags({ tags[1][1], tags[1][4] })
+        if awful.tag.getnmaster(tags[1][1]) == 1 then
+            awful.tag.incnmaster(1, tags[1][1])
+            c:connect_signal("unmanage", function()
+                awful.tag.incnmaster(-1, tags[1][1])
+            end)
+        end
     end
 end
 
@@ -118,20 +124,11 @@ awful.rules.rules = {
     { rule = { class = "qutebrowser" },
       properties = { tag = tags[1][4] },
       callback = awful.client.setslave },
-    { rule = { class = "http___messenger_com" },
-      properties = { tag = tags[1][4] },
-      callback = awful.client.setmaster },
     { rule = { class = "chromium" },
       properties = { tag = tags[1][2] } },
     { rule = { class = "mpv" },
       callback = mpvStart },
 }
--- }}}
-
--- {{{ Startup
-awful.layout.set(awful.layout.suit.tile.left, tags[1][4])
-awful.tag.setmwfact(0.25, tags[1][4])
-awful.tag.setgap(1, tags[1][4])
 -- }}}
 
 -- {{{ Signals

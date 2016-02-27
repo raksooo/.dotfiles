@@ -9,8 +9,6 @@ function gdrive.widget()
     gdriveWidget:add(gdrive.image)
     gdriveWidget:add(gdrive.padding)
 
-    --tools.initInterval(function() updateGDriveWidget(image, padding) end, 60)
-
     return gdriveWidget
 end
 
