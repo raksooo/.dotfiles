@@ -1,15 +1,15 @@
 #!/bin/sh
 
-AWESOME_CLIENT=awesome-client
-AWESOME_PID=$(pgrep awesome | head -1 )
+AWESOME_CLIENT=/usr/bin/awesome-client
+AWESOME_PID=$(/usr/bin/pgrep awesome | /usr/bin/head -1 )
 
 if [[ -z "$DBUS_SESSION_BUS_ADDRESS" ]]; then
-    eval $(tr '\0' '\n' < /proc/${AWESOME_PID}/environ | sed -e 's/^/export /')
+    eval $(/usr/bin/tr '\0' '\n' < /proc/${AWESOME_PID}/environ | /usr/bin/sed -e 's/^/export /')
 fi
-AWESOME_PID_OWNER=$(stat -c %U /proc/${AWESOME_PID})
+AWESOME_PID_OWNER=$(/usr/bin/stat -c %U /proc/${AWESOME_PID})
 if [[ $EUID -ne 0 ]]; then
     eval $AWESOME_CLIENT
 else
-    su $AWESOME_PID_OWNER -c $AWESOME_CLIENT
+    /usr/bin/su $AWESOME_PID_OWNER -c $AWESOME_CLIENT
 fi
 

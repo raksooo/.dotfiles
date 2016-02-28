@@ -30,8 +30,6 @@ end
 
 function tools.notify(text)
     local preset = {
-        height = 60,
-        width = 140,
         title = "Debug",
         text = text
     }

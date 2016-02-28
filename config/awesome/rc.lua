@@ -50,10 +50,11 @@ end
 -- Themes define colours, icons, font and wallpapers.
 beautiful.init("/home/rascal/.config/awesome/theme.lua")
 
-naughty.config.defaults.height = 60
-naughty.config.defaults.width = 250
-naughty.config.defaults.margin = 7
-naughty.config.defaults.spacing = 3
+naughty.config.defaults.height = beautiful.naughty_height
+naughty.config.defaults.width = beautiful.naughty_width
+naughty.config.defaults.margin = beautiful.naughty_margin
+naughty.config.defaults.border_width = beautiful.naughty_border_width
+naughty.config.defaults.border_color = beautiful.naughty_border_color
 
 -- This is used later as the default terminal and editor to run.
 terminal = "urxvt"
@@ -189,13 +190,14 @@ client.connect_signal("focus", function(c)
     if c.class == "URxvt" then
         c.opacity = 0.96
     else
-        c.opacity = 1
+        c.opacity = beautiful.opacity_focus
     end
     c.border_color = beautiful.border_focus
 end)
 client.connect_signal("unfocus", function(c)
     if c.class ~= "mpv" then
-        c.opacity = 0.85 end
+        c.opacity = beautiful.opacity_normal
+    end
     c.border_color = beautiful.border_normal
 end)
 -- }}}

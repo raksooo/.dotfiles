@@ -1,5 +1,10 @@
 #!/bin/sh
 
+function execute {
+    { error=$(($* &) 2>&1 1>&$out); } {out}>&1
+    echo $error
+}
+
 history_file=~/.local/share/rascal/rofiHistory
 alias_file=/home/rascal/.dotfiles/config/aliases
 
@@ -21,16 +26,15 @@ fi
 
 result=$(printf "$alt" | $rofi)
 
-if [[ "$result" =~ ^=.* ]]; then
-    math=$(echo $result | sed "s/^=//")
-    calc=$(python -c "print($math)")
-    rofiHistory "$math=$calc"
+if [[ $(execute $result) == *"command not found"* ]]; then
+    calc=$(python -c "print($result)")
+    if [[ $? -eq 0 ]]; then
+        rofiHistory "$result=$calc"
+    fi
 else
-    $result &
     if [[ $result = *[!\ ]* ]] && [[ $result != "rofiHistory"* ]] && [[ $result != "calc "* ]]; then
         newhst=$(printf "$(grep -v -x "$result" $history_file)")
         printf "$result\n$newhst" > $history_file
     fi
 fi
-
 

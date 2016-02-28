@@ -34,7 +34,7 @@ local gdrivewidget = tools.margin(gdrive.widget(), 2)
 local etherwidget = etherWidget()
 
 for s = 1, screen.count() do
-    statusbar[s] = awful.wibox({ position = "bottom", screen = s, height = 20, opacity = 0.85 })
+    statusbar[s] = awful.wibox({ position = "bottom", screen = s, height = 20, opacity = beautiful.statusbar_opacity })
 
     -- Create a promptbox for each screen
     mypromptbox[s] = awful.widget.prompt()
