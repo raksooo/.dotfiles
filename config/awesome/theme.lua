@@ -40,7 +40,7 @@ theme.naughty_margin       = 10
 theme.naughty_border_width = 1
 theme.naughty_border_color = "#268bd2"
 
-theme.systray_icon_spacing = 5
+theme.systray_icon_spacing = 2
 theme.useless_gap = 15
 theme.less_useless_gap = 2
 

@@ -9,6 +9,8 @@ function gdrive.widget()
     gdriveWidget:add(gdrive.image)
     gdriveWidget:add(gdrive.padding)
 
+    gdrive.update()
+
     return gdriveWidget
 end
 
