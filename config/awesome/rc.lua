@@ -56,7 +56,7 @@ naughty.config.defaults.margin = 7
 naughty.config.defaults.spacing = 3
 
 -- This is used later as the default terminal and editor to run.
-terminal = "xterm"
+terminal = "urxvt"
 editor = os.getenv("EDITOR") or "nano"
 editor_cmd = terminal .. " -e " .. editor
 webbrowser = "qutebrowser"
@@ -111,14 +111,12 @@ awful.rules.rules = {
     -- All clients will match this rule.
     { rule = { },
       properties = { border_width = beautiful.border_width,
-                     border_color = "#303030", -- beautiful.border_color,
+                     border_color = beautiful.border_color,
                      focus = awful.client.focus.filter,
                      raise = true,
                      keys = clientkeys,
                      buttons = clientbuttons,
                      size_hints_honor = false } },
-    { rule = { class = "XTerm" },
-      properties = { opacity = 0.95 } },
     { rule = { class = "Spotify" },
       properties = { tag = tags[1][9] } },
     { rule = { class = "qutebrowser" },
@@ -188,8 +186,8 @@ client.connect_signal("manage", function (c, startup)
 end)
 
 client.connect_signal("focus", function(c)
-    if c.class == "XTerm" then
-        c.opacity = 0.95
+    if c.class == "URxvt" then
+        c.opacity = 0.96
     else
         c.opacity = 1
     end
@@ -197,9 +195,8 @@ client.connect_signal("focus", function(c)
 end)
 client.connect_signal("unfocus", function(c)
     if c.class ~= "mpv" then
-        c.opacity = 0.75
-    end
-    c.border_color = "#303030" -- theme.border_normal
+        c.opacity = 0.85 end
+    c.border_color = beautiful.border_normal
 end)
 -- }}}
 

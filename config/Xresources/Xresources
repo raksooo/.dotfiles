@@ -1,0 +1,24 @@
+XTerm*Background: rgb:35/35/36
+XTerm*Foreground: rgb:BB/BB/BB
+
+XTerm*renderFont: true
+!XTerm*faceName: DejaVu Sans Mono:size=8
+
+Xft.lcdfilter: lcddefault
+Xft.antialias: true
+Xft.autohint: 0
+Xft.hinting: true
+Xft.hintstyle: hintslight
+Xft.rgba: rgb
+Xft.dpi: 96
+
+!URxvt
+URxvt.intensityStyles: false
+URxvt.scrollBar: false
+URxvt.urgentOnBell: true
+URxvt.font: xft:Monaco:size=7.5
+! clickable urls
+URxvt.perl-ext-common: default,matcher,vtwheel
+URxvt.url-launcher: /usr/bin/qutebrowser
+URxvt.matcher.button: 1
+

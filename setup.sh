@@ -9,8 +9,9 @@ sudo -v
 link bash_profile .bash_profile
 link vimrc .vimrc
 link xinitrc .xinitrc
-link Xresources .Xresources
-link Xresources_rofi .Xresources_rofi
+link Xresources/Xresources .Xresources
+link Xresources/Xresources_rofi .Xresources_rofi
+link Xresources/Xresources_solarized .Xresources_theme
 link gitconfig .gitconfig
 
 link awesome .config/
@@ -24,4 +25,8 @@ sudo ln -sf $DOTFILES/bin /usr/local/
 if [ ! -s ~/.local/share/rascal ]; then
     ln -s $DOTFILES/share ~/.local/share/rascal
 fi
+
+xrdb -merge ~/.Xresources
+xrdb -merge ~/.Xresources_rofi
+xrdb -merge ~/.Xresources_theme
 

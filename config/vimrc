@@ -17,22 +17,27 @@ Bundle 'bling/vim-airline'
 Bundle 'scrooloose/nerdtree'
 
 Bundle 'altercation/vim-colors-solarized'
+Bundle 'NLKNguyen/papercolor-theme'
 
 call vundle#end()
 filetype plugin indent on
 
 " Theme
 set background=dark
+"set background=light
 let g:solarized_termtrans=0
 let g:solarized_termcolors=256
 let g:solarized_termtrans=1
+let g:solarized_term = 1
 colorscheme solarized
+"colorscheme PaperColor
 
 hi LineNr ctermfg=grey ctermbg=none
 hi CursorLine ctermbg=237
 hi CursorLineNr ctermbg=237
-hi Folded cterm=bold ctermbg=234
-hi Colorcolumn ctermbg=23
+hi Folded cterm=none ctermbg=234
+"hi Colorcolumn ctermbg=24
+hi Colorcolumn ctermbg=0
 
 highlight ExtraWhitespace ctermbg=red
 match ExtraWhitespace /\s\+$/
@@ -51,6 +56,8 @@ let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = ' '
 let g:airline#extensions#tabline#right_sep = ''
 let g:airline#extensions#tabline#show_buffers = 1
+"let g:airline_theme = 'solarized'
+let g:airline_theme = 'papercolor'
 
 " NerdTree
 let NERDTreeShowHidden=1
@@ -74,6 +81,7 @@ set shortmess=atI
 set shiftwidth=4
 set smartcase
 set smartindent
+set t_Co=256
 set tabstop=4
 set timeoutlen=400
 set title

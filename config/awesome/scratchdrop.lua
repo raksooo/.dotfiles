@@ -38,7 +38,7 @@ local scratchdrop = {} -- module scratch.drop
 local dropdown = {}
 
 local possibleProgs = {
-    xterm     = "XTerm",
+    urxvt     = "URxvt",
     messenger = "http___messenger_com"
 }
 tools.setTimeout(function()
@@ -58,6 +58,12 @@ tools.setTimeout(function()
             dropdown[prog] = {}
             dropdown[prog][1] = c
             c.hidden = true
+
+            c:connect_signal("unfocus", function()
+                if not c.hidden then
+                    toggle(prog)
+                end
+            end)
         end
     end
 end, 0.1)
@@ -121,6 +127,12 @@ function toggle(prog, vert, horiz, width, height, sticky, screen)
             c:raise()
             capi.client.focus = c
             detach_signal("manage", spawnw)
+
+            c:connect_signal("unfocus", function()
+                if not c.hidden then
+                    toggle(prog)
+                end
+            end)
         end
 
         -- Add manage signal and spawn the program
