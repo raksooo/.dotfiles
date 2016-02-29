@@ -9,6 +9,7 @@ sudo -v
 link bash_profile .bash_profile
 link vimrc .vimrc
 link xinitrc .xinitrc
+link Xmodmap .Xmodmap
 link Xresources/Xresources .Xresources
 link Xresources/Xresources_rofi .Xresources_rofi
 link Xresources/Xresources_solarized .Xresources_theme

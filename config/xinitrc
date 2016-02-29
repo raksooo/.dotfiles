@@ -1,8 +1,8 @@
-setxkbmap -option caps:escape
+#!/bin/sh
 
-xmodmap -e "keycode 16 = 7 slash 7 slash braceleft backslash"
-xmodmap -e "keycode 17 = 8 parenleft 8 8 bracketleft braceleft"
-xmodmap -e "keycode 18 = 9 parenright 8 8 bracketright braceright"
+setxkbmap se -option 'lv3:caps_switch'
+xcape -e 'ISO_Level3_Shift=Escape'
+[[ -f ~/.Xmodmap ]] && xmodmap ~/.Xmodmap
 
 [[ -f ~/.Xresources ]] && xrdb -merge -I$HOME ~/.Xresources
 [[ -f ~/.Xresources_rofi ]] && xrdb -merge -I$HOME ~/.Xresources_rofi
@@ -15,14 +15,13 @@ redshift 57.705829:11.990570 &
 xcompmgr &
 
 # Startup sound
-sleep 1.5 && mpg123 ~/.local/share/rascal/boot.mp3 &
+sleep 2 && mpg123 ~/.local/share/rascal/boot.mp3 &
 
 # Autostart
 sleep 60 && watchdrive &
 qutebrowser &
-urxvt htop &
-sleep 4 && urxvt &
-sleep 4 && urxvt &
+urxvt &
+urxvt &
 
 # Start awesome
 exec awesome
