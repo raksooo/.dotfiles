@@ -27,8 +27,8 @@ theme.opacity_normal    = 0.85
 theme.opacity_focus     = 1
 theme.statusbar_opacity = 0.95
 
-theme.taglist_bg_focus = "#d33682"
-theme.taglist_bg_occupied = "#268bd2"
+theme.taglist_bg_focus = "#268bd2"
+theme.taglist_bg_occupied = "#d33682"
 theme.taglist_bg_urgent = "#dc322f"
 theme.taglist_fg_focus = "#ffffff"
 theme.taglist_fg_occupied = "#ffffff"
