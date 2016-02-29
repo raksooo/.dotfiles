@@ -7,6 +7,7 @@ function execute {
 
 history_file=~/.local/share/rascal/rofiHistory
 alias_file=/home/rascal/.dotfiles/config/aliases
+rofi_path=$(which rofiHistory)
 
 rofi="rofi -dmenu -p > -i -width 40"
 if [[ $1 ]] && [[ $1 != *"--all"* ]]; then
@@ -25,8 +26,7 @@ else
 fi
 
 result=$(printf "$alt" | $rofi)
-
-if [[ $(execute $result) == *"command not found"* ]]; then
+if [[ $(execute $result) =~ ^$rofi_path.* ]]; then
     calc=$(python -c "print($result)")
     if [[ $? -eq 0 ]]; then
         rofiHistory "$result=$calc"

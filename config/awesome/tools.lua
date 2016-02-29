@@ -62,15 +62,19 @@ function tools.initInterval(f, interval, first, needsInternet)
         first = nil
     end
 
-    tools.connected(function()
-        local t = tools.setInterval(f, interval)
+    if needsInternet then
+        tools.connected(function()
+            tools.setInterval(f, interval)
+            tools.setTimeout(f, first)
+        end, function()
+            tools.setTimeout(function()
+                tools.initInterval(f, interval, first, needsInternet)
+            end, 15)
+        end)
+    else
+        tools.setInterval(f, interval)
         tools.setTimeout(f, first)
-        return t
-    end, function()
-        tools.setTimeout(function()
-            tools.initInterval(f, interval, first, needsInternet)
-        end, 15)
-    end)
+    end
 end
 
 function tools.margin(widget, margin)
