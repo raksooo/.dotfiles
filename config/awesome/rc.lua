@@ -97,7 +97,7 @@ root.keys(globalkeys)
 -- Rules to apply to new clients (through the "manage" signal).
 function mpvStart(c)
     local tag = awful.tag.getidx()
-    if tag == 4 and client.focus then
+    if (tag == 1 or tag == 4) and client.focus then
         c:tags({ tags[1][1], tags[1][4] })
         if awful.tag.getnmaster(tags[1][1]) == 1 then
             awful.tag.incnmaster(1, tags[1][1])

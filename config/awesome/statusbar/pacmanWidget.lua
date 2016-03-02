@@ -11,6 +11,10 @@ function pacman.widget()
     pacmanWidget:add(image)
     pacman.tooltip = awful.tooltip({ objects = { pacmanWidget } })
 
+    pacmanWidget:buttons(awful.util.table.join(
+        awful.button ({}, 1, function() pacman.update(value) end)
+    ))
+
     tools.initInterval(function()
             pacman.update(count, pacman.tooltip)
         end, 1800, true)

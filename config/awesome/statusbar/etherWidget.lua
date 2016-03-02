@@ -4,6 +4,10 @@ function etherWidget()
     etherWidget:add(value)
     value:set_text("Ξ")
 
+    etherWidget:buttons(awful.util.table.join(
+        awful.button ({}, 1, function() updateEtherWidget(value) end)
+    ))
+
     tools.initInterval(function() updateEtherWidget(value) end, 1200, true)
 
     return etherWidget

@@ -32,8 +32,8 @@ alias spi='ssh pi'
 #other
 alias externalmonitor='xrandr --output DisplayPort-1 --auto --right-of LVDS'
 alias externalmonitoroff='xrandr --output DisplayPort-1 --off'
-# alias connected='ping -q -w 1 -c 1 `ip r | grep default | cut -d " " -f 3` &> /dev/null'
-alias connected='ping -q -w 1 -c 1 www.google.com &> /dev/null'
+
+alias weather='curl wttr.in/gothenburg'
 
 alias feh='feh -.'
 
