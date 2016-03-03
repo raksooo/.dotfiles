@@ -1,7 +1,4 @@
 pacman = {}
-pacman.count = nil
-pacman.tootltip = nil
-
 function pacman.widget()
     pacmanWidget = wibox.layout.fixed.horizontal()
     image = wibox.widget.imagebox()
@@ -15,9 +12,7 @@ function pacman.widget()
         awful.button ({}, 1, function() pacman.update(value) end)
     ))
 
-    tools.initInterval(function()
-            pacman.update(count, pacman.tooltip)
-        end, 1800, true)
+    tools.initInterval(pacman.update, 1800, true)
 
     return pacmanWidget
 end

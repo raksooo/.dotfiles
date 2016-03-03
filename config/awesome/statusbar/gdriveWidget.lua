@@ -1,6 +1,4 @@
 gdrive = {}
-gdrive.image = nil
-gdrive.padding = nil
 function gdrive.widget()
     gdriveWidget = wibox.layout.fixed.horizontal()
     gdrive.image = wibox.widget.imagebox()

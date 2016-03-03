@@ -1,24 +1,23 @@
-function batteryWidget()
+battery = {}
+function battery.widget()
     batteryWidget = wibox.layout.fixed.horizontal()
-    batteryText = wibox.widget.textbox()
-    batteryTooltip = awful.tooltip ({ objects = { batteryWidget } })
+    battery.text = wibox.widget.textbox()
+    battery.tooltip = awful.tooltip ({ objects = { batteryWidget } })
 
-    battery = awful.widget.progressbar()
-    battery:set_vertical(true)
-    battery:set_width(7)
-    battery:set_background_color("#494B4F")
+    battery.battery = awful.widget.progressbar()
+    battery.battery:set_vertical(true)
+    battery.battery:set_width(7)
+    battery.battery:set_background_color("#494B4F")
 
-    tools.initInterval(function()
-            updateBatteryWidget(battery, batteryText, batteryTooltip)
-        end, 15, 1)
+    tools.initInterval(battery.update, 15)
 
-    batteryWidget:add(batteryText)
+    batteryWidget:add(battery.text)
     batteryWidget:add(tools.spacing)
-    batteryWidget:add(battery)
+    batteryWidget:add(battery.battery)
     return batteryWidget
 end
 
-function updateBatteryWidget(battery, batteryText, batteryTooltip)
+function battery.update()
     getBatteryData(function(data)
         timeleft = ""
         if #data[2] >= 5 then
@@ -84,23 +83,27 @@ function formatBatteryContent(state, percentage, timeleft)
         color = "#AECF96"
     end
     text = "<span color=\"" .. color .. "\">" .. text .. percentage .. "%</span>"
-    batteryText:set_markup(text)
-    batteryTooltip:set_text("  " .. tooltip .. "  ")
-    battery:set_color(color)
-    battery:set_value(percentage/100)
+    battery.text:set_markup(text)
+    battery.tooltip:set_text("  " .. tooltip .. "  ")
+    battery.battery:set_color(color)
+    battery.battery:set_value(percentage/100)
 end
 
 local lowbattery = false
 function batteryNotification(percentage, timeleft)
     if percentage <= 10 and not(lowbattery) then
         lowbattery = true
-        naughty.notify({ preset = {
+        battery.notification = naughty.notify({ preset = {
             title = "Low battery",
             text = "Only " .. percentage .. "% (" .. timeleft .. ") left",
             timeout = 120
         } })
     elseif percentage > 10 then
         lowbattery = false
+        naughty.destroy(battery.notification,
+            naughty.notificationClosedReason.dismissedByCommand)
     end
 end
+
+return battery
 
