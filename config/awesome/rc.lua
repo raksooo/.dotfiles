@@ -72,6 +72,14 @@ screenshot = "maim /home/rascal/documents/Bilder/screenshots/$(date +%F-%T).png"
 titlebars_enabled = false
 -- }}}
 
+local possibleProgs = {
+    urxvt     = "URxvt",
+    messenger = "http___messenger_com"
+}
+tools.setTimeout(function()
+    dropinit(possibleProgs)
+end, 0.1)
+
 -- {{{ Wallpaper
 if beautiful.wallpaper then
     for s = 1, screen.count() do
@@ -101,8 +109,8 @@ root.keys(globalkeys)
 -- {{{ Rules
 -- Rules to apply to new clients (through the "manage" signal).
 function mpvStart(c)
-    local tag = awful.tag.getidx()
-    if (tag == 1 or tag == 4) and client.focus then
+    local tag = c:tags()[1]
+    if (tag == tags[1][1] or tag == tags[1][4]) and client.focus then
         c:tags({ tags[1][1], tags[1][4] })
         if awful.tag.getnmaster(tags[1][1]) == 1 then
             awful.tag.incnmaster(1, tags[1][1])

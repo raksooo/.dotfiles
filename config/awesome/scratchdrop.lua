@@ -37,11 +37,7 @@ local scratchdrop = {} -- module scratch.drop
 
 local dropdown = {}
 
-local possibleProgs = {
-    urxvt     = "URxvt",
-    messenger = "http___messenger_com"
-}
-tools.setTimeout(function()
+function dropinit(possibleProgs)
     clients = client.get()
 
     for prog, class in pairs(possibleProgs) do
@@ -66,7 +62,7 @@ tools.setTimeout(function()
             end)
         end
     end
-end, 0.1)
+end
 
 -- Create a new window for the drop-down application when it doesn't
 -- exist, or toggle between hidden and visible states when it does
