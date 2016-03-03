@@ -15,11 +15,13 @@ end
 
 function updateEtherWidget(textbox)
     tools.connected(function()
+        local ethersign = "<span color=\"#666666\">Ξ:</span> "
+        textbox:set_markup(ethersign .. "...")
         getEtherValue(function(ether)
             usdToSek(function(sek)
                 usd = round2(ether)
                 sek = round2(ether * sek)
-                text = "Ξ: $" .. usd .. " (" .. sek .. "kr)"
+                text = ethersign .. "$" .. usd .. " (" .. sek .. "kr)"
                 textbox:set_markup(text)
             end)
         end)

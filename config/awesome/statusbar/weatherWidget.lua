@@ -7,8 +7,8 @@ function weatherWidget()
             weather_t:set_text("City: " .. args["{city}"] .."\nWind: " ..
                 args["{windkmh}"] .. "km/h " .. args["{wind}"] .. "\nSky: " ..
                 args["{sky}"] .. "\nHumidity: " .. args["{humid}"] .. "%")
-            return "<span color=\"#888888\">" .. args["{tempc}"] ..
-                        "</span><span color=\"#666666\">°C</span>"
+            return args["{tempc}"] ..
+                        "<span color=\"#666666\">°C</span>"
         end, 1800, "ESGP"
     )
 
