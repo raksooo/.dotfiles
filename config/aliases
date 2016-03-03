@@ -33,7 +33,8 @@ alias spi='ssh pi'
 alias externalmonitor='xrandr --output DisplayPort-1 --auto --right-of LVDS'
 alias externalmonitoroff='xrandr --output DisplayPort-1 --off'
 
-alias weather='curl wttr.in/gothenburg'
+alias weather='curl --silent wttr.in/gothenburg | head -n 17'
+alias moreweather='curl --silent wttr.in/gothenburg'
 
 alias feh='feh -.'
 

@@ -56,6 +56,11 @@ naughty.config.defaults.margin = beautiful.naughty_margin
 naughty.config.defaults.border_width = beautiful.naughty_border_width
 naughty.config.defaults.border_color = beautiful.naughty_border_color
 
+function awful.tag.getgap(t)
+    t = t or awful.tag.selected()
+    return awful.tag.getproperty(t, "useless_gap") or beautiful.useless_gap or 0
+end
+
 -- This is used later as the default terminal and editor to run.
 terminal = "urxvt"
 editor = os.getenv("EDITOR") or "nano"
