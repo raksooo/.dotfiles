@@ -3,7 +3,7 @@ local pacman = require("statusbar/pacmanWidget")
 require("statusbar/volumeWidget")
 local gdrive = require("statusbar/gdriveWidget")
 require("statusbar/weatherWidget")
-require("statusbar/etherWidget")
+local ether = require("statusbar/etherWidget")
 
 -- Define a tag table which hold all screen tags.
 tags = {}
@@ -31,7 +31,7 @@ local volumewidget = volumeWidget(terminal)
 local batterywidget = tools.margin(battery.widget())
 local clockwidget = awful.widget.textclock()
 local gdrivewidget = tools.margin(gdrive.widget(), 2)
-local etherwidget = etherWidget()
+local etherwidget = ether.widget()
 
 for s = 1, screen.count() do
     statusbar[s] = awful.wibox({ position = "bottom", screen = s, height = 20, opacity = beautiful.statusbar_opacity })

@@ -18,7 +18,7 @@ xcompmgr &
 sleep 2 && mpg123 ~/.local/share/rascal/boot.mp3 &
 
 # Autostart
-sleep 60 && watchdrive &
+sleep 60 && syncdrive &
 qutebrowser &
 urxvt &
 urxvt &

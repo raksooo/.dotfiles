@@ -1,28 +1,30 @@
-function etherWidget()
+local ether = {}
+function ether.widget()
     etherWidget = wibox.layout.fixed.horizontal()
-    value = wibox.widget.textbox()
-    etherWidget:add(value)
-    value:set_text("Ξ")
+    ether.value = wibox.widget.textbox()
+    etherWidget:add(ether.value)
 
     etherWidget:buttons(awful.util.table.join(
-        awful.button ({}, 1, function() updateEtherWidget(value) end)
+        awful.button ({}, 180, function() ether.update(true) end)
     ))
 
-    tools.initInterval(function() updateEtherWidget(value) end, 1200, true)
+    tools.initInterval(ether.update, 1, true)
 
     return etherWidget
 end
 
-function updateEtherWidget(textbox)
+function ether.update(forced)
     tools.connected(function()
         local ethersign = "<span color=\"#666666\">Ξ:</span> "
-        textbox:set_markup(ethersign .. "...")
-        getEtherValue(function(ether)
+        if forced == true then
+            ether.value:set_markup(ethersign .. "...")
+        end
+        getEtherValue(function(eth)
             usdToSek(function(sek)
-                usd = round2(ether)
-                sek = round2(ether * sek)
+                usd = round2(eth)
+                sek = round2(eth * sek)
                 text = ethersign .. "$" .. usd .. " (" .. sek .. "kr)"
-                textbox:set_markup(text)
+                ether.value:set_markup(text)
             end)
         end)
     end)
@@ -54,4 +56,6 @@ function usdToSek(callback)
             callback(data[2]/data[1])
         end)
 end
+
+return ether
 

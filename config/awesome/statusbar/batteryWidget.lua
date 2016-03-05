@@ -35,7 +35,7 @@ function battery.update()
 
         formatBatteryContent(state, percentage, timeleft)
 
-        batteryNotification(percentage, timeleft)
+        batteryNotification(percentage, timeleft, state)
     end)
 end
 
@@ -90,15 +90,15 @@ function formatBatteryContent(state, percentage, timeleft)
 end
 
 local lowbattery = false
-function batteryNotification(percentage, timeleft)
-    if percentage <= 10 and not(lowbattery) then
+function batteryNotification(percentage, timeleft, state)
+    if percentage <= 10 and not(lowbattery) and state ~= "charging" then
         lowbattery = true
         battery.notification = naughty.notify({ preset = {
             title = "Low battery",
             text = "Only " .. percentage .. "% (" .. timeleft .. ") left",
             timeout = 120
         } })
-    elseif percentage > 10 then
+    elseif percentage > 10 or state == "charging" then
         lowbattery = false
         naughty.destroy(battery.notification,
             naughty.notificationClosedReason.dismissedByCommand)
