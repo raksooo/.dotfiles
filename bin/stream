@@ -1,6 +1,10 @@
 #!/bin/sh
 
-magnet=$(xclip -selection clipboard -o)
+if [[ $1 ]]; then
+    magnet=$1
+else
+    magnet=$(xclip -selection clipboard -o)
+fi
 url=http://192.168.1.223:8888/
 
 peerflix $magnet > /dev/null 2>&1 &
