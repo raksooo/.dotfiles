@@ -5,10 +5,10 @@ function ether.widget()
     etherWidget:add(ether.value)
 
     etherWidget:buttons(awful.util.table.join(
-        awful.button ({}, 180, function() ether.update(true) end)
+        awful.button ({}, 1, function() ether.update(true) end)
     ))
 
-    tools.initInterval(ether.update, 1, true)
+    tools.initInterval(ether.update, 180, true)
 
     return etherWidget
 end

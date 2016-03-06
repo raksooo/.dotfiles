@@ -91,6 +91,9 @@ function round(num, idp)
 end
 
 function split(inputstr, sep)
+        if inputstr == nil then
+            return nil
+        end
         if sep == nil then
             sep = "%s"
         end

@@ -12,7 +12,7 @@ Plugin 'Valloric/YouCompleteMe'
 Bundle 'Raimondi/delimitMate'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'godlygeek/tabular'
-Plugin 'airblade/vim-gitgutter'
+"Plugin 'airblade/vim-gitgutter'
 Bundle 'bling/vim-airline'
 Bundle 'scrooloose/nerdtree'
 
