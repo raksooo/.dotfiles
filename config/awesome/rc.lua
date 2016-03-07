@@ -50,9 +50,10 @@ end
 -- Themes define colours, icons, font and wallpapers.
 beautiful.init("/home/rascal/.config/awesome/theme.lua")
 
---naughty.config.defaults.height = beautiful.naughty_height
---naughty.config.defaults.width = beautiful.naughty_width
-naughty.config.defaults.margin = beautiful.naughty_margin
+--naughty.config.defaults.height       = beautiful.naughty_height
+--naughty.config.defaults.width        = beautiful.naughty_width
+naughty.config.defaults.icon_size    = beautiful.naughty_icon_size
+naughty.config.defaults.margin       = beautiful.naughty_margin
 naughty.config.defaults.border_width = beautiful.naughty_border_width
 naughty.config.defaults.border_color = beautiful.naughty_border_color
 
