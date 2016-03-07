@@ -25,7 +25,7 @@ theme.border_marked = "#91231c"
 
 theme.opacity_normal    = 0.85
 theme.opacity_focus     = 1
-theme.statusbar_opacity = 0.95
+theme.statusbar_opacity = 1
 
 theme.taglist_bg_focus = "#268bd2"
 theme.taglist_bg_occupied = "#d33682"
@@ -36,6 +36,7 @@ theme.taglist_fg_empty = theme.taglist_fg_occupied
 
 theme.naughty_width        = 250
 theme.naughty_height       = 60
+theme.naughty_icon_size    = 60
 theme.naughty_margin       = 10
 theme.naughty_border_width = 1
 theme.naughty_border_color = "#268bd2"

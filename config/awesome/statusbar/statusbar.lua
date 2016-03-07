@@ -2,7 +2,6 @@ local battery = require("statusbar/batteryWidget")
 local pacman = require("statusbar/pacmanWidget")
 require("statusbar/volumeWidget")
 local gdrive = require("statusbar/gdriveWidget")
-require("statusbar/weatherWidget")
 local ether = require("statusbar/etherWidget")
 
 -- Define a tag table which hold all screen tags.
@@ -26,7 +25,6 @@ mytaglist.buttons = awful.util.table.join(
                     )
 
 local pacmanwidget = tools.margin(pacman.widget(), 2)
-local weatherwidget = weatherWidget()
 local volumewidget = volumeWidget(terminal)
 local batterywidget = tools.margin(battery.widget())
 local clockwidget = awful.widget.textclock()
@@ -57,9 +55,6 @@ for s = 1, screen.count() do
     right_layout:add(etherwidget)
 
         right_layout:add(tools.seperator)
-    right_layout:add(weatherwidget)
-
-        right_layout:add(tools.seperator)
     right_layout:add(volumewidget)
 
         right_layout:add(tools.seperator)
@@ -68,7 +63,7 @@ for s = 1, screen.count() do
     --    right_layout:add(tools.seperator)
     --right_layout:add(clockwidget)
 
-        right_layout:add(tools.newSeperator("   |"))
+        right_layout:add(tools.bigspacing)
     right_layout:add(gdrivewidget)
 
     if s == 1 then

@@ -5,8 +5,8 @@ function volumeWidget(terminal)
         channel = "Master",
         step = "5%",
         colors = {
-            unmute = "#AECF96",
-            mute = "#FF5656"
+            unmute = "#859900",
+            mute = "#dc322f"
         },
         mixer = terminal .. " -e alsamixer", -- or whatever your preferred sound mixer is
     }
@@ -16,7 +16,7 @@ function volumeWidget(terminal)
     alsawidget.bar:set_width (30)
     alsawidget.bar:set_ticks (true)
     alsawidget.bar:set_ticks_gap (1)
-    alsawidget.bar:set_background_color ("#222222")
+    alsawidget.bar:set_background_color ("#002b36")
     alsawidget.bar:set_color (alsawidget.colors.unmute)
     alsawidget.bar:buttons (awful.util.table.join (
         awful.button ({}, 1, function()

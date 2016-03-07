@@ -7,8 +7,8 @@ function tools.newSeperator(text)
 end
 tools.spacing = tools.newSeperator("  ")
 tools.mediumspacing = tools.newSeperator("   ")
-tools.bigspacing = tools.newSeperator("    ")
-tools.seperator = tools.newSeperator("    |    ")
+tools.bigspacing = tools.newSeperator("     ")
+tools.seperator = tools.newSeperator("         ")
 
 tools.lastConnected = 0
 function tools.connected(online, offline)

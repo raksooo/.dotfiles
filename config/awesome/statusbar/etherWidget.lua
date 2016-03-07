@@ -2,6 +2,7 @@ local ether = {}
 function ether.widget()
     etherWidget = wibox.layout.fixed.horizontal()
     ether.value = wibox.widget.textbox()
+    ether.tooltip = awful.tooltip({ objects = { etherWidget } })
     etherWidget:add(ether.value)
 
     etherWidget:buttons(awful.util.table.join(
@@ -23,8 +24,8 @@ function ether.update(forced)
             usdToSek(function(sek)
                 usd = round2(eth)
                 sek = round2(eth * sek)
-                text = ethersign .. "$" .. usd .. " (" .. sek .. "kr)"
-                ether.value:set_markup(text)
+                ether.value:set_markup(ethersign .. "$" .. usd)
+                ether.tooltip:set_markup(sek .. "kr")
             end)
         end)
     end)
