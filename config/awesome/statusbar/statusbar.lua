@@ -65,8 +65,8 @@ for s = 1, screen.count() do
         right_layout:add(tools.seperator)
     right_layout:add(batterywidget)
 
-        right_layout:add(tools.seperator)
-    right_layout:add(clockwidget)
+    --    right_layout:add(tools.seperator)
+    --right_layout:add(clockwidget)
 
         right_layout:add(tools.newSeperator("   |"))
     right_layout:add(gdrivewidget)
@@ -78,8 +78,10 @@ for s = 1, screen.count() do
 
     -- Now bring it all together
     local layout = wibox.layout.align.horizontal()
+    layout:set_expand("none")
+
     layout:set_left(left_layout)
-    -- layout:set_middle(mytextclock)
+    layout:set_middle(clockwidget)
     layout:set_right(right_layout)
 
     statusbar[s]:set_widget(layout)
