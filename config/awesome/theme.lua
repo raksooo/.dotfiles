@@ -13,10 +13,10 @@ theme.bg_urgent     = "#ff0000"
 theme.bg_minimize   = "#444444"
 theme.bg_systray    = theme.bg_normal
 
-theme.fg_normal     = "#999999"
-theme.fg_focus      = "#ffffff"
-theme.fg_urgent     = "#ffffff"
-theme.fg_minimize   = "#ffffff"
+theme.fg_normal     = "#93a1a1"
+theme.fg_focus      = "#93a1a1"
+theme.fg_urgent     = "#93a1a1"
+theme.fg_minimize   = "#93a1a1"
 
 theme.border_width  = 0
 theme.border_normal = "#000000"
@@ -30,8 +30,8 @@ theme.statusbar_opacity = 1
 theme.taglist_bg_focus = "#268bd2"
 theme.taglist_bg_occupied = "#d33682"
 theme.taglist_bg_urgent = "#dc322f"
-theme.taglist_fg_focus = "#ffffff"
-theme.taglist_fg_occupied = "#ffffff"
+theme.taglist_fg_focus = "#93a1a1"
+theme.taglist_fg_occupied = "#93a1a1"
 theme.taglist_fg_empty = theme.taglist_fg_occupied
 
 theme.naughty_width        = 250

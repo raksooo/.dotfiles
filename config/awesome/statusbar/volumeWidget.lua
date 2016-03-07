@@ -45,11 +45,11 @@ function volumeWidget(terminal)
     end, 5, alsawidget.channel) -- relatively high update time, use of keys/mouse will force update
 
     volumeText = wibox.widget.textbox()
-    volumeText:set_markup("<span color=\"#666666\">A:</span><span color=\"#333333\">[</span>")
+    volumeText:set_markup("A: [")
     volumeWidget:add(volumeText)
     volumeWidget:add(tools.margin(alsawidget.bar, 6))
     rightBracket = wibox.widget.textbox()
-    rightBracket:set_markup(" <span color=\"#333333\">]</span>")
+    rightBracket:set_markup("]")
     volumeWidget:add(rightBracket)
     return volumeWidget
 end
