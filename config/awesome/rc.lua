@@ -11,7 +11,6 @@ wibox = require("wibox")
 beautiful = require("beautiful")
 -- Notification library
 naughty = require("naughty")
-menubar = require("menubar")
 vicious = require("vicious")
 
 tools = require("tools")
@@ -70,7 +69,6 @@ webbrowser = "qutebrowser"
 messenger = "messenger"
 launcher = "rofiHistory"
 screenshot = "maim /home/rascal/documents/Bilder/screenshots/$(date +%F-%T).png"
-titlebars_enabled = false
 -- }}}
 
 local possibleProgs = {
@@ -89,10 +87,6 @@ if beautiful.wallpaper then
 end
 -- }}}
 
--- Menubar configuration
-menubar.utils.terminal = terminal -- Set the terminal for applications that require it
--- }}}
-
 -- {{{ Statusbar
 require("statusbar/statusbar")
 -- }}}
@@ -102,10 +96,6 @@ clientbuttons = awful.util.table.join(
     awful.button({ }, 1, function (c) client.focus = c; c:raise() end),
     awful.button({ modkey }, 1, awful.mouse.client.move),
     awful.button({ modkey }, 3, awful.mouse.client.resize))
-
--- Set keys
-root.keys(globalkeys)
--- }}}
 
 -- {{{ Rules
 -- Rules to apply to new clients (through the "manage" signal).
@@ -158,46 +148,6 @@ client.connect_signal("manage", function (c, startup)
             awful.placement.no_offscreen(c)
         end
     end
-
-    if titlebars_enabled and (c.type == "normal" or c.type == "dialog") then
-        -- buttons for the titlebar
-        local buttons = awful.util.table.join(
-                awful.button({ }, 1, function()
-                    client.focus = c
-                    c:raise()
-                    awful.mouse.client.move(c)
-                end),
-                awful.button({ }, 3, function()
-                    client.focus = c
-                    c:raise()
-                    awful.mouse.client.resize(c)
-                end)
-                )
-
-        -- Widgets that are aligned to the left
-        local left_layout = wibox.layout.fixed.horizontal()
-        left_layout:add(awful.titlebar.widget.maximizedbutton(c))
-        left_layout:buttons(buttons)
-
-        -- Widgets that are aligned to the right
-        local right_layout = wibox.layout.fixed.horizontal()
-        right_layout:add(awful.titlebar.widget.closebutton(c))
-
-        -- The title goes in the middle
-        local middle_layout = wibox.layout.flex.horizontal()
-        local title = awful.titlebar.widget.titlewidget(c)
-        title:set_align("center")
-        middle_layout:add(title)
-        middle_layout:buttons(buttons)
-
-        -- Now bring it all together
-        local layout = wibox.layout.align.horizontal()
-        layout:set_left(left_layout)
-        layout:set_right(right_layout)
-        layout:set_middle(middle_layout)
-
-        awful.titlebar(c):set_widget(layout)
-    end
 end)
 
 client.connect_signal("focus", function(c)
@@ -217,20 +167,15 @@ end)
 -- }}}
 
 
-client.connect_signal("focus",
-        function(c)
-                if c.maximized_horizontal == true and c.maximized_vertical == true then
-                        c.border_width = "0"
-                        c.border_color = beautiful.border_focus
-                else
-                        c.border_width = beautiful.border_width
-                        c.border_color = beautiful.border_focus
-                end
-        end)
+client.connect_signal("focus", function(c)
+    if c.maximized_horizontal == true and c.maximized_vertical == true then
+            c.border_width = "0"
+    else
+            c.border_width = beautiful.border_width
+    end
+end)
 
-client.connect_signal("unfocus",
-        function(c)
-                c.border_width = beautiful.border_width
-                c.border_color = beautiful.border_focus
-        end)
+client.connect_signal("unfocus", function(c)
+    c.border_width = beautiful.border_width
+end)
 
