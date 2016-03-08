@@ -28,10 +28,15 @@ function tools.connected(online, offline)
     end
 end
 
-function tools.notify(text)
+function tools.notify(title, text)
+    if title and not text then
+        text = title
+        title = nil
+    end
+
     local preset = {
-        title = "Debug",
-        text = text
+        title = title or "Debug",
+        text = text or "Debug notification"
     }
     naughty.notify({ preset = preset })
 end

@@ -23,7 +23,7 @@ function pacman.update()
             function(data)
                 lines = split(data, "\n")
                 dots = ""
-                for i = 1, math.min(#lines, 35) do
+                for i = 1, math.min(#lines, 55) do
                     dots = dots .. ((i-1) % 20 == 0 and "⚫" or "•")
                 end
                 pacman.count:set_markup(dots .. " ")

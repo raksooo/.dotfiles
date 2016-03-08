@@ -1,0 +1,10 @@
+#!/bin/sh
+
+read min sec <<<$(date +'%M %S')
+timeleft=$(( 3600 - 10#$min*60 - 10#$sec ))
+sleep $timeleft
+echo 'tools.notify("Studytimer", "Time for a paus!")' | awesome-client
+sleep 300
+echo 'tools.notify("Studytimer", "Back to studying!")' | awesome-client
+studytimer
+
