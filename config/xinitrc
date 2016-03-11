@@ -1,23 +1,23 @@
 #!/bin/sh
 
+# Caps as escape
 setxkbmap se -option 'lv3:caps_switch'
 xcape -e 'ISO_Level3_Shift=Escape'
 [[ -f ~/.Xmodmap ]] && xmodmap ~/.Xmodmap
 
+# Xresources
 [[ -f ~/.Xresources ]] && xrdb -merge -I$HOME ~/.Xresources
 [[ -f ~/.Xresources_rofi ]] && xrdb -merge -I$HOME ~/.Xresources_rofi
 [[ -f ~/.Xresources_theme ]] && xrdb -merge -I$HOME ~/.Xresources_theme
 
+# Autostart
 unclutter -idle 1 &
 slock &
 nm-applet &
 redshift 57.705829:11.990570 &
 xcompmgr &
 
-# Startup sound
-sleep 2 && mpg123 ~/.local/share/rascal/boot.mp3 &
-
-# Autostart
+# Autostart applications
 sleep 60 && syncdrive &
 qutebrowser &
 urxvt &
@@ -25,4 +25,7 @@ urxvt &
 
 # Start awesome
 exec awesome
+
+# Startup sound
+mpg123 ~/.local/share/rascal/boot.mp3 &
 

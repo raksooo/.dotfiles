@@ -3,5 +3,9 @@
 sleep 5
 cd ~/gdrive/
 
-pidof grive || (echo "gdrive.update()" | awesome-client && grive && sleep 2 && echo "gdrive.update()" | awesome-client &)
+function gdriveWidgetUpdate {
+    echo "gdrive.update()" | awesome-client
+}
+
+pidof grive || (gdriveWidgetUpdate && grive && sleep 2 && gdriveWidgetUpdate || gdriveWidgetUpdate &)
 

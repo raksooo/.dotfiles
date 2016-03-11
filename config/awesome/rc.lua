@@ -137,16 +137,10 @@ awful.rules.rules = {
 -- {{{ Signals
 -- Signal function to execute when a new client appears.
 client.connect_signal("manage", function (c, startup)
-    if not startup then
-        -- Set the windows at the slave,
-        -- i.e. put it at the end of others instead of setting it master.
-        -- awful.client.setslave(c)
-
-        -- Put windows in a smart way, only if they does not set an initial position.
-        if not c.size_hints.user_position and not c.size_hints.program_position then
-            awful.placement.no_overlap(c)
-            awful.placement.no_offscreen(c)
-        end
+    if not startup and not c.size_hints.user_position
+            and not c.size_hints.program_position then
+        awful.placement.no_overlap(c)
+        awful.placement.no_offscreen(c)
     end
 end)
 
@@ -157,25 +151,19 @@ client.connect_signal("focus", function(c)
         c.opacity = beautiful.opacity_focus
     end
     c.border_color = beautiful.border_focus
-end)
-client.connect_signal("unfocus", function(c)
-    if c.class ~= "mpv" then
-        c.opacity = beautiful.opacity_normal
-    end
-    c.border_color = beautiful.border_normal
-end)
--- }}}
 
-
-client.connect_signal("focus", function(c)
     if c.maximized_horizontal == true and c.maximized_vertical == true then
             c.border_width = "0"
     else
             c.border_width = beautiful.border_width
     end
 end)
-
 client.connect_signal("unfocus", function(c)
+    if c.class ~= "mpv" then
+        c.opacity = beautiful.opacity_normal
+    end
+    c.border_color = beautiful.border_normal
     c.border_width = beautiful.border_width
 end)
+-- }}}
 

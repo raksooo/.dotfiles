@@ -90,6 +90,12 @@ function tools.margin(widget, margin)
     return margin
 end
 
+function curry(f, a, b, c, d, e, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u)
+    return function()
+        f(a, b, c, d, e, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u)
+    end
+end
+
 function round(num, idp)
     local mult = 10^(idp or 0)
     return math.floor(math.floor(num * mult + 0.5) / mult)

@@ -62,34 +62,33 @@ function toggleGap()
 end
 
 globalkeys = awful.util.table.join(
-    awful.key({ modkey,           }, "j", function() navigate("j") end),
-    awful.key({ modkey,           }, "k", function() navigate("k") end),
-    awful.key({ modkey,           }, "h", function() navigate("h") end),
-    awful.key({ modkey,           }, "l", function() navigate("l") end),
-	awful.key({ "Mod1", 		  }, "j", function () navigate("j", true) end),
-    awful.key({ "Mod1",           }, "k", function () navigate("k", true) end),
-	awful.key({ "Mod1", 		  }, "h", function () navigate("h", true) end),
-    awful.key({ "Mod1",           }, "l", function () navigate("l", true) end),
+    awful.key({ modkey,           }, "j", curry(navigate, "j")),
+    awful.key({ modkey,           }, "k", curry(navigate, "k")),
+    awful.key({ modkey,           }, "h", curry(navigate, "h")),
+    awful.key({ modkey,           }, "l", curry(navigate, "l")),
+	awful.key({ "Mod1", 		  }, "j", curry(navigate, "j", true)),
+    awful.key({ "Mod1",           }, "k", curry(navigate, "k", true)),
+	awful.key({ "Mod1", 		  }, "h", curry(navigate, "h", true)),
+    awful.key({ "Mod1",           }, "l", curry(navigate, "l", true)),
     awful.key({ modkey,           }, "Escape", awful.tag.history.restore),
 
-    awful.key({ modkey, "Shift"   }, "j", function () moveFocus(1) end),
-    awful.key({ modkey, "Shift"   }, "k", function () moveFocus(-1) end),
-    awful.key({ "Control",        }, "j", function () awful.client.swap.byidx(1) end),
-    awful.key({ "Control",        }, "k", function () awful.client.swap.byidx(-1) end),
+    awful.key({ modkey, "Shift"   }, "j", curry(moveFocus, 1)),
+    awful.key({ modkey, "Shift"   }, "k", curry(moveFocus, -1)),
+    awful.key({ "Control",        }, "j", curry(awful.client.swap.byidx, 1)),
+    awful.key({ "Control",        }, "k", curry(awful.client.swap.byidx, -1)),
 
-    awful.key({ modkey, "Shift"   }, "l", function () awful.tag.incmwfact( 0.05) end),
-    awful.key({ modkey, "Shift"   }, "h", function () awful.tag.incmwfact(-0.05) end),
-    awful.key({ modkey, "Shift"   }, ".", function () awful.tag.incnmaster( 1) end),
-    awful.key({ modkey, "Shift"   }, ",", function () awful.tag.incnmaster(-1) end),
-    awful.key({ modkey, "Control" }, "h", function () awful.tag.incncol( 1) end),
-    awful.key({ modkey, "Control" }, "l", function () awful.tag.incncol(-1) end),
+    awful.key({ modkey, "Shift"   }, "l", curry(awful.tag.incmwfact,  0.05)),
+    awful.key({ modkey, "Shift"   }, "h", curry(awful.tag.incmwfact, -0.05)),
+    awful.key({ modkey, "Shift"   }, ".", curry(awful.tag.incnmaster,  1)),
+    awful.key({ modkey, "Shift"   }, ",", curry(awful.tag.incnmaster, -1)),
+    awful.key({ modkey, "Control" }, "h", curry(awful.tag.incncol,  1)),
+    awful.key({ modkey, "Control" }, "l", curry(awful.tag.incncol, -1)),
 
-    awful.key({ modkey, "Control" }, "j", function () awful.screen.focus_relative( 1) end),
-    awful.key({ modkey, "Control" }, "k", function () awful.screen.focus_relative(-1) end),
+    awful.key({ modkey, "Control" }, "j", curry(awful.screen.focus_relative,  1)),
+    awful.key({ modkey, "Control" }, "k", curry(awful.screen.focus_relative, -1)),
 
     awful.key({ modkey,           }, "u", awful.client.urgent.jumpto),
-    awful.key({ modkey,           }, "Tab",
-        function ()
+    awful.key({ modkey,           }, "Tab", function()
             awful.client.focus.history.previous()
             if client.focus then
                 client.focus:raise()
@@ -97,22 +96,22 @@ globalkeys = awful.util.table.join(
         end),
 
     -- Standard program
-    awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end),
-    awful.key({ modkey, "Shift"   }, "Return", function () awful.util.spawn(webbrowser) end),
-    awful.key({ modkey,           }, "space", function () awful.util.spawn(launcher) end),
-    awful.key({ "Mod1",           }, "space", function () awful.util.spawn("slock") end),
+    awful.key({ modkey,           }, "Return", curry(awful.util.spawn, terminal)),
+    awful.key({ modkey, "Shift"   }, "Return", curry(awful.util.spawn, webbrowser)),
+    awful.key({ modkey,           }, "space", curry(awful.util.spawn, launcher)),
+    awful.key({ "Mod1",           }, "space", curry(awful.util.spawn, "slock")),
     awful.key({ modkey,           }, "+", takeScreenshot),
-    awful.key({ modkey,           }, "r", function () mypromptbox[mouse.screen]:run() end),
-    awful.key({ modkey,	          }, "z", function ()
-            drop(terminal, "top", "center", 1, 0.35)
+    awful.key({ modkey,           }, "r", function()
+            mypromptbox[mouse.screen]:run()
         end),
-    awful.key({ modkey,	          }, "x", function ()
-            drop(messenger, "top", "right", 0.25, 1)
-        end),
+    awful.key({ modkey,	          }, "z", curry(drop, terminal, "top",
+                                                "center", 1, 0.35)),
+    awful.key({ modkey,	          }, "x", curry(drop, messenger, "top",
+                                                "right", 0.25, 1)),
     awful.key({ modkey, "Control" }, "r", awesome.restart),
     awful.key({ modkey, "Shift"   }, "q", awesome.quit),
 
-    awful.key({ modkey, "Shift"   }, "space", function () awful.layout.inc(layouts, 1) end),
+    awful.key({ modkey, "Shift"   }, "space", curry(awful.layout.inc, layouts, 1)),
     awful.key({ modkey, "Shift"   }, "n", awful.client.restore),
     awful.key({ modkey, "Shift"   }, "m", toggleGap),
     awful.key({ modkey, "Control" }, "n", function()
@@ -120,27 +119,34 @@ globalkeys = awful.util.table.join(
         end),
 
     -- Volume/Playback/Brightness controls
-    awful.key({ }, "XF86AudioPlay", function() os.execute("playerctl play-pause &") end),
-    awful.key({ }, "XF86AudioPrev", function() os.execute("playerctl previous &") end),
-    awful.key({ }, "XF86AudioNext", function() os.execute("playerctl next &") end),
-    awful.key({ }, "XF86MonBrightnessDown", function() adjustBrightness(-5000) end),
-    awful.key({ }, "XF86MonBrightnessUp", function() adjustBrightness(5000) end)
+    awful.key({ }, "XF86AudioPlay", curry(os.execute, "playerctl play-pause &")),
+    awful.key({ }, "XF86AudioPrev", curry(os.execute, "playerctl previous &")),
+    awful.key({ }, "XF86AudioNext", curry(os.execute, "playerctl next &")),
+    awful.key({ }, "XF86MonBrightnessDown", curry(adjustBrightness, -5000)),
+    awful.key({ }, "XF86MonBrightnessUp", curry(adjustBrightness, 5000))
 )
 globalkeys = volumekeys(globalkeys)
 
 clientkeys = awful.util.table.join(
-    awful.key({ modkey,           }, "f",      function (c)
-        c.fullscreen = not c.fullscreen
-    end),
-    awful.key({ modkey, "Shift"   }, "c",      function (c) c:kill() end),
-    awful.key({ modkey,           }, "w",      function (c) c:kill() end),
-    awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle                     ),
-    awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end),
-    awful.key({ modkey,           }, "n", function (c) c.minimized = true end),
-    awful.key({ modkey,           }, "m",
-        function (c)
+    awful.key({ modkey,           }, "f", function(c)
+            c.fullscreen = not c.fullscreen
+        end),
+    awful.key({ modkey, "Shift"   }, "c", function(c) c:kill() end),
+    awful.key({ modkey,           }, "w", function(c) c:kill() end),
+    awful.key({ modkey, "Control" }, "space", awful.client.floating.toggle),
+    awful.key({ modkey, "Control" }, "Return", function(c)
+            c:swap(awful.client.getmaster())
+        end),
+    awful.key({ modkey,           }, "n", function(c) c.minimized = true end),
+    awful.key({ modkey,           }, "m", function(c)
             c.maximized_horizontal = not c.maximized_horizontal
             c.maximized_vertical   = not c.maximized_vertical
+        end),
+    awful.key({ modkey, "Control" }, "h", function(c)
+            awful.client.movetoscreen(c, c.screen - 1)
+        end),
+    awful.key({ modkey, "Control" }, "l", function(c)
+            awful.client.movetoscreen(c, c.screen + 1)
         end)
 )
 
