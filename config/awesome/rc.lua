@@ -62,14 +62,17 @@ function awful.tag.getgap(t)
 end
 
 -- This is used later as the default terminal and editor to run.
-terminal = "urxvt"
-editor = os.getenv("EDITOR") or "nano"
+terminal   = "urxvt"
+editor     = os.getenv("EDITOR") or "nano"
 editor_cmd = terminal .. " -e " .. editor
 webbrowser = "qutebrowser"
-messenger = "messenger"
-launcher = "rofiHistory"
+messenger  = "messenger"
+launcher   = "rofiHistory"
 screenshot = "maim /home/rascal/documents/Bilder/screenshots/$(date +%F-%T).png"
+warp_bars  = true
 -- }}}
+
+require("warpbars")
 
 local possibleProgs = {
     urxvt     = "URxvt",

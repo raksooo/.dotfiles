@@ -96,18 +96,26 @@ globalkeys = awful.util.table.join(
         end),
 
     -- Standard program
-    awful.key({ modkey,           }, "Return", curry(awful.util.spawn, terminal)),
-    awful.key({ modkey, "Shift"   }, "Return", curry(awful.util.spawn, webbrowser)),
-    awful.key({ modkey,           }, "space", curry(awful.util.spawn, launcher)),
+    awful.key({ modkey,           }, "Return", function()
+            awful.util.spawn(terminal)
+        end),
+    awful.key({ modkey, "Shift"   }, "Return", function()
+            awful.util.spawn(webbrowser)
+        end),
+    awful.key({ modkey,           }, "space", function()
+            awful.util.spawn(launcher)
+        end),
     awful.key({ "Mod1",           }, "space", curry(awful.util.spawn, "slock")),
     awful.key({ modkey,           }, "+", takeScreenshot),
     awful.key({ modkey,           }, "r", function()
             mypromptbox[mouse.screen]:run()
         end),
-    awful.key({ modkey,	          }, "z", curry(drop, terminal, "top",
-                                                "center", 1, 0.35)),
-    awful.key({ modkey,	          }, "x", curry(drop, messenger, "top",
-                                                "right", 0.25, 1)),
+    awful.key({ modkey,	          }, "z", function()
+            drop(terminal, "top", "center", 1, 0.35)
+        end),
+    awful.key({ modkey,	          }, "x", function()
+            drop(messenger, "top", "right", 0.25, 1)
+        end),
     awful.key({ modkey, "Control" }, "r", awesome.restart),
     awful.key({ modkey, "Shift"   }, "q", awesome.quit),
 
