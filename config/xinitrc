@@ -23,9 +23,9 @@ qutebrowser &
 urxvt &
 urxvt &
 
+# Startup sound
+sleep 3 && mpg123 ~/.local/share/rascal/boot.mp3 &
+
 # Start awesome
 exec awesome
-
-# Startup sound
-mpg123 ~/.local/share/rascal/boot.mp3 &
 
