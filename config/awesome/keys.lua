@@ -35,24 +35,6 @@ function moveFocus(n)
     end
 end
 
-function adjustBrightness(delta)
-    current_fh = io.popen("cat /sys/class/backlight/gmux_backlight/actual_brightness")
-    current = tonumber(current_fh:read("*a"))
-    current_fh:close()
-    max_fh = io.popen("cat /sys/class/backlight/gmux_backlight/max_brightness")
-    max = tonumber(max_fh:read("*a"))
-    max_fh:close()
-    current = math.floor(current + delta)
-    current = math.min(current, max)
-    current = math.max(current, 0)
-    os.execute("sudo tee /sys/class/backlight/gmux_backlight/brightness <<< " .. current)
-end
-
-function takeScreenshot()
-    io.popen(screenshot):close()
-    io.popen("mpg123 ~/.local/share/rascal/screenshot.mp3 &"):close()
-end
-
 function toggleGap()
     if awful.tag.getgap() == beautiful.useless_gap then
         awful.tag.setgap(beautiful.less_useless_gap)
@@ -96,17 +78,6 @@ globalkeys = awful.util.table.join(
         end),
 
     -- Standard program
-    awful.key({ modkey,           }, "Return", function()
-            awful.util.spawn(terminal)
-        end),
-    awful.key({ modkey, "Shift"   }, "Return", function()
-            awful.util.spawn(webbrowser)
-        end),
-    awful.key({ modkey,           }, "space", function()
-            awful.util.spawn(launcher)
-        end),
-    awful.key({ "Mod1",           }, "space", curry(awful.util.spawn, "slock")),
-    awful.key({ modkey,           }, "+", takeScreenshot),
     awful.key({ modkey,           }, "r", function()
             mypromptbox[mouse.screen]:run()
         end),
@@ -124,16 +95,8 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Shift"   }, "m", toggleGap),
     awful.key({ modkey, "Control" }, "n", function()
             statusbar[mouse.screen].visible = not statusbar[mouse.screen].visible
-        end),
-
-    -- Volume/Playback/Brightness controls
-    awful.key({ }, "XF86AudioPlay", curry(os.execute, "playerctl play-pause &")),
-    awful.key({ }, "XF86AudioPrev", curry(os.execute, "playerctl previous &")),
-    awful.key({ }, "XF86AudioNext", curry(os.execute, "playerctl next &")),
-    awful.key({ }, "XF86MonBrightnessDown", curry(adjustBrightness, -5000)),
-    awful.key({ }, "XF86MonBrightnessUp", curry(adjustBrightness, 5000))
+        end)
 )
-globalkeys = volumekeys(globalkeys)
 
 clientkeys = awful.util.table.join(
     awful.key({ modkey,           }, "f", function(c)

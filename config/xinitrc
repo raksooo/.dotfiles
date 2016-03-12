@@ -16,6 +16,7 @@ slock &
 nm-applet &
 redshift 57.705829:11.990570 &
 xcompmgr &
+sxhkd &
 
 # Autostart applications
 sleep 60 && syncdrive &

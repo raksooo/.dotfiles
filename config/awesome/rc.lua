@@ -67,8 +67,6 @@ editor     = os.getenv("EDITOR") or "nano"
 editor_cmd = terminal .. " -e " .. editor
 webbrowser = "qutebrowser"
 messenger  = "messenger"
-launcher   = "rofiHistory"
-screenshot = "maim /home/rascal/documents/Bilder/screenshots/$(date +%F-%T).png"
 warp_bars  = true
 -- }}}
 

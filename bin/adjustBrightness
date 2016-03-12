@@ -1,0 +1,17 @@
+#!/bin/sh
+
+min_number() {
+    printf "%s\n" "$@" | sort -g | head -n1
+}
+
+max_number() {
+    printf "%s\n" "$@" | sort -g -r | head -n1
+}
+
+current=$(cat /sys/class/backlight/gmux_backlight/actual_brightness)
+max=$(cat /sys/class/backlight/gmux_backlight/max_brightness)
+new=$(expr $current + $1)
+new=$(min_number $new $max)
+new=$(max_number $new 0)
+sudo tee /sys/class/backlight/gmux_backlight/brightness <<< $new
+
