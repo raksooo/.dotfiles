@@ -19,6 +19,8 @@ link awesome .config/
 link liquidpromptrc .config/
 link qutebrowser .config/
 link sxhkd .config/
+link pacaur .config/
+link gtk/* .config/
 link user-dirs.dirs .config/
 
 link ssh .ssh/config
