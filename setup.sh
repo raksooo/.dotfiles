@@ -18,6 +18,7 @@ link gitconfig .gitconfig
 link awesome .config/
 link liquidpromptrc .config/
 link qutebrowser .config/
+link sxhkd .config/
 link user-dirs.dirs .config/
 
 link ssh .ssh/config
