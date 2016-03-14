@@ -1,8 +1,10 @@
+# Screen brightness
 XF86MonBrightnessDown
     adjustBrightness -5000
 XF86MonBrightnessUp
     adjustBrightness 5000
 
+# Playback control
 XF86AudioPlay
     playerctl play-pause
 XF86AudioPrev
@@ -10,6 +12,7 @@ XF86AudioPrev
 XF86AudioNext
     playerctl next
 
+# Volume control
 XF86AudioRaiseVolume
     amixer sset Master 5%+ && echo 'updateVolumeWidget()' | awesome-client
 XF86AudioLowerVolume
@@ -17,18 +20,23 @@ XF86AudioLowerVolume
 XF86AudioMute
     amixer sset Master toggle && echo 'updateVolumeWidget()' | awesome-client
 
+# Terminal
 super + Return
     urxvt
 
+# Browser
 super + shift + Return
     qutebrowser
 
+# Launcher
 super + space
     rofiHistory
 
+# Lock X
 alt + space
     slock
 
+# Take screenshot
 super + plus
     maim /home/rascal/documents/Bilder/screenshots/$(date +%F-%T).png && mpg123 ~/.local/share/rascal/screenshot.mp3
 

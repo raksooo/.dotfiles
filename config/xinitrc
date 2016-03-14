@@ -14,7 +14,7 @@ xcape -e 'ISO_Level3_Shift=Escape'
 unclutter -idle 1 &
 slock &
 nm-applet &
-redshift 57.705829:11.990570 &
+redshift 57.716015:11.871436 &
 xcompmgr &
 sxhkd &
 
