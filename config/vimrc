@@ -84,6 +84,8 @@ set t_Co=256
 set tabstop=4
 set timeoutlen=400
 set title
+set undofile
+set undodir=~/.vim/undodir
 
 " Mappings
 map <space> <leader>
@@ -93,6 +95,16 @@ map <leader>p :r !xclip -o<CR>
 map <leader>c zA
 map <leader>f :noh<CR>
 map <leader>w :w<CR><CR>
+
+" Paranthesis
+nnoremap ( "="("<CR>P
+nnoremap ) "=")"<CR>p
+nnoremap [ "="["<CR>P
+nnoremap ] "="]"<CR>p
+
+" Scrolling
+nnoremap <C-Up> 10k
+nnoremap <C-Down> 10j
 
 "" Buffers
 nmap <leader>t :enew<cr>" New
@@ -131,3 +143,4 @@ autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
 autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 autocmd BufWinLeave * call clearmatches()
+
