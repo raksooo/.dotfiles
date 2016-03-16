@@ -11,7 +11,7 @@ xcape -e 'ISO_Level3_Shift=Escape'
 [[ -f ~/.Xresources_theme ]] && xrdb -merge -I$HOME ~/.Xresources_theme
 
 # Autostart
-unclutter -idle 1 &
+unclutter -idle 3 &
 slock &
 nm-applet &
 redshift 57.716015:11.871436 &
