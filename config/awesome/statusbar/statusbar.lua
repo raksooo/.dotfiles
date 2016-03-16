@@ -2,7 +2,7 @@ local battery = require("statusbar/batteryWidget")
 local pacman = require("statusbar/pacmanWidget")
 require("statusbar/volumeWidget")
 local gdrive = require("statusbar/gdriveWidget")
-local ether = require("statusbar/etherWidget")
+--local ether = require("statusbar/etherWidget")
 
 -- Define a tag table which hold all screen tags.
 tags = {}
@@ -29,7 +29,7 @@ local volumewidget = volumeWidget(terminal)
 local batterywidget = tools.margin(battery.widget())
 local clockwidget = awful.widget.textclock()
 local gdrivewidget = tools.margin(gdrive.widget(), 2)
-local etherwidget = ether.widget()
+--local etherwidget = ether.widget()
 
 clockwidget:set_font("Oxygen-Sans 9.3")
 
@@ -59,8 +59,8 @@ for s = 1, screen.count() do
         right_layout:add(tools.seperator)
     right_layout:add(batterywidget)
 
-        right_layout:add(tools.seperator)
-    right_layout:add(etherwidget)
+--        right_layout:add(tools.seperator)
+--    right_layout:add(etherwidget)
 
         right_layout:add(tools.spacing)
     right_layout:add(gdrivewidget)
