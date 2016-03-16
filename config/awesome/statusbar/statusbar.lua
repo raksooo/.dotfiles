@@ -58,6 +58,7 @@ for s = 1, screen.count() do
 
         right_layout:add(tools.seperator)
     right_layout:add(batterywidget)
+        right_layout:add(tools.spacing)
 
 --        right_layout:add(tools.seperator)
 --    right_layout:add(etherwidget)

@@ -17,6 +17,7 @@ nm-applet &
 redshift 57.716015:11.871436 &
 xcompmgr &
 sxhkd &
+toggleTrackpad &
 
 # Autostart applications
 sleep 60 && syncdrive &
