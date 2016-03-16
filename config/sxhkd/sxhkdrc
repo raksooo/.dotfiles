@@ -41,5 +41,5 @@ super + plus
     maim /home/rascal/documents/Bilder/screenshots/$(date +%F-%T).png && mpg123 ~/.local/share/rascal/screenshot.mp3
 
 ctrl + m
-    synclient TouchpadOff=$(synclient -l | grep -c 'TouchpadOff.*=.*0')
+    synclient TouchpadOff=$(synclient -l | grep -c 'TouchpadOff.*=.*0') && xdotool mousemove 720 1000
 

@@ -17,7 +17,7 @@ if warp_bars then
         if screen[s].geometry.x > screen[screenR].geometry.x then screenR = s end
     end
 
-    warpbarL = awful.wibox({ position = "left", screen = screenL, width = barwidth, bg = "#000000" })
+    warpbarL = awful.wibox({ position = "left", screen = screenL, width = barwidth, bg = "#002b36" })
     warpbarL:connect_signal("mouse::enter", function ()
         local pos = mouse.coords()
         local w = 0
@@ -28,7 +28,7 @@ if warp_bars then
         mouse.coords({ x = w - barwidth - 1, y = math.min(pos.y, h) })
     end)
 
-    warpbarR = awful.wibox({ position = "right", screen = screenR, width = barwidth, bg = "#000000" })
+    warpbarR = awful.wibox({ position = "right", screen = screenR, width = barwidth, bg = "#002b36" })
     warpbarR:connect_signal("mouse::enter", function ()
         local pos = mouse.coords()
         local h = screen[screenL].geometry.height - 1
