@@ -91,7 +91,10 @@ set undodir=~/.vim/undodir
 map <space> <leader>
 
 map <leader>yy :.w !xclip -i<CR><CR>
+map <leader>YY :.w !xclip -i -selection clipboard<CR><CR>
 map <leader>p :r !xclip -o<CR>
+map <leader>P :r !xclip -o -selection clipboard<CR>
+
 map <leader>c zA
 map <leader>f :noh<CR>
 map <leader>w :w<CR><CR>
