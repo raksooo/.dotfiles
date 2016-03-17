@@ -1,4 +1,11 @@
 battery = {}
+battery.colors = {
+    charging = "#2aa198",
+    high = "#859900",
+    low = "#b58900",
+    critical = "#cb4b16",
+    background = "#494B4F"
+}
 function battery.widget()
     batteryWidget = wibox.layout.fixed.horizontal()
     battery.text = wibox.widget.textbox()
@@ -7,7 +14,7 @@ function battery.widget()
     battery.battery = awful.widget.progressbar()
     battery.battery:set_vertical(true)
     battery.battery:set_width(7)
-    battery.battery:set_background_color("#494B4F")
+    battery.battery:set_background_color(battery.colors.background)
 
     tools.initInterval(battery.update, 15)
 
@@ -64,24 +71,22 @@ function formatBatteryContent(state, percentage, timeleft)
     local text = ""
     local color
     local tooltip
+
+    color = battery.colors.high
+    tooltip = timeleft .. " until empty"
     if state == "fully-charged" then
         tooltip = "Fully charged"
-        color = "#AECF96"
     elseif state == "charging" then
         tooltip = "Charging: " .. timeleft .. " until full"
-        color = "#B0E0E6"
+        color = battery.colors.charging
         text = "⚡"
     elseif percentage <= 10 then
-        tooltip = timeleft .. " until empty"
-        color = "#FF5656"
+        color = batter.colors.critical
         text = "Battery low: "
     elseif percentage <= 30 then
-        tooltip = timeleft .. " until empty"
-        color = "#FFFF77"
-    else
-        tooltip = timeleft .. " until empty"
-        color = "#AECF96"
+        color = battery.colors.low
     end
+
     text = "<span color=\"" .. color .. "\">" .. text .. percentage .. "%</span>"
     battery.text:set_markup(text)
     battery.tooltip:set_text("  " .. tooltip .. "  ")
