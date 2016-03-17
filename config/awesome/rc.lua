@@ -119,8 +119,8 @@ awful.rules.rules = {
       properties = { border_width = beautiful.border_width,
                      border_color = beautiful.border_color,
                      focus = awful.client.focus.filter,
-                     raise = true,
                      keys = clientkeys,
+                     raise = true,
                      buttons = clientbuttons,
                      size_hints_honor = false } },
     { rule = { class = "Spotify" },
@@ -138,6 +138,13 @@ awful.rules.rules = {
 -- {{{ Signals
 -- Signal function to execute when a new client appears.
 client.connect_signal("manage", function (c, startup)
+    if c.class == "mpv" then
+        awful.client.focus.history.previous()
+        if client.focus then
+            client.focus:raise()
+        end
+    end
+
     if not startup and not c.size_hints.user_position
             and not c.size_hints.program_position then
         awful.placement.no_overlap(c)

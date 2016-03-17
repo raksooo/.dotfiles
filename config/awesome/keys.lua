@@ -92,10 +92,7 @@ globalkeys = awful.util.table.join(
 
     awful.key({ modkey, "Shift"   }, "space", curry(awful.layout.inc, layouts, 1)),
     awful.key({ modkey, "Shift"   }, "n", awful.client.restore),
-    awful.key({ modkey, "Shift"   }, "m", toggleGap),
-    awful.key({ modkey, "Control" }, "n", function()
-            statusbar[mouse.screen].visible = not statusbar[mouse.screen].visible
-        end)
+    awful.key({ modkey, "Shift"   }, "m", toggleGap)
 )
 
 clientkeys = awful.util.table.join(
