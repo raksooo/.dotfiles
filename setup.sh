@@ -25,6 +25,9 @@ link user-dirs.dirs .config/
 
 link ssh .ssh/config
 
+sudo ln -sf $DOTFILES/config/gtk/gtk-2.0/* /etc/gtk-2.0/
+sudo ln -sf $DOTFILES/config/gtk/gtk-3.0/* /etc/gtk-3.0/
+
 sudo ln -sf $DOTFILES/bin /usr/local/
 if [ ! -s ~/.local/share/rascal ]; then
     ln -s $DOTFILES/share ~/.local/share/rascal
