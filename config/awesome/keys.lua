@@ -4,7 +4,11 @@ beautiful.init("/home/rascal/.config/awesome/theme.lua")
 
 modkey = "Mod4"
 
-function gotoTag(i)
+function gotoTag(i, move)
+    if move then
+        awful.client.movetotag(tags[client.focus.screen][i])
+    end
+
     local screen = mouse.screen
     local tag = awful.tag.gettags(screen)[i]
     if tag then
@@ -22,10 +26,7 @@ function navigate(key, move)
     }
     local j = action[key]
 
-    if move then
-        awful.client.movetotag(tags[client.focus.screen][j])
-    end
-    gotoTag(j)
+    gotoTag(j, move)
 end
 
 function moveFocus(n)
@@ -63,8 +64,6 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Shift"   }, "h", curry(awful.tag.incmwfact, -0.05)),
     awful.key({ modkey, "Shift"   }, ".", curry(awful.tag.incnmaster,  1)),
     awful.key({ modkey, "Shift"   }, ",", curry(awful.tag.incnmaster, -1)),
-    awful.key({ modkey, "Control" }, "h", curry(awful.tag.incncol,  1)),
-    awful.key({ modkey, "Control" }, "l", curry(awful.tag.incncol, -1)),
 
     awful.key({ modkey, "Control" }, "j", curry(awful.screen.focus_relative,  1)),
     awful.key({ modkey, "Control" }, "k", curry(awful.screen.focus_relative, -1)),
@@ -121,13 +120,7 @@ clientkeys = awful.util.table.join(
 for i = 1, 9 do
     globalkeys = awful.util.table.join(globalkeys,
         -- View tag only.
-        awful.key({ modkey }, "#" .. i + 9, function()
-              local screen = mouse.screen
-              local tag = awful.tag.gettags(screen)[i]
-              if tag then
-                 awful.tag.viewonly(tag)
-              end
-        end),
+        awful.key({ modkey }, "#" .. i + 9, curry(gotoTag, i)),
         -- Toggle tag.
         awful.key({ modkey, "Control" }, "#" .. i + 9, function()
             local screen = mouse.screen
@@ -137,14 +130,7 @@ for i = 1, 9 do
             end
         end),
         -- Move client to tag.
-        awful.key({ "Mod1",           }, "#" .. i + 9, function()
-            if client.focus then
-                local tag = awful.tag.gettags(client.focus.screen)[i]
-                if tag then
-                    awful.client.movetotag(tag)
-                end
-           end
-        end),
+        awful.key({ "Mod1",           }, "#" .. i + 9, curry(gotoTag, i, true)),
         -- Toggle tag.
         awful.key({ modkey, "Control", "Shift" }, "#" .. i + 9, function()
             if client.focus then
