@@ -1,10 +1,5 @@
 #!/bin/sh
 
-function execute {
-    error=$(($*) 2>&1 >/dev/null)
-    echo $error
-}
-
 history_file=~/.local/share/rascal/rofiHistory
 alias_file=/home/rascal/.dotfiles/config/aliases
 rofi_path=$(which rofiHistory)
@@ -26,7 +21,8 @@ else
 fi
 
 result=$(printf "$alt" | $rofi)
-if [[ $(execute $result) =~ ^$rofi_path.* ]]; then
+$($result 2> /dev/null)
+if [[ $? -ne 0 ]]; then
     calc=$(python -c "print($result)")
     if [[ $? -eq 0 ]]; then
         rofiHistory "$result=$calc"

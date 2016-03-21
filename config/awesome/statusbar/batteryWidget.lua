@@ -81,7 +81,7 @@ function formatBatteryContent(state, percentage, timeleft)
         color = battery.colors.charging
         text = "⚡"
     elseif percentage <= 10 then
-        color = batter.colors.critical
+        color = battery.colors.critical
         text = "Battery low: "
     elseif percentage <= 30 then
         color = battery.colors.low
