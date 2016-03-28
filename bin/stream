@@ -5,8 +5,6 @@ if [[ $1 ]]; then
 else
     magnet=$(xclip -selection clipboard -o)
 fi
-url=http://192.168.1.223:8888/
 
-peerflix $magnet > /dev/null 2>&1 &
-sleep 12 && mpv $url > /dev/null 2>&1 && killall peerflix &
+peerflix $magnet --mpv
 
