@@ -20,7 +20,7 @@ sxhkd &
 toggleTrackpad &
 
 # Autostart applications
-sleep 60 && syncdrive &
+# sleep 60 && syncdrive &
 qutebrowser &
 urxvt &
 urxvt &

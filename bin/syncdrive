@@ -7,5 +7,5 @@ function gdriveWidgetUpdate {
     echo "gdrive.update()" | awesome-client
 }
 
-pidof grive || (gdriveWidgetUpdate && grive && sleep 2 && gdriveWidgetUpdate || gdriveWidgetUpdate &)
+# pidof grive || (gdriveWidgetUpdate && grive && sleep 2 && gdriveWidgetUpdate || gdriveWidgetUpdate &)
 
