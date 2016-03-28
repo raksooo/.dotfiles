@@ -6,7 +6,8 @@ function prepend-sudo {
 }
 
 function paste {
-    BUFFER="$BUFFER$(xclip -selection clipboard -o)"
+    CLIP=$(xclip -selection clipboard -o 2> /dev/null)
+    BUFFER="$BUFFER$CLIP"
     zle end-of-line
 }
 
