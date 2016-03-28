@@ -32,6 +32,7 @@ alias spi='ssh pi'
 #other
 alias externalmonitor='xrandr --output DisplayPort-1 --auto --right-of LVDS'
 alias externalmonitoroff='xrandr --output DisplayPort-1 --off'
+alias clearram='sync && echo 3 | sudo tee /proc/sys/vm/drop_caches > /dev/null'
 
 alias weather='curl --silent wttr.in/gothenburg | head -n 17'
 alias moreweather='curl --silent wttr.in/gothenburg'
