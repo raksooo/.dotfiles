@@ -67,10 +67,7 @@ editor     = os.getenv("EDITOR") or "nano"
 editor_cmd = terminal .. " -e " .. editor
 webbrowser = "qutebrowser"
 messenger  = "messenger"
-warp_bars  = true
 -- }}}
-
-require("warpbars")
 
 local possibleProgs = {
     urxvt     = "URxvt",
