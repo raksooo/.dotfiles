@@ -6,7 +6,8 @@ modkey = "Mod4"
 
 function gotoTag(i, move)
     if move then
-        awful.client.movetotag(tags[client.focus.screen][i])
+        local tag = awful.tag.gettags(client.focus.screen)[i]
+        awful.client.movetotag(tag)
     end
 
     local screen = mouse.screen
