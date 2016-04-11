@@ -10,8 +10,17 @@ max_number() {
 
 current=$(cat /sys/class/backlight/gmux_backlight/actual_brightness)
 max=$(cat /sys/class/backlight/gmux_backlight/max_brightness)
-new=$(expr $current + $1)
-new=$(min_number $new $max)
-new=$(max_number $new 0)
+min=0
+
+if [ $1 == "max" ]; then
+    new=$max
+elif [ $1 == "min" ]; then
+    new=$min
+else
+    new=$(expr $current + $1)
+    new=$(min_number $new $max)
+    new=$(max_number $new 0)
+fi
+
 sudo tee /sys/class/backlight/gmux_backlight/brightness <<< $new
 

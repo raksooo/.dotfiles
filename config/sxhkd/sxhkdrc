@@ -3,6 +3,10 @@ XF86MonBrightnessDown
     adjustBrightness -5000
 XF86MonBrightnessUp
     adjustBrightness 5000
+XF86KbdBrightnessDown
+    adjustBrightness min
+XF86KbdBrightnessUp
+    adjustBrightness max
 
 # Playback control
 XF86AudioPlay
