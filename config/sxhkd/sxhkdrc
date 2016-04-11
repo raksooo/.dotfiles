@@ -38,7 +38,7 @@ super + space
 
 # Lock X
 alt + space
-    slock
+    slock & sh -c "sleep 0.5 && xset dpms force off"
 
 # Take screenshot
 super + plus
