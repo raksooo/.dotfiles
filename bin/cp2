@@ -1,0 +1,52 @@
+#!/bin/sh
+
+function clearLines {
+    tput cuu $1 && tput el
+}
+
+function echoProgress {
+    h1=$(du -h $1 | cut -f1)
+    h2=$(du -h $2 | cut -f1)
+    c1=$(du $1 | cut -f1)
+    c2=$(du $2 | cut -f1)
+    percentage=$(expr $(expr 100 \* $c2) / $c1)
+
+    t2=$(date +%s)
+    t3=$(expr $t2 - $3)
+    t=$(showTime $t3)
+
+    clearLines 1
+    echo "$percentage% ($h2/$h1) - $t"
+}
+
+showTime() {
+    ((h=${1}/3600))
+    ((m=(${1}%3600)/60))
+    ((s=${1}%60))
+    printf "%02d:%02d:%02d\n" $h $m $s
+}
+
+if [ -f $1 ] && [ ! -d $2 ] && [[ ! $1 =~ "\*" ]]; then
+    t1=$(date +%s)
+
+    /bin/cp $1 $2 &
+    RET=$?
+    PID=$!
+
+    echo ""
+    while kill -0 $PID 2> /dev/null; do
+        if [ -f $2 ] || [ -d $2 ]; then
+            echoProgress $1 $2 $t1
+            sleep 1
+        else
+            sleep 0.1
+        fi
+    done
+    echoProgress $1 $2 $t1
+
+    exit $RET
+else
+    echo "Fallback to /bin/cp"
+    /bin/cp $@
+fi
+
