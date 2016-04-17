@@ -12,7 +12,6 @@ xcape -e 'ISO_Level3_Shift=Escape'
 
 # Autostart
 unclutter -idle 2 &
-slock &
 nm-applet &
 redshift 57.716015:11.871436 &
 xcompmgr &
@@ -21,7 +20,7 @@ toggleTrackpad &
 
 # Autostart applications
 # sleep 60 && syncdrive &
-qutebrowser &
+sleep 0.5 && qutebrowser & # To allow network to connect
 urxvt &
 urxvt &
 

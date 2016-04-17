@@ -26,7 +26,7 @@ mytaglist.buttons = awful.util.table.join(
 
 local pacmanwidget = tools.margin(pacman.widget(), 2)
 local volumewidget = volumeWidget(terminal)
-local batterywidget = tools.margin(battery.widget())
+local batterywidget = tools.margin(battery.widget(), 6)
 local clockwidget = awful.widget.textclock()
 local gdrivewidget = tools.margin(gdrive.widget(), 2)
 --local etherwidget = ether.widget()
@@ -34,7 +34,7 @@ local gdrivewidget = tools.margin(gdrive.widget(), 2)
 clockwidget:set_font("Oxygen-Sans 9.3")
 
 for s = 1, screen.count() do
-    statusbar[s] = awful.wibox({ position = "bottom", screen = s, height = 20, opacity = beautiful.statusbar_opacity })
+    statusbar[s] = awful.wibox({ position = "bottom", screen = s, height = 38, opacity = beautiful.statusbar_opacity })
 
     -- Create a promptbox for each screen
     mypromptbox[s] = awful.widget.prompt()

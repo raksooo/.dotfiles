@@ -2,7 +2,7 @@ pacman = {}
 function pacman.widget()
     pacmanWidget = wibox.layout.fixed.horizontal()
     image = wibox.widget.imagebox()
-    image:set_image("/home/rascal/.config/awesome/resources/pacman.png")
+    image:set_image("/home/oskar/.config/awesome/resources/pacman.png")
     pacman.count = wibox.widget.textbox()
     pacmanWidget:add(pacman.count)
     pacmanWidget:add(image)

@@ -3,8 +3,8 @@
 on=$(synclient -l | grep -c "TouchpadOff.*=.*0")
 synclient TouchpadOff=$on;
 if [[ $on == '1' ]]; then
-    xdotool mousemove 1438 900
+    xdotool mousemove 3200 1800
 else
-    xdotool mousemove 720 450
+    xdotool mousemove 1600 900
 fi
 

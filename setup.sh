@@ -1,5 +1,7 @@
 #!/bin/sh
 
+DOTFILES=$HOME/.dotfiles
+
 function link {
 	ln -sf $DOTFILES/config/$1 ~/$2
 }
@@ -31,7 +33,7 @@ sudo ln -sf $DOTFILES/config/gtk/gtk-3.0/settings.ini /etc/gtk-3.0/
 
 sudo ln -sf $DOTFILES/bin /usr/local/
 if [ ! -s ~/.local/share/rascal ]; then
-    ln -s $DOTFILES/share ~/.local/share/rascal
+    ln -s $DOTFILES/share $HOME/.local/share/rascal
 fi
 
 xrdb -merge ~/.Xresources

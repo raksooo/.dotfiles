@@ -13,7 +13,7 @@ function battery.widget()
 
     battery.battery = awful.widget.progressbar()
     battery.battery:set_vertical(true)
-    battery.battery:set_width(7)
+    battery.battery:set_width(15)
     battery.battery:set_background_color(battery.colors.background)
 
     tools.initInterval(battery.update, 15)

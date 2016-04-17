@@ -8,8 +8,8 @@ max_number() {
     printf "%s\n" "$@" | sort -g -r | head -n1
 }
 
-current=$(cat /sys/class/backlight/gmux_backlight/actual_brightness)
-max=$(cat /sys/class/backlight/gmux_backlight/max_brightness)
+current=$(cat /sys/class/backlight/intel_backlight/actual_brightness)
+max=$(cat /sys/class/backlight/intel_backlight/max_brightness)
 min=0
 
 if [ $1 == "max" ]; then
@@ -25,5 +25,5 @@ else
     new=$(max_number $new 0)
 fi
 
-sudo tee /sys/class/backlight/gmux_backlight/brightness <<< $new
+sudo tee /sys/class/backlight/intel_backlight/brightness <<< $new
 

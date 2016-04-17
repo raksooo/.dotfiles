@@ -8,15 +8,15 @@ Xft.lcdfilter: lcddefault
 Xft.antialias: true
 Xft.autohint: 0
 Xft.hinting: true
-Xft.hintstyle: hintslight
+Xft.hintstyle: hintfull
 Xft.rgba: rgb
-Xft.dpi: 96
+Xft.dpi: 200
 
 !URxvt
 URxvt.intensityStyles: false
 URxvt.scrollBar: false
 URxvt.urgentOnBell: true
-URxvt.font: xft:Monaco:size=7.5
+URxvt.font: xft:Monaco:size=7
 ! clickable urls
 URxvt.perl-ext-common: default,matcher,vtwheel
 URxvt.url-launcher: /usr/bin/qutebrowser

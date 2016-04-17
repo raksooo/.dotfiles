@@ -4,8 +4,8 @@
 
 theme = {}
 
-theme.font = "sans 7.5"
-theme.wallpaper = "/home/rascal/.local/share/rascal/wallpaper.png"
+theme.font = "sans 8"
+theme.wallpaper = "/home/oskar/.local/share/rascal/wallpaper.png"
 
 theme.bg_normal     = "#002b36"
 theme.bg_focus      = "#535d6c"
@@ -36,7 +36,7 @@ theme.taglist_fg_empty = theme.taglist_fg_focus
 
 theme.naughty_width        = 250
 theme.naughty_height       = 60
-theme.naughty_icon_size    = 60
+theme.naughty_icon_size    = 100
 theme.naughty_margin       = 10
 theme.naughty_border_width = 1
 theme.naughty_border_color = "#268bd2"

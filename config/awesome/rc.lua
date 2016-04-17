@@ -47,7 +47,7 @@ end
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
-beautiful.init("/home/rascal/.config/awesome/theme.lua")
+beautiful.init("/home/oskar/.config/awesome/theme.lua")
 
 --naughty.config.defaults.height       = beautiful.naughty_height
 --naughty.config.defaults.width        = beautiful.naughty_width

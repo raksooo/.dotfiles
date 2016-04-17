@@ -8,19 +8,18 @@ function volumeWidget(terminal)
             unmute = "#859900",
             mute = "#dc322f"
         },
-        mixer = terminal .. " -e alsamixer", -- or whatever your preferred sound mixer is
+        mixer = "pavucontrol",
     }
     -- widget
-    alsawidget.bar = awful.widget.progressbar ()
+    alsawidget.bar = awful.widget.progressbar()
     volumeWidget = wibox.layout.fixed.horizontal()
-    alsawidget.bar:set_width (30)
-    alsawidget.bar:set_ticks (true)
-    alsawidget.bar:set_ticks_gap (1)
+    alsawidget.bar:set_vertical(true)
+    alsawidget.bar:set_width (15)
     alsawidget.bar:set_background_color ("#002b36")
     alsawidget.bar:set_color (alsawidget.colors.unmute)
-    alsawidget.bar:buttons (awful.util.table.join (
+    volumeWidget:buttons (awful.util.table.join (
         awful.button ({}, 1, function()
-            awful.util.spawn (alsawidget.mixer)
+            os.execute(alsawidget.mixer .. " &")
         end)
     ))
     -- tooltip
@@ -45,12 +44,9 @@ function volumeWidget(terminal)
     end, 5, alsawidget.channel) -- relatively high update time, use of keys/mouse will force update
 
     volumeText = wibox.widget.textbox()
-    volumeText:set_markup("A: [")
+    volumeText:set_markup("A: ")
     volumeWidget:add(volumeText)
     volumeWidget:add(tools.margin(alsawidget.bar, 6))
-    rightBracket = wibox.widget.textbox()
-    rightBracket:set_markup("]")
-    volumeWidget:add(rightBracket)
     return volumeWidget
 end
 
