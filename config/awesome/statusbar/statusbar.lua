@@ -24,14 +24,14 @@ mytaglist.buttons = awful.util.table.join(
                     awful.button({ }, 5, function(t) awful.tag.viewprev(awful.tag.getscreen(t)) end)
                     )
 
-local pacmanwidget = tools.margin(pacman.widget(), 2)
+local pacmanwidget = tools.margin(pacman.widget(), 3)
 local volumewidget = volumeWidget(terminal)
 local batterywidget = tools.margin(battery.widget(), 6)
 local clockwidget = awful.widget.textclock()
 local gdrivewidget = tools.margin(gdrive.widget(), 2)
 --local etherwidget = ether.widget()
 
-clockwidget:set_font("Oxygen-Sans 9.3")
+clockwidget:set_font("sans 9")
 
 for s = 1, screen.count() do
     statusbar[s] = awful.wibox({ position = "bottom", screen = s, height = 38, opacity = beautiful.statusbar_opacity })

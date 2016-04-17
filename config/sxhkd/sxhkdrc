@@ -1,9 +1,9 @@
 # Screen brightness
 
 XF86MonBrightnessDown
-    adjustBrightness -100
+    adjustBrightness -50
 XF86MonBrightnessUp
-    adjustBrightness 100
+    adjustBrightness 50
 XF86KbdBrightnessDown
     adjustBrightness min
 XF86KbdBrightnessUp
