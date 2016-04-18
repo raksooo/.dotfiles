@@ -10,6 +10,7 @@ sudo -v
 
 link zshrc .zshrc
 link vimrc .vimrc
+link tmux.conf .tmux.conf
 link xinitrc .xinitrc
 link Xmodmap .Xmodmap
 link Xresources/Xresources .Xresources

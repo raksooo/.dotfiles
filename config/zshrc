@@ -2,7 +2,7 @@
 export DOTFILES=$HOME/.dotfiles
 
 export PATH="$(ruby -e 'puts Gem.user_dir')/bin:$PATH"
-export PATH=$PATH:~/.cabal/bin
+export PATH=$PATH:$HOME/.cabal/bin
 
 ## Completion
 zstyle ':completion:*' menu select
@@ -53,7 +53,9 @@ source liquidprompt
 
 ## Start X
 if [[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] then
-    #startx
-    exec startx
+    echo "\n" >> $HOME/startx.log
+    date >> $HOM/startx.log
+    startx >> $HOME/startx.log
+    #exec startx
 fi
 

@@ -5,7 +5,7 @@
 theme = {}
 
 theme.font = "sans 8"
-theme.wallpaper = "/home/oskar/.local/share/rascal/wallpaper.png"
+theme.wallpaper = "/home/oskar/.local/share/rascal/wallpaper.jpg"
 
 theme.bg_normal     = "#002b36"
 theme.bg_focus      = "#535d6c"
@@ -43,7 +43,7 @@ theme.naughty_border_color = "#268bd2"
 
 theme.systray_icon_spacing = 2
 theme.useless_gap = 20
-theme.less_useless_gap = 1
+theme.less_useless_gap = 0
 
 theme.icon_theme = nil
 
