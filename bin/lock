@@ -1,0 +1,10 @@
+#!/bin/sh
+
+function athome() {
+    [[ $(nmcli d wifi list | grep Smuffelmorv | wc -l) == "1" ]]
+}
+
+if ! athome; then
+    slock &
+fi
+
