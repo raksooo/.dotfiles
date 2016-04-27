@@ -3,6 +3,11 @@
 # Caps as escape
 setxkbmap se -option 'lv3:caps_switch'
 xcape -e 'ISO_Level3_Shift=Escape'
+
+# No dead keys
+setxkbmap se -variant nodeadkeys
+
+# Xmodmap
 [[ -f ~/.Xmodmap ]] && xmodmap ~/.Xmodmap
 
 # Xresources
@@ -23,9 +28,6 @@ toggleTrackpad &
 sleep 0.5 && qutebrowser & # To allow network to connect
 urxvt &
 urxvt &
-
-# Startup sound
-sleep 3 && mpg123 ~/.local/share/rascal/boot.mp3 &
 
 # Start awesome
 exec awesome
