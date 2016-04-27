@@ -16,7 +16,7 @@ if [ $1 == "max" ]; then
     new=$max
 elif [ $1 == "min" ]; then
     new=$min
-    sleep 0.1 && xset dpms force off
+    sleep 0.5 && xset dpms force off &
 elif [ $1 == "abs" ]; then
     new=$2
 else
