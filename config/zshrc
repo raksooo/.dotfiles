@@ -53,9 +53,6 @@ source liquidprompt
 
 ## Start X
 if [[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] then
-    echo "\n" >> $HOME/startx.log
-    date >> $HOM/startx.log
-    startx >> $HOME/startx.log
-    #exec startx
+    exec startx
 fi
 
