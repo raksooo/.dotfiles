@@ -7,4 +7,5 @@ keycode 44 = j J j J bracketleft bracketleft
 keycode 45 = k K k K parenleft parenleft
 keycode 46 = l L l L parenright parenright
 keycode 47 = odiaeresis Odiaeresis odiaeresis Odiaeresis bracketright bracketright
+keycode 48 = adiaeresis Adiaeresis adiaeresis Adiaeresis braceright braceright
 
