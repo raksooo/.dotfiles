@@ -1,0 +1,5 @@
+#!/bin/sh
+
+#/usr/bin/mpv --hwdec=no --ytdl-format=best "$*"
+/usr/bin/mpv --ytdl-format=best "$*"
+
