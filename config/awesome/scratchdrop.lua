@@ -126,7 +126,7 @@ function toggle(prog, vert, horiz, width, height, sticky, screen)
 
             c:connect_signal("unfocus", function()
                 if not c.hidden then
-                    toggle(prog)
+                    c.hidden = true
                 end
             end)
         end
