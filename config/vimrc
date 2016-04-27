@@ -101,6 +101,7 @@ map <leader>f :noh<CR>
 map <leader>w :w<CR><CR>
 
 " Paranthesis
+inoremap {<CR> {<CR>}<Esc>ko
 nnoremap ( "="("<CR>P
 nnoremap ) "=")"<CR>p
 nnoremap [ "="["<CR>P
