@@ -1,15 +1,5 @@
 local tools = {}
 
-function tools.newSeperator(text)
-    seperator = wibox.widget.textbox()
-    seperator:set_markup("<span color=\"#333333\">" .. text .. "</span>")
-    return seperator
-end
-tools.spacing = tools.newSeperator("  ")
-tools.mediumspacing = tools.newSeperator("   ")
-tools.bigspacing = tools.newSeperator("     ")
-tools.seperator = tools.newSeperator("         ")
-
 tools.lastConnected = 0
 function tools.connected(online, offline)
     if tools.lastConnected > os.time() - 15 then
@@ -80,14 +70,6 @@ function tools.initInterval(f, interval, first, needsInternet)
         tools.setInterval(f, interval)
         tools.setTimeout(f, first)
     end
-end
-
-function tools.margin(widget, margin)
-    if margin == nil then
-        margin = 4
-    end
-    margin = wibox.layout.margin(widget, 0, 0, margin + 1, margin)
-    return margin
 end
 
 function curry(f, a, b, c, d, e, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u)

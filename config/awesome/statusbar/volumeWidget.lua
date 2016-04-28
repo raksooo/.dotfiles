@@ -46,7 +46,7 @@ function volumeWidget(terminal)
     volumeText = wibox.widget.textbox()
     volumeText:set_markup("A: ")
     volumeWidget:add(volumeText)
-    volumeWidget:add(tools.margin(alsawidget.bar, 6))
+    volumeWidget:add(alsawidget.bar)
     return volumeWidget
 end
 

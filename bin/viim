@@ -1,0 +1,5 @@
+#!/bin/sh
+
+cat $1 | nms
+vim $*
+

@@ -19,7 +19,6 @@ function battery.widget()
     tools.initInterval(battery.update, 15)
 
     batteryWidget:add(battery.text)
-    batteryWidget:add(tools.spacing)
     batteryWidget:add(battery.battery)
     return batteryWidget
 end
@@ -88,7 +87,7 @@ function formatBatteryContent(state, percentage, timeleft)
     end
 
     text = "<span color=\"" .. color .. "\">" .. text .. percentage .. "%</span>"
-    battery.text:set_markup(text)
+    battery.text:set_markup(text .. " ")
     battery.tooltip:set_text("  " .. tooltip .. "  ")
     battery.battery:set_color(color)
     battery.battery:set_value(percentage/100)

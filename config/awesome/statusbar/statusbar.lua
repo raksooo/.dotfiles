@@ -2,17 +2,36 @@ local battery = require("statusbar/batteryWidget")
 local pacman = require("statusbar/pacmanWidget")
 require("statusbar/volumeWidget")
 local gdrive = require("statusbar/gdriveWidget")
---local ether = require("statusbar/etherWidget")
+
+function spacing(n)
+    local text = ""
+    for i=1, n do
+        text = text .. " "
+    end
+    return seperator(text)
+end
+
+function seperator(text)
+    local seperator = wibox.widget.textbox()
+    seperator:set_markup("<span color=\"#333333\">" .. text .. "</span>")
+    return seperator
+end
+
+function margin(widget, margin)
+    if margin == nil then
+        margin = 4
+    end
+    margin = wibox.layout.margin(widget, 0, 0, margin + 1, margin)
+    return margin
+end
 
 -- Define a tag table which hold all screen tags.
 tags = {}
 for s = 1, screen.count() do
-    -- Each screen has its own tag table.
     tags[s] = awful.tag({ " 1 ", " 2 ", " 3 ", " 4 ", " 5 ", " 6 " }, s, layouts[1])
 end
 
 statusbar = {}
-mypromptbox = {}
 mylayoutbox = {}
 mytaglist = {}
 mytaglist.buttons = awful.util.table.join(
@@ -24,20 +43,17 @@ mytaglist.buttons = awful.util.table.join(
                     awful.button({ }, 5, function(t) awful.tag.viewprev(awful.tag.getscreen(t)) end)
                     )
 
-local pacmanwidget = tools.margin(pacman.widget(), 3)
-local volumewidget = volumeWidget(terminal)
-local batterywidget = tools.margin(battery.widget(), 6)
+local pacmanwidget = margin(pacman.widget(), 3)
+local volumewidget = margin(volumeWidget(terminal), 6)
+local batterywidget = margin(battery.widget(), 6)
 local clockwidget = awful.widget.textclock()
-local gdrivewidget = tools.margin(gdrive.widget(), 2)
---local etherwidget = ether.widget()
+local gdrivewidget = margin(gdrive.widget(), 2)
 
 clockwidget:set_font("sans 9")
 
 for s = 1, screen.count() do
     statusbar[s] = awful.wibox({ position = "bottom", screen = s, height = 38, opacity = beautiful.statusbar_opacity })
 
-    -- Create a promptbox for each screen
-    mypromptbox[s] = awful.widget.prompt()
     -- Create a taglist widget
     mytaglist[s] = awful.widget.taglist(s, awful.widget.taglist.filter.all, mytaglist.buttons)
 
@@ -45,30 +61,24 @@ for s = 1, screen.count() do
     local left_layout = wibox.layout.fixed.horizontal()
     --left_layout:add(mylauncher)
     left_layout:add(mytaglist[s])
-    left_layout:add(tools.bigspacing)
-    left_layout:add(mypromptbox[s])
-    left_layout:add(tools.spacing)
 
     -- Widgets that are aligned to the right
     local right_layout = wibox.layout.fixed.horizontal()
     right_layout:add(pacmanwidget)
 
-        right_layout:add(tools.seperator)
+        right_layout:add(spacing(9))
     right_layout:add(volumewidget)
 
-        right_layout:add(tools.seperator)
+        right_layout:add(spacing(9))
     right_layout:add(batterywidget)
-        right_layout:add(tools.spacing)
+        right_layout:add(spacing(8))
 
---        right_layout:add(tools.seperator)
---    right_layout:add(etherwidget)
-
-        right_layout:add(tools.spacing)
+        right_layout:add(spacing(0))
     right_layout:add(gdrivewidget)
 
     if s == 1 then
         right_layout:add(wibox.widget.systray())
-        right_layout:add(tools.bigspacing)
+        right_layout:add(spacing(7))
     end
 
     -- Now bring it all together

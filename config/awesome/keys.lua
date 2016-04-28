@@ -78,9 +78,6 @@ globalkeys = awful.util.table.join(
         end),
 
     -- Standard program
-    awful.key({ modkey,           }, "r", function()
-            mypromptbox[mouse.screen]:run()
-        end),
     awful.key({ modkey,	          }, "z", function()
             drop(terminal, "top", "center", 1, 0.35)
         end),
