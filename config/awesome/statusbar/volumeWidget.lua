@@ -14,7 +14,7 @@ function volumeWidget(terminal)
     alsawidget.bar = awful.widget.progressbar()
     volumeWidget = wibox.layout.fixed.horizontal()
     alsawidget.bar:set_vertical(true)
-    alsawidget.bar:set_width (15)
+    alsawidget.bar:set_width (14)
     alsawidget.bar:set_background_color ("#002b36")
     alsawidget.bar:set_color (alsawidget.colors.unmute)
     volumeWidget:buttons (awful.util.table.join (

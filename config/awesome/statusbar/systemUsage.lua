@@ -3,7 +3,7 @@ systemUsage.colors = {
     low = "#859900",
     medium = "#b58900",
     high = "#cb4b16",
-    background = "#494B4F"
+    background = "#002b36"
 }
 function systemUsage.widget()
     local systemUsageWidget = wibox.layout.fixed.horizontal()

@@ -4,7 +4,8 @@ battery.colors = {
     high = "#859900",
     low = "#b58900",
     critical = "#cb4b16",
-    background = "#494B4F"
+    background = "#002b36"
+    --background = "#494B4F"
 }
 function battery.widget()
     batteryWidget = wibox.layout.fixed.horizontal()
@@ -13,7 +14,7 @@ function battery.widget()
 
     battery.battery = awful.widget.progressbar()
     battery.battery:set_vertical(true)
-    battery.battery:set_width(15)
+    battery.battery:set_width(14)
     battery.battery:set_background_color(battery.colors.background)
 
     tools.initInterval(battery.update, 15)
