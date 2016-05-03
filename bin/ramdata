@@ -1,0 +1,7 @@
+#!/bin/sh
+
+free | tr -s ' ' | cut -d ' ' -f 3 | head -2 | tail -1
+free | tr -s ' ' | cut -d ' ' -f 2 | head -2 | tail -1
+free -h | tr -s ' ' | cut -d ' ' -f 3 | head -2 | tail -1
+free -h | tr -s ' ' | cut -d ' ' -f 2 | head -2 | tail -1
+
