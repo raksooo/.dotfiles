@@ -1,4 +1,7 @@
 #!/bin/sh
 
-midori -e identify-as=MIDORI_IDENT_SAFARI -e show-navigationbar=false -e zoom-level=3 -a http://messenger.com
+zoomIn="-e ZoomIn -e ZoomIn -e ZoomIn -e ZoomIn -e ZoomIn"
+
+midori -e identify-as=MIDORI_IDENT_SAFARI -e show-navigationbar=false \
+    $zoomIn -a http://messenger.com
 

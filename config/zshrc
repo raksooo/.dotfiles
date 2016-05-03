@@ -52,7 +52,7 @@ source $DOTFILES/config/key-bindings.zsh
 source liquidprompt
 
 ## Start X
-if [[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] then
-    exec startx
+if [[ -z $DISPLAY && $XDG_VTNR -eq 1 ]]; then
+    startx
 fi
 

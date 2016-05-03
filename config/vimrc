@@ -23,21 +23,21 @@ call vundle#end()
 filetype plugin indent on
 
 " Theme
-set background=dark
-"set background=light
-let g:solarized_termtrans=0
-let g:solarized_termcolors=256
-let g:solarized_termtrans=1
-let g:solarized_term = 1
-colorscheme solarized
-"colorscheme PaperColor
+"set background=dark
+set background=light
+"let g:solarized_termtrans=0
+"let g:solarized_termcolors=256
+"let g:solarized_termtrans=1
+"let g:solarized_term = 1
+"colorscheme solarized
+colorscheme PaperColor
 
-hi LineNr ctermfg=grey ctermbg=none
-hi CursorLine ctermbg=237
-hi CursorLineNr ctermbg=237
-hi Folded cterm=none ctermbg=234
-"hi Colorcolumn ctermbg=24
-hi Colorcolumn ctermbg=0
+"hi LineNr ctermfg=grey ctermbg=none
+"hi CursorLine ctermbg=237
+"hi CursorLineNr ctermbg=237
+"hi Folded cterm=none ctermbg=234
+hi Colorcolumn ctermbg=24
+"hi Colorcolumn ctermbg=0
 
 highlight ExtraWhitespace ctermbg=red
 match ExtraWhitespace /\s\+$/
