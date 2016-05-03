@@ -50,7 +50,7 @@ function updateCpu(callback)
             percentageh = sum/#lines
             percentage = percentageh/100
 
-            local color = percentageToColor(percentage, 0.25, 0.5)
+            local color = percentageToColor(percentage, 0.33, 0.66)
             systemUsage.cpu:set_color(color)
             systemUsage.cpu:set_value(percentage)
 
