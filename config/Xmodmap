@@ -2,10 +2,21 @@ keycode 16 = 7 slash 7 slash braceleft backslash
 keycode 17 = 8 parenleft 8 8 bracketleft braceleft
 keycode 18 = 9 parenright 8 8 bracketright braceright
 
+keycode 30 = u U u U slash slash
+keycode 31 = i I i I ampersand ampersand
+keycode 32 = o O o O bar bar
+keycode 33 = p P p P equal equal
+keycode 34 = aring Aring aring Aring backslash backslash
+keycode 38 = a A a A exclam exclam
+keycode 39 = s S s S quotedbl quotedbl
+keycode 40 = d D d D less less
+keycode 41 = f F f F greater greater
+keycode 42 = g G g G at at
 keycode 43 = h H h H braceleft braceleft
 keycode 44 = j J j J bracketleft bracketleft
 keycode 45 = k K k K parenleft parenleft
 keycode 46 = l L l L parenright parenright
 keycode 47 = odiaeresis Odiaeresis odiaeresis Odiaeresis bracketright bracketright
 keycode 48 = adiaeresis Adiaeresis adiaeresis Adiaeresis braceright braceright
+keycode 58 = m M m M dollar dollar
 
