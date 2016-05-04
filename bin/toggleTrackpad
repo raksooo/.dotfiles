@@ -1,7 +1,12 @@
 #!/bin/sh
 
-on=$(synclient -l | grep -c "TouchpadOff.*=.*0")
+if [[ $1 ]]; then
+    on=$([[ $1 == 1 ]] && echo 0 || echo 1)
+else
+    on=$(synclient -l | grep -c "TouchpadOff.*=.*0")
+fi
 synclient TouchpadOff=$on;
+
 if [[ $on == '1' ]]; then
     xdotool mousemove 3200 1800
 else
