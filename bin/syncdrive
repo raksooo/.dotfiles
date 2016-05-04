@@ -1,11 +1,14 @@
 #!/bin/sh
 
-sleep 5
-cd ~/gdrive/
+cd ~/.grive/
 
 function gdriveWidgetUpdate {
     echo "gdrive.update()" | awesome-client
 }
 
-# pidof grive || (gdriveWidgetUpdate && grive && sleep 2 && gdriveWidgetUpdate || gdriveWidgetUpdate &)
+pidof grive
+if [ $? -ne 0 ]; then
+    grive && gdriveWidgetUpdate || gdriveWidgetUpdate &
+    gdriveWidgetUpdate
+fi
 

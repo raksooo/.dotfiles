@@ -43,7 +43,8 @@ alt + space
 
 # Take screenshot
 Print
-    maim /home/oskar/screenshots/$(date +%F-%T).png && mpg123 ~/.local/share/rascal/screenshot.mp3
+    maim /home/oskar/documents/Bilder/screenshots/$(date +%F-%T).png \
+        && mpg123 ~/.local/share/rascal/screenshot.mp3
 
 ctrl + m
     toggleTrackpad

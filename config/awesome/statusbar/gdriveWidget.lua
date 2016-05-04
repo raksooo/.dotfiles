@@ -1,31 +1,26 @@
 gdrive = {}
 function gdrive.widget()
-    gdriveWidget = wibox.layout.fixed.horizontal()
+    gdrive.gdriveWidget = wibox.layout.fixed.horizontal()
     gdrive.image = wibox.widget.imagebox()
+    gdrive.image:set_image("/home/oskar/.config/awesome/resources/gdrive.png")
     gdrive.padding = wibox.widget.textbox()
-    gdriveWidget:add(gdrive.padding)
-    gdriveWidget:add(gdrive.image)
-    gdriveWidget:add(gdrive.padding)
+    gdrive.padding:set_text("    ")
 
     gdrive.update()
 
-    return gdriveWidget
+    return gdrive.gdriveWidget
 end
 
 function gdrive.update()
-    tools.setTimeout(function()
-        fh = io.popen("pidof grive")
-        data = fh:read("*a")
-        fh:close()
+    fh = io.popen("pidof grive")
+    data = fh:read("*a")
+    fh:close()
 
-        if data == "" then
-            gdrive.image:set_image("/home/rascal/.config/awesome/resources/transparent.png")
-            gdrive.padding:set_text("")
-        else
-            gdrive.image:set_image("/home/rascal/.config/awesome/resources/gdrive.png")
-            gdrive.padding:set_text("   ")
-        end
-    end, 3)
+    if data == "" then
+        gdrive.gdriveWidget:remove_widgets(gdrive.padding, gdrive.image)
+    else
+        gdrive.gdriveWidget:add(gdrive.image, gdrive.padding)
+    end
 end
 
 return gdrive

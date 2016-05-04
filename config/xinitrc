@@ -24,7 +24,7 @@ sxhkd &
 toggleTrackpad &
 
 # Autostart applications
-# sleep 60 && syncdrive &
+sleep 10 && syncdrive &
 sleep 0.5 && qutebrowser & # To allow network to connect
 urxvt &
 urxvt &

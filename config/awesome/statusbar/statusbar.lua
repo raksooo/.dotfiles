@@ -49,7 +49,7 @@ local systemUsage = margin(systemUsage.widget(), 6)
 local volumewidget = margin(volumeWidget(terminal), 6)
 local batterywidget = margin(battery.widget(), 6)
 local clockwidget = awful.widget.textclock()
-local gdrivewidget = margin(gdrive.widget(), 2)
+local gdrivewidget = margin(gdrive.widget(), 4)
 
 clockwidget:set_font("sans 9")
 
