@@ -98,6 +98,18 @@ function split(inputstr, sep)
         return t
 end
 
+function join(delimiter, list)
+    local len = #list
+    if len == 0 then
+        return ""
+    end
+    local string = list[1]
+    for i = 2, len do
+        string = string .. delimiter .. list[i]
+    end
+    return string
+end
+
 function trim(s)
     local n = s:find"%S"
     return n and s:match(".*%S", n) or ""
