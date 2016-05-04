@@ -2,7 +2,7 @@ local battery = require("statusbar/batteryWidget")
 local pacman = require("statusbar/pacmanWidget")
 require("statusbar/volumeWidget")
 local gdrive = require("statusbar/gdriveWidget")
-local systemUsage = require("statusbar/systemUsage")
+local systemUsage = require("statusbar/systemUsageWidget")
 
 function spacing(n)
     local text = ""
