@@ -1,4 +1,5 @@
 systemUsage = {}
+systemUsage.tooltip = {}
 systemUsage.colors = {
     low = "#859900",
     medium = "#b58900",
@@ -9,7 +10,7 @@ function systemUsage.widget()
     local systemUsageWidget = wibox.layout.fixed.horizontal()
     local label = wibox.widget.textbox()
     label:set_text("S: ")
-    systemUsage.tooltip = awful.tooltip ({ objects = { systemUsageWidget } })
+    systemUsage.tooltip.widget = awful.tooltip ({ objects = { systemUsageWidget } })
 
     systemUsage.ram = awful.widget.progressbar()
     systemUsage.ram:set_vertical(true)
@@ -30,12 +31,31 @@ function systemUsage.widget()
 end
 
 function systemUsage.update()
-    systemUsage.tooltipText = ""
     updateCpu(function()
-        updateRam(function()
-            systemUsage.tooltip:set_text(systemUsage.tooltipText)
+        updateTemperature(function()
+            updateRam(function()
+                local texts = {
+                    systemUsage.tooltip.ram,
+                    systemUsage.tooltip.cpu,
+                    systemUsage.tooltip.temperatures
+                }
+                local text = join("\n", texts)
+                systemUsage.tooltip.widget:set_text(text)
+            end)
         end)
     end)
+end
+
+function updateTemperature(callback)
+    asyncshell.request("sensors | tail -4 | head -3 | sed 's/.*://' | sed 's/+//g' | tr -s ' ' | cut -d ' ' -f 2",
+        function(data)
+            local lines = split(data, "\n")
+            systemUsage.tooltip.temperatures = "Temp: " .. join(", ", lines)
+
+            if callback ~= nil then
+                callback()
+            end
+        end)
 end
 
 function updateCpu(callback)
@@ -54,8 +74,8 @@ function updateCpu(callback)
             systemUsage.cpu:set_color(color)
             systemUsage.cpu:set_value(percentage)
 
-            local text = "CPU: " .. sum .. "% (" .. percentageh .. "%)"
-            systemUsage.tooltipText = systemUsage.tooltipText .. text
+            systemUsage.tooltip.cpu = "CPU: " .. sum .. "% ("
+                .. percentageh .. "%)"
 
             if callback ~= nil then
                 callback()
@@ -75,9 +95,8 @@ function updateRam(callback)
             local percentage = free / total
             local percentageh = round(100 * percentage)
 
-            local text = "RAM: " .. percentageh .. "% in use ("
+            systemUsage.tooltip.ram = "RAM: " .. percentageh .. "% in use ("
                 .. freeh .. "/" .. totalh .. ")"
-            systemUsage.tooltipText = systemUsage.tooltipText .. "\n" .. text
 
             local color = percentageToColor(percentage, 0.5, 0.75)
             systemUsage.ram:set_color(color)
