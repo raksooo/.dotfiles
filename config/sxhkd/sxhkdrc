@@ -49,3 +49,7 @@ Print
 ctrl + m
     toggleTrackpad
 
+# Restore wifi connection
+XF86Search
+    reconnectWifi
+
