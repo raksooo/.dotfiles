@@ -100,6 +100,8 @@ map <leader>c zA
 map <leader>f :noh<CR>
 map <leader>w :w<CR><CR>
 
+inoremap /** /**<CR>/<Esc>O
+
 " Paranthesis
 inoremap {<CR> {<CR>}<Esc>ko
 nnoremap ( "="("<CR>P

@@ -42,7 +42,7 @@ theme.naughty_border_width = 1
 theme.naughty_border_color = "#268bd2"
 
 theme.systray_icon_spacing = 2
-theme.useless_gap = 20
+theme.useless_gap = 19
 theme.less_useless_gap = 0
 
 theme.icon_theme = nil
