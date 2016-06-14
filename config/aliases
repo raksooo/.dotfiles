@@ -25,9 +25,6 @@ alias gsh='git push'
 
 #ssh
 alias irc='mosh irc'
-alias pi='mosh pi'
-alias opi='ssh opi'
-alias spi='ssh pi'
 
 #other
 alias externalmonitor='xrandr --output DP1 --auto --right-of eDP1'
@@ -38,8 +35,6 @@ alias weather='curl --silent wttr.in/gothenburg | head -n 17'
 alias moreweather='curl --silent wttr.in/gothenburg'
 
 alias feh='feh -.'
-
-alias startphone='sudo fastboot reboot'
 
 alias spotify='spotify --force-device-scale-factor=1.7'
 

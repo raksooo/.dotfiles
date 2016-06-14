@@ -93,6 +93,7 @@ globalkeys = awful.util.table.join(
 )
 
 clientkeys = awful.util.table.join(
+    awful.key({ modkey,           }, "o",  function (c) c:move_to_screen() end),
     awful.key({ modkey,           }, "f", function(c)
             c.fullscreen = not c.fullscreen
         end),
