@@ -137,12 +137,10 @@ tag.connect_signal("property::selected", function(t)
     if t.selected then
         if n == 1 then
             os.execute("toggleTrackpad 0")
-        elseif n == 2 or n == 6 then
-            os.execute("toggleTrackpad 1")
         end
     else
-        if n == 2 or n == 6 then
-            os.execute("toggleTrackpad 0")
+        if n == 1 then
+            os.execute("toggleTrackpad 1")
         end
     end
 end)
