@@ -132,19 +132,6 @@ awful.rules.rules = {
 }
 -- }}}
 
-tag.connect_signal("property::selected", function(t)
-    local n = tonumber(t.name)
-    if t.selected then
-        if n == 1 then
-            os.execute("toggleTrackpad 0")
-        end
-    else
-        if n == 1 then
-            os.execute("toggleTrackpad 1")
-        end
-    end
-end)
-
 -- {{{ Signals
 -- Signal function to execute when a new client appears.
 client.connect_signal("manage", function (c, startup)
