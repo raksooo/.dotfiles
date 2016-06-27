@@ -46,9 +46,6 @@ Print
     maim /home/oskar/documents/Bilder/screenshots/$(date +%F-%T).png \
         && mpg123 ~/.local/share/rascal/screenshot.mp3
 
-ctrl + m
-    toggleTrackpad
-
 # Restore wifi connection
 XF86Search
     reconnectWifi
