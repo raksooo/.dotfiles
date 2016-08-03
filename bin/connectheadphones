@@ -1,7 +1,0 @@
-#!/usr/bin/env sh
-
-tmux new -d -s headphones 'bluetoothctl'
-tmux send-keys -t headphones 'power on' C-m
-tmux send-keys -t headphones 'connect 5C:EB:68:40:30:F5' C-m
-sleep 10 && tmux kill-session -t headphones &
-

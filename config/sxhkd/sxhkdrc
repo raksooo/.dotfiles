@@ -1,13 +1,13 @@
 # Screen brightness
 
 XF86MonBrightnessDown
-    adjustBrightness -50
+    brightness -50
 XF86MonBrightnessUp
-    adjustBrightness 50
+    brightness 50
 super + F7
-    adjustBrightness min
+    brightness min
 F7
-    adjustBrightness max
+    brightness max
 
 # Playback control
 XF86AudioPlay

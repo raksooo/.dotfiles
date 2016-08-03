@@ -67,6 +67,7 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Shift"   }, ",", curry(awful.tag.incnmaster, -1)),
 
     awful.key({ modkey, "Control" }, "j", curry(awful.screen.focus_relative,  1)),
+    awful.key({ modkey,           }, "o", curry(awful.screen.focus_relative,  1)),
     awful.key({ modkey, "Control" }, "k", curry(awful.screen.focus_relative, -1)),
 
     awful.key({ modkey,           }, "u", awful.client.urgent.jumpto),
@@ -93,7 +94,7 @@ globalkeys = awful.util.table.join(
 )
 
 clientkeys = awful.util.table.join(
-    awful.key({ modkey,           }, "o",  function (c) c:move_to_screen() end),
+    awful.key({ "Mod1",           }, "o",  function (c) c:move_to_screen() end),
     awful.key({ modkey,           }, "f", function(c)
             c.fullscreen = not c.fullscreen
         end),

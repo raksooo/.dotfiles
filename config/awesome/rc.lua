@@ -150,11 +150,7 @@ client.connect_signal("manage", function (c, startup)
 end)
 
 client.connect_signal("focus", function(c)
-    if c.class == "URxvt" then
-        c.opacity = 0.96
-    else
-        c.opacity = beautiful.opacity_focus
-    end
+    c.opacity = beautiful.opacity_focus
     c.border_color = beautiful.border_focus
 
     if c.maximized_horizontal == true and c.maximized_vertical == true then
@@ -171,4 +167,9 @@ client.connect_signal("unfocus", function(c)
     c.border_width = beautiful.border_width
 end)
 -- }}}
+
+local handle = io.popen("uname -snr")
+local result = handle:read("*a")
+handle:close()
+tools.notify("Linux version", trim(result))
 

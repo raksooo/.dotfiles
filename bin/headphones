@@ -1,0 +1,17 @@
+#!/usr/bin/env sh
+
+if [[ $1 == "off" ]]; then
+    tmux new -d -s headphones 'bluetoothctl'
+    tmux send-keys -t headphones 'power off' C-m
+    sleep 1 && tmux kill-session -t headphones
+else
+    sudo rfkill unblock bluetooth
+    sleep 0.1
+    tmux new -d -s headphones 'bluetoothctl'
+    tmux send-keys -t headphones 'power on' C-m
+    sleep 0.1
+    tmux send-keys -t headphones 'connect 5C:EB:68:40:30:F5' C-m
+    sleep 10
+    tmux kill-session -t headphones
+fi
+

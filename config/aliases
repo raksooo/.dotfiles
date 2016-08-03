@@ -27,8 +27,6 @@ alias gsh='git push'
 alias irc='mosh irc'
 
 #other
-alias externalmonitor='xrandr --output DP1 --auto --right-of eDP1'
-alias externalmonitoroff='xrandr --output DP1 --off'
 alias clearram='sync && echo 3 | sudo tee /proc/sys/vm/drop_caches > /dev/null'
 
 alias weather='curl --silent wttr.in/gothenburg | head -n 17'
