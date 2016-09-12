@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+
+if [[ "types" == $1* ]]; then
+    URL="http://www.cse.chalmers.se/edu/year/2016/course/DAT140/"
+elif [[ "physics" == $1* ]]; then
+    URL="https://pingpong.chalmers.se/courseId/5718/courseLatestNews.do"
+fi
+
+chromium "$URL" 2<&1 &> /dev/null
+
