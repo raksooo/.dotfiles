@@ -47,7 +47,7 @@ function systemUsage.update()
 end
 
 function updateTemperature(callback)
-    asyncshell.request("sensors | tail -4 | head -3 | sed 's/.*://' | sed 's/+//g' | tr -s ' ' | cut -d ' ' -f 2",
+    asyncshell.request("sensors pch_skylake-virtual-0 | tail -2 | head -1 | sed 's/.*://' | sed 's/+//g' | tr -s ' ' | cut -d ' ' -f 2",
         function(data)
             local lines = split(data, "\n")
             systemUsage.tooltip.temperatures = "Temp: " .. join(", ", lines)

@@ -18,6 +18,16 @@ if [[ $1 == "init" ]]; then
     cp -r $2 $tmpdir
     common $2.gpg
     rm -rf $2
+elif [[ $1 == "ro" ]]; then
+    gpg --batch --yes --output $tmparchive -d $2
+    mkdir $tmpdir
+    tar -zxf $tmparchive --directory $tmpdir
+    rm $tmparchive
+
+    $TERMINAL -cd $tmpdir &> /dev/null
+
+    rm -rf $tmpdir
+    rm -rf $tmparchive
 else
     gpg --batch --yes --output $tmparchive -d $1
     mkdir $tmpdir

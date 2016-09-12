@@ -1,4 +1,5 @@
 #!/usr/bin/env sh
 
-curl --data "url=$1" "192.168.1.2:8081/play"
+URL=$(echo -n "$1" | base64)
+curl -X POST --data "url=$URL" "192.168.1.2:8081/play"
 
