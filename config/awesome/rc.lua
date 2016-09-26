@@ -141,6 +141,9 @@ client.connect_signal("manage", function (c, startup)
             client.focus:raise()
         end
     end
+    if c.class == "http___messenger_com" then
+        messengerWindow = c
+    end
 
     if not startup and not c.size_hints.user_position
             and not c.size_hints.program_position then

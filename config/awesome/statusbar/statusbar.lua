@@ -1,5 +1,6 @@
 local battery = require("statusbar/batteryWidget")
 local pacman = require("statusbar/pacmanWidget")
+local messenger = require("statusbar/messengerWidget")
 require("statusbar/volumeWidget")
 local gdrive = require("statusbar/gdriveWidget")
 local systemUsage = require("statusbar/systemUsageWidget")
@@ -45,6 +46,7 @@ mytaglist.buttons = awful.util.table.join(
                     )
 
 local pacmanwidget = margin(pacman.widget(), 3)
+local messengerwidget = messenger.widget()
 local systemUsage = margin(systemUsage.widget(), 6)
 local volumewidget = margin(volumeWidget(terminal), 6)
 local batterywidget = margin(battery.widget(), 6)
@@ -63,6 +65,8 @@ for s = 1, screen.count() do
     local left_layout = wibox.layout.fixed.horizontal()
     --left_layout:add(mylauncher)
     left_layout:add(mytaglist[s])
+        left_layout:add(spacing(9))
+    left_layout:add(messengerwidget)
 
     -- Widgets that are aligned to the right
     local right_layout = wibox.layout.fixed.horizontal()
