@@ -68,6 +68,7 @@ set autoindent
 set backspace=2
 set colorcolumn=80
 set cursorline
+set dir=~/.vim/swap//
 set expandtab
 set foldmethod=indent
 set foldnestmax=2
