@@ -83,7 +83,7 @@ globalkeys = awful.util.table.join(
             drop(terminal, "top", "center", 1, 0.35)
         end),
     awful.key({ modkey,	          }, "x", function()
-            drop(messenger, "top", "right", 0.25, 1)
+            drop(messenger, "top", "right", 0.31, 1)
         end),
     awful.key({ modkey, "Control" }, "r", awesome.restart),
     awful.key({ modkey, "Shift"   }, "q", awesome.quit),
