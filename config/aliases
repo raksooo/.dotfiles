@@ -27,6 +27,7 @@ alias gsh='git push'
 alias irc='mosh irc'
 
 #other
+alias vim='nvim'
 alias clearram='sync && echo 3 | sudo tee /proc/sys/vm/drop_caches > /dev/null'
 
 alias weather='curl --silent wttr.in/gothenburg | head -n 17'

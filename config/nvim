@@ -1,0 +1,159 @@
+syntax on
+filetype plugin indent on
+
+call plug#begin('~/.config/nvim/plug')
+
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'carlitux/deoplete-ternjs', { 'do': 'sudo npm install -g tern' }
+Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
+
+Plug 'Raimondi/delimitMate'
+Plug 'airblade/vim-gitgutter'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+
+Plug 'altercation/vim-colors-solarized'
+Plug 'NLKNguyen/papercolor-theme'
+
+call plug#end()
+
+" Deoplete
+let g:deoplete#enable_at_startup = 1
+autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+" tern
+if exists('g:plugs["tern_for_vim"]')
+  let g:tern_show_argument_hints = 'on_hold'
+  let g:tern_show_signature_in_pum = 1
+endif
+" deoplete tab-complete
+inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+
+let g:deoplete#enable_ignore_case = 1
+let g:tern_request_timeout = 1
+
+" Theme
+"set background=dark
+set background=light
+"let g:solarized_termtrans=0
+"let g:solarized_termcolors=256
+"let g:solarized_termtrans=1
+"let g:solarized_term = 1
+"colorscheme solarized
+colorscheme PaperColor
+
+"hi LineNr ctermfg=grey ctermbg=none
+"hi CursorLine ctermbg=237
+"hi CursorLineNr ctermbg=237
+"hi Folded cterm=none ctermbg=234
+hi Colorcolumn ctermbg=24
+"hi Colorcolumn ctermbg=0
+
+highlight ExtraWhitespace ctermbg=red
+match ExtraWhitespace /\s\+$/
+
+" gitgutter
+hi SignColumn ctermbg=none
+hi GitGutterAdd ctermbg=none ctermfg=lightgreen
+hi GitGutterChange ctermbg=none ctermfg=yellow
+hi GitGutterDelete ctermbg=none ctermfg=red
+hi GitGutterChangeDelete ctermbg=none ctermfg=lightred
+
+" airline
+let g:airline_left_sep=''
+let g:airline_right_sep=''
+let g:airline#extensions#branch#enabled=1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#fnamemod = ':t'
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = ' '
+let g:airline#extensions#tabline#right_sep = ''
+let g:airline#extensions#tabline#show_buffers = 1
+"let g:airline_theme = 'solarized'
+let g:airline_theme = 'papercolor'
+
+" Settings
+set autoindent
+set backspace=2
+set colorcolumn=80
+set cursorline
+set dir=~/.vim/swap//
+set expandtab
+set foldmethod=indent
+set foldnestmax=2
+set hidden
+set hlsearch
+set ignorecase
+set number
+set ruler
+set scrolloff=10
+set shortmess=atI
+set shiftwidth=4
+set smartcase
+set smartindent
+set splitbelow
+set t_Co=256
+set tabstop=4
+set timeoutlen=400
+set title
+set undofile
+set undodir=~/.vim/undodir
+
+" Mappings
+map <space> <leader>
+
+map <leader>yy :.w !xclip -i<CR><CR>
+map <leader>YY :.w !xclip -i -selection clipboard<CR><CR>
+map <leader>p :r !xclip -o<CR>
+map <leader>P :r !xclip -o -selection clipboard<CR>
+
+map <leader>c zA
+map <leader>f :noh<CR>
+
+inoremap /** /**<CR>/<Esc>O
+
+" Paranthesis
+inoremap {<CR> {<CR>}<Esc>ko
+nnoremap ( "="("<CR>P
+nnoremap ) "=")"<CR>p
+nnoremap [ "="["<CR>P
+nnoremap ] "="]"<CR>p
+
+" Scrolling
+nnoremap <C-Up> 10k
+nnoremap <C-Down> 10j
+
+"" Buffers
+nmap <leader>t :enew<cr>" New
+nmap <leader>j :bnext<CR>" Next
+nmap <leader>k :bprevious<CR>" Previous
+nmap <leader>q :bp <BAR> bd #<CR>" Close
+nmap <leader>s :ls <CR>" List
+nmap <leader>n :badd %:h/<CR>:bnext<CR>
+nnoremap <Leader>g :e#<CR>
+nnoremap <Leader>1 :1b<CR>
+nnoremap <Leader>2 :2b<CR>
+nnoremap <Leader>3 :3b<CR>
+nnoremap <Leader>4 :4b<CR>
+nnoremap <Leader>5 :5b<CR>
+nnoremap <Leader>6 :6b<CR>
+nnoremap <Leader>7 :7b<CR>
+nnoremap <Leader>8 :8b<CR>
+nnoremap <Leader>9 :9b<CR>
+nnoremap <Leader>0 :10b<CR>
+
+" Terminal
+nnoremap <C-t> :15split term://zsh<CR>:startinsert<CR>
+tnoremap <Esc> <C-\><C-n>
+nnoremap <Leader>l :wincmd j<CR>
+nnoremap <Leader>h :wincmd k<CR>
+tnoremap <Leader>l :wincmd j<CR>
+tnoremap <Leader>h :wincmd k<CR>
+
+" Commands
+command! W w
+
+autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+autocmd BufWinLeave * call clearmatches()
+

@@ -16,7 +16,7 @@ Xft.dpi: 200
 URxvt.intensityStyles: false
 URxvt.scrollBar: false
 URxvt.urgentOnBell: true
-URxvt.font: xft:Monaco:size=7
+URxvt.font: xft:Monaco:size=7,
 ! clickable urls
 URxvt.perl-ext-common: default,matcher,vtwheel
 URxvt.url-launcher: /usr/bin/qutebrowser

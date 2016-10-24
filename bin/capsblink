@@ -1,0 +1,8 @@
+#!/usr/bin/env sh
+
+for i in $(seq 1 3); do
+    xdotool key Caps_Lock
+    xdotool key Caps_Lock
+    sleep 0.2
+done
+
