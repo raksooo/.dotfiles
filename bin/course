@@ -1,9 +1,11 @@
 #!/usr/bin/env sh
 
-if [[ "types" == $1* ]]; then
-    URL="http://www.cse.chalmers.se/edu/year/2016/course/DAT140/"
-elif [[ "physics" == $1* ]]; then
-    URL="https://pingpong.chalmers.se/courseId/5718/courseLatestNews.do"
+if [[ "graphics" == $1* ]]; then
+    URL="http://www.cse.chalmers.se/edu/course/TDA361/"
+elif [[ "math" == $1* ]]; then
+    URL="http://www.math.chalmers.se/Stat/Grundutb/CTH/mve051/1617/"
+elif [[ "datavetaren" == $1* ]]; then
+    URL="http://www.cse.chalmers.se/edu/course/DAT315/"
 fi
 
 chromium "$URL" 2<&1 &> /dev/null
