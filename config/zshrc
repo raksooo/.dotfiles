@@ -54,7 +54,8 @@ source liquidprompt
 
 ## Start X
 if [[ -z $DISPLAY && $XDG_VTNR -eq 1 ]]; then
-    clear
-    echo -e "\e[30m" && startx
+    # clear
+    # echo -e "\e[30m" && startx
+    startx
 fi
 

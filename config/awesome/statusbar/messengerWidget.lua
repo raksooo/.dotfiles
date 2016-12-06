@@ -1,17 +1,24 @@
 messengerW = {}
 function messengerW.widget()
-    messengerWidget = wibox.layout.fixed.horizontal()
-    messengerW.text = wibox.widget.textbox()
-    messengerWidget:add(messengerW.text)
+    messengerW.messengerWidget = wibox.layout.fixed.horizontal()
+    messengerW.icon = wibox.widget.imagebox()
+    messengerW.icon:set_image("/home/oskar/.config/awesome/resources/messenger.png")
+    messengerW.padding = wibox.widget.textbox()
+    messengerW.padding:set_text("     ")
+    messengerW.active = false
     tools.initInterval(messengerW.update, 3, true)
-    return messengerWidget
+    return messengerW.messengerWidget
 end
 
 function messengerW.update()
     if messengerWindow ~= nil and messengerWindow.name:len() > 12 and not messengerWindow.name:find("messenger.com/t/") then
-        messengerW.text:set_text(messengerWindow.name)
+        if not messengerW.active then
+            messengerW.active = true
+            messengerW.messengerWidget:add(messengerW.icon, messengerW.padding)
+        end
     else
-        messengerW.text:set_text('')
+        messengerW.active = false
+        messengerW.messengerWidget:remove_widgets(messengerW.padding, messengerW.icon)
     end
 end
 

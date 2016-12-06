@@ -17,7 +17,7 @@ function battery.widget()
     battery.battery:set_width(14)
     battery.battery:set_background_color(battery.colors.background)
 
-    tools.initInterval(battery.update, 15)
+    tools.initInterval(battery.update, 60)
 
     batteryWidget:add(battery.text)
     batteryWidget:add(battery.battery)

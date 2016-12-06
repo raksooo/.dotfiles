@@ -46,7 +46,7 @@ mytaglist.buttons = awful.util.table.join(
                     )
 
 local pacmanwidget = margin(pacman.widget(), 3)
-local messengerwidget = messenger.widget()
+local messengerwidget = margin(messenger.widget(), 4)
 local systemUsage = margin(systemUsage.widget(), 6)
 local volumewidget = margin(volumeWidget(terminal), 6)
 local batterywidget = margin(battery.widget(), 6)
@@ -65,8 +65,6 @@ for s = 1, screen.count() do
     local left_layout = wibox.layout.fixed.horizontal()
     --left_layout:add(mylauncher)
     left_layout:add(mytaglist[s])
-        left_layout:add(spacing(9))
-    left_layout:add(messengerwidget)
 
     -- Widgets that are aligned to the right
     local right_layout = wibox.layout.fixed.horizontal()
@@ -84,6 +82,7 @@ for s = 1, screen.count() do
 
         right_layout:add(spacing(0))
     right_layout:add(gdrivewidget)
+    right_layout:add(messengerwidget)
 
     if s == 1 then
         right_layout:add(wibox.widget.systray())
