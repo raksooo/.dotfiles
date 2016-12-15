@@ -1,14 +1,12 @@
 #!/bin/sh
 
-cd ~/.grive/
-
 function gdriveWidgetUpdate {
     echo "gdrive.update()" | awesome-client
 }
 
 pidof grive
 if [ $? -ne 0 ]; then
-    grive && gdriveWidgetUpdate || gdriveWidgetUpdate &
+    grive -p ~/.grive && gdriveWidgetUpdate || gdriveWidgetUpdate &
     gdriveWidgetUpdate
 fi
 

@@ -101,10 +101,15 @@ set undodir=~/.vim/undodir
 " Mappings
 map <space> <leader>
 
-map <leader>yy :.w !xclip -i<CR><CR>
-map <leader>YY :.w !xclip -i -selection clipboard<CR><CR>
-map <leader>p :r !xclip -o<CR>
-map <leader>P :r !xclip -o -selection clipboard<CR>
+" Copy to clipboard
+vnoremap  <leader>y  "+y
+nnoremap  <leader>Y  "+yg_
+nnoremap  <leader>y  "+y
+" Paste from clipboard
+nnoremap <leader>p "+p
+nnoremap <leader>P "+P
+vnoremap <leader>p "+p
+vnoremap <leader>P "+P
 
 map <leader>c zA
 map <leader>f :noh<CR>

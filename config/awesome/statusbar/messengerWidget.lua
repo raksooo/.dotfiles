@@ -11,7 +11,7 @@ function messengerW.widget()
 end
 
 function messengerW.update()
-    if messengerWindow ~= nil and messengerWindow.name:len() > 12 and not messengerWindow.name:find("messenger.com/t/") then
+    if messengerWindow ~= nil and messengerWindow.name:len() > 12 and not messengerWindow.name:find("messenger.com/t/") and not messengerWindow.name:find("messenger.com/new") then
         if not messengerW.active then
             messengerW.active = true
             messengerW.messengerWidget:add(messengerW.icon, messengerW.padding)
