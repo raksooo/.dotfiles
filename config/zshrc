@@ -1,8 +1,8 @@
 ## Paths
 export DOTFILES=$HOME/.dotfiles
 
-export PATH="$(ruby -e 'puts Gem.user_dir')/bin:$PATH"
-export PATH=$PATH:$HOME/.cabal/bin
+#export PATH="$(ruby -e 'puts Gem.user_dir')/bin:$PATH"
+#export PATH=$PATH:$HOME/.cabal/bin
 
 ## Completion
 zstyle ':completion:*' menu select
@@ -34,8 +34,8 @@ HISTFILE=~/.zhistory
 ## Export variables for shell
 export CLICOLOR=1
 
-export EDITOR=vim
-export VISUAL=vim
+export EDITOR=nvim
+export VISUAL=nvim
 export BROWSER=qutebrowser
 export TERMINAL=urxvt
 
@@ -54,8 +54,6 @@ source liquidprompt
 
 ## Start X
 if [[ -z $DISPLAY && $XDG_VTNR -eq 1 ]]; then
-    # clear
-    # echo -e "\e[30m" && startx
     startx
 fi
 

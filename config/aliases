@@ -4,14 +4,8 @@
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 
-#ls
-alias la='ls -a'
-alias ll='ls -l'
-
 #tmux
 alias tmux='tmux -2' # run with 256 colors
-alias trx='tmux resize -x'
-alias try='tmux resize -y'
 
 #git
 alias gs='git status'
@@ -23,11 +17,7 @@ alias gl='git log'
 alias gll='git pull'
 alias gsh='git push'
 
-#ssh
-alias irc='mosh irc'
-
 #other
-alias vim='nvim'
 alias clearram='sync && echo 3 | sudo tee /proc/sys/vm/drop_caches > /dev/null'
 
 alias weather='curl --silent wttr.in/gothenburg | head -n 17'
@@ -35,7 +25,6 @@ alias moreweather='curl --silent wttr.in/gothenburg'
 
 alias feh='feh -.'
 
+alias qutebrowser='qutebrowser --backend webengine'
 alias spotify='spotify --force-device-scale-factor=1.7'
-alias geth='geth --cache=4096'
-alias mist='/usr/bin/geth --cache=4096 & (sleep 3 && mist)'
 

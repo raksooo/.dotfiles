@@ -1,5 +1,0 @@
-#!/bin/sh
-
-ssid=$(nmcli -t -f active,ssid dev wifi | grep 'yes:' | sed 's/yes://')
-nmcli connection up id $ssid
-

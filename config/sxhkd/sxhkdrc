@@ -31,7 +31,7 @@ super + Return
 
 # Browser
 super + shift + Return
-    qutebrowser
+    qutebrowser --backend webengine
 
 # Launcher
 super + space
@@ -44,9 +44,5 @@ alt + space
 # Take screenshot
 Print
     maim /home/oskar/documents/Bilder/screenshots/$(date +%F-%T).png \
-        && mpg123 ~/.local/share/rascal/screenshot.mp3
-
-# Restore wifi connection
-XF86Search
-    reconnectWifi
+        && mpg123 ~/.local/share/oskar/screenshot.mp3
 
