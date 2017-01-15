@@ -34,6 +34,11 @@ function statusbar.new(s, placement, height)
         gap                = 50,
         screen             = s,
     })
+    awful.tag.add("1", {
+        layout             = awful.layout.layouts[1],
+        gap_single_client  = false,
+        screen             = s,
+    })
     awful.tag({ "2", "3", "4", "5", "6" }, s, awful.layout.layouts[1])
     t1:view_only()
 
