@@ -6,6 +6,8 @@ Xft.hintstyle: hintfull
 Xft.rgba: rgb
 Xft.dpi: 150
 
+*dpi: 150
+
 !URxvt
 URxvt.intensityStyles: false
 URxvt.scrollBar: false
