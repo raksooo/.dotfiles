@@ -1,102 +1,74 @@
-local battery = require("statusbar/batteryWidget")
-local pacman = require("statusbar/pacmanWidget")
-local messenger = require("statusbar/messengerWidget")
-require("statusbar/volumeWidget")
-local gdrive = require("statusbar/gdriveWidget")
-local systemUsage = require("statusbar/systemUsageWidget")
+local wibox = require("wibox")
+local awful = require("awful")
+local beautiful = require("beautiful")
 
-function spacing(n)
-    local text = ""
-    for i=1, n do
-        text = text .. " "
-    end
-    return seperator(text)
+local battery = require("statusbar/battery")
+local system = require("statusbar/system")
+volume = require("statusbar/volume")
+pacman = require("statusbar/pacman/pacman")
+
+beautiful.init("/home/oskar/.config/awesome/theme.lua")
+
+local statusbar = {}
+
+function statusbar.init(height)
+    statusbar.height = height
+    statusbar.textclock = wibox.widget.textclock()
+    statusbar.taglist_buttons = awful.util.table.join( awful.button({ }, 1, function(t) t:view_only() end) )
+
+    statusbar.battery = battery.create()
+    statusbar.system = system.create()
+    statusbar.volume = volume.create()
+    statusbar.pacman = pacman.create()
 end
 
-function seperator(text)
-    local seperator = wibox.widget.textbox()
-    seperator:set_markup("<span color=\"#333333\">" .. text .. "</span>")
-    return seperator
-end
-
-function margin(widget, margin)
-    if margin == nil then
-        margin = 4
-    end
-    margin = wibox.layout.margin(widget, 0, 0, margin + 1, margin)
-    return margin
-end
-
--- Define a tag table which hold all screen tags.
-tags = {}
-for s = 1, screen.count() do
-    tags[s] = awful.tag({ " 1 ", " 2 ", " 3 ", " 4 ", " 5 ", " 6 " }, s, layouts[1])
-end
-
-statusbar = {}
-mylayoutbox = {}
-mytaglist = {}
-mytaglist.buttons = awful.util.table.join(
-                    awful.button({ }, 1, awful.tag.viewonly),
-                    awful.button({ modkey }, 1, awful.client.movetotag),
-                    awful.button({ }, 3, awful.tag.viewtoggle),
-                    awful.button({ modkey }, 3, awful.client.toggletag),
-                    awful.button({ }, 4, function(t) awful.tag.viewnext(awful.tag.getscreen(t)) end),
-                    awful.button({ }, 5, function(t) awful.tag.viewprev(awful.tag.getscreen(t)) end)
-                    )
-
-local pacmanwidget = margin(pacman.widget(), 3)
-local messengerwidget = margin(messenger.widget(), 4)
-local systemUsage = margin(systemUsage.widget(), 6)
-local volumewidget = margin(volumeWidget(terminal), 6)
-local batterywidget = margin(battery.widget(), 6)
-local clockwidget = awful.widget.textclock()
-local gdrivewidget = margin(gdrive.widget(), 4)
-
-clockwidget:set_font("sans 9")
-
-for s = 1, screen.count() do
-    statusbar[s] = awful.wibox({ position = "bottom", screen = s, height = 38, opacity = beautiful.statusbar_opacity })
-
-    -- Create a taglist widget
-    mytaglist[s] = awful.widget.taglist(s, awful.widget.taglist.filter.all, mytaglist.buttons)
-
-    -- Widgets that are aligned to the left
-    local left_layout = wibox.layout.fixed.horizontal()
-    --left_layout:add(mylauncher)
-    left_layout:add(mytaglist[s])
-
-    -- Widgets that are aligned to the right
-    local right_layout = wibox.layout.fixed.horizontal()
-    right_layout:add(pacmanwidget)
-
-        right_layout:add(spacing(9))
-    right_layout:add(systemUsage)
-
-        right_layout:add(spacing(9))
-    right_layout:add(volumewidget)
-
-        right_layout:add(spacing(9))
-    right_layout:add(batterywidget)
-        right_layout:add(spacing(8))
-
-        right_layout:add(spacing(0))
-    right_layout:add(gdrivewidget)
-    right_layout:add(messengerwidget)
-
-    if s == 1 then
-        right_layout:add(wibox.widget.systray())
-        right_layout:add(spacing(7))
+function statusbar.new(s, placement, height)
+    if statusbar.height == nil then
+        statusbar.init(height)
     end
 
-    -- Now bring it all together
-    local layout = wibox.layout.align.horizontal()
-    layout:set_expand("none")
+    local t1 = awful.tag.add("1", {
+        layout             = awful.layout.layouts[1],
+        master_fill_policy = "master_width_factor",
+        gap_single_client  = true,
+        gap                = 50,
+        screen             = s,
+    })
+    awful.tag({ "2", "3", "4", "5", "6" }, s, awful.layout.layouts[1])
+    t1:view_only()
 
-    layout:set_left(left_layout)
-    layout:set_middle(clockwidget)
-    layout:set_right(right_layout)
+    s.mytaglist = awful.widget.taglist(s, awful.widget.taglist.filter.all, statusbar.taglist_buttons)
+    s.mywibox = awful.wibar({ position = placement, screen = s, height = statusbar.height, bg = beautiful.bg_statusbar })
 
-    statusbar[s]:set_widget(layout)
+    s.mywibox:setup {
+        layout = wibox.layout.flex.horizontal,
+        {
+            layout = wibox.layout.fixed.horizontal,
+            s.mytaglist
+        },
+        {
+            layout = wibox.layout.flex.horizontal,
+            {
+                align = "center",
+                font = "DejaVu 11",
+                widget = statusbar.textclock
+            }
+        },
+        {
+            layout = wibox.layout.align.horizontal,
+            { layout = wibox.layout.fixed.horizontal },
+            { layout = wibox.layout.fixed.horizontal },
+            {
+                layout = wibox.layout.fixed.horizontal,
+                statusbar.pacman,
+                statusbar.volume,
+                statusbar.system,
+                statusbar.battery,
+                wibox.widget.systray()
+            }
+        }
+    }
 end
+
+return statusbar
 

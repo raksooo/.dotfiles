@@ -1,8 +1,19 @@
-require("statusbar/volumeWidget")
+local naughty = require("naughty")
+local awful = require("awful")
+local hotkeys_popup = require("awful.hotkeys_popup").widget
 
-beautiful.init("/home/rascal/.config/awesome/theme.lua")
+local super = "Mod4"
+local alt = "Mod1"
+local control = "Control"
+local shift = "Shift"
 
-modkey = "Mod4"
+function curry(f, a, b, c, d, e)
+    return function () return f(a, b, c, d, e) end
+end
+
+function bind(obj, f, a, b, c, d, e)
+    return function () return obj:f(a, b, c, d, e) end
+end
 
 function gotoTag(i, move)
     if move then
@@ -10,137 +21,193 @@ function gotoTag(i, move)
         awful.client.movetotag(tag)
     end
 
-    local screen = mouse.screen
-    local tag = awful.tag.gettags(screen)[i]
-    if tag then
-        awful.tag.viewonly(tag)
-    end
+    local tag = awful.screen.focused().tags[i]
+    if tag then tag:view_only() end
 end
 
-function navigate(key, move)
-    local i = awful.tag.getidx() - 1
+function grid(direction, move)
+    local rows = 2
+    local columns = 3
+
+    local i = awful.screen.focused().selected_tag.index - 1
     action = {
-        ["j"] = (i + 3) % 6 + 1,
-        ["k"] = (i - 3) % 6 + 1,
-        ["h"] = (math.ceil((i + 1) / 3) - 1) * 3 + ((i - 1) % 3) + 1,
-        ["l"] = (math.ceil((i + 1) / 3) - 1) * 3 + ((i + 1) % 3) + 1,
+        ["down"] = (i + columns) % (rows * columns) + 1,
+        ["up"] = (i - columns) % (rows * columns) + 1,
+        ["left"] = (math.ceil((i + 1) / columns) - 1) * columns + ((i - 1) % columns) + 1,
+        ["right"] = (math.ceil((i + 1) / columns) - 1) * columns + ((i + 1) % columns) + 1,
     }
-    local j = action[key]
+    local j = action[direction]
 
     gotoTag(j, move)
 end
 
-function moveFocus(n)
-    awful.client.focus.byidx(n)
-    if client.focus then
-        client.focus:raise()
-    end
-end
-
-function toggleGap()
-    if awful.tag.getgap() == beautiful.useless_gap then
-        awful.tag.setgap(beautiful.less_useless_gap)
-    else
-        awful.tag.setgap(beautiful.useless_gap)
-    end
-end
-
 globalkeys = awful.util.table.join(
-    awful.key({ modkey,           }, "j", curry(navigate, "j")),
-    awful.key({ modkey,           }, "k", curry(navigate, "k")),
-    awful.key({ modkey,           }, "h", curry(navigate, "h")),
-    awful.key({ modkey,           }, "l", curry(navigate, "l")),
-	awful.key({ "Mod1", 		  }, "j", curry(navigate, "j", true)),
-    awful.key({ "Mod1",           }, "k", curry(navigate, "k", true)),
-	awful.key({ "Mod1", 		  }, "h", curry(navigate, "h", true)),
-    awful.key({ "Mod1",           }, "l", curry(navigate, "l", true)),
-    awful.key({ modkey,           }, "Escape", awful.tag.history.restore),
+    awful.key({ control, shift }, "+", hotkeys_popup.show_help,
+              {description="show help", group="awesome"}),
 
-    awful.key({ modkey, "Shift"   }, "j", curry(moveFocus, 1)),
-    awful.key({ modkey, "Shift"   }, "k", curry(moveFocus, -1)),
-    awful.key({ "Control",        }, "j", curry(awful.client.swap.byidx, 1)),
-    awful.key({ "Control",        }, "k", curry(awful.client.swap.byidx, -1)),
+    awful.key({ super }, "j", curry(grid, "down", false),
+              {description = "view tag below current", group = "tag"}),
+    awful.key({ super }, "k", curry(grid, "up", false),
+              {description = "view tag above current", group = "tag"}),
+    awful.key({ super }, "h", curry(grid, "left", false),
+              {description = "view tag left of current", group = "tag"}),
+    awful.key({ super }, "l", curry(grid, "right", false),
+              {description = "view tag right of current", group = "tag"}),
+    awful.key({ alt }, "j", curry(grid, "down", true),
+              {description = "move client to the tag below", group = "client"}),
+    awful.key({ alt }, "k", curry(grid, "up", true),
+              {description = "move client to the tag above", group = "client"}),
+    awful.key({ alt }, "h", curry(grid, "left", true),
+              {description = "move client to the tag to the left", group = "client"}),
+    awful.key({ alt }, "l", curry(grid, "right", true),
+              {description = "move client to the tag to the right", group = "client"}),
 
-    awful.key({ modkey, "Shift"   }, "l", curry(awful.tag.incmwfact,  0.05)),
-    awful.key({ modkey, "Shift"   }, "h", curry(awful.tag.incmwfact, -0.05)),
-    awful.key({ modkey, "Shift"   }, ".", curry(awful.tag.incnmaster,  1)),
-    awful.key({ modkey, "Shift"   }, ",", curry(awful.tag.incnmaster, -1)),
+    awful.key({ super }, "Escape", awful.tag.history.restore,
+              {description = "go back", group = "tag"}),
 
-    awful.key({ modkey, "Control" }, "j", curry(awful.screen.focus_relative,  1)),
-    awful.key({ modkey,           }, "o", curry(awful.screen.focus_relative,  1)),
-    awful.key({ modkey, "Control" }, "k", curry(awful.screen.focus_relative, -1)),
+    awful.key({ super, shift }, "j", curry(awful.client.focus.byidx, 1),
+        {description = "focus next by index", group = "client"}
+    ),
+    awful.key({ super, shift }, "k", curry(awful.client.focus.byidx, -1),
+        {description = "focus previous by index", group = "client"}
+    ),
 
-    awful.key({ modkey,           }, "u", awful.client.urgent.jumpto),
-    awful.key({ modkey,           }, "Tab", function()
+    -- Layout manipulation
+    awful.key({ control }, "j", curry(awful.client.swap.byidx, 1),
+              {description = "swap with next client by index", group = "client"}),
+    awful.key({ control }, "k", curry(awful.client.swap.byidx, -1),
+              {description = "swap with previous client by index", group = "client"}),
+    awful.key({ control, shift }, "j", curry(awful.screen.focus_relative, 1),
+              {description = "focus the next screen", group = "screen"}),
+    awful.key({ control, shift }, "k", curry(awful.screen.focus_relative, -1),
+              {description = "focus the previous screen", group = "screen"}),
+    awful.key({ super }, "Tab",
+        function ()
             awful.client.focus.history.previous()
             if client.focus then
                 client.focus:raise()
             end
-        end),
+        end,
+        {description = "go back", group = "client"}),
 
     -- Standard program
-    awful.key({ modkey,	          }, "z", function()
-            drop(terminal, "top", "center", 1, 0.35)
-        end),
-    awful.key({ modkey,	          }, "x", function()
-            drop(messenger, "top", "right", 0.31, 1)
-        end),
-    awful.key({ modkey, "Control" }, "r", awesome.restart),
-    awful.key({ modkey, "Shift"   }, "q", awesome.quit),
+    awful.key({ super, control }, "r", awesome.restart,
+              {description = "reload awesome", group = "awesome"}),
+    awful.key({ super, control }, "q", awesome.quit,
+              {description = "quit awesome", group = "awesome"}),
 
-    awful.key({ modkey, "Shift"   }, "space", curry(awful.layout.inc, layouts, 1)),
-    awful.key({ modkey, "Shift"   }, "n", awful.client.restore),
-    awful.key({ modkey, "Shift"   }, "m", toggleGap)
+    -- Poppin
+    awful.key({ super }, "z", function ()
+        poppin.pop("terminal", terminal, "top", 800, { border_width = 0 })
+    end, {description = "Opens a poppin' terminal", group = "poppin"}),
+    awful.key({ super }, "x", function ()
+        poppin.pop("messenger", "messengerfordesktop", "right", 1000)
+    end, {description = "Opens a poppin' messenger window", group = "poppin"}),
+
+    awful.key({ super, shift }, "l", curry(awful.tag.incmwfact, 0.05),
+              {description = "increase master width factor", group = "layout"}),
+    awful.key({ super, shift }, "h", curry(awful.tag.incmwfact, -0.05),
+              {description = "decrease master width factor", group = "layout"}),
+    awful.key({ control, shift }, "h", curry(awful.tag.incnmaster, 1, nil, true),
+              {description = "increase the number of master clients", group = "layout"}),
+    awful.key({ control, shift }, "l",     curry(awful.tag.incnmaster, -1, nil, true),
+              {description = "decrease the number of master clients", group = "layout"}),
+    awful.key({ super }, ",", curry(awful.tag.incncol, 1, nil, true),
+              {description = "increase the number of columns", group = "layout"}),
+    awful.key({ super }, ".", curry(awful.tag.incncol, -1, nil, true),
+              {description = "decrease the number of columns", group = "layout"}),
+    awful.key({ super, shift }, "space", curry(awful.layout.inc, 1),
+              {description = "select next", group = "layout"}),
+
+    awful.key({ super, shift }, "n",
+              function ()
+                  local c = awful.client.restore()
+                  -- Focus restored client
+                  if c then
+                      client.focus = c
+                      c:raise()
+                  end
+              end,
+              {description = "restore minimized", group = "client"})
 )
 
 clientkeys = awful.util.table.join(
-    awful.key({ "Mod1",           }, "o",  function (c) c:move_to_screen() end),
-    awful.key({ modkey,           }, "f", function(c)
+    awful.key({ super }, "f",
+        function (c)
             c.fullscreen = not c.fullscreen
-        end),
-    awful.key({ modkey, "Shift"   }, "c", function(c) c:kill() end),
-    awful.key({ modkey,           }, "w", function(c) c:kill() end),
-    awful.key({ modkey, "Control" }, "space", awful.client.floating.toggle),
-    awful.key({ modkey, "Control" }, "Return", function(c)
-            c:swap(awful.client.getmaster())
-        end),
-    awful.key({ modkey,           }, "n", function(c) c.minimized = true end),
-    awful.key({ modkey,           }, "m", function(c)
-            c.maximized_horizontal = not c.maximized_horizontal
-            c.maximized_vertical   = not c.maximized_vertical
-        end),
-    awful.key({ modkey, "Control" }, "h", function(c)
-            awful.client.movetoscreen(c, c.screen - 1)
-        end),
-    awful.key({ modkey, "Control" }, "l", function(c)
-            awful.client.movetoscreen(c, c.screen + 1)
-        end)
+            c:raise()
+        end,
+        {description = "toggle fullscreen", group = "client"}),
+    awful.key({ super, shift }, "c", function (c) c:kill() end,
+              {description = "close", group = "client"}),
+    awful.key({ super, control }, "space",  awful.client.floating.toggle                     ,
+              {description = "toggle floating", group = "client"}),
+    awful.key({ super, control }, "Return", function (c) c:swap(awful.client.getmaster()) end,
+              {description = "move to master", group = "client"}),
+    awful.key({ super }, "o", function (c) c:move_to_screen()               end,
+              {description = "move to screen", group = "client"}),
+    awful.key({ super }, "n", function (c) c.minimized = true end ,
+        {description = "minimize", group = "client"}),
+    awful.key({ super }, "m",
+        function (c)
+            c.maximized = not c.maximized
+            c:raise()
+        end ,
+        {description = "maximize", group = "client"})
 )
 
+-- Bind all key numbers to tags.
+-- Be careful: we use keycodes to make it works on any keyboard layout.
+-- This should map on the top row of your keyboard, usually 1 to 9.
 for i = 1, 9 do
     globalkeys = awful.util.table.join(globalkeys,
         -- View tag only.
-        awful.key({ modkey }, "#" .. i + 9, curry(gotoTag, i)),
-        -- Toggle tag.
-        awful.key({ modkey, "Control" }, "#" .. i + 9, function()
-            local screen = mouse.screen
-            local tag = awful.tag.gettags(screen)[i]
-            if tag then
-               awful.tag.viewtoggle(tag)
-            end
-        end),
+        awful.key({ super }, "#" .. i + 9,
+                  function ()
+                        local screen = awful.screen.focused()
+                        local tag = screen.tags[i]
+                        if tag then
+                           tag:view_only()
+                        end
+                  end),
+        -- Toggle tag display.
+        awful.key({ super, control }, "#" .. i + 9,
+                  function ()
+                      local screen = awful.screen.focused()
+                      local tag = screen.tags[i]
+                      if tag then
+                         awful.tag.viewtoggle(tag)
+                      end
+                  end,
+                  {description = "toggle tag #" .. i, group = "tag"}),
         -- Move client to tag.
-        awful.key({ "Mod1",           }, "#" .. i + 9, curry(gotoTag, i, true)),
-        -- Toggle tag.
-        awful.key({ modkey, "Control", "Shift" }, "#" .. i + 9, function()
-            if client.focus then
-                local tag = awful.tag.gettags(client.focus.screen)[i]
-                if tag then
-                    awful.client.toggletag(tag)
-                end
-            end
-        end))
+        awful.key({ alt }, "#" .. i + 9,
+                  function ()
+                      if client.focus then
+                          local tag = client.focus.screen.tags[i]
+                          if tag then
+                              client.focus:move_to_tag(tag)
+                          end
+                     end
+                  end),
+        -- Toggle tag on focused client.
+        awful.key({ control }, "#" .. i + 9,
+                  function ()
+                      if client.focus then
+                          local tag = client.focus.screen.tags[i]
+                          if tag then
+                              client.focus:toggle_tag(tag)
+                          end
+                      end
+                  end,
+                  {description = "toggle client on tag #" .. i, group = "tag"})
+    )
 end
 
-root.keys(globalkeys)
+clientbuttons = awful.util.table.join(
+    awful.button({ }, 1, function (c) client.focus = c; c:raise() end),
+    awful.button({ super }, 1, awful.mouse.client.move),
+    awful.button({ super }, 3, awful.mouse.client.resize))
 
+-- Set keys
+root.keys(globalkeys)
