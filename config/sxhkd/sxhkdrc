@@ -19,11 +19,11 @@ XF86AudioNext
 
 # Volume control
 XF86AudioRaiseVolume
-    amixer sset Master 5%+ && echo 'updateVolumeWidget()' | awesome-client
+    amixer sset Master 5%+ && awesome-client "volume.update()"
 XF86AudioLowerVolume
-    amixer sset Master 5%- && echo 'updateVolumeWidget()' | awesome-client
+    amixer sset Master 5%- && awesome-client "volume.update()"
 XF86AudioMute
-    amixer sset Master toggle && echo 'updateVolumeWidget()' | awesome-client
+    amixer sset Master toggle && awesome-client "volume.update()"
 
 # Terminal
 super + Return
@@ -39,7 +39,7 @@ super + space
 
 # Lock X
 alt + space
-    slock & sh -c "sleep 0.5 && xset dpms force off"
+    lock
 
 # Take screenshot
 Print

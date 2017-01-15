@@ -1,0 +1,19 @@
+#!/usr/bin/env sh
+
+#file=/tmp/i3lock.png
+#maim $file && convert -scale 10% -scale 1000% $file $file
+#i3lock -i $file
+
+i3lock -i /home/oskar/.wallpapers/vader/lagom_vader-3200.png \
+    --insidevercolor=00000000 \
+    --insidewrongcolor=00000000 \
+    --insidecolor=00000000 \
+    --ringvercolor=ff000030 \
+    --ringwrongcolor=ff000000 \
+    --ringcolor=00ff0000 \
+    --linecolor=00000000 \
+    --separatorcolor=00000000 \
+    --textcolor=00000000 \
+    --keyhlcolor=00ff0030 \
+    --bshlcolor=ff000030
+

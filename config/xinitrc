@@ -13,20 +13,17 @@ setxkbmap se -variant nodeadkeys
 # Xresources
 [[ -f ~/.Xresources ]] && xrdb -merge -I$HOME ~/.Xresources
 [[ -f ~/.Xresources_rofi ]] && xrdb -merge -I$HOME ~/.Xresources_rofi
-#[[ -f ~/.Xresources_theme ]] && xrdb -merge -I$HOME ~/.Xresources_theme
+[[ -f ~/.Xresources_theme ]] && xrdb -merge -I$HOME ~/.Xresources_theme
 
 # Autostart
 unclutter -idle 2 &
-#nm-applet &
 redshift 57.716015:11.871436 &
 xcompmgr &
 sxhkd &
 
 # Autostart applications
 #sleep 10 && syncdrive &
-#sleep 0.5 && qutebrowser & # To allow network to connect
-#urxvt &
-#urxvt &
+urxvt &
 
 # Start awesome
 exec awesome

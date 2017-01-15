@@ -12,8 +12,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
-Plug 'altercation/vim-colors-solarized'
-Plug 'NLKNguyen/papercolor-theme'
+Plug 'tyrannicaltoucan/vim-quantum'
 
 call plug#end()
 
@@ -32,31 +31,22 @@ let g:deoplete#enable_ignore_case = 1
 let g:tern_request_timeout = 1
 
 " Theme
-"set background=dark
 set background=light
-"let g:solarized_termtrans=0
-"let g:solarized_termcolors=256
-"let g:solarized_termtrans=1
-"let g:solarized_term = 1
-"colorscheme solarized
-colorscheme PaperColor
+colorscheme quantum
 
-"hi LineNr ctermfg=grey ctermbg=none
-"hi CursorLine ctermbg=237
-"hi CursorLineNr ctermbg=237
 "hi Folded cterm=none ctermbg=234
-hi Colorcolumn ctermbg=24
+hi Colorcolumn ctermbg=238
 "hi Colorcolumn ctermbg=0
 
-highlight ExtraWhitespace ctermbg=red
+highlight ExtraWhitespace ctermbg=209
 match ExtraWhitespace /\s\+$/
 
 " gitgutter
 hi SignColumn ctermbg=none
-hi GitGutterAdd ctermbg=none ctermfg=lightgreen
-hi GitGutterChange ctermbg=none ctermfg=yellow
-hi GitGutterDelete ctermbg=none ctermfg=red
-hi GitGutterChangeDelete ctermbg=none ctermfg=lightred
+hi GitGutterAdd ctermbg=none ctermfg=114
+hi GitGutterChange ctermbg=none ctermfg=221
+hi GitGutterDelete ctermbg=none ctermfg=204
+hi GitGutterChangeDelete ctermbg=none ctermfg=204
 
 " airline
 let g:airline_left_sep=''
@@ -69,7 +59,7 @@ let g:airline#extensions#tabline#left_alt_sep = ' '
 let g:airline#extensions#tabline#right_sep = ''
 let g:airline#extensions#tabline#show_buffers = 1
 "let g:airline_theme = 'solarized'
-let g:airline_theme = 'papercolor'
+let g:airline_theme = 'quantum'
 
 " Settings
 set autoindent

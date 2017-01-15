@@ -27,7 +27,7 @@
 # see the README.
 
 # add time, jobs, load and battery
-LP_PS1="${LP_PS1_PREFIX}${LP_JOBS}"
+LP_PS1=" ${LP_PS1_PREFIX}${LP_JOBS}"
 if [[ "$TERM" == screen* ]]; then
     LP_PS1="${LP_PS1}${LP_BRACKET_OPEN} "
 fi

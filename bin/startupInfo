@@ -1,0 +1,25 @@
+#!/usr/bin/env sh
+
+cols=$(tput cols)
+
+green="\033[0;32m"
+orange="\033[0;33m"
+cyan="\033[0;36m"
+purple="\033[1;35m"
+nc="\033[0m"
+
+disk=$(df -h / | tail -1 | awk '{print $3 "/" $2, "(" $5 ")"}')
+inet=$(ip addr show | grep 192 | awk '{print $2}' | sed 's/\/.*//')
+#inet=$(cat /sys/class/net/wlp58s0/address)
+ip=$(curl --silent ipecho.net/plain)
+up=$(uptime -p | sed 's/up //')
+
+text="Uptime: $orange$up$nc - Disk: $purple$disk$nc - Inet: $green$inet$nc - IP: $cyan$ip$nc"
+
+color_length=$[17*4]
+padding_length=$[($color_length+$cols-${#text})/2]
+
+echo ""
+for ((i=0; i<$padding_length; i++)){ echo -n " "; }
+echo -e $text "\n"
+

@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+
+amixer | head -5 | tail -1 | tr -d \[] | tr " " "\n" | sed 's/%//g' | tail -3
+

@@ -7,7 +7,7 @@ alias_file=~/.dotfiles/config/aliases
 shopt -s expand_aliases
 source $alias_file
 
-rofi="rofi -dmenu -p > -i -width 40"
+rofi="rofi -dmenu -p " " -i -width 40"
 if [[ $1 ]] && [[ $1 != *"--all"* ]]; then
     rofi="$rofi -mesg $1"
     alt="calc $(echo $1 | sed 's/\=.*$//')\n"
@@ -40,7 +40,7 @@ if [[ $result != "" ]]; then
         if [[ $? -ne 0 ]]; then
             $result &> /dev/null &
         else
-            $(alias $result | sed "s/.*=//" | sed "s/'//g") &> /dev/null &
+            $(alias $result | sed "s/alias $result=//" | sed "s/'//g") &> /dev/null &
         fi
         calc=$(python -c "print($result)" 2> /dev/null)
     fi

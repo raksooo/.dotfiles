@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+
+top -bn2 | grep '^%Cpu' | tail -4 | tr -s ' ' | cut -d ' ' -f 4 | sed 's/[^0-9]*//g'
+
