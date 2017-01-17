@@ -79,12 +79,19 @@ awful.rules.rules = {
       properties = { tag = "4" } },
     { rule = { class = "chromium" },
       properties = { tag = "2" } },
+    { rule = { class = "Spotify" },
+      properties = { tag = "6" } },
 }
 -- }}}
 
 -- {{{ Signals
 -- Signal function to execute when a new client appears.
 client.connect_signal("manage", function (c)
+    if c.class == nil then
+        c:connect_signal("property::class", function ()
+            awful.rules.apply(c)
+        end)
+    end
     -- Set the windows at the slave,
     -- i.e. put it at the end of others instead of setting it master.
     -- if not awesome.startup then awful.client.setslave(c) end
