@@ -98,7 +98,7 @@ client.connect_signal("manage", function (c)
 end)
 
 client.connect_signal("focus", function(c)
-    if c.class:lower() == terminal then
+    if c.class ~= nil and c.class:lower() == terminal then
         c.opacity = 0.9
     else
         c.opacity = beautiful.opacity_focus
@@ -106,7 +106,7 @@ client.connect_signal("focus", function(c)
     c.border_color = beautiful.border_focus
 end)
 client.connect_signal("unfocus", function(c)
-    if c.class:lower() == terminal then
+    if c.class ~= nil and c.class:lower() == terminal then
         c.opacity = 0.75
     else
         c.opacity = beautiful.opacity_normal

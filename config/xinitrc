@@ -18,12 +18,12 @@ setxkbmap se -variant nodeadkeys
 # Autostart
 unclutter -idle 2 &
 redshift 57.716015:11.871436 &
-xcompmgr &
+compton -b --no-fading-openclose -c -C -t-4 -l-4 -o.4 -r14
 sxhkd &
 
 # Autostart applications
 #sleep 10 && syncdrive &
-urxvt &
+sleep 1 && urxvt &
 
 # Start awesome
 exec awesome

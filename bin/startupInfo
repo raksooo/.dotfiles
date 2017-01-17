@@ -8,13 +8,13 @@ cyan="\033[0;36m"
 purple="\033[1;35m"
 nc="\033[0m"
 
+up=$(uptime -p | sed 's/up //')
 disk=$(df -h / | tail -1 | awk '{print $3 "/" $2, "(" $5 ")"}')
 inet=$(ip addr show | grep 192 | awk '{print $2}' | sed 's/\/.*//')
 #inet=$(cat /sys/class/net/wlp58s0/address)
-ip=$(curl --silent ipecho.net/plain)
-up=$(uptime -p | sed 's/up //')
+ip=$(timeout 0.1 curl --silent ipecho.net/plain)
 
-text="Uptime: $orange$up$nc - Disk: $purple$disk$nc - Inet: $green$inet$nc - IP: $cyan$ip$nc"
+text="Uptime: $orange$up$nc - Disk: $purple$disk$nc - IP: $green$inet$nc/$cyan$ip$nc"
 
 color_length=$[17*4]
 padding_length=$[($color_length+$cols-${#text})/2]
