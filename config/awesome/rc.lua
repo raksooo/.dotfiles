@@ -77,7 +77,7 @@ awful.rules.rules = {
                      border_width = 14 } },
     { rule = { class = "qutebrowser" },
       properties = { tag = "4" } },
-    { rule = { class = "chromium" },
+    { rule = { class = "Chromium" },
       properties = { tag = "2" } },
     { rule = { class = "Spotify" },
       properties = { tag = "6" } },
