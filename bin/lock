@@ -9,7 +9,7 @@ i3lock -i /home/oskar/.wallpapers/vader/lagom_vader-3200.png \
     --insidewrongcolor=00000000 \
     --insidecolor=00000000 \
     --ringvercolor=ff000030 \
-    --ringwrongcolor=ff000000 \
+    --ringwrongcolor=ff000030 \
     --ringcolor=00ff0000 \
     --linecolor=00000000 \
     --separatorcolor=00000000 \
