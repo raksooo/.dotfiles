@@ -14,7 +14,6 @@ local statusbar = {}
 function statusbar.init(height)
     statusbar.height = height
     statusbar.textclock = wibox.widget.textclock()
-    statusbar.taglist_buttons = awful.util.table.join( awful.button({ }, 1, function(t) t:view_only() end) )
 
     statusbar.battery = battery.create()
     statusbar.system = system.create()
@@ -42,7 +41,7 @@ function statusbar.new(s, placement, height)
     awful.tag({ "3", "4", "5", "6" }, s, awful.layout.layouts[1])
     t1:view_only()
 
-    s.mytaglist = awful.widget.taglist(s, awful.widget.taglist.filter.all, statusbar.taglist_buttons)
+    s.mytaglist = awful.widget.taglist(s, awful.widget.taglist.filter.all)
     s.mywibox = awful.wibar({ position = placement, screen = s, height = statusbar.height, bg = beautiful.bg_statusbar })
 
     s.mywibox:setup {
