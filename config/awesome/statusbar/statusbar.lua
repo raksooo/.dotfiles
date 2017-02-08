@@ -29,13 +29,12 @@ function statusbar.new(s, placement, height)
     local t1 = awful.tag.add("1", {
         layout             = awful.layout.layouts[1],
         master_fill_policy = "master_width_factor",
-        gap_single_client  = true,
         gap                = 50,
         screen             = s,
     })
     awful.tag.add("2", {
         layout             = awful.layout.layouts[1],
-        gap_single_client  = false,
+        --gap_single_client  = false,
         screen             = s,
     })
     awful.tag({ "3", "4", "5", "6" }, s, awful.layout.layouts[1])

@@ -5,9 +5,12 @@ XF86MonBrightnessDown
 XF86MonBrightnessUp
     brightness 50
 super + F7
-    brightness min
-F7
     brightness max
+super + shift + F7
+    brightness min
+
+F7
+    systemctl suspend
 
 # Playback control
 XF86AudioPlay
@@ -43,6 +46,6 @@ alt + space
 
 # Take screenshot
 Print
-    maim /home/oskar/documents/Bilder/screenshots/$(date +%F-%T).png \
+    maim /home/oskar/screenshots/$(date +%F-%T).png \
         && mpg123 ~/.local/share/oskar/screenshot.mp3
 

@@ -7,7 +7,7 @@ local beautiful = require("beautiful")
 local naughty = require("naughty")
 local statusbar = require("statusbar/statusbar")
 local wallpaper = require("wallpaper")
-poppin = require("poppin/poppin")
+poppin = require("poppin")
 local keys = require("keys")
 
 -- {{{ Error handling
@@ -92,6 +92,12 @@ client.connect_signal("manage", function (c)
             awful.rules.apply(c)
         end)
     end
+
+    if c.floating == true and not poppin.isPoppinClient(c) then
+        awful.placement.centered(c)
+        c.y = math.max(0, c.y - 200)
+    end
+
     -- Set the windows at the slave,
     -- i.e. put it at the end of others instead of setting it master.
     -- if not awesome.startup then awful.client.setslave(c) end
