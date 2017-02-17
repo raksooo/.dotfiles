@@ -7,7 +7,6 @@ local beautiful = require("beautiful")
 local naughty = require("naughty")
 local statusbar = require("statusbar/statusbar")
 local wallpaper = require("wallpaper")
-poppin = require("poppin")
 local keys = require("keys")
 
 -- {{{ Error handling
@@ -51,7 +50,6 @@ awful.layout.layouts = {
 -- }}}
 
 local statusbar_height = 35
-poppin.statusbarSize(statusbar_height)
 
 awful.screen.connect_for_each_screen(function(s)
     statusbar.new(s, "bottom", statusbar_height)
@@ -97,7 +95,7 @@ client.connect_signal("manage", function (c)
         end)
     end
 
-    if c.floating == true and not poppin.isPoppinClient(c) then
+    if c.floating and not c.sticky then
         awful.placement.centered(c)
         c.y = math.max(0, c.y - 200)
     end
