@@ -81,6 +81,10 @@ awful.rules.rules = {
       properties = { tag = "2" } },
     { rule = { class = "Spotify" },
       properties = { tag = "6" } },
+    { rule = { class = "Messenger for Desktop" },
+      callback = function (c)
+          awful.spawn("xdotool key --window " .. c.window .. " Ctrl+Alt+b")
+      end },
 }
 -- }}}
 
