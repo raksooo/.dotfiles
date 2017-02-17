@@ -127,6 +127,7 @@ function update(stdout)
         battery.progressbar.current:set_value(battery.current_raw / 100)
         battery.progressbar.current:set_color(options.color.low)
     else
+        battery.current = ""
         battery.progressbar.current:set_value(1)
         battery.progressbar.current:set_color(options.color.charging)
     end
