@@ -1,15 +1,12 @@
--- Standard awesome library
 local awful = require("awful")
 require("awful.autofocus")
--- Theme handling library
 local beautiful = require("beautiful")
--- Notification library
+local gears = require("gears")
 local naughty = require("naughty")
 local statusbar = require("statusbar/statusbar")
 local wallpaper = require("wallpaper")
 local keys = require("keys")
 
--- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
 if awesome.startup_errors then
@@ -32,32 +29,27 @@ do
         in_error = false
     end)
 end
--- }}}
 
--- {{{ Variable definitions
--- Themes define colours, icons, font and wallpapers.
+awesome.connect_signal("debug::deprecation", function (hint)
+    naughty.notify({ title = "Deprecation warning", text = hint })
+end)
+
 beautiful.init("/home/oskar/.config/awesome/theme.lua")
 
--- This is used later as the default terminal and editor to run.
 terminal = "urxvt"
 editor = "nvim"
 
--- Table of layouts to cover with awful.layout.inc, order matters.
 awful.layout.layouts = {
     awful.layout.suit.tile,
     awful.layout.suit.fair.horizontal,
 }
--- }}}
 
 local statusbar_height = 35
 
 awful.screen.connect_for_each_screen(function(s)
     statusbar.new(s, "bottom", statusbar_height)
 end)
--- }}}
 
--- {{{ Rules
--- Rules to apply to new clients (through the "manage" signal).
 awful.rules.rules = {
     { rule = { },
       properties = { border_width = beautiful.border_width,
@@ -81,12 +73,12 @@ awful.rules.rules = {
       properties = { tag = "6" } },
     { rule = { class = "Messenger for Desktop" },
       callback = function (c)
-          awful.spawn("xdotool key --window " .. c.window .. " Ctrl+Alt+b")
+          gears.timer.start_new(0.1, function ()
+              awful.key.execute({ "Control", "Mod1" }, "b")
+          end)
       end },
 }
--- }}}
 
--- {{{ Signals
 -- Signal function to execute when a new client appears.
 client.connect_signal("manage", function (c)
     if c.class == nil then
@@ -99,10 +91,6 @@ client.connect_signal("manage", function (c)
         awful.placement.centered(c)
         c.y = math.max(0, c.y - 200)
     end
-
-    -- Set the windows at the slave,
-    -- i.e. put it at the end of others instead of setting it master.
-    -- if not awesome.startup then awful.client.setslave(c) end
 
     if awesome.startup and
       not c.size_hints.user_position
@@ -120,6 +108,7 @@ client.connect_signal("focus", function(c)
     end
     c.border_color = beautiful.border_focus
 end)
+
 client.connect_signal("unfocus", function(c)
     if c.class ~= nil and c.class:lower() == terminal then
         c.opacity = 0.75
@@ -128,7 +117,6 @@ client.connect_signal("unfocus", function(c)
     end
     c.border_color = beautiful.border_normal
 end)
--- }}}
 
 wallpaper.show(beautiful.wallpaper)
 
