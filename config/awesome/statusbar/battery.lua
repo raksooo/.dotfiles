@@ -138,18 +138,14 @@ end
 
 function pickColor()
     local color
-    if battery.charging then
-        color = options.color.charging
-    else
-        if battery.percentage_raw >= options.percentage.high then
-            color = options.color.high
-        elseif battery.percentage_raw >= options.percentage.normal then
-            color = options.color.normal
-        elseif battery.percentage_raw >= options.percentage.low then
-            color = options.color.low
-        elseif battery.percentage_raw >= options.percentage.critical then
-            color = options.color.critical
-        end
+    if battery.percentage_raw >= options.percentage.high then
+        color = options.color.high
+    elseif battery.percentage_raw >= options.percentage.normal then
+        color = options.color.normal
+    elseif battery.percentage_raw >= options.percentage.low then
+        color = options.color.low
+    elseif battery.percentage_raw >= options.percentage.critical then
+        color = options.color.critical
     end
     battery.progressbar.battery:set_color(color)
 end
