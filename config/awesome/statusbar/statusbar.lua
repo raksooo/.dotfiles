@@ -4,6 +4,7 @@ local beautiful = require("beautiful")
 
 local battery = require("statusbar/battery")
 local system = require("statusbar/system")
+local netctl = require("statusbar/netctl")
 volume = require("statusbar/volume")
 pacman = require("statusbar/pacman/pacman")
 
@@ -17,6 +18,7 @@ function statusbar.init(height)
 
     statusbar.battery = battery.create()
     statusbar.system = system.create()
+    statusbar.netctl = netctl.create()
     statusbar.volume = volume.create()
     statusbar.pacman = pacman.create()
 end
@@ -67,6 +69,7 @@ function statusbar.new(s, placement, height)
                 statusbar.volume,
                 statusbar.system,
                 statusbar.battery,
+                statusbar.netctl,
                 wibox.widget.systray()
             }
         }
