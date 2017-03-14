@@ -8,6 +8,10 @@ local netctl = {
         low = "#ddb76f",
         none = "#dd6880",
         background = "#00000000"
+    },
+    levels = {
+        high = 40,
+        low = 80
     }
 }
 
@@ -68,7 +72,7 @@ function netctl.update()
         if #data == 3 then
             local numbers = split(data[3], '-')
             local level = split(numbers[2], '.')
-            value = math.max(0, math.min(1, (80 - level[1]) * 5 / 100))
+            value = math.max(0, math.min(1, (netctl.levels.low - level[1]) * (100/(netctl.levels.low - netctl.levels.high)) / 100))
             color = netctl.colors.high
             updateTooltip(level[1])
         else

@@ -4,7 +4,7 @@ local beautiful = require("beautiful")
 
 local battery = require("statusbar/battery")
 local system = require("statusbar/system")
-local netctl = require("statusbar/netctl")
+netctl = require("statusbar/netctl")
 volume = require("statusbar/volume")
 pacman = require("statusbar/pacman/pacman")
 
