@@ -11,10 +11,12 @@ pacman = require("statusbar/pacman/pacman")
 beautiful.init("/home/oskar/.config/awesome/theme.lua")
 
 local statusbar = {}
+textclock = {}
 
 function statusbar.init(height)
     statusbar.height = height
-    statusbar.textclock = wibox.widget.textclock()
+    textclock = wibox.widget.textclock()
+    statusbar.textclock = textclock
 
     statusbar.battery = battery.create()
     statusbar.system = system.create()

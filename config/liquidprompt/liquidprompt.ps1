@@ -27,7 +27,12 @@
 # see the README.
 
 # add time, jobs, load and battery
-LP_PS1=" ${LP_PS1_PREFIX}${LP_JOBS}"
+LP_PS1=""
+if [[ $LP_ERR ]]; then
+    LP_PS1="${LP_PS1}${LP_COLOR_ERR} └─╼━${LP_ERR}"$'\n'
+fi
+LP_PS1="${LP_PS1} ${LP_PS1_PREFIX}"
+LP_PS1="${LP_PS1}${LP_JOBS}"
 if [[ "$TERM" == screen* ]]; then
     LP_PS1="${LP_PS1}${LP_BRACKET_OPEN} "
 fi
@@ -40,7 +45,7 @@ LP_PS1="${LP_PS1}${LP_COLOR_TIME}${LP_PWD}${NO_COL}"
 LP_PS1="${LP_PS1}${LP_VCS}"
 
 # add return code and prompt mark
-LP_PS1="${LP_PS1}${LP_RUNTIME}${LP_ERR}${LP_MARK_PREFIX}${LP_MARK}${LP_PS1_POSTFIX}"
+LP_PS1="${LP_PS1}${LP_RUNTIME}${LP_MARK_PREFIX}${LP_MARK}${LP_PS1_POSTFIX}"
 
 # vim: set et sts=4 sw=4 tw=120 ft=sh:
 

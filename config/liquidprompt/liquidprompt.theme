@@ -68,7 +68,7 @@ LP_COLOR_JOB_R="$BOLD_YELLOW"   # Running (xterm &)
 LP_COLOR_JOB_Z="$BOLD_YELLOW"   # Sleeping (Ctrl-Z)
 
 # Last error code
-LP_COLOR_ERR="$PURPLE"
+LP_COLOR_ERR="$RED"
 
 # Prompt mark
 LP_COLOR_MARK="$BOLD"     # as user
