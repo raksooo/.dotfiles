@@ -30,7 +30,7 @@ function createWidgets(wallpaper_fn)
     end
 end
 
-function wallpaper.show(wallpaper_fn)
+function wallpaper.init(wallpaper_fn)
     local screen = awful.screen.focused()
     createWidgets(wallpaper_fn)
 
