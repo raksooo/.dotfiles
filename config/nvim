@@ -145,7 +145,7 @@ tnoremap <Leader>l :wincmd j<CR>
 tnoremap <Leader>h :wincmd k<CR>
 
 " Commands
-command! W w
+command! W w !sudo tee %
 
 autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
 autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
