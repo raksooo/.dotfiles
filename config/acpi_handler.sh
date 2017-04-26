@@ -60,20 +60,23 @@ case "$1" in
         EXCEPTION="vim\|ssh"
         case "$3" in
             close)
-                su oskar -c "export DISPLAY=:0 && xset dpms force off && lock"
-                suspendUser suspend oskar $EXCEPTION
-                (sleep $[30 * 60] && rm /tmp/suspendPid \
-                    && suspendUser resume oskar $EXCEPTION && sleep 30 \
-                    && systemctl suspend) &
-                echo $! >> /tmp/suspendPid
+                #su oskar -c "export DISPLAY=:0 && xset dpms force off && lock"
+                #suspendUser suspend oskar $EXCEPTION
+                #(
+                #    sleep $[30 * 60]
+                #    rm /tmp/suspendPid
+                #    suspendUser resume oskar $EXCEPTION
+                #    systemctl suspend
+                #) &
+                #echo $! >> /tmp/suspendPid
                 ;;
             open)
-                if [ -f /tmp/suspendPid ]; then
-                    suspendUser resume oskar $EXCEPTION
-                    rm /tmp/suspendPid
-                fi
-                su oskar -c "xset -display :0 dpms force on"
-                su oskar -c "awesome-client \"textclock._private.textclock_update_cb()\""
+                #if [ -f /tmp/suspendPid ]; then
+                #    suspendUser resume oskar $EXCEPTION
+                #    rm /tmp/suspendPid
+                #fi
+                #su oskar -c "xset -display :0 dpms force on"
+                #su oskar -c "awesome-client \"textclock._private.textclock_update_cb()\""
                 ;;
             *)
                 logger "ACPI action undefined: $3"
