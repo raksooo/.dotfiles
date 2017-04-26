@@ -18,13 +18,10 @@ alias gll='git pull'
 alias gsh='git push'
 
 #other
-alias clearram='sync && echo 3 | sudo tee /proc/sys/vm/drop_caches > /dev/null'
-
-alias weather='curl --silent wttr.in/gothenburg | head -n 17'
-alias moreweather='curl --silent wttr.in/gothenburg'
+alias brunox='ssh -XC bruno'
 
 alias feh='feh -.'
-
 alias qutebrowser='qutebrowser --backend webengine'
 alias spotify='spotify --force-device-scale-factor=1.7'
+alias mist='/usr/bin/mist --node-light'
 
