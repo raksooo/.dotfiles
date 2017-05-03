@@ -30,7 +30,7 @@ function createWidgets(wallpaper_fn)
     end
 end
 
-function wallpaper.init(wallpaper_fn)
+function init_(wallpaper_fn)
     local screen = awful.screen.focused()
     createWidgets(wallpaper_fn)
 
@@ -40,6 +40,14 @@ function wallpaper.init(wallpaper_fn)
             wallpaper.set(screen.selected_tag.index)
         end
     end)
+end
+
+function wallpaper.init(wallpaper_fn)
+    if awesome.startup then
+        awesome.connect_signal("startup", function() init_(wallpaper_fn) end)
+    else
+        init_(wallpaper_fn)
+    end
 end
 
 return wallpaper

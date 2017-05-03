@@ -1,5 +1,6 @@
 local awful = require("awful")
 local hotkeys_popup = require("awful.hotkeys_popup").widget
+local poppin = require("poppin")
 
 local super = "Mod4"
 local alt = "Mod1"
@@ -41,7 +42,7 @@ function grid(direction, move)
 end
 
 globalkeys = awful.util.table.join(
-    awful.key({ control }, "+", hotkeys_popup.show_help,
+    awful.key({ control, shift }, "+", hotkeys_popup.show_help,
               {description="show help", group="awesome"}),
 
     awful.key({ super }, "j", curry(grid, "down", false),
@@ -97,8 +98,15 @@ globalkeys = awful.util.table.join(
 
     -- Poppin
     awful.key({ super }, "z", function ()
-        poppin.pop("terminal", terminal, "top", 800, { border_width = 0 })
-    end, {description = "Opens a poppin' terminal", group = "poppin"}),
+        poppin.pop("terminal_top", terminal, "top", 800, { border_width = 8 })
+    end, {description = "Opens a poppin' terminal at top", group = "poppin"}),
+    awful.key({ super, shift }, "z", function ()
+        poppin.pop("terminal_bottom", terminal, "bottom", 800, { border_width = 8 })
+    end, {description = "Opens a poppin' terminal at bottom", group = "poppin"}),
+    awful.key({ alt }, "z", function ()
+        poppin.pop("terminal_center", terminal, "center",
+        { border_width = 8, width = 1400, height = 700 })
+    end, {description = "Opens a poppin' terminal in center", group = "poppin"}),
     awful.key({ super }, "x", function ()
         poppin.pop("messenger", "messengerfordesktop", "right", 1000)
     end, {description = "Opens a poppin' messenger window", group = "poppin"}),
