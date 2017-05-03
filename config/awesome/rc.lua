@@ -3,9 +3,10 @@ require("awful.autofocus")
 local beautiful = require("beautiful")
 local gears = require("gears")
 naughty = require("naughty")
-local statusbar = require("statusbar/statusbar")
+local statusbar = require("statusbar")
 local wallpaper = require("wallpaper")
 local keys = require("keys")
+poppin = require("poppin")
 
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
@@ -45,10 +46,8 @@ awful.layout.layouts = {
     awful.layout.suit.floating
 }
 
-local statusbar_height = 35
-
 awful.screen.connect_for_each_screen(function(s)
-    statusbar.new(s, "bottom", statusbar_height)
+    statusbar.new(s, "bottom", 35)
 end)
 
 awful.rules.rules = {
@@ -74,7 +73,7 @@ awful.rules.rules = {
       properties = { tag = "6" } },
     { rule = { class = "Messenger for Desktop" },
       callback = function (c)
-          gears.timer.start_new(0.1, function ()
+          gears.timer.start_new(0.2, function ()
               awful.key.execute({ "Control", "Mod1" }, "b")
           end)
       end },
@@ -88,9 +87,10 @@ client.connect_signal("manage", function (c)
         end)
     end
 
-    if c.floating and not c.sticky then
-        awful.placement.centered(c)
-        c.y = math.max(0, c.y - 200)
+    if c.floating then
+        c.border_width = beautiful.border_width_floating
+        c.border_color = beautiful.border_color_floating
+        awful.placement.no_offscreen(c)
     end
 
     if awesome.startup and
@@ -127,6 +127,7 @@ client.connect_signal("property::floating", function(c)
     if c.floating then
         c.border_width = beautiful.border_width_floating
         c.border_color = beautiful.border_color_floating
+        awful.placement.no_offscreen(c)
     else
         c.border_width = beautiful.border_width
         c.border_color = beautiful.border_normal

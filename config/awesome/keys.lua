@@ -1,5 +1,4 @@
 local awful = require("awful")
-local poppin = require("poppin")
 local hotkeys_popup = require("awful.hotkeys_popup").widget
 
 local super = "Mod4"
