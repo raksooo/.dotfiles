@@ -42,7 +42,7 @@ function grid(direction, move)
 end
 
 globalkeys = awful.util.table.join(
-    awful.key({ control, shift }, "+", hotkeys_popup.show_help,
+    awful.key({ control }, "+", hotkeys_popup.show_help,
               {description="show help", group="awesome"}),
 
     awful.key({ super }, "j", curry(grid, "down", false),
@@ -117,7 +117,9 @@ globalkeys = awful.util.table.join(
     awful.key({ super }, ".", curry(awful.tag.incncol, -1, nil, true),
               {description = "decrease the number of columns", group = "layout"}),
     awful.key({ super, shift }, "space", curry(awful.layout.inc, 1),
-              {description = "select next", group = "layout"}),
+              {description = "cycle layout", group = "layout"}),
+    awful.key({ super, control }, "space", curry(awful.layout.inc, -1),
+              {description = "cycle layout in reverse", group = "layout"}),
 
     awful.key({ super, shift }, "n",
               function ()
@@ -140,9 +142,9 @@ clientkeys = awful.util.table.join(
         {description = "toggle fullscreen", group = "client"}),
     awful.key({ super, shift }, "c", function (c) c:kill() end,
               {description = "close", group = "client"}),
-    awful.key({ super, control }, "space",  awful.client.floating.toggle                     ,
+    awful.key({ control }, "space",  awful.client.floating.toggle                     ,
               {description = "toggle floating", group = "client"}),
-    awful.key({ super, control }, "Return", function (c) c:swap(awful.client.getmaster()) end,
+    awful.key({ control }, "Return", function (c) c:swap(awful.client.getmaster()) end,
               {description = "move to master", group = "client"}),
     awful.key({ super }, "o", function (c) c:move_to_screen()               end,
               {description = "move to screen", group = "client"}),
@@ -169,7 +171,8 @@ for i = 1, 9 do
                         if tag then
                            tag:view_only()
                         end
-                  end),
+                  end,
+                  {description = "switch to tag #" .. i, group = "tag"}),
         -- Toggle tag display.
         awful.key({ super, control }, "#" .. i + 9,
                   function ()
@@ -190,7 +193,8 @@ for i = 1, 9 do
                               tag:view_only()
                           end
                      end
-                  end),
+                  end,
+                  {description = "move client to tag #" .. i, group = "tag"}),
         -- Toggle tag on focused client.
         awful.key({ control }, "#" .. i + 9,
                   function ()

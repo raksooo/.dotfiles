@@ -42,6 +42,7 @@ editor = "nvim"
 awful.layout.layouts = {
     awful.layout.suit.tile,
     awful.layout.suit.fair.horizontal,
+    awful.layout.suit.floating
 }
 
 local statusbar_height = 35
@@ -106,7 +107,9 @@ client.connect_signal("focus", function(c)
     else
         c.opacity = beautiful.opacity_focus
     end
-    c.border_color = beautiful.border_focus
+    if not c.floating then
+        c.border_color = beautiful.border_focus
+    end
 end)
 
 client.connect_signal("unfocus", function(c)
@@ -115,7 +118,19 @@ client.connect_signal("unfocus", function(c)
     else
         c.opacity = beautiful.opacity_normal
     end
-    c.border_color = beautiful.border_normal
+    if not c.floating then
+        c.border_color = beautiful.border_normal
+    end
+end)
+
+client.connect_signal("property::floating", function(c)
+    if c.floating then
+        c.border_width = beautiful.border_width_floating
+        c.border_color = beautiful.border_color_floating
+    else
+        c.border_width = beautiful.border_width
+        c.border_color = beautiful.border_normal
+    end
 end)
 
 wallpaper.init(beautiful.wallpaper)

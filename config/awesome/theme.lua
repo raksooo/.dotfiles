@@ -23,6 +23,8 @@ theme.border_width  = 0
 theme.border_normal = "#444444"
 theme.border_focus  = "#333333"
 theme.border_marked = "#333333"
+theme.border_width_floating = 8
+theme.border_color_floating = "#da8c68"
 
 theme.opacity_normal    = 0.85
 theme.opacity_focus     = 1
