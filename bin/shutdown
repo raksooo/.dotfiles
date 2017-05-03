@@ -1,8 +1,0 @@
-#!/bin/sh
-
-killall qutebrowser
-killall chromium
-
-sleep 1
-sudo poweroff
-
