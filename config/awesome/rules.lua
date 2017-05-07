@@ -1,5 +1,34 @@
 local awful = require("awful")
 
+function isTerminal(c)
+    return c.class:lower() == terminal
+end
+
+function floatingToggled(c, manage)
+    if c.floating then
+        c.border_width = beautiful.border_width_floating
+        c.border_color = beautiful.border_color_floating
+        awful.placement.no_offscreen(c)
+    elseif not manage or not isTerminal(c) then
+        c.border_width = beautiful.border_width
+        c.border_color = beautiful.border_normal
+    end
+end
+
+function changeOpacity(c, opacity)
+    if c.class ~= nil and isTerminal(c) then
+        c.opacity = 0.9 * opacity
+    else
+        c.opacity = opacity
+    end
+end
+
+function changeBorder(c, border_properties)
+    if not c.floating then
+        --awful.rules.execute(c, border_properties)
+    end
+end
+
 awful.rules.rules = {
     { rule = { },
       properties = { border_width = beautiful.border_width,
@@ -32,16 +61,10 @@ awful.rules.rules = {
 -- Signal function to execute when a new client appears.
 client.connect_signal("manage", function (c)
     if c.class == nil then
-        c:connect_signal("property::class", function ()
-            awful.rules.apply(c)
-        end)
+        c:connect_signal("property::class", awful.rules.apply)
     end
 
-    if c.floating then
-        c.border_width = beautiful.border_width_floating
-        c.border_color = beautiful.border_color_floating
-        awful.placement.no_offscreen(c)
-    end
+    floatingToggled(c, true)
 
     if awesome.startup and
       not c.size_hints.user_position
@@ -52,35 +75,14 @@ client.connect_signal("manage", function (c)
 end)
 
 client.connect_signal("focus", function(c)
-    if c.class ~= nil and c.class:lower() == terminal then
-        c.opacity = 0.9
-    else
-        c.opacity = beautiful.opacity_focus
-    end
-    if not c.floating then
-        c.border_color = beautiful.border_focus
-    end
+    changeOpacity(c, beautiful.opacity_focus)
+    changeBorder(c, { border_color = beautiful.border_focus })
 end)
 
 client.connect_signal("unfocus", function(c)
-    if c.class ~= nil and c.class:lower() == terminal then
-        c.opacity = 0.75
-    else
-        c.opacity = beautiful.opacity_normal
-    end
-    if not c.floating then
-        c.border_color = beautiful.border_normal
-    end
+    changeOpacity(c, beautiful.opacity_normal)
+    changeBorder(c, { border_color = beautiful.border_normal })
 end)
 
-client.connect_signal("property::floating", function(c)
-    if c.floating then
-        c.border_width = beautiful.border_width_floating
-        c.border_color = beautiful.border_color_floating
-        awful.placement.no_offscreen(c)
-    else
-        c.border_width = beautiful.border_width
-        c.border_color = beautiful.border_normal
-    end
-end)
+client.connect_signal("property::floating", floatingToggled)
 
