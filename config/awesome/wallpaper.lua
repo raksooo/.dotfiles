@@ -1,5 +1,6 @@
 local awful = require("awful")
 local wibox = require("wibox")
+local gears = require("gears")
 
 local geometry = awful.screen.focused().geometry
 local wallpaper = {
@@ -30,9 +31,11 @@ function createWidgets(wallpaper_fn)
     end
 end
 
-function init_(wallpaper_fn)
+function init_()
+    local wp = beautiful.wallpaper
     local screen = awful.screen.focused()
-    createWidgets(wallpaper_fn)
+
+    createWidgets(wp)
 
     wallpaper.set(1)
     awful.tag.attached_connect_signal(screen, "property::selected", function()
@@ -42,13 +45,14 @@ function init_(wallpaper_fn)
     end)
 end
 
-function wallpaper.init(wallpaper_fn)
+function init()
     if awesome.startup then
-        awesome.connect_signal("startup", function() init_(wallpaper_fn) end)
+        awesome.connect_signal("startup", init_)
     else
-        init_(wallpaper_fn)
+        init_()
     end
 end
 
+init()
 return wallpaper
 

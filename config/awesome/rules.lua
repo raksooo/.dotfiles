@@ -29,6 +29,16 @@ function changeBorder(c, border_properties)
     end
 end
 
+function messengerCallback(c)
+    c:connect_signal("property::name", function(c)
+        -- Update messenger widget
+    end)
+
+    gears.timer.start_new(0.2, function ()
+        awful.key.execute({ "Control", "Mod1" }, "b")
+    end)
+end
+
 awful.rules.rules = {
     { rule = { },
       properties = { border_width = beautiful.border_width,
@@ -51,11 +61,7 @@ awful.rules.rules = {
     { rule = { class = "Spotify" },
       properties = { tag = "6" } },
     { rule = { class = "Messenger for Desktop" },
-      callback = function (c)
-          gears.timer.start_new(0.2, function ()
-              awful.key.execute({ "Control", "Mod1" }, "b")
-          end)
-      end },
+      callback = messengerCallack },
 }
 
 -- Signal function to execute when a new client appears.

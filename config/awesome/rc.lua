@@ -1,8 +1,10 @@
 local awful = require("awful")
 require("awful.autofocus")
-beautiful = require("beautiful")
 local gears = require("gears")
 naughty = require("naughty")
+beautiful = require("beautiful")
+beautiful.init(gears.filesystem.get_configuration_dir() .. "theme.lua")
+
 local statusbar = require("statusbar")
 local wallpaper = require("wallpaper")
 local keys = require("keys")
@@ -16,9 +18,6 @@ awful.layout.layouts = {
     awful.layout.suit.fair.horizontal,
     awful.layout.suit.floating
 }
-
-beautiful.init(gears.filesystem.get_configuration_dir() .. "theme.lua")
-wallpaper.init(beautiful.wallpaper)
 
 awful.screen.connect_for_each_screen(function(s)
     statusbar.new(s, "bottom", 35)

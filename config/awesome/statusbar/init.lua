@@ -1,14 +1,11 @@
 local wibox = require("wibox")
 local awful = require("awful")
-local beautiful = require("beautiful")
 
-local battery = require("statusbar/battery")
-local system = require("statusbar/system")
-netctl = require("statusbar/netctl")
-volume = require("statusbar/volume")
-pacman = require("statusbar/pacman/pacman")
-
-beautiful.init("/home/oskar/.config/awesome/theme.lua")
+local battery = require("statusbar.battery")
+local system = require("statusbar.system")
+netctl = require("statusbar.netctl")
+volume = require("statusbar.volume")
+pacman = require("statusbar.pacman")
 
 local statusbar = {}
 textclock = {}
