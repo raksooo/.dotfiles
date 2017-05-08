@@ -6,6 +6,7 @@ local system = require("statusbar.system")
 netctl = require("statusbar.netctl")
 volume = require("statusbar.volume")
 pacman = require("statusbar.pacman")
+messenger = require("statusbar.messenger")
 
 local statusbar = {}
 textclock = {}
@@ -20,6 +21,7 @@ function statusbar.init(height)
     statusbar.netctl = netctl.create()
     statusbar.volume = volume.create()
     statusbar.pacman = pacman.create()
+    statusbar.messenger = messenger.create()
 end
 
 function statusbar.new(s, placement, height)
@@ -69,6 +71,7 @@ function statusbar.new(s, placement, height)
                 statusbar.system,
                 statusbar.battery,
                 statusbar.netctl,
+                statusbar.messenger,
                 wibox.widget.systray()
             }
         }

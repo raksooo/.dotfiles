@@ -30,10 +30,7 @@ function changeBorder(c, border_properties)
 end
 
 function messengerCallback(c)
-    c:connect_signal("property::name", function(c)
-        -- Update messenger widget
-    end)
-
+    c:connect_signal("property::name", messenger.titleChange)
     gears.timer.start_new(0.2, function ()
         awful.key.execute({ "Control", "Mod1" }, "b")
     end)
@@ -61,7 +58,7 @@ awful.rules.rules = {
     { rule = { class = "Spotify" },
       properties = { tag = "6" } },
     { rule = { class = "Messenger for Desktop" },
-      callback = messengerCallack },
+      callback = messengerCallback },
 }
 
 -- Signal function to execute when a new client appears.

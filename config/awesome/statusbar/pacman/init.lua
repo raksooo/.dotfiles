@@ -4,7 +4,8 @@ local awful = require("awful")
 
 local pacman = {}
 local options = {
-    image = "/home/oskar/.config/awesome/statusbar/pacman/pacman_quantum.png",
+    image = gears.filesystem.get_configuration_dir()
+        .. "statusbar/pacman/pacman_quantum.png",
     opacity = 0.7,
     margin = 3,
     margin_right = 40
