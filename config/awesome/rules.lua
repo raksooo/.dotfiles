@@ -25,7 +25,7 @@ end
 
 function changeBorder(c, border_properties)
     if not c.floating then
-        --awful.rules.execute(c, border_properties)
+        awful.rules.execute(c, border_properties)
     end
 end
 
