@@ -12,13 +12,11 @@ local options = {
 }
 
 function messenger.create()
-    local widget = wibox.widget {
-        image = options.image,
-        widget = wibox.widget.imagebox
-    }
-
     messenger.widget = wibox.widget {
-        widget,
+        {
+            image = options.image,
+            widget = wibox.widget.imagebox
+        },
         left    = options.margin,
         right   = options.margin_right,
         top   = options.margin_top,
@@ -31,11 +29,12 @@ function messenger.create()
 end
 
 function messenger.titleChange()
-    messenger.widget.forced_width = nil
     if messenger.timer ~= nil then
         messenger.timer:stop()
     end
-    messenger.timer = gears.timer.start_new(5, function()
+
+    messenger.widget.forced_width = nil
+    messenger.timer = gears.timer.start_new(3, function()
         messenger.widget.forced_width = 0
     end)
 end
