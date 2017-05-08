@@ -1,7 +1,7 @@
 local awful = require("awful")
 
 function isTerminal(c)
-    return c.class:lower() == terminal
+    return c.class ~= nil and c.class:lower() == terminal
 end
 
 function floatingToggled(c, manage)
@@ -16,7 +16,7 @@ function floatingToggled(c, manage)
 end
 
 function changeOpacity(c, opacity)
-    if c.class ~= nil and isTerminal(c) then
+    if isTerminal(c) then
         c.opacity = 0.9 * opacity
     else
         c.opacity = opacity
