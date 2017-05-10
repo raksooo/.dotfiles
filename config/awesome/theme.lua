@@ -4,7 +4,7 @@ local theme = {}
 
 theme.font          = "DejaVu Sans 9"
 theme.wallpaper     = function(t)
-    return "/home/oskar/.wallpapers/active/" ..t .. ".png"
+    return os.getenv("HOME") .. "/.wallpapers/active/" ..t .. ".png"
 end
 
 theme.bg_normal     = "#222222"
