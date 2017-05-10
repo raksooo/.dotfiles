@@ -53,6 +53,8 @@ awful.rules.rules = {
     { rule = { class = "URxvt" },
       properties = { size_hints_honor = false,
                      border_width = 14 } },
+    { rule = { class = "mpv" },
+      properties = { floating = true } },
     { rule = { class = "qutebrowser" },
       properties = { tag = "4" } },
     { rule = { class = "Chromium" },
