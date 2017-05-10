@@ -25,7 +25,9 @@ end
 
 function changeBorder(c, border_properties)
     if not c.floating then
-        awful.rules.execute(c, border_properties)
+        for k, v in pairs(border_properties) do
+            c[k] = v
+        end
     end
 end
 
@@ -52,9 +54,9 @@ awful.rules.rules = {
       properties = { size_hints_honor = false,
                      border_width = 14 } },
     { rule = { class = "qutebrowser" },
-      properties = { tag = "2" } },
-    { rule = { class = "Chromium" },
       properties = { tag = "4" } },
+    { rule = { class = "Chromium" },
+      properties = { tag = "5" } },
     { rule = { class = "Spotify" },
       properties = { tag = "6" } },
     { rule = { class = "Messenger for Desktop" },

@@ -16,12 +16,11 @@ function bind(obj, f, a, b, c, d, e)
 end
 
 function gotoTag(i, move)
+    local tag = awful.screen.focused().tags[i]
     if move then
-        local tag = awful.tag.gettags(client.focus.screen)[i]
-        awful.client.movetotag(tag)
+        client.focus:move_to_tag(tag)
     end
 
-    local tag = awful.screen.focused().tags[i]
     if tag then tag:view_only() end
 end
 
