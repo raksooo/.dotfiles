@@ -1,8 +1,10 @@
 local naughty = require("naughty")
 
 local theme = {}
+local font = "DejaVu Sans"
 
-theme.font          = "DejaVu Sans 9"
+theme.base_font     = font
+theme.font          = font .. " 9"
 theme.wallpaper     = function(t)
     return os.getenv("HOME") .. "/.wallpapers/active/" ..t .. ".png"
 end
@@ -37,12 +39,12 @@ theme.taglist_fg_focus = theme.fg_statusbar
 theme.taglist_fg_occupied = theme.taglist_fg_focus
 theme.taglist_fg_empty = theme.taglist_fg_focus
 
-theme.naughty_width        = 250
-theme.naughty_height       = 60
-theme.naughty_icon_size    = 100
-theme.naughty_margin       = 10
-theme.naughty_border_width = 1
-theme.naughty_border_color = "#268bd2"
+theme.notification_width        = 600
+theme.notification_height       = 130
+theme.notification_border_width = 0
+theme.notification_bg           = "#00000000"
+theme.notification_inner_bg     = "#000000e5"
+theme.notification_margin       = 20
 
 theme.systray_icon_spacing = 2
 theme.useless_gap = 19

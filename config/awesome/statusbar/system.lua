@@ -114,7 +114,7 @@ function updateRam()
         local percentage = free / total
         local percentageh = math.ceil(100 * percentage)
 
-        systemUsage.tooltip.ram = "RAM: " .. percentageh .. "% in use ("
+        systemUsage.tooltip.ram = "RAM: " .. percentageh .. "% ("
             .. freeh .. "/" .. totalh .. ")"
 
         local color = percentageToColor(percentage, 0.5, 0.75)

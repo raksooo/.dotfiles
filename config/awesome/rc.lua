@@ -10,6 +10,7 @@ local wallpaper = require("wallpaper")
 local keys = require("keys")
 local warnings = require("errorHandling")
 local rules = require("rules")
+local notifications = require("notifications")
 
 terminal = "urxvt"
 
