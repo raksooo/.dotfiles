@@ -29,14 +29,18 @@ function messenger.create()
 end
 
 function messenger.titleChange()
-    if messenger.timer ~= nil then
-        messenger.timer:stop()
+    if messenger.widget.forced_width == 0 then
+        naughty.notify({title = "Facebook Messenger", text = "New message(s)"})
     end
 
     messenger.widget.forced_width = nil
-    messenger.timer = gears.timer.start_new(3, function()
-        messenger.widget.forced_width = 0
-    end)
+    if messenger.timer ~= nil then
+        messenger.timer:again()
+    else
+        messenger.timer = gears.timer.start_new(5, function()
+            messenger.widget.forced_width = 0
+        end)
+    end
 end
 
 return messenger
