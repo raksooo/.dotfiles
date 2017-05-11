@@ -6,9 +6,10 @@ local font = "DejaVu Sans"
 theme.transparent   = "#00000000"
 theme.base_font     = font
 theme.font          = font .. " 9"
-theme.wallpaper     = function(t)
-    return os.getenv("HOME") .. "/.wallpapers/active/" ..t .. ".png"
-end
+--theme.wallpaper     = function(t)
+--    return os.getenv("HOME") .. "/.wallpapers/active/" ..t .. ".png"
+--end
+theme.wallpaper     = os.getenv("HOME") .. "/.wallpapers/20.jpg"
 
 theme.bg_normal     = "#222222"
 theme.bg_focus      = "#535d6c"

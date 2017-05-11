@@ -6,7 +6,7 @@ beautiful = require("beautiful")
 beautiful.init(gears.filesystem.get_configuration_dir() .. "theme.lua")
 
 local statusbar = require("statusbar")
-local wallpaper = require("wallpaper")
+--local wallpaper = require("wallpaper")
 local keys = require("keys")
 local warnings = require("errorHandling")
 local rules = require("rules")
@@ -22,5 +22,6 @@ awful.layout.layouts = {
 
 awful.screen.connect_for_each_screen(function(s)
     statusbar.new(s, "bottom", 35)
+    gears.wallpaper.fit(beautiful.wallpaper, s)
 end)
 
