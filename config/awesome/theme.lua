@@ -3,6 +3,7 @@ local naughty = require("naughty")
 local theme = {}
 local font = "DejaVu Sans"
 
+theme.transparent   = "#00000000"
 theme.base_font     = font
 theme.font          = font .. " 9"
 theme.wallpaper     = function(t)
@@ -42,8 +43,7 @@ theme.taglist_fg_empty = theme.taglist_fg_focus
 theme.notification_width        = 600
 theme.notification_height       = 130 + 20
 theme.notification_border_width = 0
-theme.notification_bg           = "#00000000"
-theme.notification_inner_bg     = "#000000e5"
+theme.notification_bg           = "#000000e5"
 theme.notification_margin       = 20
 theme.notification_opacity      = 0
 theme.notification_font         = font .. " 12"

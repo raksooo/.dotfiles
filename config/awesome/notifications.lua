@@ -3,9 +3,9 @@ local awful = require("awful")
 local wibox = require("wibox")
 
 function createImagebox(image)
-    local image_bg = beautiful.notification_bg
+    local image_bg = beautiful.transparent
     if image ~= nil then
-        image_bg = beautiful.notification_inner_bg
+        image_bg = beautiful.notification_bg
     end
 
     return {
@@ -53,7 +53,7 @@ function createTextboxes(title, text)
                 layout = wibox.container.margin
             },
             forced_width = 1000,
-            bg = beautiful.notification_inner_bg,
+            bg = beautiful.notification_bg,
             layout = wibox.container.background
         },
         left = beautiful.notification_margin,
@@ -75,6 +75,7 @@ function fixNotification(notification, title, text, image)
 
     notification.box.border_width = beautiful.notification_border_width
     notification.box.opacity = 1
+    notification.box.bg = beautiful.transparent
     notification.box:set_widget(widget)
 end
 
