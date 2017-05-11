@@ -2,6 +2,8 @@ local gears = require("gears")
 local awful = require("awful")
 local wibox = require("wibox")
 
+local notificationQueue = {}
+
 function createImagebox(image)
     local image_bg = beautiful.transparent
     if image ~= nil then
@@ -79,7 +81,7 @@ function fixNotification(notification, title, text, image)
     notification.box:set_widget(widget)
 end
 
-function checkNotifications(title, text, image)
+function checkNotifications()
     local allNotifications = naughty.notifications[awful.screen.focused()]
     local notifications = awful.util.table.join(
         allNotifications["top_right"],
@@ -87,15 +89,15 @@ function checkNotifications(title, text, image)
     )
     for _, notification in pairs(notifications) do
         if not notification.opacity then
-            fixNotification(notification, title, text, image)
+            local args = table.remove(notificationQueue)
+            fixNotification(notification, args.title, args.text, args.icon)
         end
     end
 end
 
 naughty.config.notify_callback = function(args)
-    gears.timer.start_new(0, function()
-        checkNotifications(args.title, args.text, args.icon)
-    end)
+    table.insert(notificationQueue, args)
+    gears.timer.start_new(0, checkNotifications)
     return args
 end
 
