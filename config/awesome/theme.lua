@@ -45,6 +45,8 @@ theme.notification_border_width = 0
 theme.notification_bg           = "#00000000"
 theme.notification_inner_bg     = "#000000e5"
 theme.notification_margin       = 20
+theme.notification_opacity      = 0
+theme.notification_font         = font .. " 12"
 
 theme.systray_icon_spacing = 2
 theme.useless_gap = 19
