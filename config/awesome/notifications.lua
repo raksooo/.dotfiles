@@ -74,7 +74,6 @@ function fixNotification(notification, title, text, image)
     }
 
     notification.box.border_width = beautiful.notification_border_width
-    notification.box.type = "dock" -- To prevent shaddow
     notification.box.opacity = 1
     notification.box:set_widget(widget)
 end
