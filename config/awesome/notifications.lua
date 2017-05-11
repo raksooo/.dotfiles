@@ -4,7 +4,7 @@ local wibox = require("wibox")
 
 local notificationQueue = {}
 
-function createImagebox(image)
+function createImagebox(image, size)
     local image_bg = beautiful.transparent
     if image ~= nil then
         image_bg = beautiful.notification_bg
@@ -14,6 +14,8 @@ function createImagebox(image)
         {
             {
                 image = image,
+                forced_height = size,
+                forced_width = size,
                 widget = wibox.widget.imagebox
             },
             halign = "center",
@@ -63,11 +65,11 @@ function createTextboxes(title, text)
     }
 end
 
-function fixNotification(notification, title, text, image)
+function fixNotification(notification, args)
     local widget = wibox.widget {
         {
-            createImagebox(image),
-            createTextboxes(title, text),
+            createImagebox(args.icon, args.icon_size),
+            createTextboxes(args.title, args.text),
             layout = wibox.layout.fixed.horizontal
         },
         top = beautiful.notification_margin,
@@ -90,7 +92,7 @@ function checkNotifications()
     for _, notification in pairs(notifications) do
         if not notification.opacity then
             local args = table.remove(notificationQueue)
-            fixNotification(notification, args.title, args.text, args.icon)
+            fixNotification(notification, args)
         end
     end
 end
