@@ -19,7 +19,7 @@ setxkbmap se -variant nodeadkeys
 xss-lock -- /usr/local/bin/lock &
 unclutter -idle 2 &
 redshift 57.716015:11.871436 &
-compton -b --no-fading-openclose -c -C -t-4 -l-4 -o.4 -r14 --shadow-exclude "_NET_WM_WINDOW_TYPE@:a *= \"NOTIFICATION\""
+compton -b --no-fading-openclose -c -t-4 -l-4 -o.4 -r14 --shadow-exclude "_NET_WM_WINDOW_TYPE@:a *= \"NOTIFICATION\""
 sxhkd &
 
 # Autostart applications
