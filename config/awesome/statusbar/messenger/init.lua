@@ -30,7 +30,10 @@ end
 
 function messenger.titleChange()
     if messenger.widget.forced_width == 0 then
-        naughty.notify({title = "Facebook Messenger", text = "New message(s)"})
+        naughty.notify({ title = "Facebook Messenger",
+                         text = "New message(s)",
+                         icon = options.image,
+                         icon_size = 90 })
     end
 
     messenger.widget.forced_width = nil
