@@ -2,69 +2,81 @@ local gears = require("gears")
 local awful = require("awful")
 local wibox = require("wibox")
 
-function fixNotification(notification, title, text, image)
+function createImagebox(image)
     local image_bg = beautiful.notification_bg
     if image ~= nil then
         image_bg = beautiful.notification_inner_bg
     end
 
-    local widget = wibox.widget {
+    return {
         {
             {
-                {
-                    image = image,
-                    widget = wibox.widget.imagebox
-                },
-                halign = "center",
-                valign = "center",
-                forced_width = beautiful.notification_height,
-                forced_height = beautiful.notification_height,
-                layout = wibox.container.place
+                image = image,
+                widget = wibox.widget.imagebox
             },
-            bg = image_bg,
-            layout = wibox.container.background
+            halign = "center",
+            valign = "center",
+            forced_width = beautiful.notification_height,
+            forced_height = beautiful.notification_height,
+            layout = wibox.container.place
         },
+        bg = image_bg,
+        layout = wibox.container.background
+    }
+end
+
+function createTextboxes(title, text)
+    return {
         {
             {
                 {
                     {
                         {
-                            {
-                                widget = wibox.widget.textbox,
-                                markup = "<b>" .. title .. "</b>",
-                                font = beautiful.notification_font,
-                            },
-                            bottom = 20,
-                            layout = wibox.container.margin
-                        },
-                        {
                             widget = wibox.widget.textbox,
-                            text = text,
+                            markup = "<b>" .. title .. "</b>",
                             font = beautiful.notification_font,
                         },
-                        layout = wibox.layout.fixed.vertical
+                        bottom = 20,
+                        layout = wibox.container.margin
                     },
-                    left = beautiful.notification_margin,
-                    right = beautiful.notification_margin,
-                    top = 25,
-                    bottom = 25,
-                    layout = wibox.container.margin
+                    {
+                        widget = wibox.widget.textbox,
+                        text = text,
+                        font = beautiful.notification_font,
+                    },
+                    layout = wibox.layout.fixed.vertical
                 },
-                forced_width = 1000,
-                bg = beautiful.notification_inner_bg,
-                layout = wibox.container.background
+                left = beautiful.notification_margin,
+                right = beautiful.notification_margin,
+                top = 25,
+                bottom = 25,
+                layout = wibox.container.margin
             },
-            left = beautiful.notification_margin,
-            layout = wibox.container.margin
+            forced_width = 1000,
+            bg = beautiful.notification_inner_bg,
+            layout = wibox.container.background
         },
-        layout = wibox.layout.fixed.horizontal
+        left = beautiful.notification_margin,
+        layout = wibox.container.margin
+    }
+end
+
+function fixNotification(notification, title, text, image)
+    local widget = wibox.widget {
+        {
+            createImagebox(image),
+            createTextboxes(title, text),
+            layout = wibox.layout.fixed.horizontal
+        },
+        top = beautiful.notification_margin,
+        right = beautiful.notification_margin,
+        layout = wibox.container.margin
     }
 
     notification.box.border_width = beautiful.notification_border_width
     notification.box.type = "dock" -- To prevent shaddow
     notification.box.opacity = 1
     notification.box:set_widget(widget)
-    notification.fixed = true
 end
 
 function checkNotifications(title, text, image)
@@ -74,7 +86,7 @@ function checkNotifications(title, text, image)
         allNotifications["bottom_right"]
     )
     for _, notification in pairs(notifications) do
-        if not notification.fixed then
+        if not notification.opacity then
             fixNotification(notification, title, text, image)
         end
     end

@@ -40,7 +40,7 @@ theme.taglist_fg_occupied = theme.taglist_fg_focus
 theme.taglist_fg_empty = theme.taglist_fg_focus
 
 theme.notification_width        = 600
-theme.notification_height       = 130
+theme.notification_height       = 130 + 20
 theme.notification_border_width = 0
 theme.notification_bg           = "#00000000"
 theme.notification_inner_bg     = "#000000e5"
