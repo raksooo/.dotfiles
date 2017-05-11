@@ -163,6 +163,8 @@ function notify()
                 title = title,
                 text = text,
                 timeout = 0,
+                icon =  gears.filesystem.get_configuration_dir()
+                    .. "statusbar/battery/lowbattery.png",
                 destroy = function () notification.notification = nil end
             })
         else
