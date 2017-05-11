@@ -38,12 +38,6 @@ function messengerCallback(c)
     end)
 end
 
-function mpvCallback(c)
-    c:connect_signal("property::fullscreen", function()
-        awful.placement.no_offscreen(c)
-    end)
-end
-
 awful.rules.rules = {
     { rule = { },
       properties = { border_width = beautiful.border_width,
@@ -60,8 +54,7 @@ awful.rules.rules = {
       properties = { size_hints_honor = false,
                      border_width = 14 } },
     { rule = { class = "mpv" },
-      properties = { floating = true },
-      callback = mpvCallback },
+      properties = { floating = true } },
     { rule = { class = "qutebrowser" },
       properties = { tag = "4" } },
     { rule = { class = "Chromium" },
@@ -99,4 +92,8 @@ client.connect_signal("unfocus", function(c)
 end)
 
 client.connect_signal("property::floating", floatingToggled)
+
+client.connect_signal("property::fullscreen", function()
+    awful.placement.no_offscreen(c)
+end)
 
