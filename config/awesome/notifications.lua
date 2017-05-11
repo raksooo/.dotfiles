@@ -44,7 +44,7 @@ function createTextboxes(title, text)
                         text = text,
                         font = beautiful.notification_font,
                     },
-                    layout = wibox.layout.fixed.vertical
+                    layout = wibox.layout.flex.vertical
                 },
                 left = beautiful.notification_margin,
                 right = beautiful.notification_margin,
