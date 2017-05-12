@@ -158,10 +158,14 @@ clientkeys = awful.util.table.join(
         {description = "minimize", group = "client"}),
     awful.key({ super }, "m",
         function (c)
-            c.maximized = not c.maximized
-            c:raise()
+            local tag = awful.screen.focused().selected_tag
+            if tag.gap == beautiful.useless_gap then
+                tag.gap = beautiful.less_useless_gap
+            else
+                tag.gap = beautiful.useless_gap
+            end
         end ,
-        {description = "maximize", group = "client"})
+        {description = "remove useless gap", group = "layout"})
 )
 
 -- Bind all key numbers to tags.

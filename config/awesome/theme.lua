@@ -22,7 +22,6 @@ theme.fg_focus      = "#ffffff"
 theme.fg_urgent     = "#ffffff"
 theme.fg_minimize   = "#ffffff"
 
-theme.useless_gap   = 20
 theme.border_width  = 0
 theme.border_normal = "#444444"
 theme.border_focus  = "#333333"
@@ -50,7 +49,7 @@ theme.notification_opacity      = 0
 theme.notification_font         = font .. " 12"
 
 theme.systray_icon_spacing = 2
-theme.useless_gap = 19
+theme.useless_gap = 20
 theme.less_useless_gap = 0
 
 -- Define the icon theme for application icons. If not set then the icons
