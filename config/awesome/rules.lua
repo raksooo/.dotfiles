@@ -54,7 +54,9 @@ awful.rules.rules = {
       properties = { size_hints_honor = false,
                      border_width = 14 } },
     { rule = { class = "mpv" },
-      properties = { floating = true } },
+      properties = { floating = true,
+                     width = 1920,
+                     height = 1080 } },
     { rule = { class = "qutebrowser" },
       properties = { tag = "4" } },
     { rule = { class = "Chromium" },
@@ -72,6 +74,10 @@ client.connect_signal("manage", function (c)
     end
 
     floatingToggled(c, true)
+
+    if c.floating then
+        awful.placement.centered(c)
+    end
 
     if awesome.startup and
       not c.size_hints.user_position
