@@ -2,7 +2,9 @@ local gears = require("gears")
 local wibox = require("wibox")
 local awful = require("awful")
 
-local messenger = {}
+local messenger = {
+    unread = false
+}
 local options = {
     image = gears.filesystem.get_configuration_dir()
         .. "statusbar/messenger/icon_quantum.png",
@@ -29,21 +31,19 @@ function messenger.create()
 end
 
 function messenger.titleChange()
-    if messenger.widget.forced_width == 0 then
+    if not messenger.unread then
+        messenger.unread = true
+        messenger.widget.forced_width = nil
         naughty.notify({ title = "Facebook Messenger",
                          text = "New message(s)",
                          icon = options.image,
                          icon_size = 90 })
     end
+end
 
-    messenger.widget.forced_width = nil
-    if messenger.timer ~= nil then
-        messenger.timer:again()
-    else
-        messenger.timer = gears.timer.start_new(5, function()
-            messenger.widget.forced_width = 0
-        end)
-    end
+function messenger.opened()
+    messenger.unread = false
+    messenger.widget.forced_width = 0
 end
 
 return messenger

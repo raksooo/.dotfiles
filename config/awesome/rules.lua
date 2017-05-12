@@ -1,4 +1,5 @@
 local awful = require("awful")
+local poppin = require("poppin")
 
 function isTerminal(c)
     return c.class ~= nil and c.class:lower() == terminal
@@ -33,6 +34,7 @@ end
 
 function messengerCallback(c)
     c:connect_signal("property::name", messenger.titleChange)
+    c:connect_signal("focus", messenger.opened)
     gears.timer.start_new(0.2, function ()
         awful.key.execute({ "Control", "Mod1" }, "b")
     end)
@@ -75,7 +77,7 @@ client.connect_signal("manage", function (c)
 
     floatingToggled(c, true)
 
-    if c.floating then
+    if c.floating and not poppin.isPoppin(c) then
         awful.placement.centered(c)
     end
 
