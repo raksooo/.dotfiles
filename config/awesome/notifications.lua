@@ -2,6 +2,11 @@ local gears = require("gears")
 local awful = require("awful")
 local wibox = require("wibox")
 
+local timeout = 7
+naughty.config.defaults.timeout = timeout
+naughty.config.presets.low.timeout = timeout
+naughty.config.presets.info.timeout = timeout
+
 local notificationQueue = {}
 
 function createImagebox(image, size)
