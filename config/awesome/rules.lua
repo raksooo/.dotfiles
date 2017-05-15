@@ -19,7 +19,7 @@ end
 function changeOpacity(c, opacity)
     if isTerminal(c) then
         c.opacity = 0.9 * opacity
-    else
+    elseif c.class ~= "mpv" then
         c.opacity = opacity
     end
 end
@@ -58,7 +58,8 @@ awful.rules.rules = {
     { rule = { class = "mpv" },
       properties = { floating = true,
                      width = 1920,
-                     height = 1080 } },
+                     height = 1080,
+                     opacity = 1 } },
     { rule = { class = "qutebrowser" },
       properties = { tag = "4" } },
     { rule = { class = "Chromium" },
