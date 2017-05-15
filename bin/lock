@@ -4,8 +4,7 @@
 #maim $file && convert -scale 10% -scale 1000% $file $file
 #i3lock -i $file
 
-awesome-client "textclock._private.textclock_update_cb()"
-i3lock -i /home/oskar/.wallpapers/vader/lagom_vader-3200.png \
+i3lock -n -i /home/oskar/.wallpapers/vader/lagom_vader-3200.png \
     --insidevercolor=00000000 \
     --insidewrongcolor=00000000 \
     --insidecolor=00000000 \
@@ -17,4 +16,5 @@ i3lock -i /home/oskar/.wallpapers/vader/lagom_vader-3200.png \
     --textcolor=00000000 \
     --keyhlcolor=00ff0030 \
     --bshlcolor=ff000030
+awesome-client "statusbar.textclock._private.textclock_update_cb()" &
 
