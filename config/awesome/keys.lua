@@ -168,16 +168,21 @@ clientkeys = awful.util.table.join(
         {description = "minimize", group = "client"}),
     awful.key({ control, shift }, "space",
         function (c)
-            local factor = 2
             if c.floating then
+                local factor = 2.7
                 c.ontop = not c.ontop
+                c.sticky = not c.sticky
                 if c.ontop then
-                    c.width = c.width / factor
-                    c.height = c.height / factor
+                    c:geometry({
+                        width = c.width / factor,
+                        height = c.height / factor
+                    })
                     awful.placement.top_right(c)
                 else
-                    c.width = c.width * factor
-                    c.height = c.height * factor
+                    c:geometry({
+                        width = c.width * factor,
+                        height = c.height * factor
+                    })
                     awful.placement.centered(c)
                 end
             end
