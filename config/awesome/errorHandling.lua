@@ -1,28 +1,34 @@
 local naughty = require("naughty")
 
--- Check if awesome encountered an error during startup and fell back to
--- another config (This code will only ever execute for the fallback config)
+function log(text)
+    file = io.open(os.getenv("HOME") .. "/.cache/awesome-config.log", "a")
+    file:write("\n\n" .. text)
+    file:close()
+end
+
 if awesome.startup_errors then
+    log("Startup error:\n" .. awesome.startup_errors)
     naughty.notify({ preset = naughty.config.presets.critical,
                      title = "Oops, there were errors during startup!",
                      text = awesome.startup_errors })
 end
 
--- Handle runtime errors after startup
 do
     local in_error = false
     awesome.connect_signal("debug::error", function (err)
-        -- Make sure we don't go into an endless error loop
         if in_error then return end
         in_error = true
 
+        log("Error:\n" .. tostring(err))
         naughty.notify({ preset = naughty.config.presets.critical,
                          title = "Oops, an error happened!",
-                         text = tostring(err) })
+                         text = "Have a look in the log file!" })
         in_error = false
     end)
 end
 
 awesome.connect_signal("debug::deprecation", function (hint)
-    naughty.notify({ title = "Deprecation warning", text = hint })
+    log("Deprecation warning:\n" .. hint)
+    naughty.notify({ title = "Deprecation warning!",
+                     text = "Have a look in the log file!" })
 end)

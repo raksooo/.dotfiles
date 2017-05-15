@@ -5,10 +5,10 @@ naughty = require("naughty")
 beautiful = require("beautiful")
 beautiful.init(gears.filesystem.get_configuration_dir() .. "theme.lua")
 
+local warnings = require("errorHandling")
 local statusbar = require("statusbar")
 --local wallpaper = require("wallpaper")
 local keys = require("keys")
-local warnings = require("errorHandling")
 local rules = require("rules")
 local notifications = require("notifications")
 
