@@ -8,13 +8,11 @@ volume = require("statusbar.volume")
 pacman = require("statusbar.pacman")
 messenger = require("statusbar.messenger")
 
-local statusbar = {}
-textclock = {}
+statusbar = {}
 
 function statusbar.init(height)
     statusbar.height = height
-    textclock = wibox.widget.textclock()
-    statusbar.textclock = textclock
+    statusbar.textclock = wibox.widget.textclock()
 
     statusbar.battery = battery.create()
     statusbar.system = system.create()
