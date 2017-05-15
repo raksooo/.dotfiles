@@ -126,6 +126,16 @@ globalkeys = awful.util.table.join(
               {description = "cycle layout", group = "layout"}),
     awful.key({ super, control }, "space", curry(awful.layout.inc, -1),
               {description = "cycle layout in reverse", group = "layout"}),
+    awful.key({ super }, "m",
+        function (c)
+            local tag = awful.screen.focused().selected_tag
+            if tag.gap == beautiful.useless_gap then
+                tag.gap = beautiful.less_useless_gap
+            else
+                tag.gap = beautiful.useless_gap
+            end
+        end ,
+        {description = "remove useless gap", group = "layout"}),
 
     awful.key({ super, shift }, "n",
               function ()
@@ -150,22 +160,29 @@ clientkeys = awful.util.table.join(
               {description = "close", group = "client"}),
     awful.key({ control }, "space",  awful.client.floating.toggle                     ,
               {description = "toggle floating", group = "client"}),
-    awful.key({ control }, "Return", function (c) c:swap(awful.client.getmaster()) end,
+    awful.key({ super }, "Return", function (c) c:swap(awful.client.getmaster()) end,
               {description = "move to master", group = "client"}),
     awful.key({ super }, "o", function (c) c:move_to_screen()               end,
               {description = "move to screen", group = "client"}),
     awful.key({ super }, "n", function (c) c.minimized = true end ,
         {description = "minimize", group = "client"}),
-    awful.key({ super }, "m",
+    awful.key({ control, shift }, "space",
         function (c)
-            local tag = awful.screen.focused().selected_tag
-            if tag.gap == beautiful.useless_gap then
-                tag.gap = beautiful.less_useless_gap
-            else
-                tag.gap = beautiful.useless_gap
+            local factor = 2
+            if c.floating then
+                c.ontop = not c.ontop
+                if c.ontop then
+                    c.width = c.width / factor
+                    c.height = c.height / factor
+                    awful.placement.top_right(c)
+                else
+                    c.width = c.width * factor
+                    c.height = c.height * factor
+                    awful.placement.centered(c)
+                end
             end
         end ,
-        {description = "remove useless gap", group = "layout"})
+        {description = "Place floating client ontop in top right corner", group = "client"})
 )
 
 -- Bind all key numbers to tags.
