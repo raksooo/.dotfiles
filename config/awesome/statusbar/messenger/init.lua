@@ -42,8 +42,11 @@ function messenger.titleChange()
 end
 
 function messenger.opened()
-    messenger.unread = false
     messenger.widget.forced_width = 0
+    gears.timer.start_new(0.5, function()
+        messenger.unread = false
+        messenger.widget.forced_width = 0
+    end)
 end
 
 return messenger
