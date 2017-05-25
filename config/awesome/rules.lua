@@ -1,4 +1,5 @@
 local awful = require("awful")
+local gears = require("gears")
 local poppin = require("poppin")
 
 function isTerminal(c)
@@ -6,13 +7,15 @@ function isTerminal(c)
 end
 
 function floatingToggled(c, manage)
-    if c.floating then
-        c.border_width = beautiful.border_width_floating
-        c.border_color = beautiful.border_color_floating
-        awful.placement.no_offscreen(c)
-    elseif not manage or not isTerminal(c) then
-        c.border_width = beautiful.border_width
-        c.border_color = beautiful.border_normal
+    if beautiful.border_color_floating ~= nil then
+        if c.floating then
+            c.border_width = beautiful.border_width_floating
+            c.border_color = beautiful.border_color_floating
+            awful.placement.no_offscreen(c)
+        elseif not manage or not isTerminal(c) then
+            c.border_width = beautiful.border_width
+            c.border_color = beautiful.border_normal
+        end
     end
 end
 
@@ -65,7 +68,9 @@ awful.rules.rules = {
     { rule = { class = "Chromium" },
       properties = { tag = "5" } },
     { rule = { class = "Spotify" },
-      properties = { tag = "6" } },
+      properties = { tag = "6",
+                     floating = true,
+                     fullscreen = true } },
     { rule = { class = "Messenger for Desktop" },
       callback = messengerCallback },
 }
@@ -102,7 +107,7 @@ end)
 
 client.connect_signal("property::floating", floatingToggled)
 
-client.connect_signal("property::fullscreen", function()
+client.connect_signal("property::fullscreen", function(c)
     awful.placement.no_offscreen(c)
 end)
 
