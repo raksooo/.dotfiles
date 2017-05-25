@@ -11,6 +11,7 @@ local statusbar = require("statusbar")
 local keys = require("keys")
 local rules = require("rules")
 local notifications = require("notifications")
+session = require("session")
 
 terminal = "urxvt"
 

@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+echo "A new kernel has been installed, do you wish to reboot? (y/N) "
+exec < /dev/tty
+read yn
+case $yn in
+    y|Y|yes|Yes|YES )
+        echo "Rebooting in 3 seconds..."
+        sh -c "tmux new-session -s reboot -n reboot -d '\
+            sleep 3;\
+            sudo awesome-owner \"session.close()\";\
+            sleep 1;\
+            reboot\
+        '";
+        ;;
+    * )
+        exit
+        ;;
+esac
+
