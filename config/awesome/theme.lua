@@ -9,7 +9,7 @@ theme.font          = font .. " 9"
 --theme.wallpaper     = function(t)
 --    return os.getenv("HOME") .. "/.wallpapers/active/" ..t .. ".png"
 --end
-theme.wallpaper     = os.getenv("HOME") .. "/.wallpapers/20.jpg"
+theme.wallpaper     = os.getenv("HOME") .. "/.wallpapers/active/1.png"
 
 theme.bg_normal     = "#222222"
 theme.bg_focus      = "#535d6c"
@@ -33,9 +33,9 @@ theme.opacity_normal    = 0.85
 theme.opacity_focus     = 1
 theme.statusbar_opacity = 1
 
-theme.taglist_bg_focus = "#ffffff50"
-theme.taglist_bg_occupied = "#ffffff30"
-theme.taglist_bg_urgent = "#ff000030"
+theme.taglist_bg_focus = "#ffffff48"
+theme.taglist_bg_occupied = "#ffffff2a"
+theme.taglist_bg_urgent = theme.taglist_bg_occupied
 theme.taglist_fg_focus = theme.fg_statusbar
 theme.taglist_fg_occupied = theme.taglist_fg_focus
 theme.taglist_fg_empty = theme.taglist_fg_focus
