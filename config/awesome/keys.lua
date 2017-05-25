@@ -177,7 +177,7 @@ clientkeys = awful.util.table.join(
                         width = c.width / factor,
                         height = c.height / factor
                     })
-                    awful.placement.top_right(c)
+                    awful.placement.top_left(c)
                 else
                     c:geometry({
                         width = c.width * factor,
