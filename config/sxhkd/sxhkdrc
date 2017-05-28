@@ -46,6 +46,6 @@ alt + space
 
 # Take screenshot
 Print
-    maim /home/oskar/screenshots/$(date +%F-%T).png \
+    maim /home/oskar/documents/screenshots/$(date +%F-%T).png \
         && mpg123 ~/.local/share/oskar/screenshot.mp3
 
