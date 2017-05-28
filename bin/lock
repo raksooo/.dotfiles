@@ -4,7 +4,7 @@
 #maim $file && convert -scale 10% -scale 1000% $file $file
 #i3lock -i $file
 
-i3lock -n -i /home/oskar/.wallpapers/active/1.png \
+i3lock -n -e -i /home/oskar/.wallpapers/active/1.png \
     --insidevercolor=00000000 \
     --insidewrongcolor=00000000 \
     --insidecolor=00000000 \
