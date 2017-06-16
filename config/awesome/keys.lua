@@ -109,6 +109,9 @@ globalkeys = awful.util.table.join(
     awful.key({ super }, "x", function ()
         poppin.pop("messenger", "messengerfordesktop", "right", 1000)
     end, {description = "Opens a poppin' messenger window", group = "poppin"}),
+    awful.key({ super }, "r", function ()
+        poppin.pop("remote", "midori -a http://stream.oskar.ninja:8081/ -e show-navigationbar=false -e ZoomIn -e ZoomIn -e ZoomIn -e ZoomIn", "center", { width = 1500, height = 800 })
+    end, {description = "Open remote", group = "poppin"}),
 
     awful.key({ super, shift }, "l", curry(awful.tag.incmwfact, 0.05),
               {description = "increase master width factor", group = "layout"}),
