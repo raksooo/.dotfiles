@@ -1,5 +1,0 @@
-#!/usr/bin/env sh
-
-youtube-notification $1 &
-mpv "$@"
-

@@ -77,12 +77,12 @@ set number
 set ruler
 set scrolloff=10
 set shortmess=atI
-set shiftwidth=4
+set shiftwidth=2
 set smartcase
 set smartindent
 set splitbelow
 set t_Co=256
-set tabstop=4
+set tabstop=2
 set timeoutlen=400
 set title
 set undofile
@@ -151,4 +151,9 @@ autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
 autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 autocmd BufWinLeave * call clearmatches()
+
+" Filetypes
+augroup filetypedetect
+    au BufRead,BufNewFile *.vue setfiletype html
+augroup END
 

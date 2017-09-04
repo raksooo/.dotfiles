@@ -1,4 +1,0 @@
-#!/bin/sh
-
-cat $1 | grep alias | sed 's/alias //' | sed 's/\=.*$//'
-

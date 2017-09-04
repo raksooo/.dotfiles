@@ -1,8 +1,0 @@
-#!/usr/bin/env sh
-
-IMAGE_PATH=/tmp/youtube-thumbnail-$(date +%s)
-ID=$(echo $1 | sed "s/.*v=//g" | sed "s/&.*//g")
-TITLE=$(curl -s $1 | grep -o "<title>[^<]*" | tail -c+8)
-curl -o $IMAGE_PATH "http://img.youtube.com/vi/$ID/0.jpg"
-awesome-client "naughty.notify({title = \"Playing YouTube\", text = \"$TITLE\", icon = \"$IMAGE_PATH\"})"
-sleep 10 && rm $IMAGE_PATH
