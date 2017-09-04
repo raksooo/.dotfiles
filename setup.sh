@@ -9,13 +9,12 @@ function link {
 sudo -v
 
 link zshrc .zshrc
-link vimrc .vimrc
 link tmux.conf .tmux.conf
 link xinitrc .xinitrc
 link Xmodmap .Xmodmap
 link Xresources/Xresources .Xresources
 link Xresources/Xresources_rofi .Xresources_rofi
-link Xresources/Xresources_solarized .Xresources_theme
+link Xresources/Xresources_quantum .Xresources_theme
 link gitconfig .gitconfig
 
 link awesome .config/
@@ -27,14 +26,20 @@ link pacaur .config/
 link gtk/* .config/
 link user-dirs.dirs .config/
 
-link ssh .ssh/config
+mkdir ~/.config/nvim
+link nvim .config/nvim/init.vim
 
 sudo ln -sf $DOTFILES/config/gtk/gtk-2.0/gtkrc /etc/gtk-2.0/
 sudo ln -sf $DOTFILES/config/gtk/gtk-3.0/settings.ini /etc/gtk-3.0/
 
-sudo ln -sf $DOTFILES/bin /usr/local/
-if [ ! -s ~/.local/share/rascal ]; then
-    ln -s $DOTFILES/share $HOME/.local/share/rascal
+git clone git@oskarnyberg.com:dotfiles/wallpapers.git ~/.wallpapers
+git clone git@oskarnyberg.com:dotfiles/share.git ~/.local/share/oskar
+git clone git@oskarnyberg.com:dotfiles/bin.git ~/.local/bin
+sudo ln -sf ~/.local/bin /usr/local/
+
+git clone git@oskarnyberg.com:dotfiles/moredotfiles.git ~/.moredotfiles
+if [ -f ~/.moredotfiles/setup.sh ]; then
+  cd ~/.moredotfiles/setup.sh
 fi
 
 xrdb -merge ~/.Xresources
