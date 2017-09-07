@@ -28,10 +28,6 @@
 
 # add time, jobs, load and battery
 LP_PS1=""
-if [[ $LP_ERR ]]; then
-    # LP_PS1="${LP_PS1}${LP_COLOR_ERR} └─╼━${LP_ERR}"$'\n'
-    LP_PS1="${LP_PS1}${LP_COLOR_ERR}${LP_ERR}"
-fi
 LP_PS1="${LP_PS1} ${LP_PS1_PREFIX}"
 LP_PS1="${LP_PS1}${LP_JOBS}"
 if [[ "$TERM" == screen* ]]; then
@@ -44,6 +40,11 @@ LP_PS1="${LP_PS1}${LP_COLOR_TIME}${LP_PWD}${NO_COL}"
 # If root, the info has not been collected unless LP_ENABLE_VCS_ROOT
 # is set.
 LP_PS1="${LP_PS1}${LP_VCS}"
+
+if [[ $LP_ERR ]]; then
+    # LP_PS1="${LP_PS1}${LP_COLOR_ERR} └─╼━${LP_ERR}"$'\n'
+    LP_PS1="${LP_PS1}${LP_COLOR_ERR}${LP_ERR}"
+fi
 
 # add return code and prompt mark
 LP_PS1="${LP_PS1}${LP_RUNTIME}${LP_MARK_PREFIX}${LP_MARK}${LP_PS1_POSTFIX}"
