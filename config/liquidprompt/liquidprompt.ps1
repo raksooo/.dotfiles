@@ -29,7 +29,8 @@
 # add time, jobs, load and battery
 LP_PS1=""
 if [[ $LP_ERR ]]; then
-    LP_PS1="${LP_PS1}${LP_COLOR_ERR} └─╼━${LP_ERR}"$'\n'
+    # LP_PS1="${LP_PS1}${LP_COLOR_ERR} └─╼━${LP_ERR}"$'\n'
+    LP_PS1="${LP_PS1}${LP_COLOR_ERR}${LP_ERR}"
 fi
 LP_PS1="${LP_PS1} ${LP_PS1_PREFIX}"
 LP_PS1="${LP_PS1}${LP_JOBS}"
