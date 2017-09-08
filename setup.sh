@@ -35,14 +35,9 @@ sudo ln -sf $DOTFILES/config/gtk/gtk-3.0/settings.ini /etc/gtk-3.0/
 git clone git@oskarnyberg.com:dotfiles/wallpapers.git ~/.wallpapers
 git clone git@oskarnyberg.com:dotfiles/share.git ~/.local/share/oskar
 git clone git@oskarnyberg.com:dotfiles/bin.git ~/.local/bin
-sudo ln -sf ~/.local/bin /usr/local/
 
 git clone git@oskarnyberg.com:dotfiles/moredotfiles.git ~/.moredotfiles
 if [ -f ~/.moredotfiles/setup.sh ]; then
   cd ~/.moredotfiles/setup.sh
 fi
-
-xrdb -merge ~/.Xresources
-xrdb -merge ~/.Xresources_rofi
-xrdb -merge ~/.Xresources_theme
 

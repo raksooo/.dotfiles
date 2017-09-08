@@ -1,6 +1,7 @@
 ## Paths
 export DOTFILES=$HOME/.dotfiles
 
+export PATH=$PATH:$HOME/.local/bin
 #export PATH="$(ruby -e 'puts Gem.user_dir')/bin:$PATH"
 #export PATH=$PATH:$HOME/.cabal/bin
 
