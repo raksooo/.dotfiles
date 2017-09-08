@@ -9,7 +9,7 @@ end
 function floatingToggled(c, manage)
     if beautiful.border_color_floating ~= nil then
         if c.floating then
-            c.border_width = beautiful.border_width_floating
+            c.border_width = c.border_width_floating or beautiful.border_width_floating
             c.border_color = beautiful.border_color_floating
             awful.placement.no_offscreen(c)
         elseif not manage or not isTerminal(c) then
@@ -75,7 +75,7 @@ awful.rules.rules = {
                      floating = true,
                      fullscreen = true } },
     { rule = { class = "Messenger for Desktop" },
-      callback = messengerCallback },
+      callback = messengerCallback }
 }
 
 -- Signal function to execute when a new client appears.
