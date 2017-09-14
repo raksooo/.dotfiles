@@ -82,6 +82,14 @@ function fixNotification(notification, args)
     layout = wibox.container.margin
   }
 
+  widget:buttons(gears.table.join(
+    widget:buttons(),
+    awful.button({}, 1,
+      function()
+        notification.die(naughty.notificationClosedReason.dismissedByUser)
+      end)
+  ))
+
   notification.box.border_width = beautiful.notification_border_width
   notification.box.opacity = 1
   notification.box.bg = beautiful.transparent

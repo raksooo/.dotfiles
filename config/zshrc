@@ -36,7 +36,6 @@ HISTFILE=~/.zhistory
 export CLICOLOR=1
 
 export EDITOR=nvim
-export VISUAL=nvim
 export BROWSER=qutebrowser
 export TERMINAL=urxvt
 
