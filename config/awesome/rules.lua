@@ -37,7 +37,7 @@ end
 
 function messengerCallback(c)
     c:connect_signal("property::name", messenger.titleChange)
-    c:connect_signal("focus", messenger.opened)
+    c:connect_signal("unfocus", messenger.opened)
     gears.timer.start_new(0.2, function ()
         awful.key.execute({ "Control", "Mod1" }, "b")
     end)
