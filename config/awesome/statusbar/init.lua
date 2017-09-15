@@ -3,12 +3,14 @@ local awful = require("awful")
 
 local battery = require("statusbar.battery")
 local system = require("statusbar.system")
+local foo = loadfile(os.getenv("HOME") .. "/.moredotfiles/home/foo/init.lua")()
 netctl = require("statusbar.netctl")
 volume = require("statusbar.volume")
 pacman = require("statusbar.pacman")
 messenger = require("statusbar.messenger")
 
 statusbar = {}
+
 
 function statusbar.init(height)
     statusbar.height = height
@@ -19,6 +21,7 @@ function statusbar.init(height)
     statusbar.netctl = netctl.create()
     statusbar.volume = volume.create()
     statusbar.pacman = pacman.create()
+    statusbar.foo = foo.create()
     statusbar.messenger = messenger.create()
 end
 
@@ -69,8 +72,9 @@ function statusbar.new(s, placement, height)
                 statusbar.system,
                 statusbar.battery,
                 statusbar.netctl,
+                statusbar.foo,
                 statusbar.messenger,
-                wibox.widget.systray()
+                --wibox.widget.systray()
             }
         }
     }
