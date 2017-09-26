@@ -34,27 +34,11 @@ function createImagebox(image, size)
   }
 end
 
-function createTextboxes(title, text)
+function createTextboxes(textbox)
   return {
     {
       {
-        {
-          {
-            {
-              widget = wibox.widget.textbox,
-              markup = "<b>" .. title .. "</b>",
-              font = beautiful.notification_font,
-            },
-            bottom = 20,
-            layout = wibox.container.margin
-          },
-          {
-            widget = wibox.widget.textbox,
-            text = text,
-            font = beautiful.notification_font,
-          },
-          layout = wibox.layout.flex.vertical
-        },
+        textbox,
         left = beautiful.notification_margin,
         right = beautiful.notification_margin,
         top = 25,
@@ -74,7 +58,8 @@ function fixNotification(notification, args)
   local widget = wibox.widget {
     {
       createImagebox(args.icon, args.icon_size),
-      createTextboxes(args.title, args.text),
+      --notification.textbox,
+      createTextboxes(notification.textbox),
       layout = wibox.layout.fixed.horizontal
     },
     top = beautiful.notification_margin,
@@ -94,6 +79,7 @@ function fixNotification(notification, args)
   notification.box.opacity = 1
   notification.box.bg = beautiful.transparent
   notification.box:set_widget(widget)
+  notification.fixed = true
 end
 
 function checkNotifications()
@@ -103,7 +89,7 @@ function checkNotifications()
     allNotifications["bottom_right"]
   )
   for _, notification in pairs(notifications) do
-    if not notification.opacity then
+    if not notification.fixed then
       local args = table.remove(notificationQueue, 1)
       fixNotification(notification, args)
     end
