@@ -54,7 +54,7 @@ function messenger.titleChange(c)
       })
     end
   elseif unread == nil and messenger.timer == nil then
-    messenger.timer = gears.timer.start_new(4, function ()
+    messenger.timer = gears.timer.start_new(5, function ()
       messenger.widget.forced_width = 0
       messenger.unread = nil
       messenger.timer = nil
