@@ -1,0 +1,13 @@
+[Trigger]
+Operation = Install
+Operation = Upgrade
+Operation = Remove
+Type = Package
+Target = *
+
+[Action]
+Description = Updating pacman widget...
+Depends = awesome
+When = PostTransaction
+Exec = /home/<user>/.config/awesome/pacman/awesome-owner 'pacman.update()'
+
