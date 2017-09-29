@@ -20,7 +20,14 @@ function statusbar.init(height)
     statusbar.system = system.create()
     statusbar.netctl = netctl.create()
     statusbar.volume = volume.create()
-    statusbar.pacman = pacman.create()
+    statusbar.pacman = wibox.widget {
+      pacman.create(0.7),
+      left    = 3,
+      right   = 40,
+      top   = 3,
+      bottom   = 3,
+      layout  = wibox.container.margin
+    }
     statusbar.foo = foo.create()
     statusbar.messenger = messenger.create()
 end

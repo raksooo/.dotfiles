@@ -78,7 +78,13 @@ awful.rules.rules = {
     properties = {
       tag = "6",
       floating = true,
-      fullscreen = true } },
+      fullscreen = true,
+      keys = awful.util.table.join( clientkeys,
+          awful.key( { "Mod4", "Shift" }, "c", function (c)
+            c:kill()
+            awful.spawn("killall spotify")
+          end)
+        ) } },
   { rule = { class = "Messenger for Desktop" },
     callback = messengerCallback },
   { rule = { class = "Pinentry" },
