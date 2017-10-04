@@ -11,7 +11,6 @@ messenger = require("statusbar.messenger")
 
 statusbar = {}
 
-
 function statusbar.init(height)
     statusbar.height = height
     statusbar.textclock = wibox.widget.textclock()
@@ -45,7 +44,8 @@ function statusbar.new(s, placement, height)
     })
     awful.tag.add("2", {
         layout             = awful.layout.layouts[1],
-        --gap_single_client  = false,
+        master_fill_policy = "master_width_factor",
+        gap                = 50,
         screen             = s,
     })
     awful.tag({ "3", "4", "5", "6" }, s, awful.layout.layouts[1])

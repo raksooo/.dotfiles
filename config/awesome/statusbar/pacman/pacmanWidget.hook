@@ -9,5 +9,5 @@ Target = *
 Description = Updating pacman widget...
 Depends = awesome
 When = PostTransaction
-Exec = /home/<user>/.config/awesome/pacman/awesome-owner 'pacman.update()'
+Exec = /home/<user>/.config/awesome/pacman/awesome-owner 'pacman.hook()'
 

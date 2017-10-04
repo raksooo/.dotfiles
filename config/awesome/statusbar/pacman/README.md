@@ -10,7 +10,7 @@ git clone https://github.com/raksooo/pacmanwidget.git ~/.config/awesome/pacman
 ## Usage
 ```lua
 pacman = require("statusbar.pacman")
-local widget = pacman.create(<opacity>)
+local widget = pacman.create([<opacity>])
 ```
 And then add the widget to your wibar.
 

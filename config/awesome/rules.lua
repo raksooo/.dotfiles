@@ -71,7 +71,7 @@ awful.rules.rules = {
       height = 1080,
       opacity = 1 } },
   { rule = { class = "qutebrowser" },
-    properties = { tag = "4" } },
+    properties = { tags = { "4", "5" } } },
   { rule = { class = "Chromium" },
     properties = { tag = "5" } },
   { rule = { class = "Spotify" },

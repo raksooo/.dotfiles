@@ -5,9 +5,10 @@ local awful = require("awful")
 local pacman = {}
 
 function pacman.create(dotOpacity)
+  content, pacman.timer = awful.widget.watch("checkupdates", 180, pacman.update)
   local widget = wibox.widget {
     {
-      awful.widget.watch("checkupdates", 180, pacman.update),
+      content,
       opacity = dotOpacity,
       layout = wibox.layout.fixed.horizontal
     },
@@ -25,6 +26,10 @@ function pacman.create(dotOpacity)
   })
 
   return widget
+end
+
+function pacman.hook()
+  pacman.timer:emit_signal("timeout")
 end
 
 function pacman.update(widget, stdout)
