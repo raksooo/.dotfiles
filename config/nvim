@@ -48,6 +48,12 @@ hi GitGutterChange ctermbg=none ctermfg=221
 hi GitGutterDelete ctermbg=none ctermfg=204
 hi GitGutterChangeDelete ctermbg=none ctermfg=204
 
+" spell checking
+hi SpellBad ctermfg=204
+hi SpellCap ctermfg=221
+hi SpellRare ctermfg=114
+hi SpellLocal ctermfg=238
+
 " airline
 let g:airline_left_sep=''
 let g:airline_right_sep=''
@@ -108,10 +114,6 @@ inoremap /** /**<CR>/<Esc>O
 
 " Paranthesis
 inoremap {<CR> {<CR>}<Esc>ko
-nnoremap ( "="("<CR>P
-nnoremap ) "=")"<CR>p
-nnoremap [ "="["<CR>P
-nnoremap ] "="]"<CR>p
 
 " Scrolling
 nnoremap <C-Up> 10k
@@ -153,6 +155,9 @@ autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 autocmd BufWinLeave * call clearmatches()
 
 " Filetypes
+au FileType tex setl spell
+au FileType tex terminal ./compile main
+
 augroup filetypedetect
     au BufRead,BufNewFile *.vue setfiletype html
 augroup END
