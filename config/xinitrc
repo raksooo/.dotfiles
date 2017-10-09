@@ -24,6 +24,8 @@ sxhkd &
 
 # Autostart applications
 urxvt &
+slack &
+messengerfordesktop &
 
 # Start awesome
 exec awesome

@@ -36,20 +36,30 @@ function statusbar.new(s, placement, height)
         statusbar.init(height)
     end
 
-    local t1 = awful.tag.add("1", {
+    awful.tag.add(tagnames[1], {
+        layout             = awful.layout.layouts[1],
+        master_fill_policy = "master_width_factor",
+        gap                = 50,
+        screen             = s,
+        selected           = true,
+    })
+    awful.tag.add(tagnames[2], {
         layout             = awful.layout.layouts[1],
         master_fill_policy = "master_width_factor",
         gap                = 50,
         screen             = s,
     })
-    awful.tag.add("2", {
-        layout             = awful.layout.layouts[1],
-        master_fill_policy = "master_width_factor",
-        gap                = 50,
-        screen             = s,
+    awful.tag({ tagnames[3], tagnames[4], tagnames[5], tagnames[6] }, s, awful.layout.layouts[1])
+    awful.tag.add(tagnames[7], {
+        layout              = awful.layout.layouts[1],
+        master_fill_policy  = "master_width_factor",
+        master_width_factor = 0.65,
+        gap                 = 50,
+        screen              = s,
     })
-    awful.tag({ "3", "4", "5", "6" }, s, awful.layout.layouts[1])
-    t1:view_only()
+    awful.tag.add(tagnames[8], {
+        screen              = s,
+    })
 
     s.mytaglist = awful.widget.taglist(s, awful.widget.taglist.filter.all)
     s.mywibox = awful.wibar({ position = placement, screen = s, height = statusbar.height, bg = beautiful.bg_statusbar })

@@ -38,6 +38,7 @@ function changeBorder(c, border_properties)
 end
 
 function messengerCallback(c)
+  awful.client.setslave(c)
   c:connect_signal("property::name", messenger.titleChange)
   gears.timer.start_new(0.2, function ()
     awful.key.execute({ "Control", "Mod1" }, "b")
@@ -71,12 +72,12 @@ awful.rules.rules = {
       height = 1080,
       opacity = 1 } },
   { rule = { class = "qutebrowser" },
-    properties = { tags = { "4", "5" } } },
+    properties = { tags = { tagnames[4], tagnames[5] } } },
   { rule = { class = "Chromium" },
-    properties = { tag = "5" } },
+    properties = { tag = tagnames[6] } },
   { rule = { class = "Spotify" },
     properties = {
-      tag = "6",
+      tag = tagnames[8],
       floating = true,
       fullscreen = true,
       keys = awful.util.table.join( clientkeys,
@@ -86,7 +87,10 @@ awful.rules.rules = {
           end)
         ) } },
   { rule = { class = "Messenger for Desktop" },
+    properties = { tag = tagnames[7] },
     callback = messengerCallback },
+  { rule = { class = "Slack" },
+    properties = { tag = tagnames[7] } },
   { rule = { class = "Pinentry" },
     properties = { floating = true } }
   }

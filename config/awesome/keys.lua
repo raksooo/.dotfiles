@@ -96,22 +96,32 @@ globalkeys = awful.util.table.join(
               {description = "quit awesome", group = "awesome"}),
 
     -- Poppin
-    awful.key({ super }, "z", function ()
+    awful.key({ super }, "t", function ()
         poppin.pop("terminal_top", terminal, "top", 800, { border_width = 8 })
     end, {description = "Opens a poppin' terminal at top", group = "poppin"}),
-    awful.key({ super, shift }, "z", function ()
+    awful.key({ super, shift }, "t", function ()
         poppin.pop("terminal_bottom", terminal, "bottom", 800, { border_width = 8 })
     end, {description = "Opens a poppin' terminal at bottom", group = "poppin"}),
-    awful.key({ alt }, "z", function ()
+    awful.key({ alt }, "t", function ()
         poppin.pop("terminal_center", terminal, "center",
         { border_width = 8, width = 1400, height = 700 })
     end, {description = "Opens a poppin' terminal in center", group = "poppin"}),
-    awful.key({ super }, "x", function ()
-        poppin.pop("messenger", "messengerfordesktop", "right", 1000)
-    end, {description = "Opens a poppin' messenger window", group = "poppin"}),
-    awful.key({ super }, "r", function ()
-        poppin.pop("remote", "midori -a http://stream.oskar.ninja:8081/ -e show-navigationbar=false -e ZoomIn -e ZoomIn -e ZoomIn -e ZoomIn", "center", { width = 1500, height = 800 })
-    end, {description = "Open remote", group = "poppin"}),
+
+    awful.key({ super }, "p", function ()
+      if awful.screen.focused().selected_tag.name == tagnames[7] then
+        awful.tag.history.restore()
+      else
+        awful.tag.find_by_name(nil, tagnames[7]):view_only()
+      end
+    end, {description = "Show/hide messaging tag", group = "tag"}),
+
+    awful.key({ super }, "s", function ()
+      if awful.screen.focused().selected_tag.name == tagnames[8] then
+        awful.tag.history.restore()
+      else
+        awful.tag.find_by_name(nil, tagnames[8]):view_only()
+      end
+    end, {description = "Show/hide Spotify tag", group = "tag"}),
 
     awful.key({ super, shift }, "l", curry(awful.tag.incmwfact, 0.05),
               {description = "increase master width factor", group = "layout"}),

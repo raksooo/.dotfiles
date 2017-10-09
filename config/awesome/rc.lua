@@ -6,8 +6,10 @@ beautiful = require("beautiful")
 beautiful.init(gears.filesystem.get_configuration_dir() .. "theme.lua")
 
 local warnings = require("errorHandling")
+
+tagnames = { "$", "2", "3", "🌍", "🌎", "6", "🗩", "♪" }
+
 local statusbar = require("statusbar")
---local wallpaper = require("wallpaper")
 local keys = require("keys")
 local rules = require("rules")
 local notifications = require("notifications")
