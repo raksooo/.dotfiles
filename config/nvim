@@ -157,6 +157,10 @@ autocmd BufWinLeave * call clearmatches()
 " Filetypes
 au FileType tex setl spell
 au FileType tex terminal ./compile main
+au FileType tex stopinsert
+au FileType tex b 1
+au FileType tex nmap j gj
+au FileType tex nmap k gk
 
 augroup filetypedetect
     au BufRead,BufNewFile *.vue setfiletype html
