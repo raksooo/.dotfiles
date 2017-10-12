@@ -36,12 +36,11 @@ function statusbar.new(s, placement, height)
         statusbar.init(height)
     end
 
-    awful.tag.add(tagnames[1], {
+    local selected = awful.tag.add(tagnames[1], {
         layout             = awful.layout.layouts[1],
         master_fill_policy = "master_width_factor",
         gap                = 50,
         screen             = s,
-        selected           = true,
     })
     awful.tag.add(tagnames[2], {
         layout             = awful.layout.layouts[1],
@@ -60,6 +59,8 @@ function statusbar.new(s, placement, height)
     awful.tag.add(tagnames[8], {
         screen              = s,
     })
+
+    selected:view_only()
 
     s.mytaglist = awful.widget.taglist(s, awful.widget.taglist.filter.all)
     s.mywibox = awful.wibar({ position = placement, screen = s, height = statusbar.height, bg = beautiful.bg_statusbar })
