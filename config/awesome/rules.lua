@@ -56,12 +56,12 @@ awful.rules.rules = {
       buttons = clientbuttons,
       screen = awful.screen.preferred,
       placement = awful.placement.no_overlap+awful.placement.no_offscreen } },
-  { rule = { class = "URxvt" },
+  { rule = { class = "Termite" },
     properties = {
       size_hints_honor = false,
       border_width = 14 } },
   { rule = {
-    class = "URxvt",
+    class = "Termite",
     name = "qutebrowser"
   },
     properties = { floating = true } },
@@ -91,6 +91,12 @@ awful.rules.rules = {
     callback = messengerCallback },
   { rule = { class = "Slack" },
     properties = { tag = tagnames[7] } },
+  { rule = { class = "brunocast-client" },
+    properties = { floating = true,
+                   width = 1410,
+                   height = 575 } },
+  { rule = { class = "Zathura" },
+    callback = awful.client.setslave },
   { rule = { class = "Pinentry" },
     properties = { floating = true } }
   }
@@ -102,10 +108,14 @@ awful.rules.rules = {
     end
 
     if c.class == nil then
-      c:connect_signal("property::class", awful.rules.apply)
+      c.minimized = true
+      c:connect_signal("property::class", function ()
+        c.minimized = false
+        awful.rules.apply(c)
+      end)
     end
 
-    floatingToggled(c, true)
+    --floatingToggled(c, true)
 
     if c.floating and not poppin.isPoppin(c) then
       awful.placement.centered(c)
@@ -129,7 +139,7 @@ awful.rules.rules = {
     changeBorder(c, { border_color = beautiful.border_normal })
   end)
 
-  client.connect_signal("property::floating", floatingToggled)
+  -- client.connect_signal("property::floating", floatingToggled)
 
   client.connect_signal("property::fullscreen", function(c)
     awful.placement.no_offscreen(c)

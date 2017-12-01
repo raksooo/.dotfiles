@@ -6,9 +6,6 @@ local font = "DejaVu Sans"
 theme.transparent   = "#00000000"
 theme.base_font     = font
 theme.font          = font .. " 9"
---theme.wallpaper     = function(t)
---    return os.getenv("HOME") .. "/.wallpapers/active/" ..t .. ".png"
---end
 theme.wallpaper     = os.getenv("HOME") .. "/.wallpapers/active/1.png"
 
 theme.bg_normal     = "#222222"
@@ -26,8 +23,8 @@ theme.border_width  = 0
 theme.border_normal = "#444444"
 theme.border_focus  = "#333333"
 theme.border_marked = "#333333"
-theme.border_width_floating = 8
-theme.border_color_floating = "#da8c68"
+-- theme.border_width_floating = 8
+-- theme.border_color_floating = "#da8c68"
 
 theme.opacity_normal    = 0.85
 theme.opacity_focus     = 1

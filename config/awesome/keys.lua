@@ -1,6 +1,7 @@
 local awful = require("awful")
 local hotkeys_popup = require("awful.hotkeys_popup").widget
 local poppin = require("poppin")
+local rotation = require("rotation")
 
 local super = "Mod4"
 local alt = "Mod1"
@@ -106,6 +107,10 @@ globalkeys = awful.util.table.join(
         poppin.pop("terminal_center", terminal, "center",
         { border_width = 8, width = 1400, height = 700 })
     end, {description = "Opens a poppin' terminal in center", group = "poppin"}),
+    awful.key({ super }, "r", function ()
+        poppin.pop("brunocast", "brunocast", "center",
+        { width = 1410, height = 575 })
+    end, {description = "Opens a poppin' terminal at top", group = "poppin"}),
 
     awful.key({ super }, "p", function ()
       if awful.screen.focused().selected_tag.name == tagnames[7] then
@@ -120,8 +125,25 @@ globalkeys = awful.util.table.join(
         awful.tag.history.restore()
       else
         awful.tag.find_by_name(nil, tagnames[8]):view_only()
+        local spotifyOpen = false
+        for _, c in ipairs(client.get()) do
+          if c.class == "Spotify" then
+            spotifyOpen = true
+          end
+        end
+        if not spotifyOpen then
+          awful.spawn("spotify --force-device-scale-factor=1.7")
+        end
       end
     end, {description = "Show/hide Spotify tag", group = "tag"}),
+    awful.key({ super }, "Up", function() rotation.rotate("normal") end,
+      {description = "Normal tag rotation", group = "tag"}),
+    awful.key({ super }, "Down", function() rotation.rotate("inverted") end,
+      {description = "Inverse tag rotation", group = "tag"}),
+    awful.key({ super }, "Left", function() rotation.rotate("left") end,
+      {description = "Counter-clockwise tag rotation", group = "tag"}),
+    awful.key({ super }, "Right", function() rotation.rotate("right") end,
+      {description = "Clockwise tag rotation", group = "tag"}),
 
     awful.key({ super, shift }, "l", curry(awful.tag.incmwfact, 0.05),
               {description = "increase master width factor", group = "layout"}),

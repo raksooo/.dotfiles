@@ -5,20 +5,21 @@ naughty = require("naughty")
 beautiful = require("beautiful")
 beautiful.init(gears.filesystem.get_configuration_dir() .. "theme.lua")
 
+lock = require("lock")
+
 local warnings = require("errorHandling")
 
-tagnames = { "$", "2", "3", "🌍", "🌎", "6", "🗩", "♪" }
+tagnames = { "🖥", "2", "3", "🌍", "🌎", "6", "💬", "🎧" }
 
 local statusbar = require("statusbar")
 local keys = require("keys")
 local rules = require("rules")
 local notifications = require("notifications")
 
-terminal = "urxvt"
+terminal = "termite"
 
 awful.layout.layouts = {
     awful.layout.suit.tile,
-    awful.layout.suit.fair.horizontal,
     awful.layout.suit.floating
 }
 
