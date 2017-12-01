@@ -21,7 +21,6 @@ alias gsh='git push'
 alias brunox='ssh -XC bruno'
 
 alias feh='feh -.'
-alias qutebrowser='qutebrowser --backend webengine'
 alias spotify='spotify --force-device-scale-factor=1.7'
-alias mist='/usr/bin/mist --node-light'
+alias mist='/usr/bin/mist --syncmode light'
 
