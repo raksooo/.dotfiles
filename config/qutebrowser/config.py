@@ -49,7 +49,7 @@ c.downloads.position            = "bottom"
 c.downloads.remove_finished     = 500
 c.downloads.location.directory  = "/home/oskar/downloads/"
 
-c.editor.command                = ["urxvt", "-title", "qutebrowser", "-e",
+c.editor.command                = ["termite", "-title", "qutebrowser", "-e",
                                    "vim", "-c", "startinsert", "{}"]
 
 config.bind('gk', 'tab-move -')
@@ -57,8 +57,9 @@ config.bind('gj', 'tab-move +')
 
 config.bind('x', 'hint links spawn mpv-youtube {hint-url}')
 config.bind('X', 'spawn mpv-youtube {url}')
-config.bind('c', 'hint links spawn streamTV {hint-url}')
-config.bind('C', 'spawn streamTV {url}')
+config.bind('c', 'hint links spawn brunocast-cli {hint-url}')
+config.bind('C', 'spawn brunocast-cli {url}')
+config.bind('z', 'hint links spawn zathura --fork {hint-url}')
 
-config.bind('pf', 'spawn --userscript /usr/share/qutebrowser/userscripts/password_fill ;; hint')
+config.bind('pf', 'spawn --userscript /usr/share/qutebrowser/userscripts/password_fill_xdotool')
 
