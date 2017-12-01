@@ -2,8 +2,8 @@
 export DOTFILES=$HOME/.dotfiles
 
 export PATH=$PATH:$HOME/.local/bin
-#export PATH="$(ruby -e 'puts Gem.user_dir')/bin:$PATH"
-#export PATH=$PATH:$HOME/.cabal/bin
+export HOLDIR=$HOME/documents/master-thesis/HOL
+export PATH=$PATH:$HOLDIR/bin
 
 ## Completion
 zstyle ':completion:*' menu select
@@ -37,7 +37,7 @@ export CLICOLOR=1
 
 export EDITOR=nvim
 export BROWSER=qutebrowser
-export TERMINAL=urxvt
+export TERMINAL=termite
 
 export LANG='en_US.UTF-8'
 export LANGUAGE=$LANG

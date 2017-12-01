@@ -30,11 +30,11 @@ XF86AudioMute
 
 # Terminal
 super + Return
-    urxvt
+    termite
 
 # Browser
 super + shift + Return
-    qutebrowser --backend webengine
+    qutebrowser
 
 # Launcher
 super + space
@@ -42,10 +42,14 @@ super + space
 
 # Lock X
 alt + space
-    lock
+    awesome-client "lock.lock()"
 
 # Take screenshot
 Print
     maim /home/oskar/documents/screenshots/$(date +%F-%T).png \
         && mpg123 ~/.local/share/oskar/screenshot.mp3
+
+# Restart netctl-auto
+super + Print
+    sudo systemctl restart netctl-auto@wlp58s0.service
 

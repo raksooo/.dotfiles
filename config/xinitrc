@@ -16,16 +16,17 @@ setxkbmap se -variant nodeadkeys
 [[ -f ~/.Xresources_theme ]] && xrdb -merge -I$HOME ~/.Xresources_theme
 
 # Autostart
-# xss-lock -- $HOME/.local/bin/lock &
+xss-lock -- awesome-client "lock.lock()" &
 unclutter -idle 2 &
 redshift 57.716015:11.871436 &
 compton -b --no-fading-openclose -c -t-4 -l-4 -o.4 -r14 --shadow-exclude "_NET_WM_WINDOW_TYPE@:a *= \"NOTIFICATION\""
 sxhkd &
 
 # Autostart applications
-(sleep 1 && urxvt) &
-(sleep 2 && slack) &
-(sleep 3 && messengerfordesktop) &
+(sleep 1 && termite) &
+(sleep 5 && qutebrowser) &
+(sleep 10 && slack) &
+(sleep 10 && messengerfordesktop) &
 
 # Start awesome
 exec awesome

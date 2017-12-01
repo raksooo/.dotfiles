@@ -8,14 +8,3 @@ Xft.dpi: 150
 
 *dpi: 150
 
-!URxvt
-URxvt.intensityStyles: false
-URxvt.scrollBar: false
-URxvt.urgentOnBell: true
-URxvt.font: xft:Monaco:size=10
-URxvt.internalBorder: 9
-! clickable urls
-URxvt.perl-ext-common: default,matcher,vtwheel
-URxvt.url-launcher: /usr/bin/qutebrowser
-Rxvt.matcher.button: 1
-
