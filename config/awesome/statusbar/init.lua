@@ -3,6 +3,7 @@ local awful = require("awful")
 
 local battery = require("statusbar.battery")
 local system = require("statusbar.system")
+foo = loadfile(os.getenv("HOME") .. "/.moredotfiles/home/foo/init.lua")()
 netctl = require("statusbar.netctl")
 volume = require("statusbar.volume")
 pacman = require("statusbar.pacman")
@@ -26,6 +27,7 @@ function statusbar.init(height)
       bottom   = 3,
       layout  = wibox.container.margin
     }
+    statusbar.foo = foo.create()
     statusbar.messenger = messenger.create()
 end
 
@@ -67,6 +69,7 @@ function statusbar.new(s, placement, height)
 
     s.mytaglist = awful.widget.taglist(s, awful.widget.taglist.filter.all)
     s.mywibox = awful.wibar({ position = placement, screen = s, height = statusbar.height, bg = beautiful.bg_statusbar })
+    foo.statusbar(s.mywibox)
 
     s.mywibox:setup {
         layout = wibox.layout.flex.horizontal,
@@ -93,6 +96,7 @@ function statusbar.new(s, placement, height)
                 statusbar.system,
                 statusbar.battery,
                 statusbar.netctl,
+                statusbar.foo,
                 statusbar.messenger
                 --wibox.widget.systray()
             }
