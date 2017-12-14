@@ -34,7 +34,7 @@ super + Return
 
 # Browser
 super + shift + Return
-    qutebrowser
+    qutebrowser --qt-flag=force-webrtc-ip-handling-policy=default_public_interface_only
 
 # Launcher
 super + space
