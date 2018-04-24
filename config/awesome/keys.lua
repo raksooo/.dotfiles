@@ -1,7 +1,8 @@
 local awful = require("awful")
+local gears = require("gears")
 local hotkeys_popup = require("awful.hotkeys_popup").widget
 local poppin = require("poppin")
-local rotation = require("rotation")
+local rotate = require("screenrotation")
 
 local super = "Mod4"
 local alt = "Mod1"
@@ -41,7 +42,7 @@ function grid(direction, move)
     gotoTag(j, move)
 end
 
-globalkeys = awful.util.table.join(
+globalkeys = gears.table.join(globalkeys,
     awful.key({ control, shift }, "+", hotkeys_popup.show_help,
               {description="show help", group="awesome"}),
 
@@ -136,13 +137,13 @@ globalkeys = awful.util.table.join(
         end
       end
     end, {description = "Show/hide Spotify tag", group = "tag"}),
-    awful.key({ super }, "Up", function() rotation.rotate("normal") end,
+    awful.key({ super }, "Up", function()rotate("normal") end,
       {description = "Normal tag rotation", group = "tag"}),
-    awful.key({ super }, "Down", function() rotation.rotate("inverted") end,
-      {description = "Inverse tag rotation", group = "tag"}),
-    awful.key({ super }, "Left", function() rotation.rotate("left") end,
+    awful.key({ super }, "Down", function() rotate("inverted") end,
+      {description = "Inverted tag rotation", group = "tag"}),
+    awful.key({ super }, "Left", function() rotate("left") end,
       {description = "Counter-clockwise tag rotation", group = "tag"}),
-    awful.key({ super }, "Right", function() rotation.rotate("right") end,
+    awful.key({ super }, "Right", function()rotate("right") end,
       {description = "Clockwise tag rotation", group = "tag"}),
 
     awful.key({ super, shift }, "l", curry(awful.tag.incmwfact, 0.05),
@@ -184,7 +185,7 @@ globalkeys = awful.util.table.join(
               {description = "restore minimized", group = "client"})
 )
 
-clientkeys = awful.util.table.join(
+clientkeys = gears.table.join(
     awful.key({ super }, "f",
         function (c)
             c.fullscreen = not c.fullscreen
@@ -229,7 +230,7 @@ clientkeys = awful.util.table.join(
 -- Be careful: we use keycodes to make it works on any keyboard layout.
 -- This should map on the top row of your keyboard, usually 1 to 9.
 for i = 1, 9 do
-    globalkeys = awful.util.table.join(globalkeys,
+    globalkeys = gears.table.join(globalkeys,
         -- View tag only.
         awful.key({ super }, "#" .. i + 9,
                   function ()
@@ -276,7 +277,7 @@ for i = 1, 9 do
     )
 end
 
-clientbuttons = awful.util.table.join(
+clientbuttons = gears.table.join(
     awful.button({ }, 1, function (c) client.focus = c; c:raise() end),
     awful.button({ super }, 1, awful.mouse.client.move),
     awful.button({ super }, 3, awful.mouse.client.resize))

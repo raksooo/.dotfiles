@@ -2,6 +2,8 @@
 export DOTFILES=$HOME/.dotfiles
 
 export PATH=$PATH:$HOME/.local/bin
+export PATH=$PATH:$HOME/.npm-global/bin
+
 export HOLDIR=$HOME/documents/master-thesis/HOL
 export PATH=$PATH:$HOLDIR/bin
 
@@ -36,7 +38,7 @@ HISTFILE=~/.zhistory
 export CLICOLOR=1
 
 export EDITOR=nvim
-export BROWSER=qutebrowser
+export BROWSER=firefox
 export TERMINAL=termite
 
 export LANG='en_US.UTF-8'

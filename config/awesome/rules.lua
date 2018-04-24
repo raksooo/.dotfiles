@@ -1,6 +1,7 @@
 local awful = require("awful")
 local gears = require("gears")
 local poppin = require("poppin")
+local awffvim = require("awffvim")
 
 local notifyclass = false
 
@@ -60,19 +61,15 @@ awful.rules.rules = {
     properties = {
       size_hints_honor = false,
       border_width = 14 } },
-  { rule = {
-    class = "Termite",
-    name = "qutebrowser"
-  },
-    properties = { floating = true } },
   { rule = { class = "mpv" },
     properties = {
       floating = true,
       width = 1920,
       height = 1080,
       opacity = 1 } },
-  { rule = { class = "qutebrowser" },
-    properties = { tags = { tagnames[4], tagnames[5] } } },
+  { rule = { class = "Firefox" },
+    properties = { tags = { tagnames[4], tagnames[5] } },
+    callback = awffvim.run },
   { rule = { class = "Chromium" },
     properties = { tag = tagnames[6] } },
   { rule = { class = "Spotify" },

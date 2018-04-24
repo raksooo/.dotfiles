@@ -34,11 +34,14 @@ super + Return
 
 # Browser
 super + shift + Return
-    qutebrowser --qt-flag=force-webrtc-ip-handling-policy=default_public_interface_only
+  env GTK_THEME=Adwaita:light firefox
 
 # Launcher
 super + space
     rofiHistory
+
+alt + shift + space
+    rofiPass
 
 # Lock X
 alt + space

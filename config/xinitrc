@@ -17,14 +17,14 @@ setxkbmap se -variant nodeadkeys
 
 # Autostart
 xss-lock -- awesome-client "lock.lock()" &
-unclutter -idle 2 &
+unclutter -keystroke -idle 2 &
 redshift 57.716015:11.871436 &
 compton -b --no-fading-openclose -c -t-4 -l-4 -o.4 -r14 --shadow-exclude "_NET_WM_WINDOW_TYPE@:a *= \"NOTIFICATION\""
 sxhkd &
 
 # Autostart applications
 (sleep 1 && termite) &
-(sleep 5 && qutebrowser --qt-flag=force-webrtc-ip-handling-policy=default_public_interface_only) &
+(sleep 5 && env GTK_THEME=Adwaita:light firefox) &
 (sleep 10 && slack) &
 (sleep 10 && messengerfordesktop) &
 

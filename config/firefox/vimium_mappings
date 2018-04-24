@@ -1,0 +1,14 @@
+map J nextTab
+map K previousTab
+map gk moveTabLeft
+map gj moveTabRight
+map d removeTab
+map u restoreTab
+unmap x
+unmap X
+unmap ge
+unmap gE
+map go Vomnibar.activateEditUrl
+map gO Vomnibar.activateEditUrlInNewTab
+map R reload hard
+mapkey O t

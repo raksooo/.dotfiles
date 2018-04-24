@@ -65,8 +65,6 @@ set colorcolumn=80
 set cursorline
 set dir=~/.vim/swap//
 set expandtab
-set foldmethod=indent
-set foldnestmax=2
 set hidden
 set hlsearch
 set ignorecase
@@ -104,19 +102,20 @@ map <leader>f :noh<CR>
 inoremap /** /**<CR>/<Esc>O
 
 " Paranthesis
-inoremap {<CR> {<CR>}<Esc>ko
+inoremap {<CR> {<CR>}<Esc>O
 
 " Scrolling
 nnoremap <C-Up> 10k
 nnoremap <C-Down> 10j
 
 "" Buffers
-nmap <leader>t :enew<cr>" New
-nmap <leader>j :bnext<CR>" Next
-nmap <leader>k :bprevious<CR>" Previous
-nmap <leader>q :bp <BAR> bd #<CR>" Close
-nmap <leader>s :ls <CR>" List
-nmap <leader>n :badd %:h/<CR>:bnext<CR>
+nmap <leader>t :enew<CR>
+nmap <leader>j :bnext<CR>
+nmap <leader>k :bprevious<CR>
+nmap <leader>q :bp <BAR> bd #<CR>
+nmap <leader>s :ls <CR>
+nmap <leader>n :badd 
+nmap <leader>e :Explore<CR>
 nnoremap <Leader>g :e#<CR>
 nnoremap <Leader>1 :1b<CR>
 nnoremap <Leader>2 :2b<CR>
@@ -144,19 +143,4 @@ autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
 autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 autocmd BufWinLeave * call clearmatches()
-
-" Filetypes
-au FileType tex setl spell
-au FileType tex terminal ./compile
-au FileType tex stopinsert
-au FileType tex b 1
-au FileType tex nmap j gj
-au FileType tex nmap k gk
-
-au FileType markdown setl spell
-au FileType markdown nmap <leader>c :terminal mdf %<CR>:stopinsert<CR>:b #<CR>
-
-augroup filetypedetect
-    au BufRead,BufNewFile *.vue setfiletype html
-augroup END
 

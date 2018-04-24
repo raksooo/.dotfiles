@@ -1,0 +1,25 @@
+#topmenu {
+  display: none;
+}
+
+.tab:not(.pinned) .tab-context {
+  margin-right: 6px;
+}
+
+#pinnedtablist.compact, #pinnedtablist.compact .tab.pinned {
+    height: 42px;
+}
+
+#pinnedtablist.compact .tab.pinned {
+    width: 42px;
+}
+
+#pinnedtablist.compact .tab.pinned .tab-icon {
+    margin: 6px 1px;
+}
+
+#pinnedtablist.compact .tab.pinned:not(.loading) .tab-icon {
+    width: 19px;
+    height: 19px;
+}
+

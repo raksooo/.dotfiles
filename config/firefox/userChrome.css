@@ -1,0 +1,6 @@
+#TabsToolbar { visibility: collapse !important; }
+
+#sidebar-header { display: none; }
+
+#back-button, #forward-button { display: none; }
+

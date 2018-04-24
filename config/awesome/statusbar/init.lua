@@ -1,9 +1,8 @@
 local wibox = require("wibox")
 local awful = require("awful")
+local gears = require("gears")
 
 local battery = require("statusbar.battery")
-local system = require("statusbar.system")
-foo = loadfile(os.getenv("HOME") .. "/.moredotfiles/home/foo/init.lua")()
 netctl = require("statusbar.netctl")
 volume = require("statusbar.volume")
 pacman = require("statusbar.pacman")
@@ -11,97 +10,93 @@ messenger = require("statusbar.messenger")
 
 statusbar = {}
 
-function statusbar.init(height)
-    statusbar.height = height
-    statusbar.textclock = wibox.widget.textclock()
+function margin(widget, margins)
+  local w = {
+    widget,
+    layout = wibox.container.margin
+  }
+  return wibox.widget (gears.table.join(w, margins))
+end
+
+function statusbar.init()
+    statusbar.textclock = wibox.widget.textclock("%H:%M")
+    statusbar.clock = margin({
+        font = "Helvetica Thin 11",
+        widget = statusbar.textclock
+      },
+      { right = 20, top = 1 })
 
     statusbar.battery = battery.create()
-    statusbar.system = system.create()
     statusbar.netctl = netctl.create()
     statusbar.volume = volume.create()
-    statusbar.pacman = wibox.widget {
-      pacman.create(0.7),
-      left    = 3,
-      right   = 40,
-      top   = 3,
-      bottom   = 3,
-      layout  = wibox.container.margin
-    }
-    statusbar.foo = foo.create()
     statusbar.messenger = messenger.create()
 end
 
-function statusbar.new(s, placement, height)
-    if statusbar.height == nil then
-        statusbar.init(height)
+function statusbar.new(s)
+    if statusbar.clock == nil then
+      statusbar.init()
     end
 
-    local selected = awful.tag.add(tagnames[1], {
-        layout             = awful.layout.layouts[1],
-        master_fill_policy = "master_width_factor",
-        gap                = 50,
-        screen             = s,
-    })
-    awful.tag.add(tagnames[2], {
-        layout             = awful.layout.layouts[1],
-        master_fill_policy = "master_width_factor",
-        gap                = 50,
-        screen             = s,
-    })
-    awful.tag({ tagnames[3], tagnames[4], tagnames[5] }, s, awful.layout.layouts[1])
-    awful.tag.add(tagnames[6], {
-        layout             = awful.layout.layouts[2],
-        gap                 = 50,
-        screen             = s,
-    })
-    awful.tag.add(tagnames[7], {
-        layout              = awful.layout.layouts[1],
-        master_fill_policy  = "master_width_factor",
-        master_width_factor = 0.65,
-        gap                 = 50,
-        screen              = s,
-    })
-    awful.tag.add(tagnames[8], {
-        screen              = s,
-    })
-
-    selected:view_only()
-
-    s.mytaglist = awful.widget.taglist(s, awful.widget.taglist.filter.all)
-    s.mywibox = awful.wibar({ position = placement, screen = s, height = statusbar.height, bg = beautiful.bg_statusbar })
-    foo.statusbar(s.mywibox)
-
-    s.mywibox:setup {
-        layout = wibox.layout.flex.horizontal,
-        {
-            layout = wibox.layout.fixed.horizontal,
-            s.mytaglist
-        },
-        {
-            layout = wibox.layout.flex.horizontal,
-            {
-                align = "center",
-                font = "DejaVu 11",
-                widget = statusbar.textclock
-            }
-        },
-        {
-            layout = wibox.layout.align.horizontal,
-            { layout = wibox.layout.fixed.horizontal },
-            { layout = wibox.layout.fixed.horizontal },
-            {
-                layout = wibox.layout.fixed.horizontal,
-                statusbar.pacman,
-                statusbar.volume,
-                statusbar.system,
-                statusbar.battery,
-                statusbar.netctl,
-                statusbar.foo,
-                statusbar.messenger
-                --wibox.widget.systray()
-            }
-        }
+    local left = wibox {
+      x = 70,
+      y = -35,
+      height = 50,
+      width = 380,
+      visible = true,
+      bg = "#00000000",
+      type = "dock",
+      ontop = true
     }
+    left:setup {
+      widget = awful.widget.taglist(s, awful.widget.taglist.filter.all)
+    }
+    left:connect_signal("mouse::enter", function() left:geometry({ y = 20 }) end)
+    left:connect_signal("mouse::leave", function() left:geometry({ y = -35 }) end)
+
+    local geometry = awful.screen.focused().geometry
+    rwidth = 350
+    local right = wibox {
+      x = geometry.width - rwidth - 100,
+      y = 20,
+      height = 50,
+      width = rwidth,
+      visible = true,
+      bg = "#00000000",
+      type = "dock",
+      ontop = true
+    }
+
+    local right_content = {
+        layout = wibox.layout.fixed.horizontal,
+        statusbar.volume,
+        statusbar.battery,
+        statusbar.netctl,
+        statusbar.messenger,
+        statusbar.clock
+    }
+
+    --local children = right:get_children()
+    --for k, v in ipairs(right_content[1]) do
+      --naughty.notify({ title = k, text = type(v) })
+    --end
+
+    right:setup {
+      margin(right_content, { bottom = 10 }),
+      bottom = 3,
+      color = "#dddddd",
+      widget = wibox.container.margin
+    }
+
+    tag.connect_signal("property::selected", function(t) 
+      right.x = geometry.width - rwidth - (t.gap * 2)
+      if t.gap > 20 then
+        right.y = 20
+        right.widget.bottom = 3
+      else
+        right.y = 0
+        right.widget.bottom = 0
+      end
+    end)
 end
 
 return statusbar

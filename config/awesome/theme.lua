@@ -6,7 +6,7 @@ local font = "DejaVu Sans"
 theme.transparent   = "#00000000"
 theme.base_font     = font
 theme.font          = font .. " 9"
-theme.wallpaper     = os.getenv("HOME") .. "/.wallpapers/active/1.png"
+theme.wallpaper     = os.getenv("HOME") .. "/.wallpapers/active.png"
 
 theme.bg_normal     = "#222222"
 theme.bg_focus      = "#535d6c"

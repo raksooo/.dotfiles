@@ -16,12 +16,12 @@ c.fonts.messages.warning        = font["medium"]
 c.fonts.prompts                 = font["medium"]
 c.fonts.statusbar               = font["medium"]
 
-c.tabs.indicator_padding        = {"top": 2, "right": 10, "bottom": 2, "left": 5}
+c.tabs.indicator.width          = 7
+c.tabs.indicator.padding        = {"top": 2, "right": 10, "bottom": 2, "left": 5}
 c.tabs.padding                  = {"top": 8, "right": 8, "bottom": 8, "left": 8}
 c.tabs.position                 = "right"
 c.tabs.title.format             = "{title}"
-c.tabs.width.bar                = "15%"
-c.tabs.width.indicator          = 7
+c.tabs.width                    = "15%"
 c.tabs.background               = True
 c.tabs.mousewheel_switching     = False
 
@@ -64,4 +64,5 @@ config.bind('C', 'spawn brunocast-cli {url}')
 config.bind('z', 'hint links spawn zathura --fork {hint-url}')
 
 config.bind('pf', 'spawn --userscript /usr/share/qutebrowser/userscripts/password_fill_xdotool')
+config.bind('e', 'spawn --userscript ens-ipfs-resolver')
 
