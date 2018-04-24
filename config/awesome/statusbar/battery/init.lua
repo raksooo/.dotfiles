@@ -8,14 +8,7 @@ local notification = {}
 local options = {
     battery = "BAT0",
     interval = 10,
-    width = 14,
-    margin = 5,
-    margin_right = 40,
-    text = {
-        text = "B:",
-        opacity = 0.6,
-        color = "#ffffff"
-    },
+    width = 35,
     percentage = {
         high = 90,
         normal = 50,
@@ -24,7 +17,7 @@ local options = {
     },
     color = {
         charging = "#7aa5e6",
-        high = "#ddb76f",
+        high = "#83b879",
         normal = "#83b879",
         low = "#ddb76f",
         critical = "#dd6880",
@@ -34,81 +27,49 @@ local options = {
 
 function battery.create()
     battery.progressbar = createProgressbar()
-    local widget = wrap(battery.progressbar.merged)
     awful.tooltip({
-        objects = { widget },
+        objects = { battery.progressbar },
         timer_function = function()
-            return "B: " .. battery.percentage .. "\nC: " .. battery.current
+            return battery.percentage
         end,
     })
 
     battery.poll()
     gears.timer.start_new(options.interval, battery.poll)
-    return wibox.widget {
-        widget,
-        left    = options.margin,
-        right   = options.margin_right,
-        top   = options.margin + 1,
-        bottom   = options.margin,
-        layout  = wibox.container.margin
-    }
-end
 
-function wrap(widget)
     return wibox.widget {
-        layout = wibox.layout.fixed.horizontal,
+      battery.progressbar,
+      {
         {
-            wibox.widget {
-                markup = "<span color=\"" .. options.text.color .. "\">" .. options.text.text .. "</span>",
-                opacity = options.text.opacity,
-                font = options.text.font,
-                widget = wibox.widget.textbox
-            },
-            right   = 6,
-            top   = 2,
-            layout  = wibox.container.margin
+          wibox.widget { forced_width = 3 },
+          bg = "#ffffff66",
+          layout = wibox.container.background
         },
-        widget
+        top = 6,
+        bottom = 6,
+        layout = wibox.container.margin
+      },
+      layout = wibox.layout.fixed.horizontal
     }
 end
 
 function createProgressbar()
-    local batterybar = wibox.widget {
-            max_value        = 1,
-            background_color = options.color.background,
-            widget           = wibox.widget.progressbar,
+    return wibox.widget {
+      max_value        = 1,
+      background_color = options.color.background,
+      widget           = wibox.widget.progressbar,
+      forced_width     = options.width,
+      paddings         = 3,
+      border_width     = 2,
+      border_color     = "#ffffff66"
     }
-    local currentbar = wibox.widget {
-            max_value        = 1,
-            background_color = options.color.background,
-            widget           = wibox.widget.progressbar,
-    }
-
-    local merged = wibox.widget {
-        {
-            batterybar,
-            direction     = 'east',
-            forced_width  = options.width - 4,
-            layout        = wibox.container.rotate
-        },
-        {
-            currentbar,
-            direction     = 'east',
-            forced_width  = 4,
-            layout        = wibox.container.rotate
-        },
-        layout = wibox.layout.fixed.horizontal
-    }
-
-    return { battery = batterybar, current = currentbar, merged = merged }
 end
 
 function battery.poll()
     local now = "/sys/class/power_supply/" .. options.battery .. "/charge_now"
     local full = "/sys/class/power_supply/" .. options.battery .. "/charge_full_design"
-    local current = "/sys/class/power_supply/" .. options.battery .. "/current_now"
     local charging = "/sys/class/power_supply/AC/online"
-    local cmd = "cat " .. now .." " .. full .. " " .. charging .. " " .. current
+    local cmd = "cat " .. now .." " .. full .. " " .. charging
     awful.spawn.easy_async(cmd, update)
     return true
 end
@@ -119,18 +80,7 @@ function update(stdout)
     battery.percentage = tostring(battery.percentage_raw) .. "%"
     battery.charging = data[3] == "1"
 
-    battery.progressbar.battery:set_value(battery.percentage_raw / 100)
-    if not battery.charging then
-        local current = (tonumber(data[4]) - 1000000) / 27500
-        battery.current_raw = math.max(0, math.min(100, current))
-        battery.current = math.floor(tostring(battery.current_raw)) .. "%"
-        battery.progressbar.current:set_value(battery.current_raw / 100)
-        battery.progressbar.current:set_color(options.color.low)
-    else
-        battery.current = ""
-        battery.progressbar.current:set_value(1)
-        battery.progressbar.current:set_color(options.color.charging)
-    end
+    battery.progressbar:set_value(battery.percentage_raw / 100)
     pickColor()
 
     notify()
@@ -138,7 +88,9 @@ end
 
 function pickColor()
     local color
-    if battery.percentage_raw >= options.percentage.high then
+    if battery.charging then
+        color = options.color.charging
+    elseif battery.percentage_raw >= options.percentage.high then
         color = options.color.high
     elseif battery.percentage_raw >= options.percentage.normal then
         color = options.color.normal
@@ -147,7 +99,7 @@ function pickColor()
     elseif battery.percentage_raw >= options.percentage.critical then
         color = options.color.critical
     end
-    battery.progressbar.battery:set_color(color)
+    battery.progressbar:set_color(color)
 end
 
 function notify()

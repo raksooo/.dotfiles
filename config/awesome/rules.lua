@@ -9,32 +9,11 @@ function isTerminal(c)
   return c.class ~= nil and c.class:lower() == terminal
 end
 
-function floatingToggled(c, manage)
-  if beautiful.border_color_floating ~= nil then
-    if c.floating then
-      c.border_width = c.border_width_floating or beautiful.border_width_floating
-      c.border_color = beautiful.border_color_floating
-      awful.placement.no_offscreen(c)
-    elseif not manage or not isTerminal(c) then
-      c.border_width = beautiful.border_width
-      c.border_color = beautiful.border_normal
-    end
-  end
-end
-
 function changeOpacity(c, opacity)
   if isTerminal(c) then
     c.opacity = 0.9 * opacity
   elseif c.class ~= "mpv" then
     c.opacity = opacity
-  end
-end
-
-function changeBorder(c, border_properties)
-  if not c.floating then
-    for k, v in pairs(border_properties) do
-      c[k] = v
-    end
   end
 end
 
@@ -60,7 +39,7 @@ awful.rules.rules = {
   { rule = { class = "Termite" },
     properties = {
       size_hints_honor = false,
-      border_width = 14 } },
+      border_width = 30 } },
   { rule = { class = "mpv" },
     properties = {
       floating = true,
@@ -112,8 +91,6 @@ awful.rules.rules = {
       end)
     end
 
-    --floatingToggled(c, true)
-
     if c.floating and not poppin.isPoppin(c) then
       awful.placement.centered(c)
     end
@@ -128,15 +105,11 @@ awful.rules.rules = {
 
   client.connect_signal("focus", function(c)
     changeOpacity(c, beautiful.opacity_focus)
-    changeBorder(c, { border_color = beautiful.border_focus })
   end)
 
   client.connect_signal("unfocus", function(c)
     changeOpacity(c, beautiful.opacity_normal)
-    changeBorder(c, { border_color = beautiful.border_normal })
   end)
-
-  -- client.connect_signal("property::floating", floatingToggled)
 
   client.connect_signal("property::fullscreen", function(c)
     awful.placement.no_offscreen(c)

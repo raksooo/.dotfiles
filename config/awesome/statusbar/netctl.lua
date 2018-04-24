@@ -7,81 +7,51 @@ local netctl = {
         high = "#83b879",
         low = "#ddb76f",
         none = "#dd6880",
-        background = "#00000000"
     },
     levels = {
-        high = 40,
+        high = 50,
         low = 80
     }
 }
 
-local options = {
-    width = 12,
-    margin = 5,
-    margin_right = 40
-}
-
 function netctl.create()
-    netctl.bar = wibox.widget {
-        background_color = netctl.colors.background,
-        widget           = wibox.widget.progressbar,
-    }
-
-    local widget = wibox.widget {
-        {
-            {
-                text = "W:",
-                opacity = 0.6,
-                widget = wibox.widget.textbox
-            },
-            right   = 6,
-            top   = 2,
-            layout  = wibox.container.margin
-        },
-        {
-            netctl.bar,
-            forced_width = options.width,
-            direction = 'east',
-            layout = wibox.container.rotate
-        },
-        layout = wibox.layout.fixed.horizontal
+    netctl.widget = wibox.widget {
+        paddings      = 3,
+        border_width  = 2,
+        border_color  = "#ffffff66",
+        shape         = gears.shape.circle,
+        widget        = wibox.widget.checkbox
     }
 
     awful.tooltip({
-        objects = { widget },
+        objects = { netctl.widget },
         timer_function = function() return netctl.tooltip end,
     })
 
     netctl.update()
     gears.timer.start_new(10, netctl.update)
 
-    return wibox.widget {
-        widget,
-        left    = options.margin,
-        right   = options.margin_right,
-        top   = options.margin + 1,
-        bottom   = options.margin,
-        layout  = wibox.container.margin
-    }
+    return netctl.widget
 end
 
 function netctl.update()
     awful.spawn.easy_async('cat /proc/net/wireless', function(stdin)
         local data = split(stdin, '\n')
-        local color, value
+        local color, checked
         if #data == 3 then
             local numbers = split(data[3], '-')
             local level = split(numbers[2], '.')
-            value = math.max(0, math.min(1, (netctl.levels.low - level[1]) * (100/(netctl.levels.low - netctl.levels.high)) / 100))
+            netctl.widget.paddings = 3 + ((1 - math.max(0, math.min(1, (netctl.levels.low - level[1]) * (100/(netctl.levels.low - netctl.levels.high)) / 100))) * 7)
+            checked = true
             color = netctl.colors.high
             updateTooltip(level[1])
         else
-            value = 1
+            checked = false
             color = netctl.colors.none
             netctl.tooltip = 'Not connected'
         end
-        netctl.bar:set_value(value)
-        netctl.bar:set_color(color)
+        netctl.widget:set_checked(checked)
+        netctl.widget:set_color(color)
     end)
     return true
 end

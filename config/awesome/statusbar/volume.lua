@@ -1,41 +1,30 @@
 local wibox = require("wibox")
+local gears = require("gears")
 local awful = require("awful")
 
 local volume = {
     colors = {
         unmute = "#83b879",
-        mute = "#ddb76f",
-        background = "#00000000"
+        mute = "#ddb76f"
     }
-}
-
-local options = {
-    width = 12,
-    margin = 5,
-    margin_right = 40
 }
 
 function volume.create()
     volume.bar = wibox.widget {
-        max_value        = 100,
-        background_color = volume.colors.background,
-        widget           = wibox.widget.progressbar,
+        bar_shape           = gears.shape.rounded_rect,
+        bar_height          = 3,
+        bar_color           = "#ffffff66",
+        handle_shape        = gears.shape.circle,
+        handle_border_color = "#ffffff66",
+        handle_border_width = 1,
+        widget              = wibox.widget.slider,
     }
+
 
     local widget = wibox.widget {
         {
-            {
-                text = "A:",
-                opacity = 0.6,
-                widget = wibox.widget.textbox
-            },
-            right   = 6,
-            top   = 2,
-            layout  = wibox.container.margin
-        },
-        {
             volume.bar,
-            forced_width = options.width,
+            forced_width = 22,
             direction = 'east',
             layout = wibox.container.rotate
         },
@@ -49,14 +38,7 @@ function volume.create()
 
     volume.update()
 
-    return wibox.widget {
-        widget,
-        left    = options.margin,
-        right   = options.margin_right,
-        top   = options.margin + 1,
-        bottom   = options.margin,
-        layout  = wibox.container.margin
-    }
+    return widget
 end
 
 function volume.update()
@@ -67,9 +49,9 @@ function volume.update()
             volume.bar:set_value(tonumber(data[1]))
             if data[3] == "off" then
                 volume.tooltip = volume.tooltip .. " [Muted]"
-                volume.bar:set_color(volume.colors.mute)
+                volume.bar.handle_color = volume.colors.mute
             else
-                volume.bar:set_color(volume.colors.unmute)
+                volume.bar.handle_color = volume.colors.unmute
             end
         end)
 end
