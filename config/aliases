@@ -19,11 +19,9 @@ alias gc='git commit -m'
 alias gca='git commit -am'
 
 #other
-alias brunox='ssh -XC bruno'
+alias virtualbox='ssh -XC bruno virtualbox'
 
 alias feh='feh -.'
 alias spotify='spotify --force-device-scale-factor=1.7'
-alias mist='/usr/bin/mist --syncmode light --node-port 16926'
-alias qutebrowser='qutebrowser --qt-flag=force-webrtc-ip-handling-policy=default_public_interface_only'
 alias firefox='env GTK_THEME=Adwaita:light firefox'
 

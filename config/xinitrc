@@ -19,14 +19,15 @@ setxkbmap se -variant nodeadkeys
 xss-lock -- awesome-client "lock.lock()" &
 unclutter -keystroke -idle 2 &
 redshift 57.716015:11.871436 &
-compton -b --no-fading-openclose -c -t-4 -l-4 -o.4 -r14 --shadow-exclude "_NET_WM_WINDOW_TYPE@:a *= \"NOTIFICATION\""
+# compton -b --no-fading-openclose -c -t-4 -l-4 -o.4 -r14 --shadow-exclude "_NET_WM_WINDOW_TYPE@:a *= \"NOTIFICATION\""
+compton -b --no-fading-openclose -c -t-0 -l-0 -o.0 -r14
 sxhkd &
 
 # Autostart applications
 (sleep 1 && termite) &
 (sleep 5 && env GTK_THEME=Adwaita:light firefox) &
 (sleep 10 && slack) &
-(sleep 10 && messengerfordesktop) &
+(sleep 10 && signal-desktop) &
 
 # Start awesome
 exec awesome

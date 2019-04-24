@@ -40,7 +40,9 @@ function messenger.titleChange(c)
     end
     if messenger.unread == nil or messenger.unread < unread then
       messenger.unread = unread
-      messenger.widget.forced_width = nil
+      if messenger.widget ~= nil then
+        messenger.widget.forced_width = nil
+      end
 
       local text = unread .. " new message"
       if unread > 1 then
@@ -55,7 +57,9 @@ function messenger.titleChange(c)
     end
   elseif unread == nil and messenger.timer == nil then
     messenger.timer = gears.timer.start_new(5, function ()
-      messenger.widget.forced_width = 0
+      if messenger.widget ~= nil then
+        messenger.widget.forced_width = 0
+      end
       messenger.unread = nil
       messenger.timer = nil
     end)

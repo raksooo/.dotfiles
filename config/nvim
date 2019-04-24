@@ -3,23 +3,44 @@ filetype plugin indent on
 
 call plug#begin('~/.config/nvim/plug')
 
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'Raimondi/delimitMate'
+Plug 'Shougo/denite.nvim'
+Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
 Plug 'airblade/vim-gitgutter'
+Plug 'Raimondi/delimitMate'
 Plug 'vim-airline/vim-airline'
+Plug 'ntpeters/vim-better-whitespace'
 
 Plug 'tyrannicaltoucan/vim-quantum'
 
 call plug#end()
 
-" Deoplete
-let g:deoplete#enable_at_startup = 1
-autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
-" deoplete tab-complete
-inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+" denite.nvim
+nmap <leader>r :Denite buffer -mode=normal<CR>
+nmap <leader>t :Denite file/rec<CR>
+nnoremap <leader>e :<C-u>Denite grep:. -no-empty -mode=normal<CR>
+nnoremap <leader>w :<C-u>DeniteCursorWord grep:. -mode=normal<CR>
 
-let g:deoplete#enable_ignore_case = 1
-let g:tern_request_timeout = 1
+" coc.nvim
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gr <Plug>(coc-references)
+vmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>a  <Plug>(coc-codeaction)
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction<Paste>
+
+command! -nargs=0 Format :call CocAction('format')
+command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 " Theme
 set background=dark
@@ -30,8 +51,9 @@ colorscheme quantum
 
 hi Colorcolumn ctermbg=238
 
-highlight ExtraWhitespace ctermbg=209
-match ExtraWhitespace /\s\+$/
+" Trailing whitespace
+let g:better_whitespace_enabled=1
+let g:strip_whitespace_on_save=1
 
 " gitgutter
 hi SignColumn ctermbg=none
@@ -39,12 +61,6 @@ hi GitGutterAdd ctermbg=none ctermfg=114
 hi GitGutterChange ctermbg=none ctermfg=221
 hi GitGutterDelete ctermbg=none ctermfg=204
 hi GitGutterChangeDelete ctermbg=none ctermfg=204
-
-" spell checking
-hi SpellBad ctermfg=204
-hi SpellCap ctermfg=221
-hi SpellRare ctermfg=114
-hi SpellLocal ctermfg=238
 
 " airline
 let g:airline_left_sep=''
@@ -78,10 +94,12 @@ set smartindent
 set splitbelow
 set t_Co=256
 set tabstop=2
+set softtabstop=2
 set timeoutlen=400
 set title
 set undofile
 set undodir=~/.vim/undodir
+set updatetime=100
 
 " Mappings
 map <space> <leader>
@@ -96,8 +114,7 @@ nnoremap <leader>P "+P
 vnoremap <leader>p "+p
 vnoremap <leader>P "+P
 
-map <leader>c zA
-map <leader>f :noh<CR>
+map <leader>m :noh<CR>
 
 inoremap /** /**<CR>/<Esc>O
 
@@ -108,14 +125,11 @@ inoremap {<CR> {<CR>}<Esc>O
 nnoremap <C-Up> 10k
 nnoremap <C-Down> 10j
 
-"" Buffers
-nmap <leader>t :enew<CR>
+" Buffers
 nmap <leader>j :bnext<CR>
 nmap <leader>k :bprevious<CR>
 nmap <leader>q :bp <BAR> bd #<CR>
-nmap <leader>s :ls <CR>
-nmap <leader>n :badd 
-nmap <leader>e :Explore<CR>
+nmap <leader>n :badd
 nnoremap <Leader>g :e#<CR>
 nnoremap <Leader>1 :1b<CR>
 nnoremap <Leader>2 :2b<CR>
@@ -127,20 +141,4 @@ nnoremap <Leader>7 :7b<CR>
 nnoremap <Leader>8 :8b<CR>
 nnoremap <Leader>9 :9b<CR>
 nnoremap <Leader>0 :10b<CR>
-
-" Terminal
-nnoremap <C-t> :15split term://zsh<CR>:startinsert<CR>
-tnoremap <Esc> <C-\><C-n>
-nnoremap <Leader>l :wincmd j<CR>
-nnoremap <Leader>h :wincmd k<CR>
-tnoremap <Leader>l :wincmd j<CR>
-tnoremap <Leader>h :wincmd k<CR>
-
-" Commands
-command! W w !sudo tee %
-
-autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
-autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
-autocmd InsertLeave * match ExtraWhitespace /\s\+$/
-autocmd BufWinLeave * call clearmatches()
 

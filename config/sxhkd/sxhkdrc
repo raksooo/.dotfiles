@@ -56,3 +56,7 @@ Print
 super + Print
     sudo systemctl restart netctl-auto@wlp58s0.service
 
+# Play video from url in clipboard
+super + v
+    mpv --ytdl-format="bestvideo[height<=1080]+bestaudio/best" $(xclip -selection clipboard -o)
+

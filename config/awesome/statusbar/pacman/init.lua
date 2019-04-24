@@ -33,7 +33,7 @@ function pacman.hook()
 end
 
 function pacman.update(widget, stdout)
-  lines = #split(stdout, "\n")
+  lines = #gears.string.split(stdout, "\n")
   dots = ""
   for i = 1, math.min(lines, 55) do
     dots = dots .. ((i-1) % 20 == 0 and "⚫" or "•")

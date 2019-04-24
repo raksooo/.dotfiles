@@ -67,7 +67,7 @@ end
 
 function battery.poll()
     local now = "/sys/class/power_supply/" .. options.battery .. "/charge_now"
-    local full = "/sys/class/power_supply/" .. options.battery .. "/charge_full_design"
+    local full = "/sys/class/power_supply/" .. options.battery .. "/charge_full"
     local charging = "/sys/class/power_supply/AC/online"
     local cmd = "cat " .. now .." " .. full .. " " .. charging
     awful.spawn.easy_async(cmd, update)
@@ -75,7 +75,7 @@ function battery.poll()
 end
 
 function update(stdout)
-    local data = split(stdout, "\n")
+    local data = gears.string.split(stdout, "\n")
     battery.percentage_raw = math.floor(tonumber(data[1]) * 100 / tonumber(data[2]))
     battery.percentage = tostring(battery.percentage_raw) .. "%"
     battery.charging = data[3] == "1"
@@ -123,21 +123,6 @@ function notify()
             naughty.replace_text(notification.notification, title, text)
         end
     end
-end
-
-function split(inputstr, sep)
-        if inputstr == nil then
-            return nil
-        end
-        if sep == nil then
-            sep = "%s"
-        end
-        local t={} ; i=1
-        for str in string.gmatch(inputstr, "([^"..sep.."]+)") do
-                t[i] = str
-                i = i + 1
-        end
-        return t
 end
 
 return battery

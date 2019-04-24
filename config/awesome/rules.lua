@@ -11,7 +11,11 @@ end
 
 function changeOpacity(c, opacity)
   if isTerminal(c) then
-    c.opacity = 0.9 * opacity
+    if opacity == beautiful.opacity_normal then
+      c.opacity = 0.92 * beautiful.opacity_focus
+    else
+      c.opacity = 0.97 * opacity
+    end
   elseif c.class ~= "mpv" then
     c.opacity = opacity
   end
@@ -42,12 +46,13 @@ awful.rules.rules = {
       border_width = 30 } },
   { rule = { class = "mpv" },
     properties = {
-      floating = true,
-      width = 1920,
-      height = 1080,
+      fullscreen = true,
+      --floating = true,
+      --width = 1920,
+      --height = 1080,
       opacity = 1 } },
   { rule = { class = "Firefox" },
-    properties = { tags = { tagnames[4], tagnames[5] } },
+    properties = { tags = { tagnames[4] } },
     callback = awffvim.run },
   { rule = { class = "Chromium" },
     properties = { tag = tagnames[6] } },
@@ -62,9 +67,8 @@ awful.rules.rules = {
             awful.spawn("killall spotify")
           end)
         ) } },
-  { rule = { class = "Messenger for Desktop" },
-    properties = { tag = tagnames[7] },
-    callback = messengerCallback },
+  { rule = { class = "Signal" },
+    properties = { tag = tagnames[7] } },
   { rule = { class = "Slack" },
     properties = { tag = tagnames[7] } },
   { rule = { class = "brunocast-client" },
@@ -81,6 +85,10 @@ awful.rules.rules = {
   client.connect_signal("manage", function (c)
     if notifyclass then
       naughty.notify({ title = "Class of new window", text = c.class })
+    end
+
+    c.shape = function(cr, w, h)
+        gears.shape.rounded_rect(cr, w, h, 6)
     end
 
     if c.class == nil then

@@ -96,9 +96,10 @@ function checkNotifications()
   end
 end
 
-naughty.config.notify_callback = function(args)
-  table.insert(notificationQueue, args)
-  gears.timer.start_new(0, checkNotifications)
-  return args
-end
+--naughty.config.notify_callback = function(args)
+  --table.insert(notificationQueue, args)
+  --gears.timer.start_new(0, checkNotifications)
+
+--  return args
+--end
 

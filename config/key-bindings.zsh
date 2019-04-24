@@ -27,10 +27,10 @@ function clearscreen {
 zle -N prepend-sudoE
 zle -N prepend-sudo
 zle -N paste
-zle -N clearscreen
+# zle -N clearscreen
 
 bindkey "^[§" prepend-sudo
 bindkey "^[½" prepend-sudoE
 bindkey "^[p" paste
-bindkey -s "^l" 'clearscreen\n'
+# bindkey -s "^l" 'clearscreen\n'
 

@@ -58,6 +58,6 @@ source liquidprompt
 if [[ -z $DISPLAY && $XDG_VTNR -eq 1 ]]; then
     startx
 else
-    startupInfo
+    # startupInfo
 fi
 
