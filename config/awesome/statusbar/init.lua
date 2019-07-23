@@ -23,7 +23,7 @@ function statusbar.init()
     statusbar.clock = margin({
         font = "Helvetica Thin 11",
         widget = statusbar.textclock
-      }, { right = 40, top = 1 })
+      }, { right = 40, top = 7 })
 
     statusbar.volume = margin(volume.create(), { top = 8, bottom = 6, left = 40, right = 40 })
     statusbar.connectivity = margin(connectivity.create(), { top = 8, bottom = 6, right = 40 })
@@ -45,8 +45,7 @@ function statusbar.new(s)
       width = geometry.width * 0.6,
       visible = true,
       bg = beautiful.transparent,
-      type = "dock",
-      ontop = true
+      type = "dock"
     }
     left:setup {
       layout = wibox.layout.fixed.horizontal,
@@ -78,7 +77,7 @@ function statusbar.new(s)
       type = "dock",
     }
 
-    tag.connect_signal("property::selected", function(t) 
+    tag.connect_signal("property::selected", function(t)
       if t.selected then
         right.x = geometry.width - rwidth - 2 * t.gap
         hover.x = geometry.width - rwidth - 2 * t.gap

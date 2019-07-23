@@ -28,6 +28,7 @@ sxhkd &
 (sleep 5 && env GTK_THEME=Adwaita:light firefox) &
 (sleep 10 && slack) &
 (sleep 10 && signal-desktop) &
+(sleep 15 && chromium --incognito) &
 
 # Start awesome
 exec awesome

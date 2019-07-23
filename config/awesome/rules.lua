@@ -1,7 +1,6 @@
 local awful = require("awful")
 local gears = require("gears")
 local poppin = require("poppin")
-local awffvim = require("awffvim")
 
 local notifyclass = false
 
@@ -45,17 +44,11 @@ awful.rules.rules = {
       size_hints_honor = false,
       border_width = 30 } },
   { rule = { class = "mpv" },
-    properties = {
-      fullscreen = true,
-      --floating = true,
-      --width = 1920,
-      --height = 1080,
-      opacity = 1 } },
+    properties = { fullscreen = true, opacity = 1 } },
   { rule = { class = "Firefox" },
-    properties = { tags = { tagnames[4] } },
-    callback = awffvim.run },
+    properties = { tags = { tagnames[3], tagnames[4] } } },
   { rule = { class = "Chromium" },
-    properties = { tag = tagnames[6] } },
+    properties = { tags = { tagnames[5], tagnames[6] } } },
   { rule = { class = "Spotify" },
     properties = {
       tag = tagnames[8],
@@ -71,10 +64,6 @@ awful.rules.rules = {
     properties = { tag = tagnames[7] } },
   { rule = { class = "Slack" },
     properties = { tag = tagnames[7] } },
-  { rule = { class = "brunocast-client" },
-    properties = { floating = true,
-                   width = 1410,
-                   height = 575 } },
   { rule = { class = "Zathura" },
     callback = awful.client.setslave },
   { rule = { class = "Pinentry" },

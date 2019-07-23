@@ -39,7 +39,7 @@ local function createTags(s)
     })
     awful.tag({ tagnames[3], tagnames[4], tagnames[5] }, s, awful.layout.layouts[1])
     awful.tag.add(tagnames[6], {
-        layout             = awful.layout.layouts[2],
+        layout             = awful.layout.layouts[1],
         gap                 = 50,
         screen             = s,
     })
@@ -65,7 +65,7 @@ local gray = wibox {
   opacity = 1,
 }
 
-tag.connect_signal("property::selected", function(t) 
+tag.connect_signal("property::selected", function(t)
   if t.selected then
     if t.index == 1 then
       gray.opacity = 1

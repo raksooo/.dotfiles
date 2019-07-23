@@ -2,7 +2,6 @@ local awful = require("awful")
 local gears = require("gears")
 local hotkeys_popup = require("awful.hotkeys_popup").widget
 local poppin = require("poppin")
-local rotate = require("screenrotation")
 
 local super = "Mod4"
 local alt = "Mod1"
@@ -26,9 +25,10 @@ function gotoTag(i, move)
     if tag then tag:view_only() end
 end
 
-function grid(direction, move)
-    local rows = 2
-    local columns = 3
+-- Grid
+function navigate(direction, move)
+    local rows = 3
+    local columns = 2
 
     local i = awful.screen.focused().selected_tag.index - 1
     action = {
@@ -39,28 +39,45 @@ function grid(direction, move)
     }
     local j = action[direction]
 
+    if (j == 4 or j == 6) then
+      j = j - 1
+    end
+
     gotoTag(j, move)
 end
+
+--[[
+function navigate(direction, move)
+    local i = awful.screen.focused().selected_tag.index - 1
+    action = {
+        ["down"] = (i == 0 or i == 1) and 2 or (i + 1) % 4,
+        ["up"] = (i - columns) % (rows * columns) + 1,
+        ["left"] = (math.ceil((i + 1) / columns) - 1) * columns + ((i - 1) % columns) + 1,
+        ["right"] = (math.ceil((i + 1) / columns) - 1) * columns + ((i + 1) % columns) + 1,
+    }
+    local j = action[direction]
+end
+--]]
 
 globalkeys = gears.table.join(globalkeys,
     awful.key({ control, shift }, "+", hotkeys_popup.show_help,
               {description="show help", group="awesome"}),
 
-    awful.key({ super }, "j", curry(grid, "down", false),
+    awful.key({ super }, "j", curry(navigate, "down", false),
               {description = "view tag below current", group = "tag"}),
-    awful.key({ super }, "k", curry(grid, "up", false),
+    awful.key({ super }, "k", curry(navigate, "up", false),
               {description = "view tag above current", group = "tag"}),
-    awful.key({ super }, "h", curry(grid, "left", false),
+    awful.key({ super }, "h", curry(navigate, "left", false),
               {description = "view tag left of current", group = "tag"}),
-    awful.key({ super }, "l", curry(grid, "right", false),
+    awful.key({ super }, "l", curry(navigate, "right", false),
               {description = "view tag right of current", group = "tag"}),
-    awful.key({ alt }, "j", curry(grid, "down", true),
+    awful.key({ alt }, "j", curry(navigate, "down", true),
               {description = "move client to the tag below", group = "client"}),
-    awful.key({ alt }, "k", curry(grid, "up", true),
+    awful.key({ alt }, "k", curry(navigate, "up", true),
               {description = "move client to the tag above", group = "client"}),
-    awful.key({ alt }, "h", curry(grid, "left", true),
+    awful.key({ alt }, "h", curry(navigate, "left", true),
               {description = "move client to the tag to the left", group = "client"}),
-    awful.key({ alt }, "l", curry(grid, "right", true),
+    awful.key({ alt }, "l", curry(navigate, "right", true),
               {description = "move client to the tag to the right", group = "client"}),
 
     awful.key({ super }, "Escape", awful.tag.history.restore,
@@ -137,14 +154,6 @@ globalkeys = gears.table.join(globalkeys,
         end
       end
     end, {description = "Show/hide Spotify tag", group = "tag"}),
-    awful.key({ super }, "Up", function()rotate("normal") end,
-      {description = "Normal tag rotation", group = "tag"}),
-    awful.key({ super }, "Down", function() rotate("inverted") end,
-      {description = "Inverted tag rotation", group = "tag"}),
-    awful.key({ super }, "Left", function() rotate("left") end,
-      {description = "Counter-clockwise tag rotation", group = "tag"}),
-    awful.key({ super }, "Right", function()rotate("right") end,
-      {description = "Clockwise tag rotation", group = "tag"}),
 
     awful.key({ super, shift }, "l", curry(awful.tag.incmwfact, 0.05),
               {description = "increase master width factor", group = "layout"}),
