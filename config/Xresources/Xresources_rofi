@@ -1,15 +1,15 @@
 rofi.color-enabled: true
-rofi.color-window: #212121, #343434, #89cf7c
-rofi.color-normal: #212121, #aeb6b7, #212121, #343434, #83b879
-rofi.scrollbar-width: 15
-rofi.line-margin: 6
-rofi.line-padding: 6
+rofi.color-window: #22272e, #22272e, #2b3038
+rofi.color-normal: #22272e, #dcdfe4, #22272e, #2b3038, #98c370
+rofi.scrollbar-width: 3
+rofi.line-margin: 0
+rofi.line-padding: 8
 rofi.separator-style: solid
-rofi.borderwidth: 15
+rofi.borderwidth: 0
 rofi.opacity: 0.5
 rofi.dpi: 170
-rofi.font: DejaVu 15
+rofi.font: FiraCode thin 12
 rofi.padding: 15
-rofi.yoffset: -200
+rofi.yoffset: -300
 rofi.lines: 5
 

@@ -10,7 +10,10 @@ Plug 'Raimondi/delimitMate'
 Plug 'vim-airline/vim-airline'
 Plug 'ntpeters/vim-better-whitespace'
 
-Plug 'tyrannicaltoucan/vim-quantum'
+Plug 'leafgarland/typescript-vim'
+Plug 'ianks/vim-tsx'
+
+Plug 'sonph/onehalf', {'rtp': 'vim/'}
 
 call plug#end()
 
@@ -23,7 +26,6 @@ nnoremap <leader>w :<C-u>DeniteCursorWord grep:. -mode=normal<CR>
 " coc.nvim
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gr <Plug>(coc-references)
-vmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>a  <Plug>(coc-codeaction)
 nnoremap <silent> K :call <SID>show_documentation()<CR>
@@ -45,15 +47,14 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 " Theme
 set background=dark
 set termguicolors
-let g:quantum_black=1
-let g:quantum_italics=1
-colorscheme quantum
+colorscheme onehalfdark
 
 hi Colorcolumn ctermbg=238
 
 " Trailing whitespace
 let g:better_whitespace_enabled=1
 let g:strip_whitespace_on_save=1
+let g:better_whitespace_guicolor='#e5c07b'
 
 " gitgutter
 hi SignColumn ctermbg=none
@@ -72,7 +73,7 @@ let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = ' '
 let g:airline#extensions#tabline#right_sep = ''
 let g:airline#extensions#tabline#show_buffers = 1
-let g:airline_theme = 'quantum'
+let g:airline_theme='onehalfdark'
 
 " Settings
 set autoindent

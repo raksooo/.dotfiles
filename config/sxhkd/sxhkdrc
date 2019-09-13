@@ -1,16 +1,8 @@
 # Screen brightness
-
 XF86MonBrightnessDown
     brightness -50
 XF86MonBrightnessUp
     brightness 50
-super + F7
-    brightness max
-super + shift + F7
-    brightness min
-
-F7
-    systemctl suspend
 
 # Playback control
 XF86AudioPlay
@@ -32,10 +24,6 @@ XF86AudioMute
 super + Return
     termite
 
-# Browser
-super + shift + Return
-  env GTK_THEME=Adwaita:light firefox
-
 # Launcher
 super + space
     rofiHistory
@@ -45,18 +33,18 @@ alt + shift + space
 
 # Lock X
 alt + space
-    awesome-client "lock.lock()"
+    lock
 
 # Take screenshot
 Print
-    maim /home/oskar/documents/screenshots/$(date +%F-%T).png \
-        && mpg123 ~/.local/share/oskar/screenshot.mp3
-
-# Restart netctl-auto
-super + Print
-    sudo systemctl restart netctl-auto@wlp58s0.service
+    scrot /home/oskar/documents/screenshots/$(date +%F-%T).png \
+        && notify-send "Screenshot taken" "Great success!"
 
 # Play video from url in clipboard
 super + v
     mpv --ytdl-format="bestvideo[height<=1080]+bestaudio/best" $(xclip -selection clipboard -o)
+super + c
+    cast
+super + shift + v
+    copyundercursor && mpv --ytdl-format="bestvideo[height<=1080]+bestaudio/best" $(xclip -o)
 

@@ -1,12 +1,12 @@
 local naughty = require("naughty")
 
 local theme = {}
-local font = "DejaVu Sans"
+local font = "FiraCode Light"
 
 theme.transparent   = "#00000000"
 theme.base_font     = font
 theme.font          = font .. " 9"
-theme.wallpaper     = os.getenv("HOME") .. "/.wallpapers/active.png"
+theme.wallpaper     = os.getenv("HOME") .. "/.config/wallpaper.png"
 
 theme.bg_normal     = "#222222"
 theme.bg_focus      = "#535d6c"
@@ -20,7 +20,7 @@ theme.fg_urgent     = "#ffffff"
 theme.fg_minimize   = "#ffffff"
 
 theme.border_width  = 0
-theme.border_normal = "#212121"
+theme.border_normal = "#282c34"
 
 theme.opacity_normal    = 0.85
 theme.opacity_focus     = 1

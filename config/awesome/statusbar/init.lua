@@ -6,7 +6,6 @@ local battery = require("statusbar.battery")
 local notificationBar = require("statusbar.notificationBar")
 connectivity = require("statusbar.connectivity")
 volume = require("statusbar.volume")
-messenger = require("statusbar.messenger")
 
 statusbar = {}
 
@@ -21,9 +20,9 @@ end
 function statusbar.init()
     statusbar.textclock = wibox.widget.textclock("%H:%M")
     statusbar.clock = margin({
-        font = "Helvetica Thin 11",
+        font = "Helvetica Thin 11.7",
         widget = statusbar.textclock
-      }, { right = 40, top = 7 })
+      }, { right = 40, top = 0 })
 
     statusbar.volume = margin(volume.create(), { top = 8, bottom = 6, left = 40, right = 40 })
     statusbar.connectivity = margin(connectivity.create(), { top = 8, bottom = 6, right = 40 })
@@ -37,7 +36,7 @@ function statusbar.new(s)
     end
 
     local geometry = awful.screen.focused().geometry
-    local rwidth = 344
+    local rwidth = 350
 
     local left = wibox {
       x = 100,
@@ -68,19 +67,9 @@ function statusbar.new(s)
         statusbar.clock
     }
 
-    local hover = wibox {
-      x = geometry.width - rwidth - 100,
-      height = 3,
-      width = rwidth,
-      visible = true,
-      bg = "#ffffff66",
-      type = "dock",
-    }
-
     tag.connect_signal("property::selected", function(t)
       if t.selected then
         right.x = geometry.width - rwidth - 2 * t.gap
-        hover.x = geometry.width - rwidth - 2 * t.gap
         left.x = 2 * t.gap
       end
     end)

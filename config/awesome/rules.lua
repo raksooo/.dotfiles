@@ -2,8 +2,6 @@ local awful = require("awful")
 local gears = require("gears")
 local poppin = require("poppin")
 
-local notifyclass = false
-
 function isTerminal(c)
   return c.class ~= nil and c.class:lower() == terminal
 end
@@ -11,21 +9,13 @@ end
 function changeOpacity(c, opacity)
   if isTerminal(c) then
     if opacity == beautiful.opacity_normal then
-      c.opacity = 0.92 * beautiful.opacity_focus
+      c.opacity = 0.85 * beautiful.opacity_focus
     else
-      c.opacity = 0.97 * opacity
+      c.opacity = 0.95 * opacity
     end
   elseif c.class ~= "mpv" then
     c.opacity = opacity
   end
-end
-
-function messengerCallback(c)
-  awful.client.setslave(c)
-  c:connect_signal("property::name", messenger.titleChange)
-  gears.timer.start_new(0.2, function ()
-    awful.key.execute({ "Control", "Mod1" }, "b")
-  end)
 end
 
 awful.rules.rules = {
@@ -42,10 +32,10 @@ awful.rules.rules = {
   { rule = { class = "Termite" },
     properties = {
       size_hints_honor = false,
-      border_width = 30 } },
+      border_width = 15 } },
   { rule = { class = "mpv" },
     properties = { fullscreen = true, opacity = 1 } },
-  { rule = { class = "Firefox" },
+  { rule = { class = "firefox" },
     properties = { tags = { tagnames[3], tagnames[4] } } },
   { rule = { class = "Chromium" },
     properties = { tags = { tagnames[5], tagnames[6] } } },
@@ -64,8 +54,6 @@ awful.rules.rules = {
     properties = { tag = tagnames[7] } },
   { rule = { class = "Slack" },
     properties = { tag = tagnames[7] } },
-  { rule = { class = "Zathura" },
-    callback = awful.client.setslave },
   { rule = { class = "Pinentry" },
     properties = { floating = true } }
   }
@@ -77,7 +65,7 @@ awful.rules.rules = {
     end
 
     c.shape = function(cr, w, h)
-        gears.shape.rounded_rect(cr, w, h, 6)
+        gears.shape.rounded_rect(cr, w, h, 8)
     end
 
     if c.class == nil then
