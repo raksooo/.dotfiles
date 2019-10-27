@@ -1,6 +1,7 @@
 [user]
-	email = oskar@oskarnyberg.com
+	email = me@oskarnyberg.com
 	name = Oskar Nyberg
+	signingkey = me@oskarnyberg.com
 [push]
 	default = simple
 [color]
@@ -17,3 +18,5 @@
 [diff]
   tool = vimdiff
 
+[commit]
+	gpgsign = true

@@ -12,6 +12,9 @@ XF86AudioPrev
 XF86AudioNext
     playerctl next
 
+super + XF86AudioPlay
+  castnow --command space --quiet --exit
+
 # Volume control
 XF86AudioRaiseVolume
     amixer sset Master 5%+ && awesome-client "volume.update()"
@@ -19,6 +22,11 @@ XF86AudioLowerVolume
     amixer sset Master 5%- && awesome-client "volume.update()"
 XF86AudioMute
     amixer sset Master toggle && awesome-client "volume.update()"
+
+super + XF86AudioRaiseVolume
+  castnow --command up --quiet --exit
+super + XF86AudioLowerVolume
+  castnow --command down --quiet --exit
 
 # Terminal
 super + Return
