@@ -17,10 +17,30 @@ function GIT() {
     ahead=$(git rev-list --count $remote..HEAD)
     behind=$(git rev-list --count HEAD..$remote)
 
-    #untrackedCount=$(git ls-files --others --exclude-standard | wc -l)
-    #untracked=$([[ $untrackedCount -gt 0 ]] && echo "%F{red}*%f" || "")
+    if [[ ahead -gt 0 && behind -gt 0 ]]; then
+      commits="(%F{yellow}$ahead%f, %F{red}$behind%f)"
+      branchColor="yellow"
+    elif [[ ahead -gt 0 ]]; then
+      commits="(%F{yellow}$ahead%f)"
+      branchColor="yellow"
+    elif [[ behind -gt 0 ]]; then
+      commits="(%F{red}$behind%f)"
+      branchColor="yellow"
+    else
+      commits=""
+      branchColor="green"
+    fi
 
-    echo "$RSEP%F{green}$branch%f"
+    untrackedCount=$(git ls-files --others --exclude-standard | wc -l)
+    untracked=$([[ $untrackedCount -gt 0 ]] && echo "%F{red}*%f" || echo "")
+
+    unstagedCount=$(git ls-files . -m | wc -l)
+    unstaged=$([[ $unstagedCount -gt 0 ]] && echo "%F{yellow}*%f" || echo "")
+
+    stagedCount=$(git diff --name-only --staged | wc -l)
+    staged=$([[ $stagedCount -gt 0 ]] && echo "%F{green}*%f" || echo "")
+
+    echo "$RSEP%F{$branchColor}$branch%f$commits$staged$unstaged$untracked"
   fi
 }
 
