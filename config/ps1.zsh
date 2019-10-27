@@ -18,7 +18,7 @@ function GIT() {
     behind=$(git rev-list --count HEAD..$remote)
 
     if [[ ahead -gt 0 && behind -gt 0 ]]; then
-      commits="(%F{yellow}$ahead%f, %F{red}$behind%f)"
+      commits="(%F{yellow}$ahead%f,%F{red}$behind%f)"
       branchColor="yellow"
     elif [[ ahead -gt 0 ]]; then
       commits="(%F{yellow}$ahead%f)"
@@ -39,6 +39,12 @@ function GIT() {
 
     stagedCount=$(git diff --name-only --staged | wc -l)
     staged=$([[ $stagedCount -gt 0 ]] && echo "%F{green}*%f" || echo "")
+
+    conflict=$([[ $(git diff --name-only --diff-filter=U | wc -l) -gt 0 ]])
+    if [[ $conflict ]]; then
+      branchColor="red"
+    fi
+
 
     echo "$RSEP%F{$branchColor}$branch%f$commits$staged$unstaged$untracked"
   fi
