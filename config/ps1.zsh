@@ -31,10 +31,10 @@ function GIT() {
       branchColor="green"
     fi
 
-    untrackedCount=$(git ls-files --others --exclude-standard | wc -l)
+    untrackedCount=$(git status --porcelain | grep '??' | wc -l)
     untracked=$([[ $untrackedCount -gt 0 ]] && echo "%F{red}*%f" || echo "")
 
-    unstagedCount=$(git ls-files . -m | wc -l)
+    unstagedCount=$(git diff --name-only | wc -l)
     unstaged=$([[ $unstagedCount -gt 0 ]] && echo "%F{yellow}*%f" || echo "")
 
     stagedCount=$(git diff --name-only --staged | wc -l)

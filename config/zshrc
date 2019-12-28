@@ -47,6 +47,9 @@ export TERMINAL=termite
 export LANG='en_US.UTF-8'
 export LANGUAGE=$LANG
 
+## FZF
+export FZF_DEFAULT_COMMAND='rg --files --no-ignore-vcs --hidden'
+
 ## Prompt
 source ~/.dotfiles/config/ps1.zsh
 
