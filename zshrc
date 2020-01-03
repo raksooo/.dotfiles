@@ -51,14 +51,14 @@ export LANGUAGE=$LANG
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore-vcs --hidden'
 
 ## Prompt
-source ~/.dotfiles/config/ps1.zsh
+source $DOTFILES/ps1.zsh
 
 ## Make vim colors work in tmux
 [ -n "$TMUX" ] && export TERM=screen-256color
 
 ## Aliases & keybindings
-source $DOTFILES/config/aliases
-source $DOTFILES/config/key-bindings.zsh
+source $DOTFILES/aliases
+source $DOTFILES/key-bindings.zsh
 
 ## Start X
 if [[ -z $DISPLAY && $XDG_VTNR -eq 1 ]]; then

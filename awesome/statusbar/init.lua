@@ -1,6 +1,7 @@
 local wibox = require("wibox")
 local awful = require("awful")
 local gears = require("gears")
+local naughty = require("naughty")
 
 local battery = require("statusbar.battery")
 local notificationBar = require("statusbar.notificationBar")
@@ -44,7 +45,8 @@ function statusbar.new(s)
       width = geometry.width * 0.6,
       visible = true,
       bg = beautiful.transparent,
-      type = "dock"
+      type = "dock",
+      ontop = true
     }
     left:setup {
       layout = wibox.layout.fixed.horizontal,
@@ -52,12 +54,14 @@ function statusbar.new(s)
     }
 
     local right = wibox {
-      x = geometry.width - rwidth - 100,
+      x = geometry.width - rwidth - 110,
+      y = 7,
       height = 40,
       width = rwidth,
       visible = true,
       bg = beautiful.transparent,
       type = "dock",
+      ontop = true,
     }
     right:setup {
         layout = wibox.layout.fixed.horizontal,
@@ -68,11 +72,21 @@ function statusbar.new(s)
     }
 
     tag.connect_signal("property::selected", function(t)
-      if t.selected then
-        right.x = geometry.width - rwidth - 2 * t.gap
-        left.x = 2 * t.gap
+      if t.selected and t.index == 2 then
+        left.ontop = false
+        right.ontop = false
+      else
+        left.ontop = true
+        right.ontop = true
       end
     end)
+
+    -- tag.connect_signal("property::selected", function(t)
+    --   if t.selected then
+    --     right.x = geometry.width - rwidth - 2 * t.gap
+    --     left.x = 2 * t.gap
+    --   end
+    -- end)
 end
 
 return statusbar

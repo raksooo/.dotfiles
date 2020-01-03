@@ -1,12 +1,16 @@
 " Plugins
 call plug#begin('~/.config/nvim/plug')
 
+Plug 'morhetz/gruvbox'
+
 Plug 'jiangmiao/auto-pairs'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" coc-css, coc-eslint, coc-json, coc-lua, coc-prettier, coc-rls, coc-tsserver
 Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'vim-airline/vim-airline'
 Plug 'ntpeters/vim-better-whitespace'
+Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 
@@ -22,15 +26,12 @@ filetype plugin indent on
 
 set colorcolumn=100
 set cursorline
-set expandtab
+set expandtab shiftwidth=2 smartindent softtabstop=2 tabstop=2
+set hidden
+set ignorecase smartcase
 set number relativenumber
 set ruler
 set scrolloff=10
-set smartcase
-set shiftwidth=2
-set smartindent
-set softtabstop=2
-set tabstop=2
 set timeoutlen=400
 set title
 set undofile
@@ -58,7 +59,7 @@ nnoremap <leader>8 :8b<CR>
 nnoremap <leader>9 :9b<CR>
 nnoremap <leader>0 :10b<CR>
 
-"" Fzf
+"" FZF
 nnoremap <leader>t :Files<Cr>
 nnoremap <leader>f :Rg<Cr>
 nnoremap <leader>b :Buffers<Cr>
@@ -66,7 +67,7 @@ nnoremap <leader>b :Buffers<Cr>
 "" Nerdtree
 nnoremap <leader>l :NERDTreeToggle<CR>
 
-"" Coc
+"" COC
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gr <Plug>(coc-references)
 nmap <leader>a  <Plug>(coc-codeaction)
@@ -77,9 +78,11 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 " Theme
 set background=dark
+colorscheme gruvbox
 
 "" Colors
-hi Colorcolumn ctermbg=238
+hi Normal ctermbg=0
+hi Colorcolumn ctermbg=237
 
 "Plugins
 "" Airline

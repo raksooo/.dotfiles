@@ -1,6 +1,6 @@
 rofi.color-enabled: true
-rofi.color-window: #22272e, #22272e, #2b3038
-rofi.color-normal: #22272e, #dcdfe4, #22272e, #2b3038, #98c370
+rofi.color-window: #303030, #303030, #323232
+rofi.color-normal: #303030, #ebdbb2, #303030, #353535, #98971a
 rofi.scrollbar-width: 3
 rofi.line-margin: 0
 rofi.line-padding: 8

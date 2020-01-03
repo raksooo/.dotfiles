@@ -9,9 +9,9 @@ end
 function changeOpacity(c, opacity)
   if isTerminal(c) then
     if opacity == beautiful.opacity_normal then
-      c.opacity = 0.85 * beautiful.opacity_focus
+      --c.opacity = 0.85 * beautiful.opacity_focus
     else
-      c.opacity = 0.95 * opacity
+      --c.opacity = 0.95 * opacity
     end
   elseif c.class ~= "mpv" then
     c.opacity = opacity
@@ -32,7 +32,7 @@ awful.rules.rules = {
   { rule = { class = "Termite" },
     properties = {
       size_hints_honor = false,
-      border_width = 15 } },
+      border_width = 50 } },
   { rule = { class = "mpv" },
     properties = { fullscreen = true, opacity = 1 } },
   { rule = { class = "firefox" },
@@ -56,47 +56,47 @@ awful.rules.rules = {
     properties = { tag = tagnames[7] } },
   { rule = { class = "Pinentry" },
     properties = { floating = true } }
-  }
+}
 
-  -- Signal function to execute when a new client appears.
-  client.connect_signal("manage", function (c)
-    if notifyclass then
-      naughty.notify({ title = "Class of new window", text = c.class })
-    end
+-- Signal function to execute when a new client appears.
+client.connect_signal("manage", function (c)
+  if notifyclass then
+    naughty.notify({ title = "Class of new window", text = c.class })
+  end
 
-    c.shape = function(cr, w, h)
-        gears.shape.rounded_rect(cr, w, h, 8)
-    end
+  c.shape = function(cr, w, h)
+      gears.shape.rounded_rect(cr, w, h, 8)
+  end
 
-    if c.class == nil then
-      c.minimized = true
-      c:connect_signal("property::class", function ()
-        c.minimized = false
-        awful.rules.apply(c)
-      end)
-    end
+  if c.class == nil then
+    c.minimized = true
+    c:connect_signal("property::class", function ()
+      c.minimized = false
+      awful.rules.apply(c)
+    end)
+  end
 
-    if c.floating and not poppin.isPoppin(c) then
-      awful.placement.centered(c)
-    end
+  if c.floating and not poppin.isPoppin(c) then
+    awful.placement.centered(c)
+  end
 
-    if awesome.startup and
-      not c.size_hints.user_position
-      and not c.size_hints.program_position then
-      -- Prevent clients from being unreachable after screen count changes.
-      awful.placement.no_offscreen(c)
-    end
-  end)
-
-  client.connect_signal("focus", function(c)
-    changeOpacity(c, beautiful.opacity_focus)
-  end)
-
-  client.connect_signal("unfocus", function(c)
-    changeOpacity(c, beautiful.opacity_normal)
-  end)
-
-  client.connect_signal("property::fullscreen", function(c)
+  if awesome.startup and
+    not c.size_hints.user_position
+    and not c.size_hints.program_position then
+    -- Prevent clients from being unreachable after screen count changes.
     awful.placement.no_offscreen(c)
-  end)
+  end
+end)
+
+client.connect_signal("focus", function(c)
+  changeOpacity(c, beautiful.opacity_focus)
+end)
+
+client.connect_signal("unfocus", function(c)
+  changeOpacity(c, beautiful.opacity_normal)
+end)
+
+client.connect_signal("property::fullscreen", function(c)
+  awful.placement.no_offscreen(c)
+end)
 

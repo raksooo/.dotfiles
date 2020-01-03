@@ -8,12 +8,12 @@ xcape -e 'ISO_Level3_Shift=Escape'
 setxkbmap se -variant nodeadkeys
 
 # Xmodmap
-[[ -f ~/.Xmodmap ]] && xmodmap ~/.Xmodmap
+[[ -f ~/.dotfiles/Xmodmap ]] && xmodmap ~/.dotfiles/Xmodmap
 
 # Xresources
 [[ -f ~/.Xresources ]] && xrdb -merge -I$HOME ~/.Xresources
-[[ -f ~/.Xresources_rofi ]] && xrdb -merge -I$HOME ~/.Xresources_rofi
-[[ -f ~/.Xresources_theme ]] && xrdb -merge -I$HOME ~/.Xresources_theme
+[[ -f $DOTFILES/Xresources/Xresources_rofi ]] && xrdb -merge -I$HOME $DOTFILES/Xresources/Xresources_rofi
+[[ -f $DOTFILES/Xresources/Xresources_theme ]] && xrdb -merge -I$HOME $DOTFILES/Xresources/Xresources_theme
 
 # Autostart
 xss-lock -l -- lock &

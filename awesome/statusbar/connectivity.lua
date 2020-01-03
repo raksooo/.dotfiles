@@ -29,6 +29,7 @@ function connectivity.create()
 
     connectivity.update()
     gears.timer.start_new(10, connectivity.update)
+    gears.timer.start_new(20, connectivity.update_vpn_status)
 
     return connectivity.widget
 end
@@ -56,16 +57,19 @@ function connectivity.update()
         end
         connectivity.widget:set_checked(checked)
         connectivity.widget:set_color(color)
-
-        awful.spawn.easy_async('vpn', function(stdout)
-          if #stdout > 0 then
-            connectivity.widget.border_color = "#ffffff66"
-          else
-            connectivity.widget.border_color = connectivity.colors.none
-          end
-        end)
     end)
     return true
+end
+
+function connectivity.update_vpn_status()
+  awful.spawn.easy_async('vpn', function(stdout, stderr, reason, exit_code)
+    if exit_code == 0 then
+      connectivity.widget.border_color = "#ffffff66"
+    else
+      connectivity.widget.border_color = connectivity.colors.none
+    end
+  end)
+  return true
 end
 
 return connectivity

@@ -23,7 +23,7 @@ awful.layout.layouts = {
 local defaultTag = {
     layout             = awful.layout.layouts[1],
     master_fill_policy = "master_width_factor",
-    gap                = 50,
+    --gap                = 50,
     screen             = s,
 }
 
