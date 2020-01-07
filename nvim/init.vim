@@ -1,11 +1,10 @@
 " Plugins
 call plug#begin('~/.config/nvim/plug')
 
-Plug 'morhetz/gruvbox'
-
 Plug 'jiangmiao/auto-pairs'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " coc-css, coc-eslint, coc-json, coc-lua, coc-prettier, coc-rls, coc-tsserver
+Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'vim-airline/vim-airline'
@@ -17,6 +16,8 @@ Plug 'airblade/vim-gitgutter'
 Plug 'leafgarland/typescript-vim'
 Plug 'maxmellon/vim-jsx-pretty'
 Plug 'prettier/vim-prettier', { 'do': 'yarn install', 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
+
+Plug 'morhetz/gruvbox'
 
 call plug#end()
 
@@ -118,4 +119,9 @@ let g:prettier#config#print_width = 100
 let g:prettier#config#trailing_comma = 'all'
 let g:prettier#autoformat = 0
 autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
+
+"" Firenvim
+if exists('g:started_by_firenvim')
+  let g:airline#extensions#tabline#enabled = 0
+endif
 

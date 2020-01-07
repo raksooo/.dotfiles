@@ -19,10 +19,11 @@ setxkbmap se -variant nodeadkeys
 xss-lock -l -- lock &
 unclutter -keystroke -idle 1 &
 redshift 57.716015:11.871436 &
-compton -b --no-fading-openclose -c -t-0 -l-0 -o.0 -r14
+compton -b --no-fading-openclose -c -t-0 -l-0 -o.0
 sxhkd &
 
 # Autostart applications
+termite &
 termite &
 firefox &
 
