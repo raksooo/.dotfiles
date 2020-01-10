@@ -48,7 +48,7 @@ export LANGUAGE=$LANG
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore-vcs --hidden'
 
 ## Prompt
-source $DOTFILES/ps1.zsh
+source ~/.config/ps1.zsh
 
 ## Make vim colors work in tmux
 [ -n "$TMUX" ] && export TERM=screen-256color
