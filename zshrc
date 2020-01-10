@@ -4,9 +4,6 @@ export DOTFILES=$HOME/.dotfiles
 export PATH=$PATH:$HOME/.local/bin
 export PATH=$PATH:$HOME/.npm-global/bin
 
-export HOLDIR=$HOME/documents/master-thesis/HOL
-export PATH=$PATH:$HOLDIR/bin
-
 export npm_config_prefix=~/.npm-global
 
 ## Completion
