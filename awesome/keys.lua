@@ -99,9 +99,6 @@ globalkeys = gears.table.join(globalkeys,
     awful.key({ super }, "t", function ()
         poppin.pop("terminal_top", terminal, "top", 800, { border_width = 8 })
     end, {description = "Opens a poppin' terminal at top", group = "poppin"}),
-    awful.key({ super, shift }, "t", function ()
-        poppin.pop("terminal_bottom", terminal, "bottom", 800, { border_width = 8 })
-    end, {description = "Opens a poppin' terminal at bottom", group = "poppin"}),
     awful.key({ alt }, "t", function ()
         poppin.pop("terminal_center", terminal, "center",
         { border_width = 8, width = 1400, height = 700 })
