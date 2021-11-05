@@ -18,5 +18,3 @@
 [diff]
   tool = nvim
 
-[commit]
-	gpgsign = true
