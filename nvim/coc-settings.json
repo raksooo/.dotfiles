@@ -1,4 +1,4 @@
 {
   "suggest.echodocSupport": true,
-  "coc.preferences.formatOnSaveFiletypes": ["rust"]
+  "coc.preferences.formatOnSaveFiletypes": ["typescript", "typescriptreact", "javascript", "javascriptreact"]
 }
