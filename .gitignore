@@ -1,4 +1,5 @@
 *.swp
 github_oauth
 share/rofiHistory
+nvim/plug
 
