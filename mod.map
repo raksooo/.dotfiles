@@ -1,0 +1,17 @@
+altgr keycode  22 = slash
+altgr keycode  23 = ampersand
+altgr keycode  24 = bar
+altgr keycode  25 = equal
+altgr keycode  26 = backslash
+altgr keycode  30 = exclam
+altgr keycode  31 = quotedbl
+altgr keycode  32 = less
+altgr keycode  33 = greater
+altgr keycode  34 = at
+altgr keycode  35 = braceleft
+altgr keycode  36 = bracketleft
+altgr keycode  37 = parenleft
+altgr keycode  38 = parenright
+altgr keycode  39 = bracketright
+altgr keycode  40 = braceright
+altgr keycode  50 = dollar

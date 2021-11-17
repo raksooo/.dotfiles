@@ -1,0 +1,24 @@
+default partial alphanumeric_keys
+xkb_symbols "basic" {
+  include "se"
+  name[Group1] = "Swedish with special character on home row if ralt is pressed";
+  key <AE12> { [ dead_acute, grave ] };
+  key <AD07> { [ u, U, slash ] };
+  key <AD08> { [ i, I, ampersand ] };
+  key <AD09> { [ o, O, bar ] };
+  key <AD10> { [ p, P, equal ] };
+  key <AD11> { [ aring, Aring, backslash ] };
+  key <AD12> { [ dead_diaeresis, asciicircum, asciitilde ] };
+  key <AC01> { [ a, A, exclam ] };
+  key <AC02> { [ s, S, quotedbl ] };
+  key <AC03> { [ d, D, less ] };
+  key <AC04> { [ f, F, greater ] };
+  key <AC05> { [ g, G, at ] };
+  key <AC06> { [ h, H, braceleft ] };
+  key <AC07> { [ j, J, bracketleft ] };
+  key <AC08> { [ k, K, parenleft ] };
+  key <AC09> { [ l, L, parenright ] };
+  key <AC10> { [ odiaeresis, Odiaeresis, bracketright ] };
+  key <AC11> { [ adiaeresis, Adiaeresis, braceright ] };
+  key <AB07> { [ m, M, dollar ] };
+};
