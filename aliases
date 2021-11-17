@@ -1,27 +1,9 @@
 #!/bin/sh
 
-alias pls='sudo $(fc -ln -1)'
-
 #color
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 
 #tmux
 alias tmux='tmux -2' # run with 256 colors
-
-#git
-alias gs='git status'
-alias gd='git difftool'
-alias ga='git add'
-alias gap='git add -p'
-alias gaa='git add -A'
-alias gc='git commit -m'
-alias gca='git commit -am'
-alias gl='git log --graph --oneline --all --decorate'
-
-#other
-alias yay='yay --editmenu --aur'
-alias feh='feh -.'
-alias spotify='spotify --force-device-scale-factor=1.7'
-alias firefox='env GTK_THEME=Adwaita:light firefox'
 
