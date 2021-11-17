@@ -18,16 +18,24 @@ fpath=(/usr/local/share/zsh-completions $fpath)
 
 ## Set options
 setopt append_history
-setopt auto_cd
+
+setopt auto_pushd
+setopt cd_silent
+setopt pushd_silent
+setopt pushd_to_home
+
 setopt complete_aliases
 setopt complete_in_word
 setopt correct
 setopt extended_glob
 setopt no_match
+
 setopt notify
 setopt no_beep
 setopt prompt_subst
-bindkey -e
+
+bindkey -v
+KEYTIMEOUT=5
 
 ## History
 HISTSIZE=1000
@@ -39,7 +47,7 @@ export CLICOLOR=1
 
 export EDITOR=nvim
 export BROWSER=firefox
-export TERMINAL=termite
+export TERMINAL=alacritty
 
 export LANG='en_US.UTF-8'
 export LANGUAGE=$LANG
@@ -48,17 +56,26 @@ export LANGUAGE=$LANG
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore-vcs --hidden'
 
 ## Prompt
-source ~/.config/ps1.zsh
+source $DOTFILES/ps1.zsh
 
 ## Make vim colors work in tmux
 [ -n "$TMUX" ] && export TERM=screen-256color
 
-## Aliases & keybindings
+## Aliases
 source $DOTFILES/aliases
-source $DOTFILES/key-bindings.zsh
+[[ -f "$HOME/aliases" ]] && source "$HOME/aliases"
 
-## Start X
-if [[ -z $DISPLAY && $XDG_VTNR -eq 1 ]]; then
-    startx
-fi
+## Vi
+function _set_cursor() { [[ $TMUX = '' ]] && echo -ne $1 || echo -ne "\ePtmux;\e\e$1\e\\" }
+function _set_block_cursor() { _set_cursor '\e[1 q' }
+function _set_beam_cursor() { _set_cursor '\e[5 q' }
+function _use_block_cursor() { [[ ${KEYMAP} == vicmd ]] || [[ $1 = 'block' ]] }
 
+function zle-keymap-select { _use_block_cursor && _set_block_cursor  || _set_beam_cursor }
+function zle-line-init() { zle -K viins; _set_beam_cursor }
+function zle-line-finish() { _set_block_cursor }
+
+zle -N zle-keymap-select
+zle -N zle-line-finish
+
+precmd_functions+=(_set_beam_cursor)
