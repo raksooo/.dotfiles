@@ -1,4 +1,0 @@
-{
-  "suggest.echodocSupport": true,
-  "coc.preferences.formatOnSaveFiletypes": ["typescript", "typescriptreact", "javascript", "javascriptreact"]
-}
