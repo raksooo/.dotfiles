@@ -4,7 +4,6 @@ source ~/.config/nvim/tabline.vim
 call plug#begin('~/.config/nvim/plug')
 
 Plug 'neovim/nvim-lspconfig'
-Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-path'
@@ -20,10 +19,6 @@ Plug 'ntpeters/vim-better-whitespace'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
-
-" Plug 'leafgarland/typescript-vim'
-" Plug 'maxmellon/vim-jsx-pretty'
-" Plug 'darfink/vim-plist'
 
 " Plug 'vimwiki/vimwiki'
 
@@ -123,15 +118,6 @@ hi GitGutterChange ctermbg=none ctermfg=221
 hi GitGutterDelete ctermbg=none ctermfg=204
 hi GitGutterChangeDelete ctermbg=none ctermfg=204
 
-"" nvim-cmp
-set completeopt=menu,menuone,preview
-
 "" Auto-pairs
 let g:AutoPairsMultilineClose = 0
 
-"" jsx-typescript
-" autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescript.tsx
-"
-"" Vim Wiki
-" let g:vimwiki_list = [{'path': '~/Documents/vimwiki/'}]
-" let g:vimwiki_global_ext = 0

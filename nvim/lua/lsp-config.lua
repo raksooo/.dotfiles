@@ -2,16 +2,13 @@ local lspconfig = require'lspconfig'
 local cmp = require'cmp'
 
 cmp.setup({
+  preselect = cmp.PreselectMode.None,
   mapping = {
     ['<Tab>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
     ['<S-Tab>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
     ['<j>'] = cmp.mapping.scroll_docs(-4),
     ['<k>'] = cmp.mapping.scroll_docs(4),
     ['<C-e>'] = cmp.mapping.close(),
-
-    ['<Down>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
-    ['<Up>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
-    ['<CR>'] = cmp.mapping.confirm({ select = true }),
   },
   sources = cmp.config.sources(
     { { name = 'nvim_lsp' } },
@@ -22,29 +19,23 @@ cmp.setup({
 
 cmp.setup.cmdline(':', { sources = cmp.config.sources({ { name = 'path' } }) })
 
--- bindings
+-- Mappings.
+local opts = { noremap=true, silent=true }
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
+
 local on_attach = function(client, bufnr)
-  local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-  local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
-
   -- Enable completion triggered by <c-x><c-o>
-  buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
-
-  -- Mappings.
-  local opts = { noremap=true, silent=true }
+  vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
   -- See `:help vim.lsp.*` for documentation on any of the below functions
-  buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
-  buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
-  buf_set_keymap('n', 'L', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
-  buf_set_keymap('n', 'gt', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-  buf_set_keymap('n', 'ar', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-  buf_set_keymap('n', 'aa', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-  buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-  buf_set_keymap('n', 'af', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
-  buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
-  buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
-
+  vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+  vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
+  vim.keymap.set('n', 'gt', vim.lsp.buf.type_definition, opts)
+  vim.keymap.set('n', '<leader>r', vim.lsp.buf.rename, opts)
+  vim.keymap.set('n', '<leader>a', vim.lsp.buf.code_action, opts)
+  vim.keymap.set('n', '<leader>g', function() vim.lsp.buf.format { async = true } end, opts)
+  vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
 end
 
 local servers = { 'bashls', 'rust_analyzer', 'tsserver', 'cssls', 'jsonls', 'eslint', 'vimls' }
