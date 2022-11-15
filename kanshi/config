@@ -1,0 +1,8 @@
+profile "lap" {
+  output eDP-1 enable scale 1.5
+}
+
+profile "desk" {
+  output eDP-1 disable
+  output DP-1 enable scale 1.15
+}
