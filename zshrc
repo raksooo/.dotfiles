@@ -3,6 +3,8 @@ export DOTFILES=$HOME/.dotfiles
 
 export PATH=$PATH:$HOME/.local/bin
 export PATH=$PATH:$HOME/.npm-global/bin
+export PATH=$PATH:$HOME/.cargo/bin
+export PATH=$PATH:$HOME/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin/
 
 export npm_config_prefix=~/.npm-global
 
@@ -63,7 +65,10 @@ source $DOTFILES/ps1.zsh
 
 ## Aliases
 source $DOTFILES/aliases
-[[ -f "$HOME/aliases" ]] && source "$HOME/aliases"
+
+## Host specific config
+[[ -f "$HOME/.morezshrc" ]] && source "$HOME/.morezshrc"
+[[ -f "$HOME/.aliases" ]] && source "$HOME/.aliases"
 
 ## Vi
 function _set_cursor() { [[ $TMUX = '' ]] && echo -ne $1 || echo -ne "\ePtmux;\e\e$1\e\\" }

@@ -15,7 +15,6 @@ set $password_menu bemenuPass $bemenu_options
 set $lock swaylock -f -c 000000
 
 output * bg /usr/share/backgrounds/parrot.jpg fill
-output eDP-1 scale 1.5
 
 input "type:keyboard" {
   xkb_layout "se-oskar"
@@ -26,14 +25,25 @@ input "type:keyboard" {
 input "type:touchpad" {
   tap enabled
   natural_scroll enabled
+  dwt disabled
 }
 
+exec kanshi
+
 exec swayidle -w \
-  timeout 300 '$lock' \
-  timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
+  timeout 240 '$lock' \
+  timeout 260 'systemctl suspend' \
   before-sleep '$lock'
 
-xwayland disable
+for_window [class=".*"] inhibit_idle fullscreen
+for_window [app_id=".*"] inhibit_idle fullscreen
+
+exec swaymsg "workspace 1; exec $term"
+exec swaymsg "workspace 1; exec $term"
+exec swaymsg "workspace 2; exec firefox"
+exec swaymsg "workspace 3; exec firefox -P non-private"
+
+# xwayland disable
 
 default_border pixel 2
 
@@ -49,7 +59,10 @@ bindsym XF86AudioPrev exec playerctl previous
 bindsym XF86AudioNext exec playerctl next
 
 bindsym XF86Search exec yt
+bindsym Shift+XF86Search exec yt
 bindsym $mod+XF86Search exec pyt
+
+bindsym --release F7 exec swaymsg output eDP-1 toggle
 
 bindsym $mod+Space exec $menu
 bindsym Alt+Space exec $password_menu
