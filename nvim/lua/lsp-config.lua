@@ -1,7 +1,14 @@
 local lspconfig = require'lspconfig'
 local cmp = require'cmp'
 
-vim.cmd [[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]]
+vim.api.nvim_create_autocmd('CursorHold', {
+  pattern = '*',
+  callback = function() vim.diagnostic.open_float(nil, { focus = false }) end,
+})
+vim.api.nvim_create_autocmd('BufWritePre', {
+  pattern = '*.js,*.ts,*.tsx,*.css,*.json,*.yaml,*.html,*.rs',
+  callback = function() vim.lsp.buf.format({ async = false }) end,
+})
 
 cmp.setup({
   preselect = cmp.PreselectMode.None,
