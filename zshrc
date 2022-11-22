@@ -69,6 +69,7 @@ source $DOTFILES/aliases
 ## Host specific config
 [[ -f "$HOME/.morezshrc" ]] && source "$HOME/.morezshrc"
 [[ -f "$HOME/.aliases" ]] && source "$HOME/.aliases"
+[[ -f "$HOME/.morealiases" ]] && source "$HOME/.morealiases"
 
 ## Vi
 function _set_cursor() { [[ $TMUX = '' ]] && echo -ne $1 || echo -ne "\ePtmux;\e\e$1\e\\" }
