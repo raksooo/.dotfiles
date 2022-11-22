@@ -1,6 +1,8 @@
 local lspconfig = require'lspconfig'
 local cmp = require'cmp'
 
+vim.cmd [[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]]
+
 cmp.setup({
   preselect = cmp.PreselectMode.None,
   mapping = {
@@ -21,8 +23,8 @@ cmp.setup.cmdline(':', { sources = cmp.config.sources({ { name = 'path' } }) })
 
 -- Mappings.
 local opts = { noremap=true, silent=true }
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
+vim.keymap.set('n', 'gE', vim.diagnostic.goto_prev, opts)
+vim.keymap.set('n', 'ge', vim.diagnostic.goto_next, opts)
 
 local on_attach = function(client, bufnr)
   -- Enable completion triggered by <c-x><c-o>
