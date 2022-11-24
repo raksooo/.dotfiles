@@ -12,10 +12,12 @@ Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-cmdline'
 Plug 'hrsh7th/nvim-cmp'
 
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+Plug 'BurntSushi/ripgrep'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+
 Plug 'jiangmiao/auto-pairs'
-Plug '/usr/local/opt/fzf'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'tpope/vim-commentary'
@@ -78,13 +80,11 @@ nnoremap <leader>8 :call GoToBuffer(8)<CR>
 nnoremap <leader>9 :call GoToBuffer(9)<CR>
 nnoremap <leader>0 :call GoToBuffer(10)<CR>
 
-"" FZF
-command! -bang -nargs=*  RgFiles
-      \ call fzf#run(fzf#wrap({'source': 'rg --files --hidden --glob "!{.git/*}"'}))
-
-nnoremap <leader>t :RgFiles<Cr>
-nnoremap <leader>f :Rg<Cr>
-nnoremap <leader>b :Buffers<Cr>
+"" Telescope
+nnoremap <leader>t <cmd>Telescope find_files theme=dropdown previewer=false<cr>
+nnoremap <leader>f <cmd>Telescope live_grep theme=dropdown<cr>
+nnoremap <leader>b <cmd>Telescope buffers theme=dropdown<cr>
+nnoremap <leader>d <cmd>Telescope treesitter theme=dropdown<cr>
 
 "" Nerdtree
 nnoremap <leader>l :NERDTreeToggle<CR>
@@ -104,10 +104,6 @@ hi TabLineSel ctermfg=7 ctermbg=238
 hi TabLineModified ctermfg=2
 hi TabLineModifiedSel ctermfg=2 ctermbg=238
 hi TabLineError ctermfg=1 ctermbg=238
-
-"Plugins
-"" FZF
-let g:fzf_preview_window = 'up:50%'
 
 "" Better whitespace
 let g:better_whitespace_enabled=1

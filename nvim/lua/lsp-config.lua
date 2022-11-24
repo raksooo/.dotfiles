@@ -1,5 +1,7 @@
 local lspconfig = require'lspconfig'
 local cmp = require'cmp'
+local telescope = require'telescope.builtin'
+local get_dropdown = require('telescope.themes').get_dropdown
 
 vim.api.nvim_create_autocmd('CursorHold', {
   pattern = '*',
@@ -47,13 +49,12 @@ local on_attach = function(client, bufnr)
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
   -- See `:help vim.lsp.*` for documentation on any of the below functions
-  vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+  vim.keymap.set('n', 'gd', function() telescope.lsp_definitions(get_dropdown({ show_line = false })) end, opts)
+  vim.keymap.set('n', 'gr', function() telescope.lsp_references(get_dropdown({ show_line = false })) end, opts)
   vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
-  vim.keymap.set('n', 'gt', vim.lsp.buf.type_definition, opts)
   vim.keymap.set('n', '<leader>r', vim.lsp.buf.rename, opts)
   vim.keymap.set('n', '<leader>a', vim.lsp.buf.code_action, opts)
   vim.keymap.set('n', '<leader>g', function() vim.lsp.buf.format { async = true } end, opts)
-  vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
 end
 
 local servers = { 'bashls', 'rust_analyzer', 'tsserver', 'cssls', 'jsonls', 'eslint', 'vimls' }
