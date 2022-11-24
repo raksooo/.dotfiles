@@ -1,0 +1,30 @@
+[push]
+	default = simple
+
+[color]
+	ui = true
+
+[alias]
+	st = status
+	co = commit
+	coa = commit -a
+  a = add
+  aa = add -A
+	sl = log --graph --pretty=format:'%Cred%h%Creset - %Cblue%G?%Creset %s %C(yellow)%d %C(bold blue)<%an>'
+  slo = sl origin/master
+	rem = rebase master
+	rim = rebase -i master
+	ri = "!f() { git rebase -i HEAD~$1; }; f"
+	can = commit --amend --no-edit
+	caan = commit -a --amend --no-edit
+	dh = "!f() { git diff "HEAD~$1^" "HEAD~$1"; }; f"
+  fp = fetch -p
+
+[diff]
+	tool = nvim
+
+[pull]
+	rebase = false
+
+[init]
+	defaultBranch = main
