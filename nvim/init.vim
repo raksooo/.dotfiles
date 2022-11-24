@@ -1,4 +1,5 @@
 source ~/.config/nvim/tabline.vim
+source ~/.config/nvim/moreinit.vim
 
 " Plugins
 call plug#begin('~/.config/nvim/plug')
@@ -20,7 +21,7 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 
-" Plug 'vimwiki/vimwiki'
+Plug 'vimwiki/vimwiki'
 
 Plug 'morhetz/gruvbox'
 
@@ -120,4 +121,3 @@ hi GitGutterChangeDelete ctermbg=none ctermfg=204
 
 "" Auto-pairs
 let g:AutoPairsMultilineClose = 0
-
