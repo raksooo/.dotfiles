@@ -6,9 +6,13 @@ vim.api.nvim_create_autocmd('CursorHold', {
   callback = function() vim.diagnostic.open_float(nil, { focus = false }) end,
 })
 vim.api.nvim_create_autocmd('BufWritePre', {
-  pattern = '*.js,*.ts,*.tsx,*.css,*.json,*.yaml,*.html,*.rs',
+  pattern = '*.css,*.json,*.yaml,*.html,*.rs',
   callback = function() vim.lsp.buf.format({ async = false }) end,
 })
+-- vim.api.nvim_create_autocmd('BufWritePre', {
+--   pattern = '*.js,*.ts,*.tsx',
+--   callback = function() vim.lsp.buf.format({ async = false }) end,
+-- })
 
 cmp.setup({
   preselect = cmp.PreselectMode.None,
