@@ -11,10 +11,6 @@ vim.api.nvim_create_autocmd('BufWritePre', {
   pattern = '*.css,*.json,*.yaml,*.html,*.rs',
   callback = function() vim.lsp.buf.format({ async = false }) end,
 })
--- vim.api.nvim_create_autocmd('BufWritePre', {
---   pattern = '*.js,*.ts,*.tsx',
---   callback = function() vim.lsp.buf.format({ async = false }) end,
--- })
 
 cmp.setup({
   preselect = cmp.PreselectMode.None,
@@ -27,6 +23,7 @@ cmp.setup({
   },
   sources = cmp.config.sources(
     { { name = 'nvim_lsp' } },
+    { { name = 'nvim_lsp_signature_help' } },
     { { name = 'buffer' } },
     { { name = 'path' } }
   ),
@@ -54,10 +51,15 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
   vim.keymap.set('n', '<leader>r', vim.lsp.buf.rename, opts)
   vim.keymap.set('n', '<leader>a', vim.lsp.buf.code_action, opts)
-  vim.keymap.set('n', '<leader>g', function() vim.lsp.buf.format { async = true } end, opts)
+
+  if (client.name == "eslint" or client.name == "tsserver") then
+    vim.keymap.set('n', '<leader>g', function() vim.cmd('EslintFixAll') end, opts)
+  else
+    vim.keymap.set('n', '<leader>g', function() vim.lsp.buf.format { async = true } end, opts)
+  end
 end
 
-local servers = { 'bashls', 'rust_analyzer', 'tsserver', 'cssls', 'jsonls', 'eslint', 'vimls' }
+local servers = { 'bashls', 'rust_analyzer', 'tsserver', 'cssls', 'jsonls', 'eslint', 'vimls', 'yamlls' }
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {
     on_attach = on_attach,
